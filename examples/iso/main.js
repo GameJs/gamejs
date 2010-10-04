@@ -5,7 +5,8 @@ var animationInfo = {
    rootPath: 'images/vlad/',
    movementSpeed: 2,
    dying: 'tipping over',
-   noLoop: ['tipping over', 'attack']
+   noLoop: ['tipping over', 'attack'],
+   idle: 'stopped',
 };
 
 var vladAnimations = {
@@ -35,13 +36,14 @@ var vladAnimations = {
    }
 };
 
+gamejs.preloadAnimation('vlad', vladAnimations, animationInfo);
 
 function main() {
    // init
    gamejs.display.setMode([800, 600]);
    gamejs.display.setCaption("Example Iso");
 
-   var vlad = new gamejs.extra.iso.AnimatedSprite([100, 100], vladAnimations, animationInfo);
+   var vlad = new gamejs.extra.iso.AnimatedSprite([100, 100], 'vlad');
       
    /**
     * M A I N
@@ -94,5 +96,4 @@ function main() {
 
 };
 
-gamejs.preloadAnimation(vladAnimations, animationInfo);
 gamejs.ready(main);
