@@ -1,0 +1,7 @@
+exports.CLIENT_JOIN = 100;
+exports.CLIENT_LEAVE = 101;
+exports.CLIENT_READY = 102;
+
+exports.SERVER_WELCOME = 202;
+exports.SERVER_PLAYER_JOINED = 203;
+exports.SERVER_PLAYER_LEFT = 203;

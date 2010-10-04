@@ -1,0 +1,7 @@
+{
+    "name": "ringo-gamejs",
+    "version": "0.0.0",
+    "description": "Ringo GameJs Server",
+    "keywords": ["canvas", "game"],
+    "author": "Simon Oberhammer <simon@nekapuzer.at>"
+}

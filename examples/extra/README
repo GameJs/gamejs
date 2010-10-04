@@ -1,0 +1,36 @@
+Game
+======
+ * highlight player ship at start, so players know what to control
+ * CHECK much nicer code layout. really be a template
+ * CHECK sound on/off
+ * CHECK introduction & start-game screen
+ * better highscore display - remember last tries
+ * CHECK restart when game over
+ * CHECK more statistics @ end screen
+
+Ship
+======
+ * CHECK engine boost
+ * CHECK shoot rocket
+ * CHECK explodes when hit by planet rocket or planet
+
+Planet
+========
+ * CHECK shoot shurikens
+ * CHECK explodes when hit by ship rocket
+ * CHECK drop diamonds, worth more then planets
+
+Art
+====
+ * CHECK background
+ * CHECK start & explanation
+ * CHECK restart & game over screen with highscores! 
+ * some kind of logo and better art (let toby decide after having played it)
+
+Legalese
+=========
+Code & Design
+ Simon Oberhammer, http://nekapuzer.at
+Graphics
+ Remastered Tyrian by Danc,  http://lostgarden.com/2007/04/free-game-graphics-tyrian-ships-and.html
+ NASA, ESA, AURA/Caltech, Palomar Observatory, http://en.wikipedia.org/wiki/File:Pleiades_large.jpg
