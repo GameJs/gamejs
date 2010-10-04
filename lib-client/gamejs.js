@@ -475,7 +475,7 @@ var preload = exports.preload = function(resources) {
    return;
 }
 
-exports.preloadAnimation = function(animations, meta) {
+exports.preloadAnimation = function(animationKey, animations, meta) {
    // FIXME fns duplicated in gamejs.extra.iso
    function getImagePath(root, animation) {
       return root + animation.replace(' ', '%20') + '.png';
@@ -486,4 +486,12 @@ exports.preloadAnimation = function(animations, meta) {
       images.push(getImagePath(meta.rootPath, animation));
    }
    preload(images);
+   // FIXME store them somewhere & make accessible per name
+   window.$G_ANIMATIONS[animationKey] = {
+      meta: meta,
+      animations: animations,
+   }
 }
+
+window.$G_ANIMATIONS = {};
+

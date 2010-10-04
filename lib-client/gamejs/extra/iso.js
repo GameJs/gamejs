@@ -59,15 +59,17 @@ var DIRECTIONS_SORTED = ['e', 'n', 'ne', 'nw', 's', 'se', 'sw', 'w'];
  * @param {fps} Frames Per Second for animations
  * @param {spritesPath} root path for sprites
  */
-var AnimatedSprite = exports.AnimatedSprite = function(pos, animations, meta) {
+var AnimatedSprite = exports.AnimatedSprite = function(pos, animationKey) {
    AnimatedSprite.superConstructor.apply(this, []);
-      
+
+   var animations = window.$G_ANIMATIONS[animationKey].animations;
+   var meta = window.$G_ANIMATIONS[animationKey].meta;
    var dyingAnimation = meta.dying;
    var noLoopAnimations = meta.noLoop;
    var fps = meta.fps;
    var spritesPath = meta.rootPath;
    
-   var animation = 'stopped';
+   var animation = meta.idle;
    var animationStep = 0;
    var animationDirection = 's';
    var movementSpeed = meta.movementSpeed;
@@ -115,7 +117,7 @@ var AnimatedSprite = exports.AnimatedSprite = function(pos, animations, meta) {
          }
          // switch to stopped if this is a noLoop animation
          if (noLoopAnimations && noLoopAnimations.indexOf(animation) != -1) {
-            this.setAnimation('stopped');
+            this.setAnimation(meta.idle);
          }
          animationStep = 0;
          imageUpdate = true;
@@ -154,7 +156,7 @@ var AnimatedSprite = exports.AnimatedSprite = function(pos, animations, meta) {
    }
    
    this.getAngle = function() {
-      return dirToAngle[animationDirection];
+      return DIRECTIONS[animationDirection].angle;
    }
    
    this.kill = function(instant) {
@@ -186,7 +188,7 @@ var AnimatedSprite = exports.AnimatedSprite = function(pos, animations, meta) {
    this.rect = new Rect(0,0);
    this.rect.center = pos;
    var center = pos;   
-   this.setAnimation('stopped');
+   this.setAnimation(meta.idle);
    
    if (!IMAGES[spritesPath]) {
       IMAGES[spritesPath] = {};

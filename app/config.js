@@ -21,3 +21,5 @@ print (join(module.directory, '../examples/'));
 exports.app = require('ringo/webapp').handleRequest;
 exports.charset = 'UTF-8';
 exports.contentType = 'text/html';
+
+exports.extensions = ["websocket-extension"];

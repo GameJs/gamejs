@@ -76,10 +76,10 @@ var Group = exports.Group = function() {
    this._sprites = [];
 
    
-   if (arguments[0] instanceof sprite.Sprite ||
+   if (arguments[0] instanceof Sprite ||
       (arguments[0] instanceof Array && 
        arguments[0].length && 
-       arguments[0][0] instanceof sprite.Sprite
+       arguments[0][0] instanceof Sprite
    )) {
       this.add(arguments[0]);
    }
@@ -161,7 +161,7 @@ Group.prototype.some = function() {
  * find Sprites in a Group that intersect another Sprite
  */
 exports.spriteCollide = function(sprite, group, doKill, collided) {
-   var collided = collided || sprite.collideRect;
+   var collided = collided || collideRect;
    var doKill = doKill || false;
    
    var collidingSprites = [];
@@ -188,7 +188,7 @@ exports.groupCollide = function(groupA, groupB, doKillA, doKillB) {
    
    groupA.sprites().forEach(function(groupSpriteA) {
       groupB.sprites().forEach(function(groupSpriteB) {
-         if (sprite.collideRect(groupSpriteA, groupSpriteB)) {
+         if (collideRect(groupSpriteA, groupSpriteB)) {
             if (doKillA) groupSpriteA.kill();
             if (doKillB) groupSpriteB.kill();
             
@@ -206,7 +206,7 @@ exports.groupCollide = function(groupA, groupB, doKillA, doKillB) {
 /** 
  * Collision detection between two sprites, using rects.
  */
-exports.collideRect = function(spriteA, spriteB) {
+var collideRect = exports.collideRect = function(spriteA, spriteB) {
    return spriteA.rect.collideRect(spriteB.rect);
 };
 
