@@ -19,5 +19,4 @@ function main() {
    var textSurface = defaultFont.render("Example Draw Test 101", "#bbbbbb");
    mainSurface.blit(textSurface, [300, 50]);
 }
-
 gamejs.ready(main);

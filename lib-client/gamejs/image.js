@@ -71,10 +71,8 @@ exports.init = function() {
  * @ignore
  */
 exports.preload = function(imgIdents) {
-   if (!imgIdents) return;
    
    var countLoaded = 0;
-   _PRELOADING = true;
    
    var incrementLoaded = function() {
       countLoaded++;
@@ -100,6 +98,9 @@ exports.preload = function(imgIdents) {
       }, true);
       img.src = imgIdents[key];
       img.gamejsKey = key;
+   }
+   if (TOTAL_IMGS > 0) {
+      _PRELOADING = true;
    }
    return;
 };

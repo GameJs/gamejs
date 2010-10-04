@@ -4,9 +4,6 @@ var matrix = require('gamejs/matrix');
  * @fileoverview This module holds the essential `Rect` and `Surface` classes.
  */
 
-var PRELOADING = true;
-var INITIALIZED = false;
-
 /**
  * Log a msg to the console if console is enable
  * @param {String} msg the msg to log
