@@ -383,22 +383,60 @@ Surface.prototype.__defineGetter__('canvas', function() {
 
 
 // FIXME get rid of this, currently required by all apps
+/**
+ * @ignore
+ */
 exports.utils = {};
 exports.utils.arrays = require('gamejs/utils/arrays');
 exports.utils.objects = require('gamejs/utils/objects');
 
+/**
+ * @ignore
+ */
 exports.event = require('gamejs/event');
+/**
+ * @ignore
+ */
 exports.time = require('gamejs/time');
+/**
+ * @ignore
+ */
 exports.matrix = require('gamejs/matrix');
+/**
+ * @ignore
+ */
 exports.transform = require('gamejs/transform');
+/**
+ * @ignore
+ */
 exports.image = require('gamejs/image');
+/**
+ * @ignore
+ */
 exports.draw = require('gamejs/draw');
+/**
+ * @ignore
+ */
 exports.sprite = require('gamejs/sprite');
+/**
+ * @ignore
+ */
 exports.display = require('gamejs/display');
-
+/**
+ * @ignore
+ */
 exports.font = require('gamejs/font');
+/**
+ * @ignore
+ */
 exports.mixer = require('gamejs/mixer');
+/**
+ * @ignore
+ */
 exports.extra = require('gamejs/extra');
+/**
+ * @ignore
+ */
 exports.extra.iso = require('gamejs/extra/iso');
 
 
