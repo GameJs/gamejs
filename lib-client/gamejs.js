@@ -387,7 +387,13 @@ Surface.prototype.__defineGetter__('canvas', function() {
  * @ignore
  */
 exports.utils = {};
+/**
+ * @ignore
+ */
 exports.utils.arrays = require('gamejs/utils/arrays');
+/**
+ * @ignore
+ */
 exports.utils.objects = require('gamejs/utils/objects');
 
 /**
