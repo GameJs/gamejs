@@ -4,12 +4,12 @@
 	<meta charset="utf-8">
 	
    <!-- // START WEBSOCKET STUFF -->
-   <script type="text/javascript" src="/gamejs-static/web-socket-js/swfobject.js"></script>
-   <script type="text/javascript" src="/gamejs-static/web-socket-js/FABridge.js"></script>
-   <script type="text/javascript" src="/gamejs-static/web-socket-js/web_socket.js"></script>
+   <script src="<% wsFallbackBaseHref %>/javascript/swfobject.js"></script>
+   <script src="<% wsFallbackBaseHref %>/javascript/FABridge.js"></script>
+   <script src="<% wsFallbackBaseHref %>/javascript/web_socket.js"></script>
 
    <script>
-   WEB_SOCKET_SWF_LOCATION = "/gamejs-static/web-socket-js/WebSocketMain.swf";
+   WEB_SOCKET_SWF_LOCATION = "<% wsFallbackBaseHref %>/flash/WebSocketMain.swf";
    // Set this to dump debug message from Flash to console.log:
    WEB_SOCKET_DEBUG = false;
    </script>
@@ -17,9 +17,9 @@
    <!-- // END WEBSOCKET STUFF -->
 	<script>
 	   var $g = {};
-	   $g.assetBaseUrl = '<% assetBaseUrl %>';
+	   $g.resourceBaseHref = '<% resourceBaseHref %>';
 	</script>
-	<script src="/scripts/app/<% appModule %>/main.js" type="text/javascript" charset="utf-8"></script>
+	<script src="<% mainScriptHref %>" type="text/javascript" charset="utf-8"></script>
 	<title>Gamejs Base Layout</title>
 </head>
 <body>

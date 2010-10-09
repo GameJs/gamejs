@@ -470,7 +470,8 @@ exports.ready = function(readyFn) {
 var preload = exports.preload = function(resources) {
    // attack appBaseUrl to resources
    resources.forEach(function(res) {
-      RESOURCES[res] = $g.assetBaseUrl + '/' + res;
+      // normalize slashses
+      RESOURCES[res] = ($g.resourceBaseHref + '/' + res).replace(/\/+/g, '/');
    }, this);
    return;
 }
