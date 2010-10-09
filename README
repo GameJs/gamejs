@@ -1,12 +1,24 @@
-===============================================
-GameJs - taking the C out of game programming
-===============================================
+## GameJs
 
-2D Sprite centric API for html5 canvas games.
+Setup
+-------
+Install RingoJs, the Web Serving Application we use. It needs Java, see:
 
-============
-Legalese
-===========
-Code Simon Oberhammer
-Graphics: lostgarden.com (tyrian set) and a NASA pic
+    http://ringojs.org/wiki/Getting_Started/
 
+Get ringo-gamejs from github:
+
+   git clone http://github.com/oberhamsi/ringo-gamejs.git
+
+GameJs and the applications written written by you are CommonJs Modules.
+
+Usage
+------
+Try the demo apps that can be found in the `examples` directory of GameJs. Start GameJs by starting the ringo-gamejs web application:
+
+   cd ringo-gamejs/app/
+   ringo-web
+   
+and go to http://localhost/
+
+You can start digging around by modifying the code in `examples`. If you want to write and serve a fresh app simply add it's path information to `export.apps` in `ringo-gamejs/app/config.js` - there's an example for how to do that right there.

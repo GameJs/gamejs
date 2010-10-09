@@ -1,5 +1,5 @@
 var Game = exports.Game = function(eventHandler) {
-   var eventHandler.register(this);
+   eventHandler.register(this);
    
    return this;
 };
