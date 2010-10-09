@@ -2,31 +2,11 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	
-   <!-- // START WEBSOCKET STUFF -->
-   <script src="<% wsFallbackBaseHref %>/javascript/swfobject.js"></script>
-   <script src="<% wsFallbackBaseHref %>/javascript/FABridge.js"></script>
-   <script src="<% wsFallbackBaseHref %>/javascript/web_socket.js"></script>
-
-   <script>
-   WEB_SOCKET_SWF_LOCATION = "<% wsFallbackBaseHref %>/flash/WebSocketMain.swf";
-   // Set this to dump debug message from Flash to console.log:
-   WEB_SOCKET_DEBUG = false;
-   </script>
-
-   <!-- // END WEBSOCKET STUFF -->
-	<script>
-	   var $g = {};
-	   $g.resourceBaseHref = '<% resourceBaseHref %>';
-	</script>
-	<script src="<% mainScriptHref %>" type="text/javascript" charset="utf-8"></script>
-	<title>Gamejs Base Layout</title>
+	<title>gamejs.org</title>
+	<% render header %>
 </head>
 <body>
-    
-    <div>
-      Welcome To GameJs
-      ... loading <span id="gamejs-loading"></span>
-    </div>
+   <% render content %>
 </body>
 </html>
+

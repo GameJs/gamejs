@@ -4,16 +4,20 @@ var {join} = require('fs');
 var {mimeType} = require("ringo/webapp/mime");
 var config = require('./config');
 
-exports.index = function(req, appName) {
-   if (!appName) {
-      return new Response('missing app name');
-   }
-   return Response.skin('skins/base.html', {
+exports.index = function(req) {
+   return Response.skin('skins/index.html', {
+      apps: config.apps
+   })
+};
+
+exports.app = function(req, appName) {
+   return Response.skin('skins/app.html', {
+      appName: appName,
       resourceBaseHref: config.getResourceBaseHref(appName),
       mainScriptHref: config.getMainScriptHref(appName),
       wsFallbackBaseHref:config.getResourceBaseHref('websocketFallback'),
    });
-};
+}
 
 exports.resources = function(req, appName, resourceType, resourcePath) {
    // basically ringo/middleware/static but every app can

@@ -1,5 +1,6 @@
 var Surface = require('gamejs').Surface;
 
+
 /**
  * @fileoverview Methods to create, access and manipulate the display Surface.
  * Drawing to the screen is as simple as this:
