@@ -1,0 +1,32 @@
+<% extends './base.html' %>
+
+<% header %>	
+   <!-- // START WEBSOCKET STUFF -->
+   <script src="<% wsFallbackBaseHref %>/javascript/swfobject.js"></script>
+   <script src="<% wsFallbackBaseHref %>/javascript/FABridge.js"></script>
+   <script src="<% wsFallbackBaseHref %>/javascript/web_socket.js"></script>
+
+   <script>
+   WEB_SOCKET_SWF_LOCATION = "<% wsFallbackBaseHref %>/flash/WebSocketMain.swf";
+   // Set this to dump debug message from Flash to console.log:
+   WEB_SOCKET_DEBUG = false;
+   </script>
+
+   <!-- // END WEBSOCKET STUFF -->
+	<script>
+	   var $g = {};
+	   $g.resourceBaseHref = '<% resourceBaseHref %>';
+	</script>
+	<script src="<% mainScriptHref %>" type="text/javascript" charset="utf-8"></script>
+	<title><% appName %> @ gamejs.org</title>
+
+<% content %>
+<div>
+   <h1> <% appName %> </h1>
+   <p>
+   <canvas id="jsgamecanvas"></canvas>
+   </p>
+   <p>
+      <a href="/"><-- Dashboard</a>
+   </pb>
+</div>

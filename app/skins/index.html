@@ -1,0 +1,14 @@
+<% extends './base.html' %>
+
+
+<% subskin content %>
+   <h1> gamejs.org </h2>
+   Available Apps:
+   <ul>
+   <% for app in <% apps %> render appItem %>   
+   </ul>    
+</body>
+</html>
+
+<% subskin appItem %>
+<li> <a href="/<% app.name %>/"> <% app.name %> </a>
