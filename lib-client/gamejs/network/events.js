@@ -1,7 +1,24 @@
-exports.CLIENT_JOIN = 100;
-exports.CLIENT_LEAVE = 101;
-exports.CLIENT_READY = 102;
+exports.PLAYER_CREATE = 99;
+exports.PLAYER_JOIN = 100;
+exports.PLAYER_LEAVE = 101;
 
-exports.SERVER_WELCOME = 202;
-exports.SERVER_PLAYER_JOINED = 203;
-exports.SERVER_PLAYER_LEFT = 203;
+exports.PLAYER_LIST_GAMES = 103;
+exports.PLAYER_LIST_PLAYERS = 104;
+exports.PLAYER_CREATE_GAME = 105;
+
+exports.GAME_PLAYER_CREATED = 202;
+exports.GAME_PLAYER_JOINED = 203;
+exports.GAME_PLAYER_LEFT = 203;
+exports.GAME_ALL_READY = 204;
+
+exports.GAME_LIST_GAMES = 205;
+exports.GAME_LIST_PLAYERS = 206;
+
+exports.GAME_START = 301;
+exports.GAME_STOP = 302;
+
+exports.GAME_CUSTOM = 400;
+exports.PLAYER_CUSTOM = 500;
+
+exports.CLIENT_CONNECTED = 600;
+exports.CLIENT_DISCONNECTED = 700;

@@ -25,7 +25,7 @@ apps.websocketFallback = {
 };
 
 // add examples to app by default
-['draw', 'sprite', 'extra', 'iso'].forEach(function(appName) {
+['draw', 'sprite', 'extra', 'iso', 'example-network'].forEach(function(appName) {
    apps[appName] = {
       name: appName,
       resourceBase: join(module.directory, '../examples/', appName),
@@ -65,4 +65,4 @@ exports.charset = 'UTF-8';
 exports.contentType = 'text/html';
 
 // experimental websocket networking
-exports.extensions = ["websocket-extension"];
+exports.extensions = ['gamejs/network/websocket'];
