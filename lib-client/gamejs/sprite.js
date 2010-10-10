@@ -124,7 +124,7 @@ Group.prototype.has = function(sprites) {
    
    return sprites.every(function(sp) {
       return this._sprites.indexOf(sp) !== -1;
-   });
+   }, this);
 };
 
 Group.prototype.sprites = function() {
