@@ -1,7 +1,7 @@
 // browser env before requireing gamejs modules
 global.window = {};
 
-var gamejs  = require('../lib-client/gamejs');
+var gamejs  = require('gamejs');
 var assert = require('assert');
 
 exports.setUp = function() {
