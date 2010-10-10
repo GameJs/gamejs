@@ -64,6 +64,10 @@ Sprite.prototype.draw = function(surface) {
 // overload
 Sprite.prototype.update = function() {};
 
+Sprite.prototype.isDead = function() {
+   return !this._alive;
+};
+
 /**
  * Sprites are often grouped. That makes collision detection more efficient and
  * improves rendering performance. It also allows you to easly keep track of layers
