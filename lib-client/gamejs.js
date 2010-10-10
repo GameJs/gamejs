@@ -67,24 +67,24 @@ var Rect = exports.Rect = function() {
    
    if (arguments.length === 2) {
       if (arguments[0] instanceof Array && arguments[1] instanceof Array) {   
-         this.left = arguments[0][0];
-         this.top = arguments[0][1];
-         this.width = arguments[1][0];
-         this.height = arguments[1][1];
+         this.left = parseInt(arguments[0][0], 10);
+         this.top = parseInt(arguments[0][1], 10);
+         this.width = parseInt(arguments[1][0], 10);
+         this.height = parseInt(arguments[1][1], 10);
       } else {
-         this.left = arguments[0];
-         this.top = arguments[1];
+         this.left = parseInt(arguments[0], 10);
+         this.top = parseInt(arguments[1], 10);
       }
    } else if (arguments.length === 1 && arguments[0] instanceof Array) {
-      this.left = arguments[0][0];
-      this.top = arguments[0][1];
-      this.width = 0;
-      this.height = 0;
+      this.left = parseInt(arguments[0][0], 10);
+      this.top = parseInt(arguments[0][1], 10);
+      this.width = parseInt(arguments[0][2], 10) || 0;
+      this.height = parseInt(arguments[0][3], 10) || 0;
    } else if (arguments.length === 4) {
-      this.left = arguments[0];
-      this.top = arguments[1];
-      this.width = arguments[2];
-      this.height = arguments[3];
+      this.left = parseInt(arguments[0], 10);
+      this.top = parseInt(arguments[1], 10);
+      this.width = parseInt(arguments[2], 10);
+      this.height = parseInt(arguments[3], 10);
    }
    
    return this;
@@ -109,15 +109,17 @@ Rect.prototype.__defineGetter__("right", function() {
  * @type Array
  */
 Rect.prototype.__defineGetter__("center", function() {
-   return [parseInt(this.left + this.width / 2), parseInt(this.top + this.height / 2)];
+   return [parseInt(this.left + (this.width / 2), 10), 
+           parseInt(this.top + (this.height / 2), 10)
+          ];
 });
 
 Rect.prototype.__defineSetter__("center", function(center) {
    if (!typeof(center) === 'array' || center.length < 2) {
       throw new Error('tried to set center of ' + this + ' to non array' + center);
    }
-   this.left = parseInt(center[0] - this.width / 2);
-   this.top = parseInt(center[1] - this.height / 2);
+   this.left = parseInt(center[0] - (this.width / 2), 10);
+   this.top = parseInt(center[1] - (this.height / 2), 10);
    return;
 });
 
@@ -141,8 +143,8 @@ Rect.prototype.move = function(x, y) {
  */
 Rect.prototype.moveIp = function(x, y) {
    if (arguments.length == 1) {
-      x = arguments[0][0];
-      y = arguments[0][1];
+      x = parseInt(arguments[0][0], 10);
+      y = parseInt(arguments[0][1], 10);
    }
    this.left += x;
    this.top += y;
@@ -157,18 +159,20 @@ Rect.prototype.moveIp = function(x, y) {
  * @returns {Boolean} true if the point collides with this Rect
  */
 Rect.prototype.collidePoint = function() {
+   var x,y;
+   // FIXME must accept rect constructor forms
    if (arguments.length == 1 && arguments[0] instanceof Rect) {
       x = arguments[0].left;
       y = arguments[0].top;
    } else if (arguments.length == 1) {
-      x = arguments[0][0];
-      y = arguments[0][1];
+      x = parseInt(arguments[0][0], 10);
+      y = parseInt(arguments[0][1], 10);
    } else {
-      x = arguments[0];
-      y = arguments[1];
+      x = parseInt(arguments[0], 10)
+      y = parseInt(arguments[1], 10);
    }
-   return (this.left < x && x < this.right) &&
-       (this.top < y && y < this.bottom)   
+   return (this.left <= x && x <= this.right) &&
+       (this.top <= y && y <= this.bottom)   
 };
 
 /**
@@ -177,6 +181,7 @@ Rect.prototype.collidePoint = function() {
  * @returns {Boolean} true if the given Rect collides with this Rect
  */   
 Rect.prototype.collideRect = function(rect) {
+   // FIXME must accept rect constructor forms
    return !(this.left > rect.right || this.right < rect.left ||
       this.top > rect.bottom || this.bottom < rect.top);
 };
