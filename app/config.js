@@ -10,10 +10,18 @@ var {Response} = require('ringo/webapp/response');
 var apps = exports.apps = {
    /*
    yourAppName: {
+      name: yourAppName,
       scriptBase: '/main.js/directory/',
       resourceBase: 'resource/directory/
    }
     */
+};
+
+// gamejs server needs to serve some js files and flash statically to have websocket 
+// support in firefox. this websocketFallback app does that serving.
+apps.websocketFallback = {
+   name: '[[websocket internal]]',
+   resourceBase: join(module.directory, 'static/web-socket-js'),
 };
 
 // add examples to app by default
@@ -44,13 +52,6 @@ exports.urls = [
    // static files: appName/resourceType/resourcePath/
    [ '/([^/]+)/(?:/*)(images|javascript|flash)/(?:/*)(.*)', './actions', 'resources'],
 ];
-
-// gamejs server needs to serve some js files and flash statically to have websocket 
-// support in firefox. this websocketFallback app does that serving.
-apps.websocketFallback = {
-   name: '[[websocket internal]]',
-   resourceBase: join(module.directory, 'static/web-socket-js'),
-};
 
 // clientside javascript library directory. holds all gamejs modules as well as
 // all apps.
