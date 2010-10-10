@@ -1,7 +1,7 @@
 var gamejs = require('gamejs');
 var events = require('gamejs/network/events');
 
-var NetworkController = exports.NetworkController = function (host, appId, eventHandler) {
+var NetworkController = exports.NetworkController = function (host, appId) {
    var self = this;
    var gameId = null;
    var playerId = null;
@@ -11,33 +11,26 @@ var NetworkController = exports.NetworkController = function (host, appId, event
    /** 
     *
     */
-   function send(event) {
+   this.send = function(event) {
       event.appId = event.appId || appId;
       event.gameId = event.gameId || gameId;
       event.playerId = event.playerId || playerId;
       ws.send(JSON.stringify(event))
       return;
    };
-   
-   this.joinGame = function(gameId) {
-      send({
-         type: events.PLAYER_JOIN,
-      });
-   };
-   
-   this.leaveGame = function() {
-      send({
-         type: events.PLAYER_JOIN,
-      });
-   }
-   
+      
+   /**
+    * return false if the event should be handled locally by gamejs.event.queue
+    */
    this.dispatch = function(event) {
       // PLAYER CREATED -> only i get it
       if (event.type === events.GAME_PLAYER_CREATED) {
          playerId = event.playerId;
-         eventHandler.dispatch({
+         gamejs.event.post({
             type: events.CLIENT_CONNECTED,
          });
+         gamejs.log('player created');
+         return true;
       // PLAYER JOINED
       } else if (event.type === events.GAME_PLAYER_JOINED) {
          if (event.player.id === playerId) {
@@ -45,6 +38,7 @@ var NetworkController = exports.NetworkController = function (host, appId, event
          }
          players.push(event.player);
          gamejs.log('player joined player#' + event.player.id + ' game #' + event.gameId);
+         return true;
       // PLAYER LEFT
       } else if (event.type === events.GAME_PLAYER_LEFT) {
          // FIXME if it's myself == i got kicked
@@ -52,10 +46,9 @@ var NetworkController = exports.NetworkController = function (host, appId, event
             return pl.id !== event.player.id
          }, this);
          gamejs.log('player kicked');
-      } else {
-         gamejs.log('sending to server, ' + event.type);
-         send(event);
-      };
+         return true;
+      }
+      return false;
    };
    
    /**
@@ -66,7 +59,7 @@ var NetworkController = exports.NetworkController = function (host, appId, event
    console.log("ws://" + host + "/game");
    ws.onopen = function() {
       gamejs.log('Connected to server, creating user...');
-      send({
+      self.send({
          type: events.PLAYER_CREATE
       });
    }
@@ -78,9 +71,10 @@ var NetworkController = exports.NetworkController = function (host, appId, event
    }
    ws.onmessage = function(e) {
       var data = JSON.parse(e.data);
-      eventHandler.dispatch(data);
+      if (!self.dispatch(data)) {
+         gamejs.event.post(data);
+      }
    }
    
-   eventHandler.register(this);
    return this;
 };
