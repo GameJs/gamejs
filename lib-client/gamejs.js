@@ -240,7 +240,7 @@ Rect.prototype.toString = function() {
  *
  * @param {Number[]} dimensions Array holding width and height
  */
-exports.Surface = Surface = function(dims) {
+var Surface = exports.Surface = function(dims) {
    if (arguments.length == 2) {
       dims = [arguments[0], arguments[1]];
    } else if (arguments.length == 1 && dims instanceof Rect) {   

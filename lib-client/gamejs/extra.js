@@ -19,7 +19,7 @@ var transform = require('gamejs/transform');
  * add a SpriteGroup and call start(30) to have a running game. Usefull for prototyping.
  * @constructor
  */
-exports.Scene = Scene = function(dims) {
+var Scene = exports.Scene  = function(dims) {
    var width = dims[0];
    var height = dims[1];
    this.doEvents = function() {};

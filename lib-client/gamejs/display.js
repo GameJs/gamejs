@@ -79,7 +79,7 @@ exports._getCanvasOffset = function() {
  * Drawing on the Surface returned by `getSurface()` will draw on the screen.
  * @returns {gamejs.Surface} the display Surface
  */
-exports.getSurface = getSurface = function() {
+var getSurface = exports.getSurface = function() {
    if (SURFACE == null) {
       var canvas = getCanvas();
       var SURFACE = new Surface([canvas.width, canvas.height]);
