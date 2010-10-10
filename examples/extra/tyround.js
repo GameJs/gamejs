@@ -1,4 +1,5 @@
 var gamejs = require('gamejs');
+var Surface = require('gamejs').Surface;
 
 var tysprites = require('./tyround/sprites');
 
@@ -214,11 +215,11 @@ exports.Game = function() {
       scene.doEvents = function(event) {
          if (event.type == gamejs.event.MOUSEUP) {
             if (rectStartButton.collidePoint(event.pos)) {
-               this.startGameSceen();
+               startGameScene();
             }
          } else if (event.type == gamejs.event.KEYUP) {
             if (event.key === gamejs.event.K_ENTER) {
-               this.startGameSceen();
+               startGameScene();
             }
          }
       }
