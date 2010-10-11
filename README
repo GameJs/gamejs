@@ -15,6 +15,10 @@ Once you have Ringo installed pull the rest of the requirements:
 You should then be able to startup the GameJs server with
 
    ringo-web ~/ringojs/packages/ringo-gamejs/app/config.js
+   
+...access it at
+   
+   http://localhost:8080/
 
 Usage
 ------
