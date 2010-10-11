@@ -3,7 +3,7 @@ var gamejs = require('gamejs');
 /**
  * @fileoverview Load images as Surfaces.
  * All images must be preloaded like this:
- *     $r.preload(["./images/ship.png", "./images/sunflower.png"]);
+ *     gamejs.preload(["images/ship.png", "images/sunflower.png"]);
  * and can then be loaded as Surfaces with [gamejs.image.load](#load).
  *
  * The following would load the image and put it onto the screen at position [10,10]:
@@ -105,6 +105,9 @@ exports.preload = function(imgIdents) {
    return;
 };
 
+/**
+ * @ignore
+ */
 exports.isPreloading = function() {
    return _PRELOADING;
 }

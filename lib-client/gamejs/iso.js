@@ -6,8 +6,51 @@ var objects = require('gamejs/utils/objects');
 
 
 /** 
- * @fileoverview ISO 3D Sprites.
+ * @fileoverview Isometric sprites. **Beta - not easy to use but should work**
  *
+ * You need sprite images and a script which turns the sprite images into a spritemap.
+ * I did that for reiner's sprites <http://reinerstileset.4players.de/>, this script
+ * should give you an idea what we need. <http://gist.github.com/606161>
+ *
+ * Note how the script also takes care of creating the complicated objects
+ * describing the animation, which we use in the example below.
+ *
+ *
+ * @example
+      var animationMeta = {
+         fps: 15,
+         rootPath: 'images/vlad/',
+         movementSpeed: 2,
+         dying: 'tipping over',
+         noLoop: ['tipping over'],
+         idle: 'stopped',
+      };
+      var animations = {
+         stopped:{
+            name: "stopped",
+            count: 0,
+            directions: ["e", "n", "ne", "nw", "s", "se", "sw", "w"],
+            size: 96,
+         },
+         'tipping over': {
+            name: "tipping over",
+            count: 11,
+            directions: ["e", "n", "ne", "nw", "s", "se", "sw", "w"],
+            size: 128,
+         },
+         walking: {
+            name: "walking",
+            count: 7,
+            directions: ["e", "n", "ne", "nw", "s", "se", "sw", "w"],
+            size: 96
+         }
+      };
+
+      // create an animation with name 'sample-animation' - later instantiated as AnimatedSprite
+      gamejs.preloadAnimation('sample-animation', animations, animationMeta);
+      ...
+      // create animatedsprite using sprite set 'sample-animation'
+      var animatedSprite = new gamejs.iso.AnimatedSprite([100, 100], 'sample-animation');
  * 
  */
 

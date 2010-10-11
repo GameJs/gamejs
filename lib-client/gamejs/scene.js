@@ -22,25 +22,52 @@ var transform = require('gamejs/transform');
 var Scene = exports.Scene  = function(dims) {
    var width = dims[0];
    var height = dims[1];
-   this.doEvents = function() {};
-   this.update = function(){};
+   /**
+    * Overwrite this to react to events yourself. This function
+    * gets called with all events from the gamejs.event queue.
+    */
+   this.doEvents = function(event) {};
 
-   // constructor
+   /**
+    * Hold the display surface this scene is rendering too.
+    * @type Surface
+    */
    this.screen = display.setMode([width, height]);
+   /**
+    * The background Surface. The scene will be cleared to this
+    * on every frame.
+    * @type Surface
+    */
    this.background = new Surface(this.screen.getSize());
    this.background.fill("#cccccc");
+   /**
+    * Top level sprites - typically sprites the players control.
+    * @type Array
+    */
    this.sprites = [];
+   /**
+    * Other sprite groups in this scene.
+    */
    this.groups = [];
 
+   /** @ignore **/
    this.fps = 30;
    return this;
 };
 
+/**
+ * Add a spriteGroup to the scene.
+ * @param {gamejs.sprite.Group} group
+ */
 Scene.prototype.addGroup = function(group) {
    this.groups.push(group);
    return;
 };
 
+/**
+ * Start rendering & processing the Scene.
+ * @param {Number} fps
+ */
 Scene.prototype.start = function(fps) {
    this.fps = fps || 30;
    this.mainSprites = new sprite.Group(this.sprites);
@@ -52,6 +79,10 @@ Scene.prototype.start = function(fps) {
    return;
 }
 
+/**
+ * Stop the scene - nothing will get updated or rendered
+ * until `start` is called again.
+ */
 Scene.prototype.stop = function() {
    time.deleteCallback(this._mainLoop, this.fps);
    this.sprites = [];
@@ -88,26 +119,42 @@ Scene.prototype._mainLoop = function(msDuration) {
  * MovingSprite provides a default implementation for Sprite.update() which moves the
  * Sprite on a linear path according to the set angle and speed. Mostly usefull for prototype. 
  * Overwrite doUpdate(event) to react to events.
+ *
+ * If you start overwriting multiple functions of MovingSprite then it's probably
+ * time to no longer extend it.
  */
 var MovingSprite = exports.MovingSprite =  function() {
    MovingSprite.superConstructor.apply(this, arguments);
       
    // constructor
    
+   /** @ignore */
    this.imageMaster = new Surface([20, 20]);
    this.imageMaster.fill("#ff0000");
+   /** @image **/
    this.image = this.imageMaster;
+   /** @image **/
    this.rect = this.image.getRect();
    
+   /** @ignore */
    this.x = 100;
+   /** @ignore */
    this.y = 100;
+   /** @ignore */
    this.dx = 0;
+   /** @ignore */
    this.dy = 0;
+   /** @ignore */
    this.dir = 0;
+   /** @ignore */
    this.lastRotation = -1;
+   /** @ignore */
    this.rotation = 0;
+   /** @ignore */
    this.speed = 0;
+   /** @ignore */
    this.maxSpeed = 10;
+   /** @ignore */
    this.minSpeed = -3;
    
    return this;
@@ -115,7 +162,10 @@ var MovingSprite = exports.MovingSprite =  function() {
 };
 objects.extend(MovingSprite, sprite.Sprite);
 
-// overwrite
+/**
+ * Overwrite this for custom model updates. It's behaves like `sprite.Sprite.update()`.
+ * @see {sprite.Sprite.update}
+ */
 MovingSprite.prototype.customUpdate = function() {};
 
 /**

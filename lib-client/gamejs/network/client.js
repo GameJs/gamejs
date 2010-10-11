@@ -4,8 +4,8 @@
 var gamejs = require('gamejs');
 
 /**
- * Creating a NetworkController automatically connects to the GameJs
- * app server for this app. Call methods on the NetworkController for
+ * Creating a NetworkController automatically connects the client to the GameJs
+ * app server. Call methods on the NetworkController for
  * joining, leaving or creating games.
  */
 var NetworkController = exports.NetworkController = function () {
@@ -24,7 +24,7 @@ var NetworkController = exports.NetworkController = function () {
    /** 
     * Send an event to the server by passing it to this function.
     */
-   this.send = function(event) {
+   function send(event) {
       event.appId = event.appId || appId;
       event.gameId = event.gameId || gameId;
       event.playerId = event.playerId || playerId;
@@ -33,8 +33,13 @@ var NetworkController = exports.NetworkController = function () {
    };
       
    /**
+    * To send events to the server pass an object with the property `type` set
+    * to `gamejs.event.NET_CLIENT_CUSTOM`.
+    * The NetworkController will pass it along to the game
+    * you are connected to.
     *
-    * @ignore
+    * Note: it is best to attach all your custom payload in the property `payload` of
+    * the event - else they might get overwritten by GameJs internals.
     */
    this.dispatch = function(event) {
       // PLAYER CREATED -> only i get it
@@ -57,15 +62,21 @@ var NetworkController = exports.NetworkController = function () {
          this.queryGames();
          this.joinGame(event.gameId);
       }
-      // foward to pygame event queue
-      gamejs.event.post(event);
+      
+      // CLIENT CUSTOM forward to server
+      if (event.type === gamejs.event.NET_CLIENT_CUSTOM) {
+         send(event);
+      } else {
+         // foward to pygame event queue
+         gamejs.event.post(event);
+      }
    };
    
    /**
     * Request creating of new game.
     */
    this.createGame = function() {
-      this.send({
+      send({
          type: gamejs.event.NET_CLIENT_CREATE_GAME,
       });
    };
@@ -74,7 +85,7 @@ var NetworkController = exports.NetworkController = function () {
     * Request to join an existing game.
     */
    this.joinGame = function(gameId) {
-      this.send({
+      send({
          type: gamejs.event.NET_CLIENT_JOIN,
          gameId: gameId
       });   
@@ -84,7 +95,7 @@ var NetworkController = exports.NetworkController = function () {
     * Request leaving the game this networkcontroller is connected to.
     */
    this.leaveGame = function() {
-      this.send({
+      send({
          type: gamejs.event.NET_CLIENT_LEAVE
       });
    };
@@ -93,7 +104,7 @@ var NetworkController = exports.NetworkController = function () {
     * Update `games` list of this NetworkController.
     */
    this.queryGames = function() {
-      this.send({
+      send({
          type: gamejs.event.NET_CLIENT_GAMELIST
       });   
    };

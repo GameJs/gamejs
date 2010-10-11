@@ -16,6 +16,9 @@ var CALLBACKS_LASTCALL = {};
 var TIMER = null;
 var STARTTIME = null;
 
+/**
+ * @ignore
+ */
 exports.init = function() {
    STARTTIME = Date.now();
    TIMER = setInterval(perInterval, 10);

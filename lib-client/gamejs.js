@@ -44,18 +44,21 @@ var Rect = exports.Rect = function() {
    /**
     * Left, X coordinate
     * @name Rect.prototype.left
+    * @type Number
     */
    this.left = 0;
    
    /**
     * Top, Y coordinate
     * @name Rect.prototype.top
+    * @type Number
     */
    this.top = 0;
    
    /**
     * Width of rectangle
     * @name Rect.prototype.width
+    * @type Number
     */
    this.width = 0;
    
@@ -92,6 +95,7 @@ var Rect = exports.Rect = function() {
 
 /** 
  * Bottom, Y coordinate
+ * @type Number
  */
 Rect.prototype.__defineGetter__("bottom", function() {
    return this.top + this.height;
@@ -99,6 +103,7 @@ Rect.prototype.__defineGetter__("bottom", function() {
 
 /** 
  * Right, X coordinate
+ * @type Number
  */
 Rect.prototype.__defineGetter__("right", function() {
    return this.left + this.width;
@@ -234,8 +239,9 @@ Rect.prototype.toString = function() {
 }
 
 /**
- * Creates a Surface. A Surface represents an image with a fixed width and height.
- * Surfaces can be <code>blit()</code>ed (copied) onto other Surfaces.
+ * A Surface represents a bitmap image with a fixed width and height. The
+ * most important feature of a Surface is that they can be `blitted`
+ * onto each other.
  *
  * @example
  * new gamejs.Surface([width, height]);
@@ -254,7 +260,9 @@ var Surface = exports.Surface = function(dims) {
    var width = dims[0];
    var height = dims[1];
    // only for rotatation & scale
+   /** @ignore */
    this._matrix = matrix.identity();
+   /** @ignore */
 	this._canvas = document.createElement("canvas");
 	this._canvas.width = width;
 	this._canvas.height = height;
@@ -283,12 +291,12 @@ var Surface = exports.Surface = function(dims) {
  * displaySurface.blit(flowerSurface, [0,0], flowerRect);
  *
  * @param {gamejs.Surface} src The Surface which will be blitted onto this one
- * @param {gamejs.Rect|Number[]} [dst] the Destination x, y position in this Surface.
+ * @param {gamejs.Rect|Number[]} dst the Destination x, y position in this Surface.
  *            If a Rect is given, it's top and left values are taken. If this argument
  *            is not supplied the blit happens at [0,0].
- * @param {gamesjs.Rect|Number[]} [area] the Area from the passed Surface which
+ * @param {gamesjs.Rect|Number[]} area the Area from the passed Surface which
  *            should be blitted onto this Surface.
- * @param {Number} [special_flags] FIXME add special flags for blit params
+ * @param {Number} [special_flags] FIXME add special flags for composite operations
  */
 Surface.prototype.blit = function(src, dest, area, special_flags) {
 
@@ -361,13 +369,18 @@ Surface.prototype.fill = function(color) {
    return;
 };
 
+/**
+ * Clear the surface.
+ */
 Surface.prototype.clear = function() {
    var size = this.getSize();
    this.context.clearRect(0, 0, size[0], size[1]);
    return;
 };
 
-
+/**
+ * @type gamejs.Rect
+ */
 Surface.prototype.__defineGetter__("rect", function() {
    return this.getRect();
 });
@@ -532,6 +545,12 @@ var preload = exports.preload = function(resources) {
    return;
 }
 
+/**
+ * Preload an animation set and give it the name `animationKey`.
+ * @param {String} animationKey unique key to load the animation later on
+ * @param {Object} animations describing all steps of the image
+ * @param {Object} meta
+ */
 exports.preloadAnimation = function(animationKey, animations, meta) {
    // FIXME fns duplicated in gamejs.iso
    function getImagePath(root, animation) {

@@ -1,7 +1,8 @@
 var gamejs = require('gamejs');
 
 /**
- * @fileoverview Playing sounds with the html5 audio tag. Not working very well. 
+ * @fileoverview Playing sounds with the html5 audio tag. Audio files must be preloaded
+ * with the usual `gamejs.preload()` function. Only ogg files supported.
  */
 
 var CACHE = {};

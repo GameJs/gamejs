@@ -83,6 +83,11 @@ exports.NET_CLIENT_LEAVE = 12;
 exports.NET_CLIENT_GAMELIST = 13;
 
 /**
+ * game specific event.
+ */
+exports.NET_SERVER_CUSTOM = 14;
+
+/**
  * Request game creation
  */
 exports.NET_CLIENT_CREATE_GAME = 15;
@@ -104,6 +109,12 @@ exports.NET_SERVER_LEFT = 102;
  * current game list for this app
  */
 exports.NET_SERVER_GAMELIST = 103;
+
+/**
+ * game specific event.
+ */
+exports.NET_SERVER_CUSTOM = 104;
+
 /**
  * new game created
  */

@@ -19,11 +19,20 @@ var arrays = require('gamejs/utils/arrays');
  * @constructor
  */
 var Sprite = exports.Sprite = function() {
+   /** @ignore */
    this._groups = [];
+   /** @ignore */
    this._alive = true;
    
-   // overload
+   /**
+    * Image to be rendered for this Sprite.
+    * @type gamejs.Surface
+    */
    this.image = null;
+   /**
+    * Rect describing the position of this sprite on the display.
+    * @type gamejs.Rect
+    */
    this.rect = null;
    
    return this;
@@ -77,6 +86,7 @@ Sprite.prototype.isDead = function() {
  * @constructor
  */
 var Group = exports.Group = function() {
+   /** @ignore */
    this._sprites = [];
 
    
