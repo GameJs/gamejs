@@ -444,11 +444,19 @@ exports.mixer = require('gamejs/mixer');
 /**
  * @ignore
  */
-exports.extra = require('gamejs/extra');
+exports.scene = require('gamejs/scene');
 /**
  * @ignore
  */
-exports.extra.iso = require('gamejs/extra/iso');
+exports.iso = require('gamejs/iso');
+/**
+ * @ignore
+ */
+exports.network = {};
+/**
+ * @ignore
+ */
+exports.network.client = require('gamejs/network/client');
 
 
 // preloading stuff
@@ -526,7 +534,7 @@ var preload = exports.preload = function(resources) {
 }
 
 exports.preloadAnimation = function(animationKey, animations, meta) {
-   // FIXME fns duplicated in gamejs.extra.iso
+   // FIXME fns duplicated in gamejs.iso
    function getImagePath(root, animation) {
       return root + animation.replace(' ', '%20') + '.png';
    }

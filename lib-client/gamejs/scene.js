@@ -10,7 +10,7 @@ var image = require('gamejs/image');
 var transform = require('gamejs/transform');
 
 /**
- * @fileoverview Provides higher level classes for creating simple prototype games.
+ * @fileoverview Provides higher level classes for creating simple prototype games in director mode.
  *
  */
 

@@ -7,7 +7,6 @@
 var gamejs = require('gamejs');
 var tyround = require('./tyround');
 
-var scene;
 function main() {
    // init gamejs & create scene
    gamejs.display.setCaption("Tyround");

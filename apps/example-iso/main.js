@@ -1,6 +1,6 @@
 var gamejs = require('gamejs');
 
-var animationInfo = {
+var vladAnimationsMeta = {
    fps: 15,
    rootPath: 'images/vlad/',
    movementSpeed: 2,
@@ -36,14 +36,15 @@ var vladAnimations = {
    }
 };
 
-gamejs.preloadAnimation('vlad', vladAnimations, animationInfo);
+// create an animation with name 'vlad' - later instantiated as AnimatedSprite
+gamejs.preloadAnimation('vlad', vladAnimations, vladAnimationsMeta);
 
 function main() {
-   // init
    gamejs.display.setMode([800, 600]);
    gamejs.display.setCaption("Example Iso");
 
-   var vlad = new gamejs.extra.iso.AnimatedSprite([100, 100], 'vlad');
+   // create an animatedsprite with the properties defined for 'vlad'
+   var vlad = new gamejs.iso.AnimatedSprite([100, 100], 'vlad');
       
    /**
     * M A I N

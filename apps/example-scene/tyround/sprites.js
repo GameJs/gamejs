@@ -87,7 +87,7 @@ var Rocket = exports.Rocket = function(scene, position, angle) {
    this.update();
    return this;
 };
-gamejs.utils.objects.extend(Rocket, gamejs.extra.MovingSprite);
+gamejs.utils.objects.extend(Rocket, gamejs.scene.MovingSprite);
 
 Rocket.prototype.customUpdate = function() {
    if (!this.scene.screen.getRect().collidePoint(this.rect.center)) {
@@ -111,7 +111,7 @@ var Shuriken = exports.Shuriken  = function(scene, position, angle) {
    this.update();
    return this;
 };
-gamejs.utils.objects.extend(Shuriken, gamejs.extra.MovingSprite);
+gamejs.utils.objects.extend(Shuriken, gamejs.scene.MovingSprite);
 
 Shuriken.prototype.customUpdate = function(msDuration) {
    this.rotateBy(15);

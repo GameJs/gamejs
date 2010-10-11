@@ -4,7 +4,7 @@ var Surface = require('gamejs').Surface;
 var tysprites = require('./tyround/sprites');
 
 /**
- * We use gamejs/extra.Scene which deals with the actual event loop. All
+ * We use gamejs/scene.Scene which deals with the actual event loop. All
  * we have here are a bunch of functions for configuring the scene for one of:
  *
  *  * the splash screen
@@ -14,7 +14,7 @@ var tysprites = require('./tyround/sprites');
  * Mouse stuff is always a bit cumbersome.
  */
 exports.Game = function() {
-   var scene = new gamejs.extra.Scene([800, 500]);
+   var scene = new gamejs.scene.Scene([800, 500]);
    var screenRect = scene.screen.getRect();
 
    /**
