@@ -1,5 +1,13 @@
+/**
+ * @fileOverview Networking functionality for the clientside.
+ */
 var gamejs = require('gamejs');
 
+/**
+ * Creating a NetworkController automatically connects to the GameJs
+ * app server for this app. Call methods on the NetworkController for
+ * joining, leaving or creating games.
+ */
 var NetworkController = exports.NetworkController = function () {
    var host = $g.websocketHost;
    var appId = $g.appId;
@@ -8,13 +16,13 @@ var NetworkController = exports.NetworkController = function () {
    var playerId = null;
    var players = [];
    /**
-    * list of available games
+    * List of available games. Can be updated with {#queryGames}.
     * @see {queryGames}
     */
    this.games = [];
    
    /** 
-    *
+    * Send an event to the server by passing it to this function.
     */
    this.send = function(event) {
       event.appId = event.appId || appId;
@@ -25,7 +33,8 @@ var NetworkController = exports.NetworkController = function () {
    };
       
    /**
-    * return false if the event should be handled locally by gamejs.event.queue
+    *
+    * @ignore
     */
    this.dispatch = function(event) {
       // PLAYER CREATED -> only i get it
@@ -52,12 +61,18 @@ var NetworkController = exports.NetworkController = function () {
       gamejs.event.post(event);
    };
    
-   this.createGame = function(gameId) {
+   /**
+    * Request creating of new game.
+    */
+   this.createGame = function() {
       this.send({
          type: gamejs.event.NET_CLIENT_CREATE_GAME,
       });
    };
    
+   /**
+    * Request to join an existing game.
+    */
    this.joinGame = function(gameId) {
       this.send({
          type: gamejs.event.NET_CLIENT_JOIN,
@@ -65,12 +80,18 @@ var NetworkController = exports.NetworkController = function () {
       });   
    };
    
+   /**
+    * Request leaving the game this networkcontroller is connected to.
+    */
    this.leaveGame = function() {
       this.send({
          type: gamejs.event.NET_CLIENT_LEAVE
       });
    };
    
+   /**
+    * Update `games` list of this NetworkController.
+    */
    this.queryGames = function() {
       this.send({
          type: gamejs.event.NET_CLIENT_GAMELIST

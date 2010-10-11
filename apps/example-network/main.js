@@ -1,6 +1,4 @@
 var gamejs = require('gamejs');
-var client = require('gamejs/network/client');
-
 
 // this game implemententation only shows the lobby list
 // and allows the player to create/join/leave a game instance. 
@@ -15,7 +13,8 @@ function Game(networkController) {
    };
 
    this.update = function(msDuration) {
-      // handle events
+      // handle events, network events appear in the usual gamejs.event queue
+      // once a gamejs.network.client.NetworkController is connected.
       gamejs.event.get().forEach(function(event) {
          if (event.type === gamejs.event.NET_SERVER_HELLO) {
             log('Succesfully connected to GameJs server');
@@ -42,12 +41,15 @@ function Game(networkController) {
 
 // template holder
 var TPL = {};
+
+// main function being called once gamejs is ready
 function main() {
-   // handlebar html templates for later usage precompiled
+   // compile handlebar html templates for later usage
    TPL.gameList = Handlebars.compile($('[tpl=gameList]').text());
    TPL.messageItem = Handlebars.compile($('[tpl=messageItem]').text());
    
-   var networkController = new client.NetworkController();
+   // start network controller - auto connects to gamejs
+   var networkController = new gamejs.network.client.NetworkController();
    var game = new Game(networkController);
 
    // init

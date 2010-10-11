@@ -13,20 +13,13 @@ var gamejs = require('gamejs');
  * 
  *     function tick() {
  *        gamejs.event.get().forEach(function(event) {
- *           if (event.type === gamejs.event.MOUSEUP) {
+ *           if (event.type === gamejs.event.MOUS_EUP) {
  *              gamejs.log(event.pos);
  *           }
  *        });
  *     };
  *     gamejs.time.fpsCallback(tick, this, 25);
  *
- * The main types of events handled are currently:
- *
- *  * KEYDOWN
- *  * KEYUP
- *  * MOUSEUP
- *  * MOUSEDOWN
- *  * QUIT
  *
  */
 // key constants
@@ -72,28 +65,50 @@ exports.MOUSE_UP = 4
 exports.MOUSE_DOWN = 5;
 
 // requests from client < 100
+/**
+ * First message to server
+ */
 exports.NET_CLIENT_HELLO = 10;
+/**
+ * Request joining a game.
+ */
 exports.NET_CLIENT_JOIN = 11;
+/**
+ * Request leaving a game.
+ */
 exports.NET_CLIENT_LEAVE = 12;
-
+/**
+ * Request list of games for app
+ */
 exports.NET_CLIENT_GAMELIST = 13;
-exports.NET_CLIENT_PLAYERLIST = 14;
 
+/**
+ * Request game creation
+ */
 exports.NET_CLIENT_CREATE_GAME = 15;
 
-exports.NET_CLIENT_CUSTOM = 99;
-
-// responses by server < 200
+// response by server
+/**
+ * server says hello and designated player.id
+ */
 exports.NET_SERVER_HELLO = 100;
+/**
+ * player has joined game
+ */
 exports.NET_SERVER_JOINED = 101;
+/**
+ * player has left a game.
+ */
 exports.NET_SERVER_LEFT = 102;
-
+/**
+ * current game list for this app
+ */
 exports.NET_SERVER_GAMELIST = 103;
-exports.NET_SERVER_PLAYERLIST = 104;
-
+/**
+ * new game created
+ */
 exports.NET_SERVER_CREATED_GAME = 105;
 
-exports.NET_SERVER_CUSTOM = 199;
 
 var QUEUE = [];
 

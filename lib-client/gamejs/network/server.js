@@ -1,19 +1,40 @@
+/**
+ * @fileOverview Networking functionality for the serverside.
+ *
+ */
 var gamejs = require('gamejs');
 var arrays = require('gamejs/utils/arrays');
 var log = require('ringo/logging').getLogger('WC.SOCKET');
 
+/**
+ * The Player object as used on the serverside.
+ */
 var Player = exports.Player = function(socket, name) {
+   /**
+    * Is the player ready for starting the game.
+    */
    this.isReady = false;
    // FIXME
+   /**
+    * secret id of this player
+    */
    this.id = parseInt(Math.random() * 99999, 10);
+   /**
+    * public name of the player
+    */
    this.name = name || 'new player #' + this.id;
-   this.socket = socket;
-   
+
+
+   /**
+    * Send an event to this player.
+    */
    this.send = function(event) {
       var strEvent = JSON.stringify(event);
-      log.info('Sending to player #' + this.id, strEvent);
-      this.socket.send(strEvent);
+      socket.send(strEvent);
    };
+   /**
+    * Serialize the player for JSON transport.
+    */
    this.serialize = function() {
       return {
          id: this.id,
@@ -24,6 +45,15 @@ var Player = exports.Player = function(socket, name) {
    return this;
 };
 
+/**
+ * If a clientside game want to connect to the server a serverside
+ * NetworkController must be instantiated for that game. The NetworkController
+ * provides lobby support and dispatches events to the appropriate games
+ * as well as creating those games.
+ *
+ * @param {String} appId appId appId for which this network controller works
+ * @param {String} gameClass instantiable class of the game, must have {gamejs.network.Game} interface
+ */
 var NetworkController = exports.NetworkController = function(id, gameClass) {
    var games = {};
    
@@ -99,36 +129,43 @@ var NetworkController = exports.NetworkController = function(id, gameClass) {
          });
      }
    };
+
+   return this;
 }
 
 /**
- * your serverside game will probably extend this.
+ * Default implementation for a serverside game. Holds list of players
+ * and recieves every event for that game through dispatch()
  */
 var Game = exports.Game = function(id) {
+   /**
+    * List of players currently connected to that game.
+    * @type {Player}
+    */
    this.players = [];
+   /**
+    * Id of this game
+    */
    // FIXME
    this.id = parseInt(Math.random() * 9999, 10);
    return this;
 };
 
-Game.prototype.send = function(event) {
-   event.gameId = this.id;
+/**
+ * Overwrite this to handle the events yourself. The default implementation
+ * forwards all events to the connected players.
+ */
+Game.prototype.dispatch = function(event) {
+   // default impl just forwards to all players
    this.players.forEach(function(player) {
       player.send(event);
    }, this);
-   return;
 };
 
-Game.prototype.update = function() {
-   // do game logic updates here
-};
-
-Game.prototype.dispatch = function(event) {
-   // default impl just forwards to all players
-   this.send(event);
-   return;
-};
-
+/**
+ * Serialize game information for JSON transport. If overwritten must contain
+ * `id` an `players` attributes.
+ */
 Game.prototype.serialize = function() {
    return {
       id: this.id,
