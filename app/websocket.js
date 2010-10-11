@@ -3,17 +3,11 @@ var log = require('ringo/logging').getLogger('WC.SOCKET');
 
 var gamejs = require('gamejs');
 var gserver = require('gamejs/network/server');
-
+var config = require('./config');
 /**
  * all players connected to the gamejs server.
  */
 var globalPlayers = {};
-
-// FIXME auto create those in config
-var networkControllers = {
-   'example-network': 
-      new gserver.NetworkController('example-network', require('gamejs/network/server').Game)
-};
 
 exports.serverStarted = function(server) {
    var context = server.getDefaultContext();
@@ -36,12 +30,12 @@ exports.serverStarted = function(server) {
             log.info('created player #', player.id);
             // BAIL OUT
             return;
-         } else if (!networkControllers[appId]) {
+         } else if (!config.networkControllers[appId]) {
             log.info('missing or invalid appId id #', appId);
          } else if (!globalPlayers[playerId]) {
             log.info('missing or invalid player id #', playerId);
          }
-         networkControllers[appId].dispatch(msg, globalPlayers[playerId]);
+         config.networkControllers[appId].dispatch(msg, globalPlayers[playerId]);
          return;
       };
       

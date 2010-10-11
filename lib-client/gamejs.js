@@ -458,7 +458,6 @@ exports.network = {};
  */
 exports.network.client = require('gamejs/network/client');
 
-
 // preloading stuff
 // NEEDS ITS OWN COPY OF GAMEJS
 var gamejs = require('gamejs');

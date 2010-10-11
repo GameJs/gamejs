@@ -5,6 +5,18 @@ var static = require('ringo/middleware/static');
 var modulr = require('modulr/middleware');
 var {join} = require('fs');
 var {Response} = require('ringo/webapp/response');
+var gserver = require('gamejs/network/server');
+
+// games with network support must defined a network controller here.
+// the websocket will relay events for this game to the networkcontroller
+// and use the game class to instantiate new games.
+exports.networkControllers = {
+   'example-network': 
+      new gserver.NetworkController(
+         'example-network',
+         require('gamejs/network/server').Game
+      )
+};
 
 // url setup
 // and a matcher for serving resources from the apps resource directories.

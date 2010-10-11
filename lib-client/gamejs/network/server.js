@@ -3,14 +3,16 @@ var arrays = require('gamejs/utils/arrays');
 var log = require('ringo/logging').getLogger('WC.SOCKET');
 
 var Player = exports.Player = function(socket, name) {
-   this.name = name || 'new player';
    this.isReady = false;
    // FIXME
-   this.id = Math.random() * 99999;
+   this.id = parseInt(Math.random() * 99999, 10);
+   this.name = name || 'new player #' + this.id;
    this.socket = socket;
    
    this.send = function(event) {
-      this.socket.send(JSON.stringify(event));
+      var strEvent = JSON.stringify(event);
+      log.info('Sending to player #' + this.id, strEvent);
+      this.socket.send(strEvent);
    };
    this.serialize = function() {
       return {
@@ -27,13 +29,12 @@ var NetworkController = exports.NetworkController = function(id, gameClass) {
    
    this.dispatch = function(event, player) {
       if (event.type == gamejs.event.NET_CLIENT_CREATE_GAME) {
-         // FIXME
-         var id = Math.random() * 99999;
-         games[id] = new gameClass(id);
+         var game = new gameClass();
+         games[game.id] = game;
          log.info('creating game #', id);
          player.send({
             type: gamejs.event.NET_SERVER_CREATED_GAME,
-            gameId: id,
+            gameId: game.id,
          });
          // BAIL OUT
          return;
@@ -43,7 +44,7 @@ var NetworkController = exports.NetworkController = function(id, gameClass) {
          var gameIds = Object.keys(games);
          player.send({
             type: gamejs.event.NET_SERVER_GAMELIST,
-            games: [{id: id} for each (id in gameIds)],
+            games: [game.serialize() for each (game in games)],
          });
          // BAIL OUT
          return;
@@ -62,12 +63,31 @@ var NetworkController = exports.NetworkController = function(id, gameClass) {
       // JOIN
       } else if (event.type === gamejs.event.NET_CLIENT_JOIN) {
          log.info('player joined #', player.id);
-         games[gameId].players.push(player);
-         games[gameId].dispatch({
-            type: gamejs.event.NET_SERVER_JOINED,
-            player: player.serialize(),
-            gameId: gameId,
+         // don't join twice
+         var notInPlayers = games[gameId].players.every(function(p) {
+            return p.id !== player.id;
          });
+         // leave other game if already joined
+         for (var key in games) {
+            var playerNotInGame = games[key].players.every(function(p) {
+               return p.id !== player.id;
+            });
+            // leave if in game
+            if (!playerNotInGame) {
+               this.dispatch({
+                  type: gamejs.event.NET_CLIENT_LEAVE,
+                  gameId: key,
+               }, player);
+            }
+         }
+         if (notInPlayers) {
+            games[gameId].players.push(player);
+            games[gameId].dispatch({
+               type: gamejs.event.NET_SERVER_JOINED,
+               player: player.serialize(),
+               gameId: gameId,
+            });
+         }
       // LEAVE
       } else if (event.type === gamejs.event.NET_CLIENT_LEAVE) {
          log.info('player left #', player.id);
@@ -86,7 +106,8 @@ var NetworkController = exports.NetworkController = function(id, gameClass) {
  */
 var Game = exports.Game = function(id) {
    this.players = [];
-   this.id = id;
+   // FIXME
+   this.id = parseInt(Math.random() * 9999, 10);
    return this;
 };
 
@@ -106,4 +127,11 @@ Game.prototype.dispatch = function(event) {
    // default impl just forwards to all players
    this.send(event);
    return;
+};
+
+Game.prototype.serialize = function() {
+   return {
+      id: this.id,
+      players: [p.serialize() for each (p in this.players)],
+   }
 };

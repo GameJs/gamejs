@@ -95,12 +95,6 @@ exports.NET_SERVER_CREATED_GAME = 105;
 
 exports.NET_SERVER_CUSTOM = 199;
 
-// networkcontroller events pumped into normal gamejs.event queue
-// > 400
-exports.NET_CONNECTED = 400;
-exports.NET_DISCONNECTED = 401;
-exports.NET_GAMELIST = 402;
-
 var QUEUE = [];
 
 /**
