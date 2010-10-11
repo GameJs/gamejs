@@ -3,30 +3,19 @@ var client = require('gamejs/network/client');
 
 var font = new gamejs.font.Font();
 
-var Game = function(networkController) {
-   this.allGames = [];
+var TPL = {};
+
+function Game(networkController) {
    
    this.update = function(msDuration) {
       gamejs.event.get().forEach(function(event) {
          if (event.type === gamejs.event.NET_CONNECTED) {
             gamejs.log('client connected');
          } else if (event.type === gamejs.event.NET_GAMELIST) {
-            this.allGames = event.gameIds;
+            $('#gj-network-gamelist').html(TPL.gameList({
+               games: event.games
+            }));
             gamejs.log('got game list ');
-         } else if (event.type === gamejs.event.KEY_UP) {
-            if (event.key === gamejs.event.K_m) {
-               gamejs.log('requesting game list');
-               networkController.queryGames();
-            } else if (event.key === gamejs.event.K_c) {
-               gamejs.log('creating game in game instance');
-               networkController.createGame();
-            } else if (gamejs.event.K_0 <= event.key && event.key <= gamejs.event.K_9) {
-               gamejs.log('joining ');
-               var newGameId = this.allGames[event.key - 48];
-               networkController.joinGame(newGameId);
-            } else if (gamejs.event.K_l == event.key) {
-               networkController.leaveGame();
-            }
          }
       }, this);
    };
@@ -36,24 +25,35 @@ var Game = function(networkController) {
 
 
 function main() {
+   // handlebar html templates for later usage precompiled
+   TPL.gameList = Handlebars.compile($('[tpl=gameList]').text());
+
    var networkController = new client.NetworkController();
    var game = new Game(networkController);
-      
+
    // init
-   gamejs.display.setMode([800, 600]);
    gamejs.display.setCaption("Example Network");
+   
+   $('#gj-refresh').click(function() {
+      networkController.queryGames();
+   });
+   $('.gj-join').live('click', function() {
+      var $this = $(this);
+      networkController.joinGame($this.attr('gameId'));
+   });
+   $('#gj-leave').click(function() {
+      var $this = $(this);
+      networkController.leaveGame();
+   });
+   $('#gj-create').click(function() {
+      var $this = $(this);
+      networkController.createGame();
+   });
    
    // game loop
    var mainSurface = gamejs.display.getSurface();
    var tick = function(msDuration) {
-      game.update();
-      mainSurface.fill("#FFFFFF");
-      var text = 'Press m to query game list; c to create game; l to leave the game and approp number to join that game';
-      mainSurface.blit(font.render(text));
-      var y = 50;
-      game.allGames.forEach(function(gid, idx) {
-         mainSurface.blit(font.render(idx + ', #' + gid), [20, y + (idx*30)]);
-      }, this);
+      game.update();      
    };
    gamejs.time.fpsCallback(tick, this, 30);
 

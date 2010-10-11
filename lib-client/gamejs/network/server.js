@@ -43,7 +43,7 @@ var NetworkController = exports.NetworkController = function(id, gameClass) {
          var gameIds = Object.keys(games);
          player.send({
             type: gamejs.event.NET_SERVER_GAMELIST,
-            gameIds: gameIds,
+            games: [{id: id} for each (id in gameIds)],
          });
          // BAIL OUT
          return;

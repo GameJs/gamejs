@@ -1,12 +1,13 @@
 <% extends './base.html' %>
 
-<% header %>	
+<% subskin header %>
    <!-- // START WEBSOCKET STUFF -->
    <script src="<% resourceHref util-websocket-fallback /javascript/swfobject.js %>"></script>
    <script src="<% resourceHref util-websocket-fallback /javascript/FABridge.js %>"></script>
    <script src="<% resourceHref util-websocket-fallback /javascript/web_socket.js %>"></script>
    
    <script src="<% resourceHref util-jquery /javascript/jquery-1.4.2.min.js %>"></script>
+   <script src="<% resourceHref util-handlebars /javascript/handlebars.js %>"></script>
 
    <script>
    WEB_SOCKET_SWF_LOCATION = "<% resourceHref util-websocket-fallback /flash/WebSocketMain.swf %>";
@@ -24,7 +25,7 @@
 	<script src="<% mainScriptHref <% appId %> %>" type="text/javascript" charset="utf-8"></script>
 	<title><% appName %> @ gamejs.org</title>
 
-<% content %>
+<% subskin content %>
 <div>
    <h1> <% appName %> </h1>
    <div id="game-header">

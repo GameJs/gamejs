@@ -59,7 +59,7 @@ var NetworkController = exports.NetworkController = function () {
       } else if (event.type === gamejs.event.NET_SERVER_GAMELIST) {
          gamejs.event.post({
             type: gamejs.event.NET_GAMELIST,
-            gameIds: event.gameIds,
+            games: event.games,
          });
       }
       return false;

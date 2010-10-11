@@ -1,6 +1,6 @@
 // stdlib
 var {Response} = require('ringo/webapp/response');
-var {join, list} = require('fs');
+var {exists, join, list} = require('fs');
 var {mimeType} = require("ringo/webapp/mime");
 var config = require('./config');
 
@@ -11,7 +11,9 @@ exports.index = function(req) {
 };
 
 exports.app = function(req, appId) {
-   return Response.skin('skins/app.html', {
+   var appSpecific = join(module.directory, '../apps/', appId, 'app.html');
+   print (appSpecific);
+   return Response.skin(exists(appSpecific) ? appSpecific : 'skins/app.html', {
       appId: appId,
       websocketHost: 'localhost:8080',
    });

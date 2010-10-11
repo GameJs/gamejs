@@ -1,0 +1,19 @@
+<% extends 'skins/app.html' %>
+
+<% subskin content %>
+<h1> Available games for <% appId %></h1>
+<div id="gj-network-gamelist">
+</div>
+<p>
+<input id="gj-refresh" type="button" value="refresh list"/>
+<input id="gj-create" type="button" value="create game"/>
+<input id="gj-leave" type="button" value="leave game"/>
+</p>
+
+<script type="text/handlebar" tpl="gameList">
+<ul>
+{{#games}}
+   <li><input class="gj-join" gameId = "{{id}}" type="button" value="join"> {{id}}
+{{/games}}
+</ul>
+</script>

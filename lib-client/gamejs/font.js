@@ -43,7 +43,7 @@ Font.prototype.render = function(text, color) {
    ctx.save();
    ctx.font = this.sampleSurface.context.font;
    ctx.fillStyle = ctx.strokeStyle = color || "#000000";
-   ctx.fillText(text, 0, dims[1]-1);
+   ctx.fillText(text, 0, dims[1] - dims[1]/4);
    ctx.restore();
    return surface;
 };
