@@ -2,11 +2,13 @@
 var {Response} = require('ringo/webapp/response');
 var {exists, join, list} = require('fs');
 var {mimeType} = require("ringo/webapp/mime");
-var config = require('./config');
+var strings = require('ringo/utils/strings');
 
+var config = require('./config');
 exports.index = function(req) {
    return Response.skin('skins/index.html', {
-      apps: list('../apps/'),
+      // hide util-* apps
+      apps: list('../apps/').filter(function(path) { return !strings.startsWith(path, 'util'); }),
    })
 };
 
