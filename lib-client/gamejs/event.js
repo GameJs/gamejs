@@ -13,7 +13,7 @@ var gamejs = require('gamejs');
  * 
  *     function tick() {
  *        gamejs.event.get().forEach(function(event) {
- *           if (event.type === gamejs.event.MOUS_EUP) {
+ *           if (event.type === gamejs.event.MOUSE_UP) {
  *              gamejs.log(event.pos);
  *           }
  *        });
