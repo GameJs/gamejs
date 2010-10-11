@@ -54,7 +54,7 @@ function main() {
          if (event.type === gamejs.event.QUIT) {
             // do quit.
          }
-         if (event.type === gamejs.event.KEYDOWN) {
+         if (event.type === gamejs.event.KEY_DOWN) {
             if (event.key == gamejs.event.K_KP4) {
                vlad.setDirection('w');
             } else if (event.key === gamejs.event.K_KP6) {

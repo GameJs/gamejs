@@ -7,11 +7,11 @@ var {join} = require('fs');
 var {Response} = require('ringo/webapp/response');
 
 // href helpers
-exports.getResourceBaseHref = function(appName) {
-   return '/' + appName + '/';
+exports.getResourceBaseHref = function(appId) {
+   return '/' + appId + '/';
 };
-exports.getMainScriptHref = function(appName) {
-   return ['/lib/gamejs/apps', appName, 'main.js'].join('/');
+exports.getMainScriptHref = function(appId) {
+   return ['/lib/gamejs/apps', appId, 'main.js'].join('/');
 }
 
 // url setup
@@ -21,7 +21,7 @@ exports.urls = [
    ['/', './actions', 'index'],
    // app wrapper html
    [ '/([^/]+)/', './actions', 'app'],
-   // static files: appName/resourceType/resourcePath/
+   // static files: appId/resourceType/resourcePath/
    [ '/([^/]+)/(?:/*)(images|javascript|flash)/(?:/*)(.*)', './actions', 'resources'],
 ];
 

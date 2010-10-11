@@ -1,5 +1,5 @@
 var display = require('gamejs/display');
-
+var gamejs = require('gamejs');
 /**
  * @fileoverview Methods for polling mouse & keyboard.
  *
@@ -64,13 +64,42 @@ exports.K_KP8 = 104;
 exports.K_KP9 = 105;
 
 // event type constants
-var QUIT = exports.QUIT = 0;
-var KEYDOWN = exports.KEYDOWN = 1;
-var KEYUP = exports.KEYUP = 2;
-var MOUSEMOTION = exports.MOUSEMOTION = 3;
-var MOUSEUP = exports.MOUSEUP = 4
-var MOUSEDOWN = exports.MOUSEDOWN = 5;
-var USEREVENT = exports.USEREVENT = 99;
+exports.QUIT = 0;
+exports.KEY_DOWN = 1;
+exports.KEY_UP = 2;
+exports.MOUSE_MOTION = 3;
+exports.MOUSE_UP = 4
+exports.MOUSE_DOWN = 5;
+
+// requests from client < 100
+exports.NET_CLIENT_HELLO = 10;
+exports.NET_CLIENT_JOIN = 11;
+exports.NET_CLIENT_LEAVE = 12;
+
+exports.NET_CLIENT_GAMELIST = 13;
+exports.NET_CLIENT_PLAYERLIST = 14;
+
+exports.NET_CLIENT_CREATE_GAME = 15;
+
+exports.NET_CLIENT_CUSTOM = 99;
+
+// responses by server < 200
+exports.NET_SERVER_HELLO = 100;
+exports.NET_SERVER_JOINED = 101;
+exports.NET_SERVER_LEFT = 102;
+
+exports.NET_SERVER_GAMELIST = 103;
+exports.NET_SERVER_PLAYERLIST = 104;
+
+exports.NET_SERVER_CREATED_GAME = 105;
+
+exports.NET_SERVER_CUSTOM = 199;
+
+// networkcontroller events pumped into normal gamejs.event queue
+// > 400
+exports.NET_CONNECTED = 400;
+exports.NET_DISCONNECTED = 401;
+exports.NET_GAMELIST = 402;
 
 var QUEUE = [];
 
@@ -149,7 +178,7 @@ exports.init = function() {
    document.onmousedown = function(ev) {
       var canvasOffset = display._getCanvasOffset();
       QUEUE.push({
-         'type': MOUSEDOWN,
+         'type': gamejs.event.MOUSE_DOWN,
          'pos': [ev.clientX - canvasOffset[0], ev.clientY - canvasOffset[1]],
          'button': ev.button,
       });
@@ -158,7 +187,7 @@ exports.init = function() {
    document.onmouseup = function(ev) {
       var canvasOffset = display._getCanvasOffset();
       QUEUE.push({
-         'type':MOUSEUP,
+         'type':gamejs.event.MOUSE_UP,
          'pos': [ev.clientX - canvasOffset[0], ev.clientY - canvasOffset[1]],
          'button': ev.button,
       });
@@ -167,7 +196,7 @@ exports.init = function() {
    document.onkeydown = function(ev) {
       var canvasOffset = display._getCanvasOffset();
       QUEUE.push({
-         'type': KEYDOWN,
+         'type': gamejs.event.KEY_DOWN,
          'key': ev.keyCode,
          'shiftKey': ev.shiftKey,
          'ctrlKey': ev.ctrlKey,
@@ -177,7 +206,7 @@ exports.init = function() {
    };
    document.onkeyup = function(ev) {
       QUEUE.push({
-         'type': KEYUP,
+         'type': gamejs.event.KEY_UP,
          'key': ev.keyCode,
          'shiftKey': ev.shiftKey,
          'ctrlKey': ev.ctrlKey,
@@ -196,7 +225,7 @@ exports.init = function() {
          ];
       }
       QUEUE.push({
-         'type': MOUSEMOTION,
+         'type': gamejs.event.MOUSE_MOTION,
          'pos': currentPos,
          'rel': relativePos,
          'buttons': null, // FIXME, fixable?
@@ -207,7 +236,7 @@ exports.init = function() {
    };
    document.onbeforeunload = function(ev) {
       QUEUE.push({
-         'type': QUIT,
+         'type': gamejs.event.QUIT,
       });
       return;
    };

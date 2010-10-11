@@ -34,11 +34,11 @@ exports.Game = function() {
       
       // handle mouse events
       scene.doEvents = function(event) {
-         if (event.type == gamejs.event.MOUSEUP) {
+         if (event.type == gamejs.event.MOUSE_UP) {
             if (rectStartButton.collidePoint(event.pos)) {
                startGameScene();
             }
-         } else if (event.type == gamejs.event.KEYUP) {
+         } else if (event.type == gamejs.event.KEY_UP) {
             if (event.key === gamejs.event.K_ENTER) {
                startGameScene();
             }
@@ -94,7 +94,7 @@ exports.Game = function() {
        * @see startGameScene
        */
       function gameDoEvents(event) {
-         if (event.type == gamejs.event.KEYDOWN) {
+         if (event.type == gamejs.event.KEY_DOWN) {
             if (event.key == gamejs.event.K_LEFT) {
                ship.rotateDir = -1;
             } else if (event.key == gamejs.event.K_RIGHT) {
@@ -117,7 +117,7 @@ exports.Game = function() {
                   msLastRocket = now;
                }
             }
-         } else if (event.type == gamejs.event.KEYUP) {
+         } else if (event.type == gamejs.event.KEY_UP) {
             if ([gamejs.event.K_LEFT, gamejs.event.K_RIGHT].indexOf(event.key) > -1) {
                ship.rotateDir = 0;
             } else if (event.key === gamejs.event.K_m) {
@@ -213,11 +213,11 @@ exports.Game = function() {
          offset += 25;
       });
       scene.doEvents = function(event) {
-         if (event.type == gamejs.event.MOUSEUP) {
+         if (event.type == gamejs.event.MOUSE_UP) {
             if (rectStartButton.collidePoint(event.pos)) {
                startGameScene();
             }
-         } else if (event.type == gamejs.event.KEYUP) {
+         } else if (event.type == gamejs.event.KEY_UP) {
             if (event.key === gamejs.event.K_ENTER) {
                startGameScene();
             }

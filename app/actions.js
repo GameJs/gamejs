@@ -10,21 +10,23 @@ exports.index = function(req) {
    })
 };
 
-exports.app = function(req, appName) {
+exports.app = function(req, appId) {
    return Response.skin('skins/app.html', {
-      appName: appName,
-      resourceBaseHref: config.getResourceBaseHref(appName),
-      mainScriptHref: config.getMainScriptHref(appName),
+      appId: appId,
+      resourceBaseHref: config.getResourceBaseHref(appId),
+      mainScriptHref: config.getMainScriptHref(appId),
       wsFallbackBaseHref:config.getResourceBaseHref('util-websocket-fallback'),
+      
+      websocketHost: 'localhost:8080',
    });
 }
 
-exports.resources = function(req, appName, resourceType, resourcePath) {
+exports.resources = function(req, appId, resourceType, resourcePath) {
    // basically ringo/middleware/static but every app can
    // have different resourceBase and we grab resourceInfo
    // from various path elements.
    var basePath = '../apps/';
-   var path = join(basePath, appName, resourceType, resourcePath);
+   var path = join(basePath, appId, resourceType, resourcePath);
    var resource = getResource(path);
    if (resource && resource.exists()) {
       return Response.static(resource, mimeType(path, 'text/plain'));

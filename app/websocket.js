@@ -1,7 +1,8 @@
 var websocket = require("ringo/webapp/websocket");
 var log = require('ringo/logging').getLogger('WC.SOCKET');
+
+var gamejs = require('gamejs');
 var gserver = require('gamejs/network/server');
-var events = require('gamejs/network/events');
 
 /**
  * all players connected to the gamejs server.
@@ -25,11 +26,11 @@ exports.serverStarted = function(server) {
          log.info('Received', m, 'from Player#');
          var appId = msg.appId;
          var playerId = msg.playerId;
-         if (msg.type === events.PLAYER_CREATE) {
+         if (msg.type === gamejs.event.NET_CLIENT_HELLO) {
             var player = new gserver.Player(socket, msg.name);
             globalPlayers[player.id] = player;
             player.send({
-               type: events.GAME_PLAYER_CREATED,
+               type: gamejs.event.NET_SERVER_HELLO,
                playerId: player.id,
             });
             log.info('created player #', player.id);

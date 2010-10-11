@@ -1,6 +1,5 @@
 var gamejs = require('gamejs');
 var client = require('gamejs/network/client');
-var events = require('gamejs/network/events');
 
 var font = new gamejs.font.Font();
 
@@ -9,35 +8,25 @@ var Game = function(networkController) {
    
    this.update = function(msDuration) {
       gamejs.event.get().forEach(function(event) {
-         if (event.type === events.CLIENT_CONNECTED) {
+         if (event.type === gamejs.event.NET_CONNECTED) {
             gamejs.log('client connected');
-         } else if (event.type === events.GAME_LIST_GAMES) {
+         } else if (event.type === gamejs.event.NET_GAMELIST) {
             this.allGames = event.gameIds;
             gamejs.log('got game list ');
-         } else if (event.type === gamejs.event.KEYUP) {
+         } else if (event.type === gamejs.event.KEY_UP) {
             if (event.key === gamejs.event.K_m) {
                gamejs.log('requesting game list');
-               networkController.send({
-                  type: events.PLAYER_LIST_GAMES,
-               });
+               networkController.queryGames();
             } else if (event.key === gamejs.event.K_c) {
                gamejs.log('creating game in game instance');
-               networkController.send({
-                  type: events.PLAYER_CREATE_GAME,
-               });
+               networkController.createGame();
             } else if (gamejs.event.K_0 <= event.key && event.key <= gamejs.event.K_9) {
                gamejs.log('joining ');
                var newGameId = this.allGames[event.key - 48];
-               networkController.send({
-                  type: events.PLAYER_JOIN,
-                  gameId: newGameId,
-               });
+               networkController.joinGame(newGameId);
             } else if (gamejs.event.K_l == event.key) {
-               networkController.send({
-                  type: events.PLAYER_LEAVE,
-               });
+               networkController.leaveGame();
             }
-
          }
       }, this);
    };
@@ -47,10 +36,7 @@ var Game = function(networkController) {
 
 
 function main() {
-   var networkController = new client.NetworkController(
-      'localhost:8080',
-      'example-network'
-   );
+   var networkController = new client.NetworkController();
    var game = new Game(networkController);
       
    // init

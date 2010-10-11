@@ -543,5 +543,9 @@ exports.preloadAnimation = function(animationKey, animations, meta) {
    }
 }
 
-window.$G_ANIMATIONS = {};
+// serverside shim
+
+if (this.window) {
+   window.$G_ANIMATIONS = {};
+}
 
