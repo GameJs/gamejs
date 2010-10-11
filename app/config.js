@@ -6,14 +6,6 @@ var modulr = require('modulr/middleware');
 var {join} = require('fs');
 var {Response} = require('ringo/webapp/response');
 
-// href helpers
-exports.getResourceBaseHref = function(appId) {
-   return '/' + appId + '/';
-};
-exports.getMainScriptHref = function(appId) {
-   return ['/lib/gamejs/apps', appId, 'main.js'].join('/');
-}
-
 // url setup
 // and a matcher for serving resources from the apps resource directories.
 exports.urls = [
@@ -35,6 +27,12 @@ exports.middleware = [
 exports.app = require('ringo/webapp').handleRequest;
 exports.charset = 'UTF-8';
 exports.contentType = 'text/html';
+
+exports.macros = [
+    require('./macros'),
+    require('ringo/skin/macros'),
+    require('ringo/skin/filters')
+];
 
 // experimental websocket networking
 exports.extensions = ['./websocket'];

@@ -13,10 +13,6 @@ exports.index = function(req) {
 exports.app = function(req, appId) {
    return Response.skin('skins/app.html', {
       appId: appId,
-      resourceBaseHref: config.getResourceBaseHref(appId),
-      mainScriptHref: config.getMainScriptHref(appId),
-      wsFallbackBaseHref:config.getResourceBaseHref('util-websocket-fallback'),
-      
       websocketHost: 'localhost:8080',
    });
 }

@@ -2,12 +2,14 @@
 
 <% header %>	
    <!-- // START WEBSOCKET STUFF -->
-   <script src="<% wsFallbackBaseHref %>/javascript/swfobject.js"></script>
-   <script src="<% wsFallbackBaseHref %>/javascript/FABridge.js"></script>
-   <script src="<% wsFallbackBaseHref %>/javascript/web_socket.js"></script>
+   <script src="<% resourceHref util-websocket-fallback /javascript/swfobject.js %>"></script>
+   <script src="<% resourceHref util-websocket-fallback /javascript/FABridge.js %>"></script>
+   <script src="<% resourceHref util-websocket-fallback /javascript/web_socket.js %>"></script>
+   
+   <script src="<% resourceHref util-jquery /javascript/jquery-1.4.2.min.js %>"></script>
 
    <script>
-   WEB_SOCKET_SWF_LOCATION = "<% wsFallbackBaseHref %>/flash/WebSocketMain.swf";
+   WEB_SOCKET_SWF_LOCATION = "<% resourceHref util-websocket-fallback /flash/WebSocketMain.swf %>";
    // Set this to dump debug message from Flash to console.log:
    WEB_SOCKET_DEBUG = false;
    </script>
@@ -15,19 +17,25 @@
    <!-- // END WEBSOCKET STUFF -->
 	<script>
 	   var $g = {};
-	   $g.resourceBaseHref = '<% resourceBaseHref %>';
-	   $g.websocketHost = '<% websocketHost %>';
 	   $g.appId = '<% appId %>';
+	   $g.resourceBaseHref = '<% resourceHref <% appId %> %>';
+	   $g.websocketHost = '<% websocketHost %>';
 	</script>
-	<script src="<% mainScriptHref %>" type="text/javascript" charset="utf-8"></script>
+	<script src="<% mainScriptHref <% appId %> %>" type="text/javascript" charset="utf-8"></script>
 	<title><% appName %> @ gamejs.org</title>
 
 <% content %>
 <div>
    <h1> <% appName %> </h1>
+   <div id="game-header">
+   
+   </div>
    <p>
    <canvas id="jsgamecanvas"></canvas>
    </p>
+   <div id="game-footer">
+   
+   </div>
    <p>
       <a href="/"><-- Dashboard</a>
    </p>
