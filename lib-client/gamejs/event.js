@@ -1,7 +1,7 @@
 var display = require('gamejs/display');
 var gamejs = require('gamejs');
 /**
- * @fileoverview Methods for polling mouse & keyboard.
+ * @fileoverview Methods for polling mouse, keyboard and ntwork;
  *
  * Call get() in your main loop to get a list of events that happend since you last called.
  *

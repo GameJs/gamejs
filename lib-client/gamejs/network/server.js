@@ -53,10 +53,15 @@ var Player = exports.Player = function(socket, name) {
  *
  * @param {String} appId appId appId for which this network controller works
  * @param {String} gameClass instantiable class of the game, must have {gamejs.network.Game} interface
+ * @constructor
  */
 var NetworkController = exports.NetworkController = function(id, gameClass) {
    var games = {};
    
+   /**
+    * Act on lobby requests, forward to gamejs.dispatch if appropriate.
+    * @ignore
+    */
    this.dispatch = function(event, player) {
       if (event.type == gamejs.event.NET_CLIENT_CREATE_GAME) {
          var game = new gameClass();
