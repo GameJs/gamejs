@@ -2,23 +2,20 @@
 
 Setup
 -------
-Install RingoJs, the Web Serving Application we use. It needs Java, see:
+Install RingoJs. Once you have Ringo installed the other components are easy
+since Ringo has package managment. More details on how to install Ringo can be found here:
 
     http://ringojs.org/wiki/Getting_Started/
 
-Get ringo-gamejs from github:
+Once you have Ringo installed pull the rest of the requirements:
 
-   git clone http://github.com/oberhamsi/ringo-gamejs.git
+   ringo-admin install hns/ringo-modulr
+   ringo-admin install oberhamsi/ringo-gamejs
 
-GameJs and the applications written written by you are CommonJs Modules.
+You should then be able to startup the GameJs server with
+
+   ringo-web ~/ringojs/packages/ringo-gamejs/app/config.js
 
 Usage
 ------
-Try the demo apps that can be found in the `examples` directory of GameJs. Start GameJs by starting the ringo-gamejs web application:
-
-   cd ringo-gamejs/app/
-   ringo-web
-   
-and go to http://localhost/
-
-You can start digging around by modifying the code in `examples`. If you want to write and serve a fresh app simply add it's path information to `export.apps` in `ringo-gamejs/app/config.js` - there's an example for how to do that right there.
+Checkout the example apps that can be found in the `apps` directory of GameJs. Copy one of them to get started. `app/config.js` is only interesting if your game is networked since you'll have to instantiate a NetworkController for the game in there.
