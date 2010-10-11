@@ -6,40 +6,12 @@ var modulr = require('modulr/middleware');
 var {join} = require('fs');
 var {Response} = require('ringo/webapp/response');
 
-// served apps by this gamejs server
-var apps = exports.apps = {
-   /*
-   yourAppName: {
-      name: yourAppName,
-      scriptBase: '/main.js/directory/',
-      resourceBase: 'resource/directory/
-   }
-    */
-};
-
-// gamejs server needs to serve some js files and flash statically to have websocket 
-// support in firefox. this websocketFallback app does that serving.
-apps.websocketFallback = {
-   name: '[[websocket internal]]',
-   resourceBase: join(module.directory, 'static/web-socket-js'),
-};
-
-// add examples to app by default
-['draw', 'sprite', 'extra', 'iso', 'example-network'].forEach(function(appName) {
-   apps[appName] = {
-      name: appName,
-      resourceBase: join(module.directory, '../examples/', appName),
-      scriptBase: join(module.directory, '../examples/', appName),
-   };
-}, this);
-
-
-// put the href helpers here so they are close to the urls
+// href helpers
 exports.getResourceBaseHref = function(appName) {
    return '/' + appName + '/';
 };
 exports.getMainScriptHref = function(appName) {
-   return ['/lib/app', appName, 'main.js'].join('/');
+   return ['/lib/gamejs/apps', appName, 'main.js'].join('/');
 }
 
 // url setup
