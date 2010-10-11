@@ -3,6 +3,9 @@ var log = require('ringo/logging').getLogger('WC.SOCKET');
 var gserver = require('gamejs/network/server');
 var events = require('gamejs/network/events');
 
+/**
+ * all players connected to the gamejs server.
+ */
 var globalPlayers = {};
 
 // FIXME auto create those in config

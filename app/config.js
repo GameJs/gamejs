@@ -65,4 +65,4 @@ exports.charset = 'UTF-8';
 exports.contentType = 'text/html';
 
 // experimental websocket networking
-exports.extensions = ['gamejs/network/websocket'];
+exports.extensions = ['./websocket'];
