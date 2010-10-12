@@ -1,5 +1,5 @@
 var websocket = require("ringo/webapp/websocket");
-var log = require('ringo/logging').getLogger('WC.SOCKET');
+var log = require('ringo/logging').getLogger('gamejs');
 
 var gamejs = require('gamejs');
 var gserver = require('gamejs/network/server');

@@ -4,7 +4,7 @@
  */
 var gamejs = require('gamejs');
 var arrays = require('gamejs/utils/arrays');
-var log = require('ringo/logging').getLogger('WC.SOCKET');
+var log = require('ringo/logging').getLogger(module.id);
 
 /**
  * The Player object as used on the serverside.
