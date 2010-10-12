@@ -11,7 +11,13 @@ var transform = require('gamejs/transform');
 
 /**
  * @fileoverview Provides higher level classes for creating simple prototype games in director mode.
+ * Your games will typically be similarly to gamejs/scene.Scene:
+ * have a bunch of SpriteGroups, update them, draw them, do collision detection
+ * amongst them and rect to events from the event loop.
  *
+ * Scene provides a default, quick-start implementation for getting something
+ * on the screen fast - you can and probably will replace the generic Scene
+ * with something custom later on.
  */
 
 /**

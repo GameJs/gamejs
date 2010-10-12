@@ -1,7 +1,15 @@
 var gamejs = require('gamejs');
 
-// this game implemententation only shows the lobby list
-// and allows the player to create/join/leave a game instance. 
+// This game implemententation only shows the lobby list
+// and allows the player to create/join/leave a game instance.
+//
+// A real game would - once the player is connected, as shown here - mostly
+// communicate with its serverside class implementing gamejs.network.server.Game
+// which automatically recieves all messages a connected client sends.
+// 
+// For sending messages from the client to the server the Game holds a reference
+// of all players, instances of gamejs.network.server.Player.
+//
 function Game(networkController) {   
 
    // log messages

@@ -20,4 +20,6 @@ function main() {
    mainSurface.blit(textSurface, [300, 50]);
 };
 
+// gamejs.ready will call your main function
+// once all components and resources are ready.
 gamejs.ready(main);

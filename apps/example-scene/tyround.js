@@ -4,14 +4,24 @@ var Surface = require('gamejs').Surface;
 var tysprites = require('./tyround/sprites');
 
 /**
- * We use gamejs/scene.Scene which deals with the actual event loop. All
- * we have here are a bunch of functions for configuring the scene for one of:
+ * We use gamejs/scene.Scene which deals with the actual event loop, screen rendering
+ * object updates, etc. for a very basic game.
+ *
+ * Your games will typically be similarly to gamejs/scene.Scene:
+ * have a bunch of SpriteGroups, update them, draw them, do collision detection
+ * amongst them and rect to events from the event loop.
+ *
+ * Scene provides a default, quick-start implementation for getting something
+ * on the screen fast.
+ * 
+ * All we have here are a bunch of functions for configuring 
+ * the scene for one of:
  *
  *  * the splash screen
  *  * the game itself
  *  * the highcsore
  *
- * Mouse stuff is always a bit cumbersome.
+ * Mouse stuff is always a bit cumbersome with canvas.
  */
 exports.Game = function() {
    var scene = new gamejs.scene.Scene([800, 500]);
@@ -32,13 +42,15 @@ exports.Game = function() {
       // clear the update function if any
       scene.update = function() {};
       
-      // handle mouse events
       scene.doEvents = function(event) {
+         // handle mouse events
          if (event.type == gamejs.event.MOUSE_UP) {
+            // die user click the startbutton?
             if (rectStartButton.collidePoint(event.pos)) {
                startGameScene();
             }
          } else if (event.type == gamejs.event.KEY_UP) {
+            // .. or press enter?
             if (event.key === gamejs.event.K_ENTER) {
                startGameScene();
             }
@@ -173,7 +185,7 @@ exports.Game = function() {
       }
       
       /**
-       * the gui is jsut a sprite
+       * the gui is just a sprite
        */
       var gui = new tysprites.Gui(scene, ship, planetGroup, startGameOverScene);
       scene.sprites.push(gui);

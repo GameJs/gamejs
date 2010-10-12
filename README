@@ -1,18 +1,18 @@
 ## GameJs
 GameJs is a library for writing 2D games or other interactive graphic applications for the HTML Canvas. Its API is modeled after the successfully PyGame.
 
-  * API http://gamejs.org/api/
+GameJs' killer feature is easy networking (work in progress).
 
 Setup
 -------
-Install RingoJs. GameJs is a Ringo app. Once you have Ringo installed the other components are easy
-to get with Ringo's package managment.
+GameJs is a Ringo application. Once you have Ringo installed the other components
+are easy to get with Ringo's package managment.
 
-More details on how to install Ringo can be found here:
+Details on how to install Ringo:
 
     http://ringojs.org/wiki/Getting_Started/
 
-Once you have Ringo installed get the two necessary Ringo packages with `ringo-admin`:
+Once you have Ringo get the two necessary Ringo packages with `ringo-admin`:
 
    ringo-admin install hns/ringo-modulr
    ringo-admin install oberhamsi/ringo-gamejs
@@ -29,6 +29,6 @@ A couple of example apps should show up.
 
 Usage
 ------
-Checkout the example apps that can be found in the `apps` directory of GameJs. Copy one of them to get started - your new app should automatically show up in the GameJs web interface.
+Every GameJs app lives in its own directory below `apps/`. `main.js` in such an app directory is called by GameJs to bootstrap your game in the browser.
 
-`app/config.js` is only interesting if your game is networked since you'll have to instantiate a NetworkController for the game in there.
+A couple of example apps are provided to get you started. Also checkout the API http://gamejs.org/api/

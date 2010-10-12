@@ -1,14 +1,10 @@
-/**
- * Copyright
- * Code: Simon Oberhammer
- * Graphics: lostgarden.com & NASA
- */
- 
 var gamejs = require('gamejs');
+// Tyround is a custom module written for this example. Use a relative require()
+// as shown here to load it.
+// .. appropriatly most of the code lives in `tyround.js`.
 var tyround = require('./tyround');
 
 function main() {
-   // init gamejs & create scene
    gamejs.display.setCaption("Tyround");
 
    // tyround.Game creates a {gamejs/extra.Scene} and

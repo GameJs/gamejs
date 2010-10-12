@@ -1,3 +1,6 @@
+/** 
+ * Heavy work in progress, see http://gamejs.org/api/gamejs/iso/ for more info.
+ */
 var gamejs = require('gamejs');
 
 var vladAnimationsMeta = {
@@ -45,7 +48,7 @@ function main() {
 
    // create an animatedsprite with the properties defined for 'vlad'
    var vlad = new gamejs.iso.AnimatedSprite([100, 100], 'vlad');
-      
+
    /**
     * M A I N
     */
@@ -87,10 +90,12 @@ function main() {
    
    // game loop
    var mainSurface = gamejs.display.getSurface();
+   var font = new gamejs.font.Font("20px Verdana"); // css font definition
    var tick = function(msDuration) {
          mainSurface.fill("#FFFFFF");
          vlad.draw(mainSurface);
          handleUserInput();
+         mainSurface.blit(font.render('ENTER to move. Keypad numbers to change direction. SPACE to kill vlad'));
          vlad.update(msDuration);
    };
    gamejs.time.fpsCallback(tick, this, 30);
