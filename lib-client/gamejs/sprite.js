@@ -2,7 +2,8 @@ var gamejs = require('gamejs');
 var sprite = require('gamejs/sprite');
 var arrays = require('gamejs/utils/arrays');
 /**
- * @fileoverview Provides `Sprite`s and `SpriteGroups` which are an efficient
+ * @fileoverview Provides `Sprite` the basic building block for any game and
+ * `SpriteGroups`, which are an efficient
  * way for doing collision detection between groups as well as drawing layered
  * groups of objects on the screen.
  *

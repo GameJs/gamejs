@@ -1,7 +1,9 @@
 var matrix = require('gamejs/matrix');
 
 /**
- * @fileoverview This module holds the essential `Rect` and `Surface` classes.
+ * @fileoverview This module holds the essential `Rect` and `Surface` classes as
+ * well as static methods for preloading assets. `gamejs.ready()` is maybe
+ * the most important as it kickstarts your app.
  */
 
 /**

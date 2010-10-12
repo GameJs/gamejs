@@ -9,7 +9,7 @@ var gamejs = require('gamejs');
  * A pattern for using this might look like so: your main game function (tick in this example) 
  * is being called by [gamejs.time.fpsCallback()](../time/#fpsCallback) 25 times per second.
  * Inside tick we call [gamejs.event.get()](#get) for a list of events that happened since the last
- * tick and we loop over each event and act on what the event properties.
+ * tick and we loop over each event and act on the event properties.
  * 
  *     function tick() {
  *        gamejs.event.get().forEach(function(event) {

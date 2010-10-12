@@ -1,5 +1,5 @@
 /**
- * @fileOverview Networking functionality for the serverside.
+ * @fileOverview Networking functionality for the serverside. **Alpha - not event everything implemented**
  *
  */
 var gamejs = require('gamejs');
