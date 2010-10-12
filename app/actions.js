@@ -8,7 +8,7 @@ var config = require('./config');
 exports.index = function(req) {
    return Response.skin('skins/index.html', {
       // hide util-* apps
-      apps: list('../apps/').filter(function(path) { return !strings.startsWith(path, 'util'); }),
+      apps: list(join(module.directory, '../apps/')).filter(function(path) { return !strings.startsWith(path, 'util'); }),
    })
 };
 
