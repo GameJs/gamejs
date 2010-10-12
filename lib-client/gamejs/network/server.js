@@ -75,7 +75,7 @@ var NetworkController = exports.NetworkController = function(id, gameClass) {
          return;
       // LIST GAMES
       } else if (event.type === gamejs.event.NET_CLIENT_GAMELIST) {
-         log.info('listing games for #', player.id);
+         log.info('listing games for #', player && player.id);
          var gameIds = Object.keys(games);
          player.send({
             type: gamejs.event.NET_SERVER_GAMELIST,

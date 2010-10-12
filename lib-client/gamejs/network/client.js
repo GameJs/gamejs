@@ -115,7 +115,7 @@ var NetworkController = exports.NetworkController = function () {
     */
    var ws = new WebSocket("ws://" + host + "/game");
    ws.onopen = function() {
-      self.send({
+      send({
          type: gamejs.event.NET_CLIENT_HELLO
       });
    }
