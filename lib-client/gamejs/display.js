@@ -5,7 +5,7 @@ var Surface = require('gamejs').Surface;
  * @fileoverview Methods to create, access and manipulate the display Surface.
  * Drawing to the screen is as simple as this:
  *
- *      $r.preload(["./images/sunflower.png"), 
+ *      $r.preload(["images/sunflower.png"), 
  *      $r.ready(function() {
  *          // init
  *          gamejs.display.setMode([800, 600]);
