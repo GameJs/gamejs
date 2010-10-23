@@ -18,6 +18,12 @@ Once you have Ringo get the two necessary packages with `ringo-admin`:
     ringo-admin install hns/ringo-modulr
     ringo-admin install oberhamsi/ringo-gamejs
 
+Note: Make sure that the symlink from ringojs/packages/ringo-gamejs/lib/ 
+pointing to ringojs/packages/ringo-gamejs/lib-client/ is intact!
+
+I need to get rid of that symlink asap - it seems to be broken when
+installing via ringo-admin insted of a git clone.
+
 Try example apps
 ------------------
 Start the GameJs web interface:
