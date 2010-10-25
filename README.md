@@ -13,16 +13,15 @@ are easy to get with Ringo's package managment.
 
 Details on how to install Ringo: <http://ringojs.org/wiki/Getting_Started/>
 
-Once you have Ringo get the two necessary packages with `ringo-admin`:
+Once you have Ringo get the necessary dependancy with `ringo-admin`:
 
     ringo-admin install hns/ringo-modulr
-    ringo-admin install oberhamsi/ringo-gamejs
 
-Note: Make sure that the symlink from ringojs/packages/ringo-gamejs/lib/ 
-pointing to ringojs/packages/ringo-gamejs/lib-client/ is intact!
+Then git clone GameJs into the `packages` directory of your Ringo install
+(a symlink also does the trick):
 
-I need to get rid of that symlink asap - it seems to be broken when
-installing via ringo-admin insted of a git clone.
+    cd ~/ringojs/packages/
+    git clone git@github.com:oberhamsi/ringo-gamejs.git
 
 Try example apps
 ------------------
