@@ -85,7 +85,7 @@ exports.NET_CLIENT_GAMELIST = 13;
 /**
  * game specific event.
  */
-exports.NET_SERVER_CUSTOM = 14;
+exports.NET_CLIENT_CUSTOM = 14;
 
 /**
  * Request game creation
