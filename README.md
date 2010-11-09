@@ -21,7 +21,7 @@ Then git clone GameJs into the `packages` directory of your Ringo install
 (a symlink also does the trick):
 
     cd ~/ringojs/packages/
-    git clone git@github.com:oberhamsi/ringo-gamejs.git
+    git clone git://github.com/oberhamsi/ringo-gamejs.git
 
 Try example apps
 ------------------
