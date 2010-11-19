@@ -20,3 +20,20 @@ exports.extend = function(subClass, superClass) {
    subClass.superConstructor = superClass;
    return;
 };
+
+/**
+ * Creates a new object as the as the keywise union of the provided objects.
+ * Whenever a key exists in a later object that already existed in an earlier
+ * object, the according value of the earlier object takes precedence.
+ * @param {Object} obj... The objects to merge
+ */
+exports.merge = function() {
+   var result = {};
+      for (var i = arguments.length; i > 0; --i) {
+         var obj = arguments[i - 1];
+         for (var property in obj) {
+            result[property] = obj[property];
+         }
+      }
+   return result;
+}
