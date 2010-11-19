@@ -401,6 +401,15 @@ Surface.prototype.__defineGetter__('canvas', function() {
    return this._canvas;
 });
 
+/**
+ * @returns {Array} the pixel image data (the canvas pixel array in html speak)
+ * @see http://dev.w3.org/html5/2dcontext/#canvaspixelarray
+ */
+Surface.prototype.getImageData = function() {
+   var size = this.getSize();
+   return this.context.getImageData(0, 0, size[0], size[1]).data;
+};
+
 
 // FIXME get rid of this, currently required by all apps
 /**
