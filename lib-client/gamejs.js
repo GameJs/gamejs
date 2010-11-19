@@ -1,4 +1,4 @@
-var matrix = require('gamejs/matrix');
+var matrix = require('gamejs/utils/matrix');
 
 /**
  * @fileoverview This module holds the essential `Rect` and `Surface` classes as
@@ -436,7 +436,7 @@ exports.time = require('gamejs/time');
 /**
  * @ignore
  */
-exports.matrix = require('gamejs/matrix');
+exports.matrix = require('gamejs/utils/matrix');
 /**
  * @ignore
  */

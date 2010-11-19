@@ -1,5 +1,5 @@
 var Surface = require('gamejs').Surface;
-var matrix = require('gamejs/matrix');
+var matrix = require('gamejs/utils/matrix');
 
 /**
  * @fileoverview Rotate and scale Surfaces.

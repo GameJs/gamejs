@@ -1,11 +1,11 @@
 /**
- * @fileoverview Lowlevel matrix manipulation, used by GameJs itself. Ignore, you
+ * @fileoverview Matrix manipulation, used by GameJs itself. You
  * probably do not need this unless you manipulate a Context's transformation
  * matrix yourself.
  */
 
 // correct way to do scale, rotate, translate
-// *  gamejs.matrix will be used in gamejs.transforms, modifing the surfaces.matrix
+// *  gamejs.utils.matrix will be used in gamejs.transforms, modifing the surfaces.matrix
 // * this matrix must be applied to the context in Surface.draw()
 
 
