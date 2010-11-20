@@ -142,9 +142,10 @@ Group.prototype.sprites = function() {
    return this._sprites;
 }
 
-Group.prototype.draw = function(surface) {
+Group.prototype.draw = function() {
+   var args = arguments;
    this._sprites.forEach(function(sprite) {
-      sprite.draw(surface);
+      sprite.draw.apply(sprite, args);
    }, this);
    return;
 };
