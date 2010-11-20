@@ -36,4 +36,17 @@ exports.merge = function() {
          }
       }
    return result;
-}
+};
+
+/**
+ * fallback for Object.keys
+ */
+exports.keys = function(obj) {
+   var ks = [];
+   for (var k in obj) {
+      if (k !== undefined) {
+         ks.push(k);
+      }
+   }
+   return ks;
+};

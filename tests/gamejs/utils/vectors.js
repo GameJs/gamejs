@@ -1,6 +1,6 @@
 var assert = require('assert');
 
-include('gamejs/utils/vector');
+include('gamejs/utils/vectors');
 
 var EPS = 0.000001;
 exports.testDistance = function() {
