@@ -3,8 +3,14 @@
  * The same interface must be provided for a custom Point class
  */
 var Point = exports.Point = function() {
-   this.x = arguments[0];
-   this.y = arguments[1];
+   var x = arguments[0];
+   var y = arguments[1];
+   if (arguments.length === 1) {
+      x = arguments[0][0];
+      x = arguments[0][1];
+   }
+   this.x = x;
+   this.y = y;
    return this;
 }
 
@@ -31,7 +37,13 @@ Point.prototype.equals = function(b) {
 
 /** convinient constructor **/
 var point = exports.point = function() {
-   return (new Point(arguments[0], arguments[1]));
+   var x = arguments[0];
+   var y = arguments[1];
+   if (arguments.length === 1) {
+      x = arguments[0][0];
+      y = arguments[0][1];
+   }
+   return (new Point(x, y));
 };
 
 /**
