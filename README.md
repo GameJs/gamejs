@@ -17,17 +17,20 @@ Once you have Ringo get the necessary dependancy with `ringo-admin`:
 
     ringo-admin install hns/ringo-modulr
 
-Then git clone GameJs into the `packages` directory of your Ringo install
-(a symlink also does the trick):
+Git clone GameJs to a convinient location:
 
-    cd ~/ringojs/packages/
-    git clone git://github.com/oberhamsi/ringo-gamejs.git
+   cd ~
+   git clone git://github.com/oberhamsi/ringo-gamejs.git
+
+Finally symlink GameJs into Ringo's packages directory:
+
+   ln -s ~/ringo-gamejs /usr/share/ringojs/packages/
 
 Try example apps
 ------------------
 Start the GameJs web interface:
 
-    ringo-web ~/ringojs/packages/ringo-gamejs/app/config.js
+    ringo-web ~/ringo-gamejs/app/config.js
    
 .. and access it in your browser:
    
