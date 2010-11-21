@@ -6,8 +6,10 @@ var matrix = require('gamejs/utils/matrix');
  */
 
 /**
+ * Returns a new surface which holds the original surface rotate by angle degrees.
  * @param {Surface} surface
  * @param {angel} angle Clockwise angle by which to rotate
+ * @returns {Surface} new, rotated surface
  */
 exports.rotate = function (surface, angle) {
    // degrees
@@ -24,8 +26,10 @@ exports.rotate = function (surface, angle) {
 };
 
 /**
+ * Returns a new surface holding the scaled surface.
  * @param {Surface} surface
- * @param {Array} dims new [width, height]
+ * @param {Array} scale new [widthScale, heightScale] in range; e.g.: [2,2] would double the size
+ * @returns {Surface} new, scaled surface
  */
 exports.scale = function(surface, dims) {
    var width = dims[0];
