@@ -410,6 +410,14 @@ Surface.prototype.getImageData = function() {
    return this.context.getImageData(0, 0, size[0], size[1]).data;
 };
 
+/**
+ * @returns a clone of this surface
+ */
+Surface.prototype.clone = function() {
+  var newSurface = new Surface(this.getRect());
+  newSurface.blit(this);
+  return newSurface; 
+};
 
 // FIXME get rid of this, currently required by all apps
 /**
