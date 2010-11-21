@@ -34,7 +34,9 @@ exports.rotate = function (surface, angle) {
 exports.scale = function(surface, dims) {
    var width = dims[0];
    var height = dims[1];
-   var newSurface = new Surface(surface.getSize());
+   var newDims = surface.getSize();
+   newDims = [newDims[0] * dims[0], newDims[1] * dims[1]];
+   var newSurface = new Surface(newDims);
    newSurface._matrix = matrix.scale(newSurface._matrix, [width, height]);
    newSurface.blit(surface);
    return newSurface;
