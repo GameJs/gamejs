@@ -102,9 +102,9 @@ exports.rect = function(surface, color, rect, width) {
    ctx.save();
    ctx.strokeStyle = ctx.fillStyle = color;
    if (width === undefined || width === 0) {
-      ctx.fillRect(rect.top, rect.left, rect.width, rect.height);
+      ctx.fillRect(rect.left, rect.top, rect.width, rect.height);
    } else {
-      ctx.strokeRect(rect.top, rect.left, rect.width, rect.height);
+      ctx.strokeRect(rect.left, rect.top, rect.width, rect.height);
    }
    ctx.restore();
 };
