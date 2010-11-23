@@ -14,7 +14,6 @@ exports.index = function(req) {
 
 exports.app = function(req, appId) {
    var appSpecific = join(module.directory, '../apps/', appId, 'app.html');
-   print (appSpecific);
    return Response.skin(exists(appSpecific) ? appSpecific : 'skins/app.html', {
       appId: appId,
       websocketHost: 'localhost:8080',
