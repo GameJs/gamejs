@@ -32,7 +32,7 @@ exports.urls = [
 // clientside javascript library directory. holds all gamejs modules as well as
 // all apps.
 exports.middleware = [
-    modulr.middleware(join(module.directory, "../lib-client/"), "/lib/"),
+    modulr.middleware(join(module.directory, "../lib/"), "/lib/"),
 ];
 
 // ringo stuff
