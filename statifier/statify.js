@@ -6,6 +6,7 @@ var {join, copyTree, write, copy, exists, makeDirectory} = require('fs');
 var myself = sys.args.shift();
 var appName = sys.args[0];
 var destinationDirectory = sys.args[1];
+// FIXME throw error if gamejs server not running
 var GAMEJS_SERVER = 'http://localhost:8080';
 
 if (!appName || !destinationDirectory) {
@@ -17,7 +18,7 @@ if (!appName || !destinationDirectory) {
 var appDirectory = join(module.directory, '../',  'apps', appName);
 var appJsUrl = GAMEJS_SERVER + '/lib/gamejs/apps/' + appName + '/main.js';
 var htmlPath = join(module.directory, 'index.html');
-
+var jqueryPath = join(module.directory, '../', 'apps/util-jquery/javascript/jquery-1.4.2.min.js');
 // copy resources
 
 ['images', 'sounds'].forEach(function(resDir) {
@@ -32,7 +33,11 @@ copy(htmlPath, join(destinationDirectory, 'index.html'));
 
 // download & copy main.js
 var response = get(appJsUrl);
-makeDirectory(join(destinationDirectory, 'javascript'));
-write(join(destinationDirectory, 'javascript', 'main.js'), response.content);
+var jsDir = join(destinationDirectory, 'javascript');
+if (!exists(jsDir)) {
+   makeDirectory();
+}
+write(join(jsDir, 'main.js'), response.content);
+copy(jqueryPath, join(jsDir, 'jquery.js'));
 
 print ('Statified ' + appName + ' to ' + destinationDirectory);
