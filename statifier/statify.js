@@ -35,7 +35,7 @@ copy(htmlPath, join(destinationDirectory, 'index.html'));
 var response = get(appJsUrl);
 var jsDir = join(destinationDirectory, 'javascript');
 if (!exists(jsDir)) {
-   makeDirectory();
+   makeDirectory(jsDir);
 }
 write(join(jsDir, 'main.js'), response.content);
 copy(jqueryPath, join(jsDir, 'jquery.js'));
