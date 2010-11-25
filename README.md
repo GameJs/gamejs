@@ -20,23 +20,23 @@ Once you have Ringo get the necessary dependancy with `ringo-admin`:
 Git clone GameJs to a convinient location:
 
     cd ~
-    git clone git://github.com/oberhamsi/ringo-gamejs.git
+    git clone git://github.com/oberhamsi/gamejs.git
 
 Finally symlink GameJs into Ringo's packages directory:
 
-    ln -s ~/ringo-gamejs /usr/share/ringojs/packages/
+    ln -s ~/gamejs /usr/share/ringojs/packages/
 
 Try example apps
 ------------------
-Start the GameJs web interface:
+Start the GameJs web server:
 
-    ringo-web ~/ringo-gamejs/app/config.js
+    ~/gamejs/start.sh
    
 .. and access it in your browser:
    
     http://localhost:8080/
 
-A couple of example apps should show up.
+Several links to example apps should show up.
 
 Writing games with GameJs
 -----------------------------
