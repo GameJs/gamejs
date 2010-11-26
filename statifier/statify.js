@@ -19,9 +19,9 @@ var appDirectory = join(module.directory, '../',  'apps', appName);
 var appJsUrl = GAMEJS_SERVER + '/lib/gamejs/apps/' + appName + '/main.js';
 var htmlPath = join(module.directory, 'index.html');
 var jqueryPath = join(module.directory, '../', 'apps/util-jquery/javascript/jquery-1.4.2.min.js');
-// copy resources
 
-['images', 'sounds'].forEach(function(resDir) {
+// copy resources
+['images', 'sounds', 'json'].forEach(function(resDir) {
    var fullResPath = join(appDirectory, resDir);
    if (exists(fullResPath)) {
       copyTree(fullResPath, join(destinationDirectory, resDir));
