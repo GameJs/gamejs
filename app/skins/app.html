@@ -1,6 +1,29 @@
 <% extends './base.html' %>
 
 <% subskin header %>
+   <% if not <% statifier %> render networkingExternals %>
+   
+   <% if <% statifier %> render statifierStartUp %>
+   <% if not <% statifier %> render normalStartUp %>
+   
+	<title><% appName %> @ gamejs.org</title>
+
+<% subskin content %>
+   <div>
+      <h1> <% appName %> </h1>
+      <div id="game-header">
+      </div>
+      
+      <canvas id="jsgamecanvas"></canvas>
+      
+      <div id="game-footer">
+      </div>
+      <p>
+         <a href="/"><-- Dashboard</a>
+      </p>
+   </div>
+
+<% subskin networkingExternals %>
    <!-- // START WEBSOCKET STUFF -->
    <script src="<% resourceHref util-websocket-fallback /javascript/swfobject.js %>"></script>
    <script src="<% resourceHref util-websocket-fallback /javascript/FABridge.js %>"></script>
@@ -16,6 +39,16 @@
    </script>
 
    <!-- // END WEBSOCKET STUFF -->
+
+<% subskin statifierStartUp %>
+   <script>
+      var $g = {};
+      $g.resourceBaseHref = './';
+   </script>
+   <script src="./javascript/jquery.js"></script>
+   <script src="./javascript/main.js"></script>
+
+<% subskin normalStartUp %>
 	<script>
 	   var $g = {};
 	   $g.appId = '<% appId %>';
@@ -23,19 +56,4 @@
 	   $g.websocketHost = '<% websocketHost %>';
 	</script>
 	<script src="<% mainScriptHref <% appId %> %>" type="text/javascript" charset="utf-8"></script>
-	<title><% appName %> @ gamejs.org</title>
 
-<% subskin content %>
-<div>
-   <h1> <% appName %> </h1>
-   <div id="game-header">
-   </div>
-   
-   <canvas id="jsgamecanvas"></canvas>
-   
-   <div id="game-footer">
-   </div>
-   <p>
-      <a href="/"><-- Dashboard</a>
-   </p>
-</div>

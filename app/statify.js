@@ -1,7 +1,7 @@
 var sys = require('system');
 var {get} = require('ringo/httpclient');
 var {join, copyTree, write, copy, exists, makeDirectory} = require('fs');
-
+var {render} = require('ringo/skin');
 
 var myself = sys.args.shift();
 var appName = sys.args[0];
@@ -17,7 +17,6 @@ if (!appName || !destinationDirectory) {
 // path & urls
 var appDirectory = join(module.directory, '../',  'apps', appName);
 var appJsUrl = GAMEJS_SERVER + '/lib/gamejs/apps/' + appName + '/main.js';
-var htmlPath = join(module.directory, 'index.html');
 var jqueryPath = join(module.directory, '../', 'apps/util-jquery/javascript/jquery-1.4.2.min.js');
 
 // copy resources
@@ -28,8 +27,13 @@ var jqueryPath = join(module.directory, '../', 'apps/util-jquery/javascript/jque
    }
 }, this);
 
-// copy index.html
-copy(htmlPath, join(destinationDirectory, 'index.html'));
+// render index.html
+var appSpecific = join(appDirectory, 'app.html');
+var indexHtml = render(exists(appSpecific) ? appSpecific : 'skins/app.html', {
+   appName: appName,
+   statifier: true,
+});
+write(join(destinationDirectory, 'index.html'), indexHtml);
 
 // download & copy main.js
 var response = get(appJsUrl);
@@ -39,5 +43,3 @@ if (!exists(jsDir)) {
 }
 write(join(jsDir, 'main.js'), response.content);
 copy(jqueryPath, join(jsDir, 'jquery.js'));
-
-print ('Statified ' + appName + ' to ' + destinationDirectory);
