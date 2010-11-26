@@ -25,7 +25,7 @@ exports.urls = [
    // app wrapper html
    [ '/([^/]+)/', './actions', 'app'],
    // static files: appId/resourceType/resourcePath/
-   [ '/([^/]+)/(?:/*)(images|javascript|flash)/(?:/*)(.*)', './actions', 'resources'],
+   [ '/([^/]+)/(?:/*)(images|json|javascript|flash)/(?:/*)(.*)', './actions', 'resources'],
 ];
 
 // clientside javascript library directory. holds all gamejs modules as well as
