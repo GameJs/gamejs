@@ -17,7 +17,6 @@ if (!appName || !destinationDirectory) {
 // path & urls
 var appDirectory = join(module.directory, '../',  'apps', appName);
 var appJsUrl = GAMEJS_SERVER + '/lib/gamejs/apps/' + appName + '/main.js';
-var jqueryPath = join(module.directory, '../', 'apps/util-jquery/javascript/jquery-1.4.2.min.js');
 
 // copy resources
 ['images', 'sounds', 'json'].forEach(function(resDir) {
@@ -42,4 +41,3 @@ if (!exists(jsDir)) {
    makeDirectory(jsDir);
 }
 write(join(jsDir, 'main.js'), response.content);
-copy(jqueryPath, join(jsDir, 'jquery.js'));
