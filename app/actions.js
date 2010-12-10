@@ -1,33 +1,32 @@
 // stdlib
+var {Application} = require("stick");
 var {Response} = require('ringo/webapp/response');
 var {exists, join, list} = require('fs');
 var {mimeType} = require("ringo/webapp/mime");
 var strings = require('ringo/utils/strings');
 
-var config = require('./config');
-exports.index = function(req) {
-   return Response.skin('skins/index.html', {
-      // hide util-* apps
-      apps: list(join(module.directory, '../apps/')).filter(function(path) { return !strings.startsWith(path, 'util'); }),
-   })
-};
+var app = exports.app = Application();
+app.configure("params", "render", "route");
 
-exports.app = function(req, appId) {
-   var appSpecific = join(module.directory, '../apps/', appId, 'app.html');
-   return Response.skin(exists(appSpecific) ? appSpecific : 'skins/app.html', {
+//app.render.base(module.resolve("skins"));
+app.render.helpers(require("./macros"), "ringo/skin/macros", "ringo/skin/filters");
+
+// dashboard
+app.get('/', function(req) {
+   return app.render(module.resolve('./skins/index.html'), {
+      // hide util-* apps
+      apps: list(module.resolve('../apps/')).
+               filter(function(path) {
+                  return !strings.startsWith(path, 'util');
+               }),
+   })
+});
+
+app.get('/:appId/', function(req, appId) {
+   var specificSkin = join(module.resolve('../apps/'), appId, 'app.html');
+   var genericSkin = module.resolve('./skins/app.html');
+   return app.render(exists(specificSkin) ? specificSkin : genericSkin, {
       appId: appId,
       websocketHost: 'localhost:8080',
    });
-}
-
-exports.resources = function(req, appId, resourceType, resourcePath) {
-   // basically ringo/middleware/static but every app can
-   // have different resourceBase and we grab resourceInfo
-   // from various path elements.
-   var basePath = '../apps/';
-   var path = join(basePath, appId, resourceType, resourcePath);
-   var resource = getResource(path);
-   if (resource && resource.exists()) {
-      return Response.static(resource, mimeType(path, 'text/plain'));
-   }
-}
+});

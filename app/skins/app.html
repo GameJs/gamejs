@@ -42,6 +42,9 @@
 
 <% subskin statifierStartUp %>
    <script>
+      if (!window.console) {
+         window.console = {log: function() {}};
+      }
       var $g = {};
       $g.resourceBaseHref = './';
    </script>
