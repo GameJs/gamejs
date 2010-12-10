@@ -8,7 +8,7 @@ GameJs is a JavaScript library for writing 2D games or other interactive graphic
    * Philosophy: Ease of use > Completeness
    * Write your games in CommonJs <http://www.commonjs.org/>
 
-GameJs will probably use WebSockets for super easy networking at some point in the future.
+Gamejs is early in development. The API will change though it will converge to a sensible translation of PyGame concepts to JavaScript.
 
 Install
 -------
