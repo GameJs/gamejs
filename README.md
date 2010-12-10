@@ -17,9 +17,10 @@ are easy to get with Ringo's package managment.
 
 Details on how to install Ringo: <http://ringojs.org/wiki/Getting_Started/>
 
-Once you have Ringo get the necessary dependancy with `ringo-admin`:
+Once you have Ringo get the necessary dependancies with `ringo-admin`:
 
     ringo-admin install hns/ringo-modulr
+    ringo-admin install hns/stick
 
 Git clone GameJs to a convinient location:
 
