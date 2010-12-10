@@ -1,11 +1,9 @@
 <% extends './base.html' %>
 
 <% subskin header %>
-   <% if not <% statifier %> render networkingExternals %>
-   
    <% if <% statifier %> render statifierStartUp %>
    <% if not <% statifier %> render normalStartUp %>
-   
+
 	<title><% appName %> @ gamejs.org</title>
 
 <% subskin content %>
@@ -13,32 +11,15 @@
       <h1> <% appName %> </h1>
       <div id="game-header">
       </div>
-      
+
       <canvas id="jsgamecanvas"></canvas>
-      
+
       <div id="game-footer">
       </div>
       <p>
          <a href="/"><-- Dashboard</a>
       </p>
    </div>
-
-<% subskin networkingExternals %>
-   <!-- // START WEBSOCKET STUFF -->
-   <script src="<% resourceHref util-websocket-fallback /javascript/swfobject.js %>"></script>
-   <script src="<% resourceHref util-websocket-fallback /javascript/FABridge.js %>"></script>
-   <script src="<% resourceHref util-websocket-fallback /javascript/web_socket.js %>"></script>
-   
-   <script src="<% resourceHref util-jquery /javascript/jquery-1.4.2.min.js %>"></script>
-   <script src="<% resourceHref util-handlebars /javascript/handlebars.js %>"></script>
-
-   <script>
-   WEB_SOCKET_SWF_LOCATION = "<% resourceHref util-websocket-fallback /flash/WebSocketMain.swf %>";
-   // Set this to dump debug message from Flash to console.log:
-   WEB_SOCKET_DEBUG = false;
-   </script>
-
-   <!-- // END WEBSOCKET STUFF -->
 
 <% subskin statifierStartUp %>
    <script>
@@ -59,4 +40,3 @@
 	   $g.websocketHost = '<% websocketHost %>';
 	</script>
 	<script src="<% mainScriptHref <% appId %> %>" type="text/javascript" charset="utf-8"></script>
-
