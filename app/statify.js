@@ -15,7 +15,7 @@ if (!appName || !destinationDirectory) {
 }
 
 // path & urls
-var appDirectory = join(module.directory, '../',  'apps', appName);
+var appDirectory = join(module.resolve('../apps'), appName);
 var appJsUrl = GAMEJS_SERVER + '/lib/gamejs/apps/' + appName + '/main.js';
 
 // copy resources
@@ -28,7 +28,7 @@ var appJsUrl = GAMEJS_SERVER + '/lib/gamejs/apps/' + appName + '/main.js';
 
 // render index.html
 var appSpecific = join(appDirectory, 'app.html');
-var indexHtml = render(exists(appSpecific) ? appSpecific : 'skins/app.html', {
+var indexHtml = render(exists(appSpecific) ? appSpecific : module.resolve('skins/app.html'), {
    appName: appName,
    statifier: true,
 });
