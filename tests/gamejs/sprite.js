@@ -27,7 +27,7 @@ exports.testSpriteGroup = function() {
    sprites = sprites.map(function(sp) {
       sp._testUpdateCalled = false;
       sp._testDurationPassed = null;
-      
+
       sp._testDrawCalled = false;
       sp._testSurfacePassed = null;
       sp.draw = function(surface) {
@@ -37,7 +37,7 @@ exports.testSpriteGroup = function() {
       sp.update = function(msDuration) {
          sp._testUpdateCalled = true;
          sp._testDurationPassed = msDuration;
-         
+
       };
       return sp;
    }, this);
@@ -53,7 +53,7 @@ exports.testSpriteGroup = function() {
       assert.isTrue(sp._testDrawCalled);
       assert.equal(sp._testSurfacePassed, surface);
    };
-   
+
    // remove one by one
    for each (var sp in sprites) {
       group.remove(sp);

@@ -13,8 +13,8 @@ var tysprites = require('./tyround/sprites');
  *
  * Scene provides a default, quick-start implementation for getting something
  * on the screen fast.
- * 
- * All we have here are a bunch of functions for configuring 
+ *
+ * All we have here are a bunch of functions for configuring
  * the scene for one of:
  *
  *  * the splash screen
@@ -33,15 +33,15 @@ exports.Game = function() {
     */
    this.startSplashScene = function() {
       scene.stop();
-      
+
       scene.background = gamejs.image.load('images/startscreen.png');
-      
+
       // hardcoded position of startbutton in splash screen background
       var rectStartButton = new gamejs.Rect([254, 376], [295, 80]);
-      
+
       // clear the update function if any
       scene.update = function() {};
-      
+
       scene.doEvents = function(event) {
          // handle mouse events
          if (event.type == gamejs.event.MOUSE_UP) {
@@ -59,14 +59,14 @@ exports.Game = function() {
       scene.start(30);
       return;
    };
-   
+
    /**
     * Setup the scene for the actual game. This has more elaborate
-    * event handling & per frame update functions which are extracted into the 
+    * event handling & per frame update functions which are extracted into the
     * game* functions.
     */
    function startGameScene() {
-   
+
       /**
        * periodically called model updater used when the game is running. Mostly
        * has to deal with collision detection in this game.
@@ -83,7 +83,7 @@ exports.Game = function() {
             }
             return false;
          }
-         
+
          // ship hit planet
          planetGroup.sprites().forEach(checkShipCollide);
          // ship hit by shuriken
@@ -97,10 +97,10 @@ exports.Game = function() {
                diamond.kill();
             }
          });
-         
+
          return;
       };
-      
+
       /**
        * event handling function when game is running
        * @see startGameScene
@@ -137,7 +137,7 @@ exports.Game = function() {
             }
          }
       };
-   
+
       scene.stop();
       scene.background = gamejs.image.load('images/starbackground.png');
 
@@ -148,7 +148,7 @@ exports.Game = function() {
       // diamonds created by planet explosions
       var diamondGroup = new gamejs.sprite.Group();
       scene.addGroup(diamondGroup)
-      
+
       // for explosions by anyone
       var explosionGroup = new gamejs.sprite.Group();
       scene.addGroup(explosionGroup);
@@ -173,7 +173,7 @@ exports.Game = function() {
          var planet = new tysprites.Planet([
                                  (screenRect.width - 110) * Math.random() + 100,
                                  (screenRect.height - 110) * Math.random() + 100
-                              ], 
+                              ],
                               ship,
                               shurikenGroup,
                               explosionGroup,
@@ -183,7 +183,7 @@ exports.Game = function() {
                               );
          planetGroup.add(planet);
       }
-      
+
       /**
        * the gui is just a sprite
        */
@@ -198,7 +198,7 @@ exports.Game = function() {
       scene.start(30);
       return;
    };
-   
+
    /**
     * Setup scene for game over - score & possibility to restart.
     */
@@ -206,7 +206,7 @@ exports.Game = function() {
       // hardcoded position of startbutton in splash screen background
       var rectStartButton = new gamejs.Rect([254, 376], [295, 80]);
 
-      scene.stop();      
+      scene.stop();
       var gameoverFont = new gamejs.font.Font("100px Verdana");
       var scoreFont = new gamejs.font.Font("20px Verdana");
       scene.background = new Surface([screenRect.width, screenRect.height]);

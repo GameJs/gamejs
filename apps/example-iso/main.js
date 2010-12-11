@@ -1,4 +1,4 @@
-/** 
+/**
  * Heavy work in progress, see http://gamejs.org/api/gamejs/iso/ for more info.
  */
 var gamejs = require('gamejs');
@@ -14,8 +14,8 @@ var vladAnimationsMeta = {
 
 var vladAnimations = {
    attack: {
-      name: "attack", 
-      count: 11, 
+      name: "attack",
+      count: 11,
       directions: ["e", "n", "ne", "nw", "s", "se", "sw", "w"],
       size: 128,
    },
@@ -52,7 +52,7 @@ function main() {
    /**
     * M A I N
     */
-   
+
    function handleUserInput() {
       gamejs.event.get().forEach(function(event) {
          if (event.type === gamejs.event.QUIT) {
@@ -76,7 +76,7 @@ function main() {
             } else if (event.key === gamejs.event.K_KP3) {
                vlad.setDirection('se');
             } else if (event.key === gamejs.event.K_KP5) {
-               vlad.setAnimation('attack');            
+               vlad.setAnimation('attack');
             } else if (event.key === gamejs.event.K_ENTER) {
                vlad.setAnimation('walking');
             } else if (event.key === gamejs.event.K_SPACE) {
@@ -87,7 +87,7 @@ function main() {
       }); // end while
       return;
    }
-   
+
    // game loop
    var mainSurface = gamejs.display.getSurface();
    var font = new gamejs.font.Font("20px Verdana"); // css font definition

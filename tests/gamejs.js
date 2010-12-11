@@ -9,9 +9,9 @@ exports.setUp = function() {
 
 exports.testRectConstructors = function() {
    // test various constructor forms
-   
+
    var [left, top, width, height] = [11, 12, 13, 14];
-   
+
    var rect = new gamejs.Rect([left, top]);
    assert.isTrue(rect instanceof gamejs.Rect);
    assert.strictEqual(rect.left, left);
@@ -24,7 +24,7 @@ exports.testRectConstructors = function() {
       left,
       top
    ]);
-   
+
    var rect = new gamejs.Rect([left, top], [width, height]);
    assert.isTrue(rect instanceof gamejs.Rect);
    assert.strictEqual(rect.left, left);
@@ -50,7 +50,7 @@ exports.testRectConstructors = function() {
       left + parseInt(width / 2, 10),
       top + parseInt(height / 2, 10)
    ]);
-   
+
    var rect = new gamejs.Rect(left, top, width, height);
    assert.isTrue(rect instanceof gamejs.Rect);
    assert.strictEqual(rect.left, left);
@@ -69,7 +69,7 @@ exports.testRectSetters = function() {
    var [left, top, width, height] = [10, 20, 30, 40];
    var rect = new gamejs.Rect(left, top, width, height);
    var newCenter = [50, 60];
-   
+
    // new center
    rect.center = newCenter;
    assert.strictEqual(rect.left, parseInt(newCenter[0] - width / 2, 10));
@@ -79,7 +79,7 @@ exports.testRectSetters = function() {
    assert.strictEqual(rect.bottom, parseInt(newCenter[1] + height / 2, 10));
    assert.strictEqual(rect.right, parseInt(newCenter[0] + width / 2, 10));
    assert.deepEqual(rect.center, newCenter);
-   
+
    // move it back to old center
    rect.moveIp((left + width/2) - newCenter[0], (top + height/2) - newCenter[1]);
    assert.strictEqual(rect.left, left);
@@ -114,7 +114,7 @@ exports.testRectCollide = function() {
    rectTwo = new gamejs.Rect(-20, 0, 10, 10);
    assert.isFalse(rect.collideRect(rectTwo));
    assert.isFalse(rectTwo.collideRect(rect));
-   
+
    rectTwo = new gamejs.Rect(0, -20, 10, 10);
    assert.isFalse(rect.collideRect(rectTwo));
    assert.isFalse(rectTwo.collideRect(rect));
@@ -125,22 +125,22 @@ exports.testRectCollide = function() {
 
    // touching
    assert.isTrue(rect.collidePoint(0, 0));
-   
+
    // diff quadrants
    assert.isFalse(rect.collidePoint(-10, 0));
    assert.isFalse(rect.collidePoint(0, -10));
    assert.isFalse(rect.collidePoint(-10, -10));
-   
+
    // collide lines
    assert.isTrue(rect.collideLine([0,0], [5,5]));
    assert.isTrue(rect.collideLine([5,5], [20,20]));
-   
+
    // touching
    assert.isTrue(rect.collideLine([-10,-10], [0,0]));
 
    // no collide
-   assert.isFalse(rect.collideLine([20, 20], [50,50]));      
-   assert.isFalse(rect.collideLine([-10,-10], [-20,-20]));   
+   assert.isFalse(rect.collideLine([20, 20], [50,50]));
+   assert.isFalse(rect.collideLine([-10,-10], [-20,-20]));
 };
 
 exports.testSurfaceConstructors = function() {
@@ -148,7 +148,7 @@ exports.testSurfaceConstructors = function() {
    global.document = {
       createElement: function() {
          return {
-         
+
          }
       }
    };

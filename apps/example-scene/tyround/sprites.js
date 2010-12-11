@@ -51,7 +51,7 @@ Ship.prototype.update = function() {
    } else {
       this.speed = 2;
    }
-   
+
    return;
 }
 
@@ -135,7 +135,7 @@ var Planet = exports.Planet = function(position, ship, shurikenGroup, explosionG
    this.scoreGroup = scoreGroup;
    this.explosionGroup = explosionGroup;
    this.ship = ship;
-   
+
    this.image = gamejs.image.load("images/planet.png");
    this.rect = this.image.getRect();
    this.rect.center = position;
@@ -200,14 +200,14 @@ var Explosion = exports.Explosion = function(origin) {
       }
       return;
    }
-   
+
    this.draw = function(surface) {
       particles.forEach(function(p) {
          surface.blit(gamejs.transform.scale(this.image, [p.size, p.size]), p.pos);
       }, this);
       return;
    };
-      
+
    return this;
 }
 gamejs.utils.objects.extend(Explosion, gamejs.sprite.Sprite);
@@ -247,7 +247,7 @@ Diamond.prototype.update = function(msDuration) {
 
 var Scorepoints = exports.Scorepoints = function(position, points) {
    Scorepoints.superConstructor.apply(this, arguments);
-   
+
    this.image = gamejs.image.load('images/' + points + 'points.png');
    this.rect = this.image.getRect();
    this.rect.center = position;
@@ -274,13 +274,13 @@ var Gui = exports.Gui = function(scene, ship, planetGroup, initGameOver) {
    Gui.superConstructor.apply(this, arguments);
 
    var scoreFont = new gamejs.font.Font("20px Verdana");
-   
+
    this.rect = new gamejs.Rect([0, 0]);
    var startTime = Date.now();
    this.diamondScore = 0;
-   
+
    this.update = function() {
-      
+
       this.timeLeft = parseInt((30000 - (Date.now() - startTime)) / 1000, 10);
       var planetsLeft = planetGroup.sprites().length;
       this.planetScore =  (10 - planetsLeft) * 100;
@@ -297,7 +297,7 @@ var Gui = exports.Gui = function(scene, ship, planetGroup, initGameOver) {
             this.score -= 100;
             msg = '-100 Your ship was destroyed.';
          }
-         totalScore = this.score + this.diamondScore + this.planetScore; 
+         totalScore = this.score + this.diamondScore + this.planetScore;
          initGameOver(totalScore, [
             {key: 'Planets', value:this.planetScore},
             {key: 'Diamonds', value: this.diamondScore},
@@ -306,13 +306,13 @@ var Gui = exports.Gui = function(scene, ship, planetGroup, initGameOver) {
          ]);
       }
       return;
-   }  
+   }
 
    this.draw = function(surface) {
       surface.blit(scoreFont.render(this.timeLeft, '#e700d5'),[surface.getRect().width-28, 0] );
 
    }
-   
+
    return this;
 }
 

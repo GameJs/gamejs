@@ -2,7 +2,7 @@ var gamejs = require('gamejs');
 var draw = require('gamejs/draw');
 var font = require('gamejs/font');
 
-function main() {   
+function main() {
    // init
    var mainSurface = gamejs.display.setMode([800, 600]);
    gamejs.display.setCaption("Example Draw");

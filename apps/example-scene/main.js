@@ -30,7 +30,7 @@ gamejs.preload([
    "images/greendiamond_2.png",
    "images/greendiamond_3.png",
    "images/greendiamond_4.png",
-   "images/greendiamond_5.png",      
+   "images/greendiamond_5.png",
 /*
    "./sounds/rocket.ogg",
    "./sounds/explosion0.ogg",

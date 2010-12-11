@@ -1,6 +1,6 @@
 var gamejs = require('gamejs');
 
-/** 
+/**
  * a basic ship
  */
 var Ship = function(rect) {

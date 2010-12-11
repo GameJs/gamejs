@@ -12,7 +12,7 @@ var ROUTE_C = {point:{x:19, y:19}, from:{point:{x:18, y:19}, from:{point:{x:17, 
 
 var toSimplePoints = function(route) {
    if (!route) return null;
-   
+
    return {point: {x: route.point.x, y: route.point.y}, from: toSimplePoints(route.from), length: route.length, score: route.score};
 };
 
@@ -28,6 +28,3 @@ exports.testSearch = function () {
 if (require.main == module.id) {
     require('test').run(exports);
 }
-
-
-
