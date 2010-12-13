@@ -15,10 +15,7 @@ app.render.helpers(require("./macros"), "ringo/skin/macros", "ringo/skin/filters
 app.get('/', function(req) {
    return app.render(module.resolve('./skins/index.html'), {
       // hide util-* apps
-      apps: list(module.resolve('../apps/')).
-               filter(function(path) {
-                  return !strings.startsWith(path, 'util');
-               }),
+      apps: list(module.resolve('../apps/')),
    })
 });
 
