@@ -20,7 +20,7 @@ app.get('/', function(req) {
 });
 
 app.get('/:appId/', function(req, appId) {
-   var specificSkin = join(module.resolve('../apps/'), appId, 'app.html');
+   var specificSkin = join(module.resolve('../apps/'), appId, 'index.html');
    var genericSkin = module.resolve('./skins/app.html');
    return app.render(exists(specificSkin) ? specificSkin : genericSkin, {
       appId: appId,
