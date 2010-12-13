@@ -4,6 +4,7 @@ var {Response} = require('ringo/webapp/response');
 var {mimeType} = require("ringo/webapp/mime");
 var {Server} = require('ringo/httpserver');
 var {join, list} = require('fs');
+var log = require('ringo/logging').getLogger(module.id);
 
 var app = exports.app = Application();
 app.configure('notfound', 'error', 'modulr/middleware', 'mount');
@@ -27,7 +28,11 @@ list(module.resolve('../apps/')).forEach(function(appId) {
       var mountPoint = '/server/' + appId;
       var module = 'gamejs/apps/' + appId + '/server';
       app.mount(mountPoint, require(module));
+      log.info('mounted ', appId, ' @ ', mountPoint);
    } catch (e) {
+      if (e.name != 'JavaException') {
+         log.error(e);
+      }
       return;
    }
 }, this);
