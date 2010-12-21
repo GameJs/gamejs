@@ -8,27 +8,32 @@ A module is just a plain JavaScript file which exports some
 properties. Only exported properties are then visible for other
 modules that require it. For example, say you have one file foo.js:
 
-   // in foo.js
-   var adder = function(a, b) {
-       return a + b;
-   };
-   exports.add = function(a, b) {
-       return adder(a, b);
-   };
+    // in foo.js
+    var adder = function(a, b) {
+        return a + b;
+    };
+    exports.add = function(a, b) {
+        return adder(a, b);
+    };
 
 .. then another file `bar.js` can load the module `foo` and use its
 function `add()`  like this:
 
-   // in bar.js:
-   var foo = require('./foo');
-   foo.add(2, 2)
+    // in bar.js:
+    var foo = require('./foo');
+    foo.add(2, 2)
 
 You can also split your files into directories. Check out this example
-app, it uses require() a lot: https://github.com/oberhamsi/gamejs/tree/master/apps/example-scene
+app, it uses require() a lot:
+
+https://github.com/oberhamsi/gamejs/tree/master/apps/example-scene
+
+
 (especially see how main.js does `require('./tyround')` and in
 tyround.js more modules from the tyround/ directory are loaded).
 
 For more in depth info on CommonJs Modules see:
+
   * Another explanation http://ringojs.org/wiki/Tutorial#modules
   * More technical explanation http://ringojs.org/wiki/Modules_in_RingoJS/
   * the commonjs specification http://wiki.commonjs.org/wiki/Modules/1.1
