@@ -13,7 +13,7 @@ var Ship = exports.Ship = function(explosionGroup, scene) {
    this.rect = this.image.getRect();
    this.x = 20;
    this.y = 20;
-   this.speed = 1;
+   this.speed = 60;
    this.heading = 0;
    this.rotateDir = 0;
    return this;
@@ -21,7 +21,7 @@ var Ship = exports.Ship = function(explosionGroup, scene) {
 
 gamejs.utils.objects.extend(Ship, gamejs.sprite.Sprite);
 
-Ship.prototype.update = function() {
+Ship.prototype.update = function(msDuration) {
    if (this.rotateDir < 0) {
       this.turnBy(-5);
    } else if (this.rotateDir > 0) {
@@ -30,8 +30,8 @@ Ship.prototype.update = function() {
 
    // move
    var theta = this.heading / 180 * Math.PI;
-   this.x += Math.cos(theta) * this.speed;
-   this.y += Math.sin(theta) * this.speed;
+   this.x += Math.cos(theta) * this.speed * (msDuration/1000);
+   this.y += Math.sin(theta) * this.speed * (msDuration/1000);
    this.rect.center = [this.x, this.y];
 
    if (this.x < 0) {
@@ -46,10 +46,10 @@ Ship.prototype.update = function() {
    }
 
    // decrease speed if boosting
-   if (this.speed > 2.1) {
-      this.speed -= (2/this.speed) ;
+   if (this.speed > 60) {
+      this.speed -= (10/this.speed) ;
    } else {
-      this.speed = 2;
+      this.speed = 60;
    }
 
    return;
@@ -83,8 +83,8 @@ var Rocket = exports.Rocket = function(scene, position, angle) {
    this.setImage("images/rocket.png");
    this.setAngle(angle);
    this.setPosition(position);
-   this.setSpeed(6);
-   this.update();
+   this.setSpeed(120);
+   this.update(1);
    return this;
 };
 gamejs.utils.objects.extend(Rocket, gamejs.scene.MovingSprite);
@@ -107,8 +107,8 @@ var Shuriken = exports.Shuriken  = function(scene, position, angle) {
    this.setImage("images/shuriken.png");
    this.setAngle(angle);
    this.setPosition(position);
-   this.setSpeed(parseInt(2 + (Math.random()*2), 10));
-   this.update();
+   this.setSpeed(parseInt(80 + (Math.random()*20), 10));
+   this.update(1);
    return this;
 };
 gamejs.utils.objects.extend(Shuriken, gamejs.scene.MovingSprite);

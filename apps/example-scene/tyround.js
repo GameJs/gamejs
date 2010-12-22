@@ -73,7 +73,7 @@ exports.Game = function() {
        *
        * @see startGameScene
        */
-      function gameUpdate() {
+      function gameUpdate(msDuration) {
          gamejs.sprite.groupCollide(rocketGroup, planetGroup, true, true);
 
          var checkShipCollide = function(item) {
@@ -117,7 +117,7 @@ exports.Game = function() {
                ship.speed = 2;
                var now = Date.now();
                if (now - msLastBoost > 5000) {
-                  ship.speed = 6;
+                  ship.speed = 120;
                }
             } else if (event.key == gamejs.event.K_SPACE) {
                var now = Date.now();
