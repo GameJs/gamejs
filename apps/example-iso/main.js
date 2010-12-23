@@ -43,11 +43,13 @@ var vladAnimations = {
 gamejs.preloadAnimation('vlad', vladAnimations, vladAnimationsMeta);
 
 function main() {
-   gamejs.display.setMode([800, 600]);
+   gamejs.display.setMode([850, 500]);
    gamejs.display.setCaption("Example Iso");
 
    // create an animatedsprite with the properties defined for 'vlad'
    var vlad = new gamejs.iso.AnimatedSprite([100, 100], 'vlad');
+   vlad.setDirection('se');
+   vlad.setAnimation('walking');
 
    /**
     * M A I N
