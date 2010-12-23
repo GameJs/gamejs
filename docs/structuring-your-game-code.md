@@ -9,6 +9,7 @@ Files your app consists off
      * `javascript`, `data` - reserved directories
 
 You game code can `require()` modules:
+
    * from GameJs
    * any CommonJs compatible module you created in  your app directory (or any subdirectory)
    * modules from packages you installed with `ringo-admin install` (lots of CommonJs modules but not a lot of them run in the browser)
