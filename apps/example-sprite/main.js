@@ -13,6 +13,7 @@ var Ship = function(rect) {
 };
 gamejs.utils.objects.extend(Ship, gamejs.sprite.Sprite);
 Ship.prototype.update = function(tick) {
+   // moveIp = move in place
    this.rect.moveIp(0, -1 * this.speed);
 };
 
@@ -31,7 +32,6 @@ function main() {
    // game loop
    var mainSurface = gamejs.display.getSurface();
    var tick = function() {
-         // needs double buffering :*(
          mainSurface.fill("#FFFFFF");
          gShips.update();
          gShips.draw(mainSurface);
