@@ -37,7 +37,7 @@ Finally, install GameJs:
 
 and symlink GameJs into RingoJs' packages directory:
 
-    ln -s ~/gamejs /usr/share/ringojs/packages/
+    ln -s ~/gamejs ~/ringojs/packages/
 
 Try example apps
 ------------------
