@@ -15,14 +15,12 @@ Install
 GameJs is a RingoJS application. The installation is convoluted because I
 want to stay flexible for now.
 
-Install Ringo (you need Java 1.5+):
+Install RingoJs (you need Java 1.5+):
 
     cd ~
     git clone git://github.com/ringo/ringojs.git
     cd ringojs
     ant jar
-
-(more details on how to install Ringo <http://ringojs.org/getting_started>)
 
 Install the RingoJs packages `ringo-modulr` and `stick`:
 
@@ -39,11 +37,12 @@ and symlink GameJs into RingoJs' packages directory:
 
     ln -s ~/gamejs ~/ringojs/packages/
 
-Try example apps
+Usage
 ------------------
 
 Start the GameJs web server:
 
+    # if RingoJs is not in `~/ringojs/` fix this script
     ~/gamejs/start.sh
 
 and access it in your browser:
