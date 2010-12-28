@@ -28,8 +28,10 @@ function main() {
                sparkles.push({
                   left: event.pos[0],
                   top: event.pos[1],
+                  alpha: Math.random(),
                   deltaX: 30 - Math.random() * 60,
                   deltaY: 80 + Math.random() * 40,
+                  deltaAlpha: 0.1 + (Math.random() * 0.1)
                });
             }
          }
@@ -39,20 +41,22 @@ function main() {
       sparkles.forEach(function(sparkle) {
          // msDuration makes is frame rate independant: we don't want
          // the sparkles to move faster on a superfast computer.
-         sparkle.left += sparkle.deltaX * (msDuration/1000);
-         sparkle.top += sparkle.deltaY * (msDuration/1000);
+         var r = (msDuration/1000);
+         sparkle.left += sparkle.deltaX * r;
+         sparkle.top += sparkle.deltaY * r;
 
       });
 
       // remove sparkles that are offscreen or invisible
       sparkles = sparkles.filter(function(sparkle) {
-         return sparkle.top < displayRect.height && sparkle.left > 0;
+         return sparkle.top < displayRect.height && sparkle.top > 0;
       })
 
       // draw sparkles
       display.fill('#000000');
       display.blit(instructionFont.render('Move mouse. Press Cursor up.', '#ffffff'));
       sparkles.forEach(function(sparkle) {
+         starImage.setAlpha(sparkle.alpha);
          display.blit(starImage, [sparkle.left, sparkle.top]);
       });
    };
