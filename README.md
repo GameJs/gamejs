@@ -12,29 +12,36 @@ Gamejs is early in development. The API will change though it will converge to a
 
 Install
 -------
-GameJs is a Ringo application. Once you have Ringo installed the other components
-are easy to get with Ringo's package managment.
+GameJs is a RingoJS application. The installation is convoluted because I
+want to stay flexible for now.
 
-Details on how to install Ringo: <http://ringojs.org/wiki/Getting_Started/>
+Install Ringo (you need Java 1.5+):
 
-Once you have Ringo get the necessary dependancies with `ringo-admin`:
+    cd ~
+    git clone git://github.com/ringo/ringojs.git
+    cd ringojs
+    ant jar
 
-    ringo-admin install hns/ringo-modulr
-    ringo-admin install ringo/stick
+(more details on how to install Ringo <http://ringojs.org/getting_started>)
 
-Git clone GameJs to a convinient location:
+Install the RingoJs packages `ringo-modulr` and `stick`:
+
+    cd ~/ringojs/packages/
+    git clone git://github.com/hns/ringo-modulr.git
+    git clone git://github.com/ringo/stick.git
+
+Finally, install GameJs:
 
     cd ~
     git clone git://github.com/oberhamsi/gamejs.git
 
-Finally symlink GameJs into Ringo's packages directory:
+and symlink GameJs into RingoJs' packages directory:
 
     ln -s ~/gamejs /usr/share/ringojs/packages/
 
-(Do not `ringo-admin install gamejs`. That would not work.)
-
 Try example apps
 ------------------
+
 Start the GameJs web server:
 
     ~/gamejs/start.sh
@@ -47,6 +54,7 @@ Several links to example apps should show up. The source to those apps is in the
 
 Writing games with GameJs
 -----------------------------
+
 Check the `docs` folder of your GameJs installation.
 
 A couple of example apps can be found in the `apps` directory.
