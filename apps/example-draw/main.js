@@ -10,8 +10,12 @@ function main() {
    // last parameter in all draw.* methods is the border width. 0 = fill
    draw.line(mainSurface, '#ff0000', [0,0], [100,100], 1);
    draw.lines(mainSurface, '#00ff00', true, [[50,50], [100,50], [100,100], [50,100]], 4);
+
+   draw.polygon(mainSurface, '#0000ff', [[150,50], [200,50], [200,100]], 0);
+
    draw.circle(mainSurface, '#0000ff', [150, 150], 50, 10);
    draw.circle(mainSurface, '#00ccff', [250, 250], 50, 0);
+
    draw.rect(mainSurface, '#cccccc', new gamejs.Rect(10, 150, 20, 20), 2);
    draw.rect(mainSurface, '#cccccc', new gamejs.Rect(50, 150, 20, 20), 0);
 
