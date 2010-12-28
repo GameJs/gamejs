@@ -2,6 +2,6 @@
 # Launches GameJs
 
 GAMEJS_DIR="${0%/*}"
-cd $GAMEJS_DIR
+cd ${GAMEJS_DIR}
 
-ringo app/main.js
+~/ringojs/bin/ringo ${GAMEJS_DIR}/app/main.js
