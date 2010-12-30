@@ -1,6 +1,8 @@
 // browser env
 exports.testGamejs = require('./gamejs');
 exports.testSprite = require('./gamejs/sprite');
+exports.testMask = require('./gamejs/mask');
+
 exports.testVector = require('./gamejs/utils/vectors');
 exports.testAstar = require('./gamejs/pathfinding');
 exports.testBinaryHeap = require('./gamejs/utils/binaryheap');
