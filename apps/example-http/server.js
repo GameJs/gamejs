@@ -1,4 +1,10 @@
-// this file will be executed by the GameJs server!
+/**
+ * This server application responds with {text: 'Hello World'} if 'foobar'
+ * is loaded.
+ * 
+ * This file will be executed by the GameJs server! See main.js for the 
+ * client-side part.
+ */
 var {Application} = require('stick');
 var {jsonResponse} = require('stick/helpers');
 

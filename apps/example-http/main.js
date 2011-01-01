@@ -1,4 +1,9 @@
-// see server.js for server side of this app
+/** 
+ * A JS object is loaded from the server and its property 'text' rendered
+ * to the screen.
+ *
+ * see server.js for server side of this app
+ */
 var gamejs = require('gamejs');
 
 function main() {

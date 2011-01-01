@@ -1,3 +1,13 @@
+/**
+ * @fileoverview
+ * Sparkles with position and alpha are created by mouse movement.
+ * The sparkles position is updated in a time-dependant way. A sparkle
+ * is removed from the simulation once it leaves the screen.
+ *
+ * Additionally, by pressing the cursor UP key the existing sparkles will
+ * move upwards (movement vecor inverted).
+ *
+ */
 var gamejs = require('gamejs');
 
 function main() {
@@ -31,7 +41,6 @@ function main() {
                   alpha: Math.random(),
                   deltaX: 30 - Math.random() * 60,
                   deltaY: 80 + Math.random() * 40,
-                  deltaAlpha: 0.1 + (Math.random() * 0.1)
                });
             }
          }

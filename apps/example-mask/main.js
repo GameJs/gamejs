@@ -1,8 +1,12 @@
 /**
+ * @fileoverview
  * Demonstrates pixel perfect collision detection utilizing image masks.
  *
  * A 'spear' is moved around with mouse or cursors keys - the text 'COLLISION'
  * appears if the spear pixel collides with the unit.
+ *
+ * gamejs.mask.fromSurface is used to create two pixel masks
+ * that do the actual collision detection.
  *
  */
 var gamejs = require('gamejs');
@@ -53,6 +57,8 @@ function main() {
       display.blit(unit, unitPosition);
       display.blit(spear, spearPosition);
       // collision
+      // the relative offset is automatically calculated by
+      // the higher-level gamejs.sprite.collideMask(spriteA, spriteB)
       var relativeOffset = $v.substract(spearPosition, unitPosition);
       var hasMaskOverlap = mUnit.overlap(mSpear, relativeOffset);
       if (hasMaskOverlap) {

@@ -1,3 +1,8 @@
+/**
+ * @fileoverview
+ * Draw lines, polygons, circles, etc on the screen.
+ * Render text in a certain font to the screen.
+ */
 var gamejs = require('gamejs');
 var draw = require('gamejs/draw');
 var font = require('gamejs/font');
