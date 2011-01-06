@@ -3,46 +3,48 @@ GameJs
 
 GameJs is a JavaScript library for writing 2D games or other interactive graphic applications for the HTML Canvas. Its API is modeled after the successful PyGame <http://pygame.org> library.
 
-   * Runs in modern browsers
-   * Sane JavaScript! With [CommonJs](http://www.commonjs.org/) support
-   * Mature, well documented PyGame API with a decade of patterns
-   * Philosophy: Ease of use > Completeness
+  * Powerful, proven, and thin abstraction for 2D
+  * Sane JavaScript! With CommonJs support
+  * Runs in modern browsers
 
 Gamejs is early in development. The API will change though it will converge to a sensible translation of PyGame concepts to JavaScript.
 
 Install
 -------
-GameJs is a RingoJS application. The installation is convoluted because I
-want to stay flexible for now.
+GameJs is a RingoJS application. You will need:
 
-Install RingoJs (you need Java 1.5+):
+  * Java 1.5+.
+  * git and ant (until I do a proper release)
+
+Get RingoJs:
 
     cd ~
     git clone git://github.com/ringo/ringojs.git
     cd ringojs
     ant jar
 
-Install the RingoJs packages `ringo-modulr` and `stick`:
+Install necessary RingoJs packages:
 
-    cd ~/ringojs/packages/
-    git clone git://github.com/hns/ringo-modulr.git
-    git clone git://github.com/ringo/stick.git
+    ringo-admin install hns/ringo-modulr
+    ringo-admin install ringo/stick
 
-Finally, install GameJs:
+Get Gamejs:
 
     cd ~
     git clone git://github.com/oberhamsi/gamejs.git
-
-and symlink GameJs into RingoJs' packages directory:
-
     ln -s ~/gamejs ~/ringojs/packages/
+
+*Windows Users:* Instead of the above Symlink you can clone GameJs directly into RingoJs.
+
+    cd ~/ringojs/packages/
+    git clone git://github.com/oberhamsi/gamejs.git
 
 Usage
 ------------------
 
 Start the GameJs web server:
 
-    # if RingoJs is not in `~/ringojs/` fix this script
+    # assumes ~/ringojs/bin/ringo exists
     ~/gamejs/start.sh
 
 and access it in your browser:
@@ -58,4 +60,20 @@ Check the `docs` folder of your GameJs installation.
 
 A couple of example apps can be found in the `apps` directory.
 
-See the [GameJs API](http://gamejs.org/api/) as well as the [Mailing List](http://groups.google.com/group/gamejs) for more help.
+See the [GameJs Website](http://gamejs.org) in particular the [API](http://gamejs.org/api/) for more help or drop us an email in the [Mailing List](http://groups.google.com/group/gamejs).
+
+Updating your GameJs Installation
+-----------------------------------
+If you update GameJs you must always update *all* its compontents.
+
+Update RingoJs and GameJs:
+
+    cd ~/ringojs/
+    git pull
+    cd ~/gamejs/
+    git pull
+
+Update RingoJs packages:
+
+    ringo-admin install -f hns/ringo-modulr
+    ringo-admin install -f ringo/stick
