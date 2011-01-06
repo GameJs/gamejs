@@ -7,9 +7,9 @@ var {join, list} = require('fs');
 var log = require('ringo/logging').getLogger(module.id);
 
 var app = exports.app = Application();
-app.configure('notfound', 'error', 'modulr/middleware', 'mount');
+app.configure('notfound', 'error', 'mount', 'route');
 
-// images, data serving
+// serve img, sound, json, etc
 app.mount('/resources', function(req) {
    var parts = req.pathInfo.split('/');
    var appId = parts[0];
@@ -22,11 +22,11 @@ app.mount('/resources', function(req) {
    }
 });
 
-// mount the gamejs-apps server application if present
+// gamejs-app's server application
 list(module.resolve('../apps/')).forEach(function(appId) {
    try {
       var mountPoint = '/server/' + appId;
-      var module = 'gamejs/apps/' + appId + '/server';
+      var module = '../apps/' + appId + '/server';
       app.mount(mountPoint, require(module));
       log.info('mounted ', appId, ' @ ', mountPoint);
    } catch (e) {
@@ -37,10 +37,8 @@ list(module.resolve('../apps/')).forEach(function(appId) {
    }
 }, this);
 
+// html & js
 app.mount('/', require('./actions'));
-
-// serve wrapped js modules
-app.modulr(module.resolve('../lib/'), '/lib/');
 
 if (require.main === module) {
    require('stick/server').main(module.id);
