@@ -16,7 +16,7 @@ if (!appName || !destinationDirectory) {
 
 // path & urls
 var appDirectory = join(module.resolve('../apps'), appName);
-var appJsUrl = GAMEJS_SERVER + '/lib/gamejs/apps/' + appName + '/main.js';
+var appJsUrl = GAMEJS_SERVER + '/lib/' + appName + '/main.js';
 
 // copy resources
 ['images', 'sounds', 'json'].forEach(function(resDir) {

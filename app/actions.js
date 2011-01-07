@@ -28,7 +28,7 @@ app.get('/:appId/', function(req, appId) {
 });
 
 // wrapped js modules
-app.get('/lib/:appId/', function(req, appId) {
+app.get('/lib/:appId/main.js', function(req, appId) {
    var root = canonical(module.resolve('../lib'));
    var appFile = join('../apps', appId, 'main.js');
    var base = getRepository(root);
