@@ -11,8 +11,6 @@ Gamejs is early in development. The API will change though it will converge to a
 
 Install
 -------
-*Windows Users*: you can try the .zip file in the Downloads section <https://github.com/oberhamsi/gamejs/archives/master>
-
 You need:
 
   * Java 1.5+.
@@ -22,22 +20,20 @@ Clone the GameJs repository:
 
     git clone git://github.com/oberhamsi/gamejs.git
 
-Get all needed submodules:
+Get all needed submodules with git:
 
     cd gamejs
     git submodule init
     git submodule update
 
-Compile RingoJs (this is why you need ant & java):
+Compile RingoJs. This is why you need ant & java:
 
-    ant -f app/ringojs/build.xml jar
+    ant -f gamejs/app/ringojs/build.xml jar
 
 Usage
 ------------------
 
-Start the GameJs web server:
-
-    ~/gamejs/start.sh
+Start the GameJs web server with `start.sh` or `start.cmd` (Windows).
 
 and access it in your browser:
 
@@ -53,3 +49,9 @@ Check the `docs` folder of your GameJs installation.
 A couple of example apps can be found in the `apps` directory.
 
 See the [GameJs Website](http://gamejs.org) in particular the [API](http://gamejs.org/api/) for more help or drop us an email in the [Mailing List](http://groups.google.com/group/gamejs).
+
+Static Deployment
+-----------------
+`statify.sh` and `statify.cmd` on Windows convert your GameJs project into static html, js and resource files. You can serve the resulting files with any http server like Apache:
+
+    statify.sh my-app-name ~/static/directory/

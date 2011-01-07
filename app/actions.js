@@ -13,7 +13,7 @@ app.render.helpers(require("./macros"), "ringo/skin/macros", "ringo/skin/filters
 // file system path constants
 var FS = {
    apps: '../apps',
-   lib: './packages/gamejs/lib/',
+   lib: './packages/gamejs/lib',
 };
 
 // dashboard
@@ -36,7 +36,7 @@ app.get('/lib/:appId/main.js', function(req, appId) {
    var base = getRepository(FS.lib);
    var coll = new Collector(base);
    // FIXME *cough* apps path relative to FS.lib
-   coll.add(join('../../../../apps/', appId, 'main.js'));
+   coll.add('../../../../apps/' + appId + '/main');
    return {
       status: 200,
       headers: {"Content-Type": "text/javascript"},
