@@ -11,40 +11,32 @@ Gamejs is early in development. The API will change though it will converge to a
 
 Install
 -------
-GameJs is a RingoJS application. You will need:
+*Windows Users*: you can try the .zip file in the Downloads section <https://github.com/oberhamsi/gamejs/archives/master>
+
+You need:
 
   * Java 1.5+.
   * git and ant (until I do a proper release)
 
-Get RingoJs:
+Clone the GameJs repository:
 
-    cd ~
-    git clone git://github.com/ringo/ringojs.git
-    cd ringojs
-    ant jar
-
-Install necessary RingoJs packages:
-
-    ringo-admin install hns/ringo-modulr
-    ringo-admin install ringo/stick
-
-Get Gamejs:
-
-    cd ~
     git clone git://github.com/oberhamsi/gamejs.git
-    ln -s ~/gamejs ~/ringojs/packages/
 
-*Windows Users:* Instead of the above Symlink you can clone GameJs directly into RingoJs.
+Get all needed submodules:
 
-    cd ~/ringojs/packages/
-    git clone git://github.com/oberhamsi/gamejs.git
+    cd gamejs
+    git submodule init
+    git submodule update
+
+Compile RingoJs (this is why you need ant & java):
+
+    ant -f app/ringojs/build.xml jar
 
 Usage
 ------------------
 
 Start the GameJs web server:
 
-    # assumes ~/ringojs/bin/ringo exists
     ~/gamejs/start.sh
 
 and access it in your browser:
@@ -61,19 +53,3 @@ Check the `docs` folder of your GameJs installation.
 A couple of example apps can be found in the `apps` directory.
 
 See the [GameJs Website](http://gamejs.org) in particular the [API](http://gamejs.org/api/) for more help or drop us an email in the [Mailing List](http://groups.google.com/group/gamejs).
-
-Updating your GameJs Installation
------------------------------------
-If you update GameJs you must always update *all* its compontents.
-
-Update RingoJs and GameJs:
-
-    cd ~/ringojs/
-    git pull
-    cd ~/gamejs/
-    git pull
-
-Update RingoJs packages:
-
-    ringo-admin install -f hns/ringo-modulr
-    ringo-admin install -f ringo/stick
