@@ -28,6 +28,7 @@ var Font = exports.Font = function(fontSettings, backgroundColor) {
      */
    this.sampleSurface = new Surface([10,10]);
    this.sampleSurface.context.font = fontSettings;
+   this.sampleSurface.context.textBaseline = 'top';
    return this;
 };
 
@@ -43,8 +44,9 @@ Font.prototype.render = function(text, color) {
    var ctx = surface.context;
    ctx.save();
    ctx.font = this.sampleSurface.context.font;
+   ctx.textBaseline = this.sampleSurface.context.textBaseline;
    ctx.fillStyle = ctx.strokeStyle = color || "#000000";
-   ctx.fillText(text, 0, dims[1] - dims[1]/4);
+   ctx.fillText(text, 0, 0);
    ctx.restore();
    return surface;
 };
@@ -57,7 +59,8 @@ Font.prototype.render = function(text, color) {
  */
 Font.prototype.size = function(text) {
    var metrics = this.sampleSurface.context.measureText(text);
-   return [metrics.width, this.fontHeight];
+   // FIXME measuretext is buggy, make extra wide
+   return [metrics.width + metrics.width / 3.5, this.fontHeight];
 };
 
 /**
