@@ -3,7 +3,6 @@
 <% subskin header %>
    <% if <% statifier %> render statifierStartUp %>
    <% if not <% statifier %> render normalStartUp %>
-
 	<title><% appName %> @ gamejs.org</title>
 
 <% subskin content %>
@@ -28,6 +27,7 @@
       }
       var $g = {};
       $g.resourceBaseHref = './';
+      $g.ajaxBaseHref = './json/';
    </script>
    <script src="./javascript/main.js"></script>
 
