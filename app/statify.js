@@ -27,7 +27,7 @@ var appJsUrl = GAMEJS_SERVER + '/lib/' + appName + '/main.js';
 }, this);
 
 // render index.html
-var appSpecific = join(appDirectory, 'app.html');
+var appSpecific = join(appDirectory, 'index.html');
 var indexHtml = render(exists(appSpecific) ? appSpecific : module.resolve('skins/app.html'), {
    appName: appName,
    statifier: true,
