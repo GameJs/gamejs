@@ -7,6 +7,7 @@ Files your app consists off
   * subdirectories of your app:
      * `images`, `sounds`, `json` (optionally) - your resources
      * `javascript`, `data` - reserved directories
+     * other folders - holding CommonJs modules used by your game
 
 You game code can `require()` modules:
 
