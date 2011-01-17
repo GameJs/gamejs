@@ -7,10 +7,15 @@ GameJs is a JavaScript library for writing 2D games or other interactive graphic
   * Sane JavaScript! With CommonJs support
   * Runs in modern browsers
 
-Gamejs is early in development. The API will change though it will converge to a sensible translation of PyGame concepts to JavaScript.
+The API will change though it will converge to a sensible translation of PyGame concepts to JavaScript.
 
 Install
--------
+========
+
+Option 1: The Good Way
+-------------------------
+Use the RingoJs server. This allows you to write your game as CommonJs modules <http://wiki.commonjs.org/wiki/Modules> (1.1) in a convinient way. You can also use the evolving server-side integration.
+
 You need:
 
   * Java 1.5+.
@@ -30,28 +35,44 @@ Compile RingoJs. This is why you need ant & java:
 
     ant -f gamejs/app/ringojs/build.xml jar
 
+Option 2: The quick and dirty <script> way
+---------------------------------------------
+No module support for you game. But no need to run JVM during development either. This is only for the lazy and stupid to use. Don't expect much help.
+
+Download the gjs-retarded-<version>.js file and include it in your html file:
+
+    <script src="./gjs-retarded-<version>.js"></script>
+    <script>
+        var gamejs = require('gamejs');
+
+        gamejs.preload(['images/foo.png', ...]);
+
+        gamejs.ready(function() {
+           var display = gamejs.display.setMode([800, 600]);
+           gamejs.draw.circle(display, 'rgba(100, 100, 100, 0.4)', [50, 50], 20);
+
+           //var objects = gamejs.utils.objects;
+           //...
+           //extend(MyMonster, gamejs.sprite.Sprite);
+
+           //gamejs.sprite.collideRect(...
+        });
+    </script>
+
 Usage
-------------------
+=========
 
-Start the GameJs web server with `start.sh` or `start.cmd` (Windows).
-
-and access it in your browser:
+Start the GameJs web server with `gjs-server.sh` or `gjs-server.cmd` (Windows). And view the dashboard it in your browser:
 
     http://localhost:8080/
 
-Several links to example apps should show up. The source to those apps is in the `apps/` directory of your GameJs installation.
+Several links to the example apps should show up. The source to those apps is in the `apps/` directory of your GameJs installation.
 
-Writing games with GameJs
------------------------------
+More Help
+===========
 
 Check the `docs` folder of your GameJs installation.
 
 A couple of example apps can be found in the `apps` directory.
 
-See the [GameJs Website](http://gamejs.org) in particular the [API](http://gamejs.org/api/) for more help or drop us an email in the [Mailing List](http://groups.google.com/group/gamejs).
-
-Static Deployment
------------------
-`statify.sh` and `statify.cmd` on Windows convert your GameJs project into static html, js and resource files. You can serve the resulting files with any http server like Apache:
-
-    statify.sh my-app-name ~/static/directory/
+See the [GameJs Website](http://gamejs.org) for more help or drop us an email in the [Mailing List](http://groups.google.com/group/gamejs).
