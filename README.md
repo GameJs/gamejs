@@ -6,20 +6,22 @@ GameJs is a JavaScript library for writing 2D games or other interactive graphic
   * Powerful, proven, and thin abstraction for 2D
   * Sane JavaScript! With CommonJs support
   * Runs in modern browsers
+  * optional server-side integration with RingoJs <http://ringojs.org>
 
 The API will change though it will converge to a sensible translation of PyGame concepts to JavaScript.
 
 Install
 ========
 
-Option 1: The Good Way
--------------------------
-Use the RingoJs server. This allows you to write your game as CommonJs modules <http://wiki.commonjs.org/wiki/Modules> (1.1) in a convinient way. You can also use the evolving server-side integration.
+If you downloaded a release just unzip the files.
+
+Developer Version
+----------------------------------
 
 You need:
 
-  * Java 1.5+.
-  * git and ant (until I do a proper release)
+  * Java 1.5+
+  * git and ant
 
 Clone the GameJs repository:
 
@@ -31,15 +33,24 @@ Get all needed submodules with git:
     git submodule init
     git submodule update
 
-Compile RingoJs. This is why you need ant & java:
+Compile RingoJs:
 
     ant -f gamejs/app/ringojs/build.xml jar
 
-Option 2: The quick and dirty <script> way
----------------------------------------------
-No module support for you game. But no need to run JVM during development either. This is only for the lazy and stupid to use. Don't expect much help.
+You should now be able to start the GameJs server.
 
-Download the gjs-retarded-<version>.js file and include it in your html file:
+Usage
+=========
+
+You need Java 1.5+. Start the GameJs web server with `gjs-server.sh` or `gjs-server.cmd` (Windows). And view the dashboard in your browser:
+
+    http://localhost:8080/
+
+Several links to the example apps should show up. The source to those apps is in the `apps/` directory of your GameJs installation.
+
+Retarded Edition
+------------------
+If you downloaded the plain JS file, simply include it in your html file:
 
     <script src="./gjs-retarded-<version>.js"></script>
     <script>
@@ -58,15 +69,6 @@ Download the gjs-retarded-<version>.js file and include it in your html file:
            //gamejs.sprite.collideRect(...
         });
     </script>
-
-Usage
-=========
-
-Start the GameJs web server with `gjs-server.sh` or `gjs-server.cmd` (Windows). And view the dashboard it in your browser:
-
-    http://localhost:8080/
-
-Several links to the example apps should show up. The source to those apps is in the `apps/` directory of your GameJs installation.
 
 More Help
 ===========
