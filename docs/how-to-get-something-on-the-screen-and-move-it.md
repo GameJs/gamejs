@@ -44,7 +44,7 @@ There is lots of those kind of high level functions that know how deal with spri
 
 Updating a sprite's position & appeareance
 ---------------------------------------------
-A simple example for an `update()` method would be, that the monster just moves a certain amount in the direction we created at instantiation (stored in `Monster.directionVector`). What we do is we update the position of `this.rect` by adding the amount we moved (`movementDelta') to it:
+A simple example for an `update()` method would be, that the monster just moves a certain amount in the direction we created at instantiation (stored in `Monster.directionVector`). What we do is we update the position of `this.rect` by adding the amount we moved (`movementDelta`) to it:
 
     var $v = require('gamejs/utils/vectors');
     Monster.prototype.update = function(msDuration) {
