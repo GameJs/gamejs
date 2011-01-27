@@ -13,7 +13,8 @@ var objects = require('gamejs/utils/objects');
  * @param {String} msg the msg to log
  */
 exports.log = function() {
-   if (window.console !== undefined) console.log.apply(console, arguments);
+   // IEFIX can't call apply on console
+   if (window.console !== undefined && console.log.apply) console.log.apply(console, arguments);
 };
 
 /**
