@@ -1,4 +1,5 @@
 var gamejs = require('gamejs');
+var objects = require('gamejs/utils/objects');
 
 /**
  * @fileoverview Image masks. Usefull for pixel perfect collision detection.
@@ -187,28 +188,33 @@ Mask.prototype.invert = function() {
 };
 
 /**
- * Rect of this Mask.
- */
-Mask.prototype.__defineGetter__('rect', function() {
-   return new gamejs.Rect([0, 0], [this.width, this.height]);
-});
-
-/**
  * @returns {Array} the dimensions of the map
  */
 Mask.prototype.getSize = function() {
    return [this.width, this.height];
 };
 
-/**
- * @returns {Number} number of set pixels in this mask.
- */
-Mask.prototype.__defineGetter__('length', function() {
-   var c = 0;
-   this._bits.forEach(function(row) {
-      row.forEach(function(b) {
-         if (b) c++;
-      });
-   });
-   return c;
+objects.accessors(Mask.prototype, {
+   /**
+    * Rect of this Mask.
+    */
+   'rect': {
+      get: function() {
+         return new gamejs.Rect([0, 0], [this.width, this.height]);
+      }
+   },
+   /**
+    * @returns {Number} number of set pixels in this mask.
+    */
+   'length': {
+      get: function() {
+         var c = 0;
+         this._bits.forEach(function(row) {
+            row.forEach(function(b) {
+               if (b) c++;
+            });
+         });
+         return c;
+      }
+   }
 });

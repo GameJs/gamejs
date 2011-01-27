@@ -121,37 +121,43 @@ var Rect = exports.Rect = function() {
    return this;
 };
 
-/**
- * Bottom, Y coordinate
- * @type Number
- */
-Rect.prototype.__defineGetter__("bottom", function() {
-   return this.top + this.height;
-});
+objects.accessors(Rect.prototype, {
+   /**
+    * Bottom, Y coordinate
+    * @type Number
+    */
+   'bottom': {
+      get: function() {
+         return this.top + this.height;
+      }
+   },
+   /**
+    * Right, X coordinate
+    * @type Number
+    */
+   'right': {
+      get: function() {
+         return this.left + this.width;
+      }
+   },
+   /**
+    * Center Position. You can assign a rectangle form.
+    * @type Array
+    */
+   'center': {
+      get: function() {
+         return [parseInt(this.left + (this.width / 2), 10),
+                 parseInt(this.top + (this.height / 2), 10)
+                ];
+      },
+      set: function() {
+         var args = normalizeRectArguments.apply(this, arguments);
+         this.left = parseInt(args.left - (this.width / 2), 10);
+         this.top = parseInt(args.top - (this.height / 2), 10);
+         return;
+      }
+   },   
 
-/**
- * Right, X coordinate
- * @type Number
- */
-Rect.prototype.__defineGetter__("right", function() {
-   return this.left + this.width;
-});
-
-/**
- * Center Position. You can assign a rectangle form.
- * @type Array
- */
-Rect.prototype.__defineGetter__("center", function() {
-   return [parseInt(this.left + (this.width / 2), 10),
-           parseInt(this.top + (this.height / 2), 10)
-          ];
-});
-
-Rect.prototype.__defineSetter__("center", function() {
-   var args = normalizeRectArguments.apply(this, arguments);
-   this.left = parseInt(args.left - (this.width / 2), 10);
-   this.top = parseInt(args.top - (this.height / 2), 10);
-   return;
 });
 
 /**
@@ -403,25 +409,28 @@ Surface.prototype.clear = function() {
    return;
 };
 
-/**
- * @type gamejs.Rect
- */
-Surface.prototype.__defineGetter__("rect", function() {
-   return this.getRect();
-});
-
-/**
- * @ignore
- */
-Surface.prototype.__defineGetter__('context', function() {
-   return this._canvas.getContext('2d');
-});
-
-/**
- * @ignore
- */
-Surface.prototype.__defineGetter__('canvas', function() {
-   return this._canvas;
+objects.accessors(Surface.prototype, {
+   /**
+    * @type gamejs.Rect
+    */
+   'rect': {
+      get: function() {
+         return this.getRect();
+      }
+   },
+   /**
+    * @ignore
+    */
+   'context': {
+      get: function() {
+         return this._canvas.getContext('2d');
+      }
+   },
+   'canvas': {
+      get: function() {
+         return this._canvas;
+      }
+   },
 });
 
 /**

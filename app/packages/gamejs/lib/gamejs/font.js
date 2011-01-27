@@ -1,4 +1,5 @@
 var Surface = require('gamejs').Surface;
+var objects = require('gamejs/utils/objects');
 
 /**
  * @fileoverview Methods for creating Font objects which can render text
@@ -66,16 +67,21 @@ Font.prototype.size = function(text) {
 /**
  * Height of the font in pixels.
  */
-Font.prototype.__defineGetter__("fontHeight", function() {
-   var fontSettingParts = this.sampleSurface.context.font.split(" ");
-   var height = 10; // default is 10px
-   // first with px is font height
-   fontSettingParts.some(function(part) {
-      if (part.substr(-2) === "px") {
-         height = parseInt(part.substring(0, part.length-2));
-         return true;
-      }
-      return false;
-   }, this);
-   return height;
+objects.accessors(Font.prototype, {
+   'fontHeight': {
+      get: function() {
+         var fontSettingParts = this.sampleSurface.context.font.split(" ");
+         var height = 10; // default is 10px
+         // first with px is font height
+         fontSettingParts.some(function(part) {
+            if (part.substr(-2) === "px") {
+               height = parseInt(part.substring(0, part.length-2));
+               return true;
+            }
+            return false;
+         }, this);
+         return height;
+      },
+   },
+
 });
