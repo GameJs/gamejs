@@ -40,8 +40,10 @@ exports.merge = function() {
 
 /**
  * fallback for Object.keys
+ * @param {Object} obj
+ * @returns {Array} list of own properties
  */
-exports.keys = function(obj) {
+var keys = exports.keys = function(obj) {
    var ks = [];
    for (var k in obj) {
       if (k !== undefined) {
@@ -50,3 +52,41 @@ exports.keys = function(obj) {
    }
    return ks;
 };
+
+/**
+ * Create object accessors
+ * @param {Object} object The object on which to define the property
+ * @param {String} name name of the property
+ * @param {Function} get
+ * @param {Function} set
+ * @see https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/defineProperty
+ */
+var accessor = exports.accessor = function(object, name, get, set) {
+   // ECMA5
+   if (Object.defineProperty !== undefined) {
+      Object.defineProperty(object, name, {
+         get: get,
+         set: set
+      });
+   // non-standard
+   } else if (Object.prototype.__defineGetter__ !== undefined) {
+      object.__defineGetter__(name, get);
+      if (set) {
+         object.__defineSetter__(name, set);
+      }
+   }
+	return;
+};
+
+/**
+ * @param {Object} object The object on which to define or modify properties.
+ * @param {Object} props An object whose own enumerable properties constitute descriptors for the properties to be defined or modified.
+ * @see https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/defineProperties
+ */
+exports.accessors = function(object, props) {
+   keys(props).forEach(function(propKey) {
+      accessor(object, propKey, props[propKey].get, props[propKey].set);
+   });
+   return;
+};
+
