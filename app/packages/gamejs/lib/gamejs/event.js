@@ -108,7 +108,7 @@ var QUEUE = [];
  * @returns {Array}
  */
 exports.get = function() {
-   return QUEUE.splice(0);
+   return QUEUE.splice(0, QUEUE.length);
 };
 
 /**
@@ -160,8 +160,10 @@ exports.Event = function() {
  * @ignore
  */
 exports.init = function() {
-
-   document.onmousedown = function(ev) {
+   
+   // anonymouse functions as event handlers = memory leak, see MDC:elementAddEventListener
+   
+   function onMouseDown (ev) {
       var canvasOffset = display._getCanvasOffset();
       QUEUE.push({
          'type': gamejs.event.MOUSE_DOWN,
@@ -169,8 +171,8 @@ exports.init = function() {
          'button': ev.button,
       });
    };
-
-   document.onmouseup = function(ev) {
+   
+   function onMouseUp (ev) {
       var canvasOffset = display._getCanvasOffset();
       QUEUE.push({
          'type':gamejs.event.MOUSE_UP,
@@ -178,19 +180,20 @@ exports.init = function() {
          'button': ev.button,
       });
    };
-
-   document.onkeydown = function(ev) {
+   
+   function onKeyDown (ev) {
       var canvasOffset = display._getCanvasOffset();
       QUEUE.push({
          'type': gamejs.event.KEY_DOWN,
-         'key': ev.keyCode,
+         'key': ev.keyCode || ev.which,
          'shiftKey': ev.shiftKey,
          'ctrlKey': ev.ctrlKey,
          'metaKey': ev.metaKey
       });
       return;
    };
-   document.onkeyup = function(ev) {
+   
+   function onKeyUp (ev) {
       QUEUE.push({
          'type': gamejs.event.KEY_UP,
          'key': ev.keyCode,
@@ -199,8 +202,8 @@ exports.init = function() {
          'metaKey': ev.metaKey
       });
    };
-   var lastPos = [];
-   document.onmousemove = function(ev) {
+   
+   function onMouseMove (ev) {
       var canvasOffset = display._getCanvasOffset();
       var currentPos = [ev.clientX - canvasOffset[0], ev.clientY - canvasOffset[1]];
       var relativePos = [];
@@ -220,10 +223,27 @@ exports.init = function() {
       lastPos = currentPos;
       return;
    };
-   document.onbeforeunload = function(ev) {
+   
+   function onBeforeUnload (ev) {
       QUEUE.push({
          'type': gamejs.event.QUIT,
       });
       return;
-   };
+   }
+
+   // IEFIX does not support addEventListener on document itself
+   // hook onto document.body not canvas to avoid dependancy into gamejs.display
+   document.body.addEventListener('mousedown', onMouseDown, false);
+
+   document.body.addEventListener('mouseup', onMouseUp, false);
+
+   document.body.addEventListener('keydown', onKeyDown, false);
+   
+   document.body.addEventListener('keyup', onKeyUp, false);
+   
+   var lastPos = [];
+   document.body.addEventListener('mousemove', onMouseMove, false);
+   
+   document.body.addEventListener('beforeunload', onBeforeUnload, false);
+   
 };

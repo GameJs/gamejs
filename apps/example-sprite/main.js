@@ -10,9 +10,9 @@ var gamejs = require('gamejs');
 var Ship = function(rect) {
    // call superconstructor
    Ship.superConstructor.apply(this, arguments);
-
-   this.speed = 30 * Math.random();
-   this.image = gamejs.transform.rotate(gamejs.image.load("images/ship.png"), parseInt(90*Math.random()));
+   this.origImage = gamejs.image.load("images/ship.png");
+   this.speed = 100 + (40 * Math.random());
+   this.image = gamejs.transform.rotate(this.origImage, parseInt(90*Math.random()));
    this.rect = new gamejs.Rect(rect);
    return this;
 };
@@ -20,9 +20,14 @@ var Ship = function(rect) {
 gamejs.utils.objects.extend(Ship, gamejs.sprite.Sprite);
 Ship.prototype.update = function(msDuration) {
    // moveIp = move in place
-   this.rect.moveIp(0, -1 * this.speed * (msDuration/1000));
+   this.rect.moveIp(0, this.speed * (msDuration/1000));
+   this.image = gamejs.transform.rotate(this.origImage, parseInt(90 * Math.random()));
+   if (this.rect.top > 600) {
+      this.speed *= -1;
+   } else if (this.rect.top < 0 ) {
+      this.speed *= -1;
+   }
 };
-
 
 function main() {
    // screen setup
@@ -31,10 +36,11 @@ function main() {
    // create some ship sprites and put them in a group
    var ship = new Ship([100, 100]);
    var gShips = new gamejs.sprite.Group();
-   for (var i=0; i<25; i++) {
-      gShips.add(new Ship([10 + i*20, 500 + i*6]));
+   for (var j=0;j<4;j++) {
+      for (var i=0; i<25; i++) {
+         gShips.add(new Ship([10 + i*20, j * 20]));
+      }
    }
-
    // game loop
    var mainSurface = gamejs.display.getSurface();
    // msDuration = time since last tick() call

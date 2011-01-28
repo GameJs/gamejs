@@ -45,8 +45,9 @@ exports.load = function(key) {
       img = key;
    }
    var canvas = document.createElement('canvas');
-   canvas.width = img.naturalWidth;
-   canvas.height = img.naturalHeight;
+   // IEFIX missing html5 feature naturalWidth/Height
+   canvas.width = img.naturalWidth || img.width;
+   canvas.height = img.naturalHeight || img.height;
    var context = canvas.getContext('2d');
    //context.fillStyle = "#00ff00";
    //context.fillRect(0, 0, canvas.width, canvas.height);
