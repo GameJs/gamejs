@@ -130,6 +130,10 @@ objects.accessors(Rect.prototype, {
    'bottom': {
       get: function() {
          return this.top + this.height;
+      },
+      set: function(newValue) {
+         this.top = newValue - this.height;
+         return;
       }
    },
    /**
@@ -139,6 +143,9 @@ objects.accessors(Rect.prototype, {
    'right': {
       get: function() {
          return this.left + this.width;
+      },
+      set: function(newValue) {
+         this.left = newValue - this.width;
       }
    },
    /**
