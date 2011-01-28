@@ -262,6 +262,10 @@ Rect.prototype.toString = function() {
    return ["[", this.left, ",", this.top, "]"," [",this.width, ",", this.height, "]"].join("");
 }
 
+Rect.prototype.clone = function() {
+   return new Rect(this);
+};
+
 /**
  * A Surface represents a bitmap image with a fixed width and height. The
  * most important feature of a Surface is that they can be `blitted`
@@ -335,7 +339,7 @@ Surface.prototype.blit = function(src, dest, area, special_flags) {
 
    // dest, we only care about x, y
    if (dest instanceof Rect) {
-      rDest = dest; // new gamejs.Rect([dest.left, dest.top], src.getSize());
+      rDest = dest.clone(); // new gamejs.Rect([dest.left, dest.top], src.getSize());
       var srcSize = src.getSize();
       if (!rDest.width) rDest.width = srcSize[0];
       if (!rDest.height) rDest.height = srcSize[1];
