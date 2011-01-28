@@ -160,9 +160,9 @@ exports.Event = function() {
  * @ignore
  */
 exports.init = function() {
-   
+
    // anonymouse functions as event handlers = memory leak, see MDC:elementAddEventListener
-   
+
    function onMouseDown (ev) {
       var canvasOffset = display._getCanvasOffset();
       QUEUE.push({
@@ -171,7 +171,7 @@ exports.init = function() {
          'button': ev.button,
       });
    };
-   
+
    function onMouseUp (ev) {
       var canvasOffset = display._getCanvasOffset();
       QUEUE.push({
@@ -180,7 +180,7 @@ exports.init = function() {
          'button': ev.button,
       });
    };
-   
+
    function onKeyDown (ev) {
       var canvasOffset = display._getCanvasOffset();
       QUEUE.push({
@@ -192,7 +192,7 @@ exports.init = function() {
       });
       return;
    };
-   
+
    function onKeyUp (ev) {
       QUEUE.push({
          'type': gamejs.event.KEY_UP,
@@ -202,7 +202,7 @@ exports.init = function() {
          'metaKey': ev.metaKey
       });
    };
-   
+
    function onMouseMove (ev) {
       var canvasOffset = display._getCanvasOffset();
       var currentPos = [ev.clientX - canvasOffset[0], ev.clientY - canvasOffset[1]];
@@ -223,7 +223,7 @@ exports.init = function() {
       lastPos = currentPos;
       return;
    };
-   
+
    function onBeforeUnload (ev) {
       QUEUE.push({
          'type': gamejs.event.QUIT,
@@ -232,18 +232,19 @@ exports.init = function() {
    }
 
    // IEFIX does not support addEventListener on document itself
+   // MOZFIX but in moz & opera events don't reach body if mouse outside window or on menubar
    // hook onto document.body not canvas to avoid dependancy into gamejs.display
-   document.body.addEventListener('mousedown', onMouseDown, false);
+   document.addEventListener('mousedown', onMouseDown, false);
 
-   document.body.addEventListener('mouseup', onMouseUp, false);
+   document.addEventListener('mouseup', onMouseUp, false);
 
-   document.body.addEventListener('keydown', onKeyDown, false);
-   
-   document.body.addEventListener('keyup', onKeyUp, false);
-   
+   document.addEventListener('keydown', onKeyDown, false);
+
+   document.addEventListener('keyup', onKeyUp, false);
+
    var lastPos = [];
-   document.body.addEventListener('mousemove', onMouseMove, false);
-   
-   document.body.addEventListener('beforeunload', onBeforeUnload, false);
-   
+   document.addEventListener('mousemove', onMouseMove, false);
+
+   document.addEventListener('beforeunload', onBeforeUnload, false);
+
 };
