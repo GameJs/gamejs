@@ -29,7 +29,7 @@
       $g.resourceBaseHref = './';
       $g.ajaxBaseHref = './json/';
    </script>
-   <script src="./javascript/main.js"></script>
+   <script src="./javascript/main.js?rnd=<% random %>"></script>
 
 <% subskin normalStartUp %>
 	<script>
@@ -38,4 +38,4 @@
 	   $g.resourceBaseHref = '<% resourceHref <% appId %> %>';
 	   $g.ajaxBaseHref = '<% ajaxHref <% appId %> %>';
 	</script>
-	<script src="../lib/<% appId %>/main.js" type="text/javascript" charset="utf-8"></script>
+	<script src="../lib/<% appId %>/main.js?rnd=<% random %>" type="text/javascript" charset="utf-8"></script>
