@@ -51,7 +51,7 @@ Several links to the example apps should show up. The source to those apps is in
 Retarded Edition
 ------------------
 
-Only recommended for demonstration purposes. More infos in `docs/retarted-edition` <https://github.com/oberhamsi/gamejs/blob/master/docs/retarted-edition.md>
+Only recommended for demonstration purposes. More infos in the help file 'docs/retarted-edition' <https://github.com/oberhamsi/gamejs/blob/master/docs/retarded-edition.md>
 
 More Help
 ===========
