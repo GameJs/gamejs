@@ -50,25 +50,8 @@ Several links to the example apps should show up. The source to those apps is in
 
 Retarded Edition
 ------------------
-If you downloaded the plain JS file, simply include it in your html file:
 
-    <script src="./gjs-retarded-<version>.js"></script>
-    <script>
-        var gamejs = require('gamejs');
-
-        gamejs.preload(['images/foo.png', ...]);
-
-        gamejs.ready(function() {
-           var display = gamejs.display.setMode([800, 600]);
-           gamejs.draw.circle(display, 'rgba(100, 100, 100, 0.4)', [50, 50], 20);
-
-           //var objects = gamejs.utils.objects;
-           //...
-           //extend(MyMonster, gamejs.sprite.Sprite);
-
-           //gamejs.sprite.collideRect(...
-        });
-    </script>
+Only recommended for demonstration purposes. More infos in `docs/retarted-edition` <https://github.com/oberhamsi/gamejs/blob/master/docs/retarted-edition.md>
 
 More Help
 ===========
