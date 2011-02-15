@@ -19,7 +19,9 @@ exports.fromSurface = function(surface, threshold) {
    var dims = surface.getSize()
    var mask = new Mask(dims);
    for (var i=0;i<imgData.length;i += 4) {
-      var y = parseInt((i / 4) / dims[1], 10);
+      // y: pixel # / width
+      var y = parseInt((i / 4) / dims[0], 10);
+      // x: pixel # % width
       var x = parseInt((i / 4) % dims[0], 10);
       var alpha = imgData[i+3];
       if (alpha >= threshold) {
@@ -160,7 +162,7 @@ Mask.prototype.overlapMask = function(otherMask, offset) {
  * @param {Number} y
  */
 Mask.prototype.setAt = function(x, y) {
-   this._bits[x][y] = true;
+   this._bits[y][x] = true;
 };
 
 /**
@@ -174,7 +176,7 @@ Mask.prototype.getAt = function(x, y) {
    y = parseInt(y, 10);
    if (x < 0 || y < 0 || x >= this.width || y >= this.height) return false;
 
-   return this._bits[x][y];
+   return this._bits[y][x];
 };
 
 
