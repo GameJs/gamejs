@@ -40,9 +40,9 @@ var Mask = exports.Mask = function(dims) {
    this.width = dims[0];
    this.height = dims[1];
    this._bits = [];
-   for (var i=0;i<this.height;i++) {
+   for (var i=0;i<this.width;i++) {
       this._bits[i] = [];
-      for (var j=0;j<this.width;j++) {
+      for (var j=0;j<this.height;j++) {
          this._bits[i][j] = false;
       }
    };
@@ -162,7 +162,7 @@ Mask.prototype.overlapMask = function(otherMask, offset) {
  * @param {Number} y
  */
 Mask.prototype.setAt = function(x, y) {
-   this._bits[y][x] = true;
+   this._bits[x][y] = true;
 };
 
 /**
@@ -176,7 +176,7 @@ Mask.prototype.getAt = function(x, y) {
    y = parseInt(y, 10);
    if (x < 0 || y < 0 || x >= this.width || y >= this.height) return false;
 
-   return this._bits[y][x];
+   return this._bits[x][y];
 };
 
 
