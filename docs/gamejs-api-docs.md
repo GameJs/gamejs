@@ -1,5 +1,5 @@
-The API docs are created with the `ringo-doc` command:
+The API docs are created with the `ringo-doc` command. Issue this inside your GameJs installation:
 
-   ringo-doc -s ~/gamejs/app/packages/gamejs/ -d ~/gamejs/docs/api/
+    app/ringojs/bin/ringo-doc --file-urls -s ./app/packages/gamejs/lib/ -d ./docs/api/
 
-The destation directory `-d` must be empty.
+The destation directory `-d ./docs/api/` must be empty.
