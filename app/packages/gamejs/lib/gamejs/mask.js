@@ -170,6 +170,8 @@ Mask.prototype.setAt = function(x, y) {
  * @param {Number} y
  */
 Mask.prototype.getAt = function(x, y) {
+   x = parseInt(x, 10);
+   y = parseInt(y, 10);
    if (x < 0 || y < 0 || x >= this.width || y >= this.height) return false;
 
    return this._bits[x][y];

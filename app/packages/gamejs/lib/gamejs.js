@@ -29,29 +29,29 @@ function normalizeRectArguments() {
 
    if (arguments.length === 2) {
       if (arguments[0] instanceof Array && arguments[1] instanceof Array) {
-         left = parseInt(arguments[0][0], 10);
-         top = parseInt(arguments[0][1], 10);
-         width = parseInt(arguments[1][0], 10);
-         height = parseInt(arguments[1][1], 10);
+         left = arguments[0][0];
+         top = arguments[0][1];
+         width = arguments[1][0];
+         height = arguments[1][1];
       } else {
-         left = parseInt(arguments[0], 10);
-         top = parseInt(arguments[1], 10);
+         left = arguments[0];
+         top = arguments[1];
       }
    } else if (arguments.length === 1 && arguments[0] instanceof Array) {
-      left = parseInt(arguments[0][0], 10);
-      top = parseInt(arguments[0][1], 10);
-      width = parseInt(arguments[0][2], 10);
-      height = parseInt(arguments[0][3], 10);
+      left = arguments[0][0];
+      top = arguments[0][1];
+      width = arguments[0][2];
+      height = arguments[0][3];
    } else if (arguments.length === 1 && arguments[0] instanceof Rect) {
       left = arguments[0].left;
       top = arguments[0].top;
       width = arguments[0].width;
       height = arguments[0].height;
    } else if (arguments.length === 4) {
-      left = parseInt(arguments[0], 10);
-      top = parseInt(arguments[1], 10);
-      width = parseInt(arguments[2], 10);
-      height = parseInt(arguments[3], 10);
+      left = arguments[0];
+      top = arguments[1];
+      width = arguments[2];
+      height = arguments[3];
    } else {
       throw new Error('not a valid rectangle specification');
    }
@@ -154,17 +154,17 @@ objects.accessors(Rect.prototype, {
     */
    'center': {
       get: function() {
-         return [parseInt(this.left + (this.width / 2), 10),
-                 parseInt(this.top + (this.height / 2), 10)
+         return [this.left + (this.width / 2),
+                 this.top + (this.height / 2)
                 ];
       },
       set: function() {
          var args = normalizeRectArguments.apply(this, arguments);
-         this.left = parseInt(args.left - (this.width / 2), 10);
-         this.top = parseInt(args.top - (this.height / 2), 10);
+         this.left = args.left - (this.width / 2);
+         this.top = args.top - (this.height / 2);
          return;
       }
-   },   
+   },
 
 });
 
