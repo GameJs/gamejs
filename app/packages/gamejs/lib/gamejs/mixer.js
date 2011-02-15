@@ -106,14 +106,16 @@ exports.Sound = function Sound(uriOrAudio) {
    }
 
    var audio = new Audio();
-   audio.src = cachedAudio.src;
    audio.preload = "auto";
-
+   audio.loop = "false";
+   audio.src = cachedAudio.src;
    /**
     * start the sound
     */
    this.play = function() {
-      audio.play();
+      if (audio.ended || audio.paused) {
+         audio.play();
+      }
    }
 
    /**
