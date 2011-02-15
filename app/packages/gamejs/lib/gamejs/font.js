@@ -29,6 +29,7 @@ var Font = exports.Font = function(fontSettings, backgroundColor) {
      */
    this.sampleSurface = new Surface([10,10]);
    this.sampleSurface.context.font = fontSettings;
+   this.sampleSurface.context.textAlign = 'start';
    this.sampleSurface.context.textBaseline = 'top';
    return this;
 };
@@ -46,8 +47,9 @@ Font.prototype.render = function(text, color) {
    ctx.save();
    ctx.font = this.sampleSurface.context.font;
    ctx.textBaseline = this.sampleSurface.context.textBaseline;
+   ctx.textAlign = this.sampleSurface.context.textAlign;
    ctx.fillStyle = ctx.strokeStyle = color || "#000000";
-   ctx.fillText(text, 0, 0);
+   ctx.fillText(text, 0, 0, surface.rect.width);
    ctx.restore();
    return surface;
 };
@@ -61,7 +63,7 @@ Font.prototype.render = function(text, color) {
 Font.prototype.size = function(text) {
    var metrics = this.sampleSurface.context.measureText(text);
    // FIXME measuretext is buggy, make extra wide
-   return [metrics.width + metrics.width / 3.5, this.fontHeight];
+   return [metrics.width, this.fontHeight];
 };
 
 /**
@@ -70,17 +72,8 @@ Font.prototype.size = function(text) {
 objects.accessors(Font.prototype, {
    'fontHeight': {
       get: function() {
-         var fontSettingParts = this.sampleSurface.context.font.split(" ");
-         var height = 10; // default is 10px
-         // first with px is font height
-         fontSettingParts.some(function(part) {
-            if (part.substr(-2) === "px") {
-               height = parseInt(part.substring(0, part.length-2));
-               return true;
-            }
-            return false;
-         }, this);
-         return height;
+         // Returns an approximate line height of the text
+         return this.sampleSurface.context.measureText('M').width * 1.2;
       },
    },
 

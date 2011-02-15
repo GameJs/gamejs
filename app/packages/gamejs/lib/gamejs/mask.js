@@ -19,7 +19,9 @@ exports.fromSurface = function(surface, threshold) {
    var dims = surface.getSize()
    var mask = new Mask(dims);
    for (var i=0;i<imgData.length;i += 4) {
-      var y = parseInt((i / 4) / dims[1], 10);
+      // y: pixel # / width
+      var y = parseInt((i / 4) / dims[0], 10);
+      // x: pixel # % width
       var x = parseInt((i / 4) % dims[0], 10);
       var alpha = imgData[i+3];
       if (alpha >= threshold) {
@@ -38,9 +40,9 @@ var Mask = exports.Mask = function(dims) {
    this.width = dims[0];
    this.height = dims[1];
    this._bits = [];
-   for (var i=0;i<this.height;i++) {
+   for (var i=0;i<this.width;i++) {
       this._bits[i] = [];
-      for (var j=0;j<this.width;j++) {
+      for (var j=0;j<this.height;j++) {
          this._bits[i][j] = false;
       }
    };
