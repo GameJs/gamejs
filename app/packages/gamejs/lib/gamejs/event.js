@@ -71,18 +71,6 @@ exports.K_x = 88;
 exports.K_y = 89;
 exports.K_z = 90;
 
-exports.K_0 = 48;
-exports.K_1 = 49;
-exports.K_2 = 50;
-exports.K_3 = 51;
-exports.K_4 = 52;
-exports.K_5 = 53;
-exports.K_6 = 54;
-exports.K_7 = 55;
-exports.K_8 = 56;
-exports.K_9 = 57;
-
-
 exports.K_KP1 = 97;
 exports.K_KP2 = 98;
 exports.K_KP3 = 99;
