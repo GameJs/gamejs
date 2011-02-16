@@ -149,7 +149,7 @@ exports.Event = function() {
  */
 exports.init = function() {
 
-   // anonymouse functions as event handlers = memory leak, see MDC:elementAddEventListener
+   // anonymous functions as event handlers = memory leak, see MDC:elementAddEventListener
 
    function onMouseDown (ev) {
       var canvasOffset = display._getCanvasOffset();
