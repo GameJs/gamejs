@@ -170,15 +170,24 @@ exports.init = function() {
    };
 
    function onKeyDown (ev) {
-      var canvasOffset = display._getCanvasOffset();
+      var key = ev.keyCode || ev.which;
       QUEUE.push({
          'type': gamejs.event.KEY_DOWN,
-         'key': ev.keyCode || ev.which,
+         'key': key,
          'shiftKey': ev.shiftKey,
          'ctrlKey': ev.ctrlKey,
          'metaKey': ev.metaKey
       });
-      return;
+
+      if (!ev.ctrlKey && !ev.metaKey && 
+         (key >= exports.K_LEFT && key <= exports.K_DOWN
+       || key >= exports.K_0    && key <= exports.K_z
+       || key >= exports.K_KP1  && key <= exports.K_KP9
+       || key === exports.K_SPACE
+       || key === exports.K_TAB
+       || key === exports.K_ENTER)) {
+        ev.preventDefault();
+      }
    };
 
    function onKeyUp (ev) {
