@@ -33,8 +33,8 @@ Include the JavaScript file like so. Remember to change the script file name `gj
 
 If you want to use images, sounds or the gamejs.http module adapt those values:
 
-    * `$g.resourceBaseHref` is prefixed to all URLs loaded with `gamejs.preload()` or `gamejs.image.load()`
-    * `$g.ajaxBaseHref` prefix for `gamejs.http.load()` calls
+  * `$g.resourceBaseHref` is prefixed to all URLs loaded with `gamejs.preload()` or `gamejs.image.load()`
+  * `$g.ajaxBaseHref` prefix for `gamejs.http.load()` calls
 
 Building
 ---------
