@@ -44,7 +44,7 @@ function `add()`  like this:
 You can also split your files into directories. Check out this example
 app, it uses require() a lot:
 
-https://github.com/oberhamsi/gamejs/tree/master/apps/example-scene
+https://github.com/oberhamsi/gamejs/tree/master/examples/example-scene
 
 
 (especially see how main.js does `require('./tyround')` and in

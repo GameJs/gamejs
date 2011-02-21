@@ -41,7 +41,7 @@ Building
 
 The retarded edition is the output of ringo-modulr. Issue this in your GameJs install directory (only test on Linux & Mac):
 
-    ./app/ringojs/bin/ringo --packages app/packages/ ./app/packages/ringo-modulr/bin/ringo-modulr app/packages/gamejs/lib/gamejs > gjs-retarded-dev.js
+    ./server/ringojs/bin/ringo --packages server/packages/ ./server/packages/ringo-modulr/bin/ringo-modulr server/packages/gamejs/lib/gamejs > gjs-retarded-dev.js
 
 and attach the following lines to the resulting file:
 

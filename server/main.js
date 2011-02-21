@@ -10,7 +10,7 @@ var app = exports.app = Application();
 app.configure('notfound', 'error', 'mount', 'route');
 
 var FS = {
-   apps: '../apps',
+   apps: '../examples',
 };
 
 // serve img, sound, json, etc

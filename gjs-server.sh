@@ -3,5 +3,4 @@
 
 GAMEJS_DIR="${0%/*}"
 cd ${GAMEJS_DIR}
-./app/ringojs/bin/ringo --packages app/packages/ ${GAMEJS_DIR}/app/main.js
-
+./server/ringojs/bin/ringo --packages server/packages/ ${GAMEJS_DIR}/server/main.js

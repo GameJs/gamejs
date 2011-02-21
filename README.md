@@ -27,22 +27,27 @@ Clone the GameJs repository:
 
     git clone git://github.com/oberhamsi/gamejs.git
 
-Get all needed submodules with git:
+Change into the GameJs directory
 
     cd gamejs
+
+Get all needed submodules with git:
+
     git submodule init
     git submodule update
 
 Compile RingoJs:
 
-    ant -f gamejs/app/ringojs/build.xml jar
+    ant -f ./server/ringojs/build.xml jar
 
 You should now be able to start the GameJs server.
 
 Usage
 =========
 
-You need Java 1.5+. Start the GameJs web server with:
+You need Java 1.5+.
+
+Start the GameJs web server with:
 
     gjs-server.sh   (gjs-server.cmd on Windows)
 
@@ -50,7 +55,7 @@ And view the dashboard in your browser:
 
     http://localhost:8080/
 
-Several links to the example apps should show up. The source to those apps is in the `apps/` directory of your GameJs installation.
+Several links to the example apps should show up. The source to those apps is in the `examples` directory of your GameJs installation.
 
 Retarded Edition
 ==================
@@ -62,6 +67,6 @@ More Help
 
 Check the `docs` folder of your GameJs installation.
 
-A couple of example apps can be found in the `apps` directory.
+A couple of example apps can be found in the `examples` directory.
 
 See the [GameJs Website](http://gamejs.org) for more help or drop us an email in the [Mailing List](http://groups.google.com/group/gamejs).

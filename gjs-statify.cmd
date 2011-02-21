@@ -1,1 +1,1 @@
-@java -jar "%~dp0\app\ringojs\run.jar" --packages app\packages\  "%~dp0\app\statify.js" %*
+@java -jar "%~dp0\server\ringojs\run.jar" --packages server\packages\  "%~dp0\server\statify.js" %*
