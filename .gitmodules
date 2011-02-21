@@ -1,9 +1,9 @@
 [submodule "app/packages/ringo-modulr"]
-	path = app/packages/ringo-modulr
+	path = server/packages/ringo-modulr
 	url = git://github.com/oberhamsi/ringo-modulr.git
 [submodule "app/packages/stick"]
-	path = app/packages/stick
+	path = server/packages/stick
 	url = git://github.com/ringo/stick.git
 [submodule "app/ringojs"]
-	path = app/ringojs
+	path = server/ringojs
 	url = git://github.com/ringo/ringojs.git
