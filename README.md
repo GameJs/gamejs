@@ -42,14 +42,18 @@ You should now be able to start the GameJs server.
 Usage
 =========
 
-You need Java 1.5+. Start the GameJs web server with `gjs-server.sh` or `gjs-server.cmd` (Windows). And view the dashboard in your browser:
+You need Java 1.5+. Start the GameJs web server with:
+
+    gjs-server.sh   (gjs-server.cmd on Windows)
+
+And view the dashboard in your browser:
 
     http://localhost:8080/
 
 Several links to the example apps should show up. The source to those apps is in the `apps/` directory of your GameJs installation.
 
 Retarded Edition
-------------------
+==================
 
 Only recommended for demonstration purposes. More infos in the help file 'docs/retarted-edition' <https://github.com/oberhamsi/gamejs/blob/master/docs/retarded-edition.md>
 
