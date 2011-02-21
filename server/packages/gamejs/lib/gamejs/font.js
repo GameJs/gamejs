@@ -30,7 +30,7 @@ var Font = exports.Font = function(fontSettings, backgroundColor) {
    this.sampleSurface = new Surface([10,10]);
    this.sampleSurface.context.font = fontSettings;
    this.sampleSurface.context.textAlign = 'start';
-   this.sampleSurface.context.textBaseline = 'top';
+   this.sampleSurface.context.textBaseline = 'bottom';
    return this;
 };
 
@@ -49,7 +49,7 @@ Font.prototype.render = function(text, color) {
    ctx.textBaseline = this.sampleSurface.context.textBaseline;
    ctx.textAlign = this.sampleSurface.context.textAlign;
    ctx.fillStyle = ctx.strokeStyle = color || "#000000";
-   ctx.fillText(text, 0, 0, surface.rect.width);
+   ctx.fillText(text, 0, surface.rect.height, surface.rect.width);
    ctx.restore();
    return surface;
 };
@@ -73,7 +73,7 @@ objects.accessors(Font.prototype, {
    'fontHeight': {
       get: function() {
          // Returns an approximate line height of the text
-         return this.sampleSurface.context.measureText('M').width * 1.2;
+         return this.sampleSurface.context.measureText('M').width * 1.5;
       },
    },
 
