@@ -2,4 +2,4 @@
 
 Example usage:
 
-    ./gjs-statify.sh example-event ~/htdocs/example-event/
+    gjs-statify.sh example-event ~/htdocs/example-event/
