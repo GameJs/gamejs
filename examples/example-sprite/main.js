@@ -1,7 +1,7 @@
 /**
  * A bare bones Sprite and sprite Group example.
  */
- 
+
 var gamejs = require('gamejs');
 
 /**
@@ -50,7 +50,7 @@ function main() {
          gShips.update(msDuration);
          gShips.draw(mainSurface);
    };
-   gamejs.time.fpsCallback(tick, this, 30);
+   gamejs.time.fpsCallback(tick, this, 15);
 }
 
 /**
