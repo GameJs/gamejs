@@ -41,7 +41,7 @@ exports.preload = function(audioUrls, showProgressOrImage) {
    };
 
    for (var key in audioUrls) {
-      if (key.indexOf('wav') == -1 && key.indexOf('ogg') == -1) {
+      if (key.indexOf('wav') == -1 && key.indexOf('ogg') == -1 && key.indexOf('webm') == -1) {
          continue;
       }
       TOTAL_SOUNDS++;
