@@ -57,6 +57,19 @@ And view the dashboard in your browser:
 
 Several links to the example apps should show up. The source to those apps is in the `examples` directory of your GameJs installation.
 
+Static Deployment
+=================
+
+You can deploy your game as plain HTML and Javascript using the following:
+
+    gjs-statify.sh <app> <output-directory>
+
+For example, to deploy one of the example apps:
+
+    gjs-statify.sh example-draw /var/www/games/foo
+
+**Note:** You lose the ability to use the gamejs.http module with static deployment as it requires server-side scripts!
+
 Retarded Edition
 ==================
 
