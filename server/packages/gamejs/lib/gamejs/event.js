@@ -33,6 +33,7 @@ exports.K_TAB = 9;
 exports.K_ENTER = 13;
 exports.K_CTRL = 17;
 exports.K_ALT = 18;
+exports.K_ESC = 27;
 
 exports.K_0 = 48;
 exports.K_1 = 49;
