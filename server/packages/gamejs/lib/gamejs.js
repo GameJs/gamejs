@@ -116,6 +116,7 @@ var Rect = exports.Rect = function() {
    /**
     * Height of rectangle
     * @name Rect.prototype.height
+    * @type Number
     */
    this.height = args.height;
 
@@ -264,11 +265,16 @@ Rect.prototype.collideLine = function(p1, p2) {
             );
 }
 
-
+/**
+ * @returns {String} Like "[x, y][w, h]"
+ */
 Rect.prototype.toString = function() {
    return ["[", this.left, ",", this.top, "]"," [",this.width, ",", this.height, "]"].join("");
 }
 
+/**
+ * @returns {gamejs.Rect} A new copy of this rect
+ */
 Rect.prototype.clone = function() {
    return new Rect(this);
 };
@@ -401,9 +407,8 @@ Surface.prototype.getRect = function() {
 
 /**
  * Fills the whole Surface with a color. Usefull for erasing a Surface.
- * @param {String} color an #RGB string, e.g., #00ff00
+ * @param {String} CSS color string, e.g. '#0d120a' or '#0f0' or 'rgba(255, 0, 0, 0.5)'
  */
-// rgb css color
 Surface.prototype.fill = function(color) {
    this.context.save();
    this.context.fillStyle = color || "#000000";
@@ -458,7 +463,7 @@ Surface.prototype.getImageData = function() {
 };
 
 /**
- * @returns a clone of this surface
+ * @returns {gamejs.Surface} a clone of this surface
  */
 Surface.prototype.clone = function() {
   var newSurface = new Surface(this.getRect());

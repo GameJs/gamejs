@@ -40,6 +40,10 @@ var Sprite = exports.Sprite = function() {
    return this;
 };
 
+/**
+ * Kill this sprite. This removes the sprite from all associated groups and 
+ * makes future calls to `Sprite.isDead()` return `false`
+ */
 Sprite.prototype.kill = function() {
    this._alive = false;
    this._groups.forEach(function(group) {
@@ -48,7 +52,11 @@ Sprite.prototype.kill = function() {
    return;
 };
 
-
+/**
+ * Remove the sprite from the passed groups
+ * @param {Array|gamejs.sprite.Group} groups One or more `gamejs.Group`
+ * instances
+ */
 Sprite.prototype.remove = function(groups) {
    if (!(groups instanceof Array)) groups = [groups];
 
@@ -58,6 +66,11 @@ Sprite.prototype.remove = function(groups) {
    return;
 };
 
+/**
+ * Add the sprite to the passed groups
+ * @param {Array|gamejs.sprite.Group} groups One or more `gamejs.sprite.Group`
+ * instances
+ */
 Sprite.prototype.add = function(groups) {
    if (!(groups instanceof Array)) groups = [groups];
 
@@ -67,14 +80,26 @@ Sprite.prototype.add = function(groups) {
    return;
 };
 
+/**
+ * Draw this sprite onto the given surface. The position is defined by this
+ * sprite's rect.
+ * @param {gamejs.Surface} surface The surface to draw on
+ */
 Sprite.prototype.draw = function(surface) {
    surface.blit(this.image, this.rect);
    return;
 };
 
-// overload
+/**
+ * Update this sprite. You **should** override this method with your own to
+ * update the position, status, etc.
+ */
 Sprite.prototype.update = function() {};
 
+/**
+ * @returns {Boolean} True if this sprite has had `Sprite.kill()` called on it
+ * previously, otherwise false
+ */
 Sprite.prototype.isDead = function() {
    return !this._alive;
 };
@@ -102,6 +127,10 @@ var Group = exports.Group = function() {
    return this;
 };
 
+/**
+ * Update all the sprites in this group. This is equivalent to calling the
+ * update method on each sprite in this group.
+ */
 Group.prototype.update = function() {
    var updateArgs = arguments;
 
@@ -111,6 +140,11 @@ Group.prototype.update = function() {
    return;
 };
 
+/**
+ * Add one or more sprites to this group
+ * @param {Array|gamejs.sprite.Sprite} sprites One or more
+ * `gamejs.sprite.Sprite` instances
+ */
 Group.prototype.add = function(sprites) {
    if (!(sprites instanceof Array)) sprites = [sprites];
 
@@ -121,6 +155,11 @@ Group.prototype.add = function(sprites) {
    return;
 };
 
+/**
+ * Remove one or more sprites from this group
+ * @param {Array|gamejs.sprite.Sprite} sprites One or more
+ * `gamejs.sprite.Sprite` instances
+ */
 Group.prototype.remove = function(sprites) {
    if (!(sprites instanceof Array)) sprites = [sprites];
 
@@ -131,6 +170,12 @@ Group.prototype.remove = function(sprites) {
    return;
 };
 
+/**
+ * Check for the existence of one or more sprites within a group
+ * @param {Array|gamejs.sprite.Sprite} sprites One or more
+ * `gamejs.sprite.Sprite` instances
+ * @returns {Boolean} True if every sprite is in this group, false otherwise
+ */
 Group.prototype.has = function(sprites) {
    if (!(sprites instanceof Array)) sprites = [sprites];
 
@@ -139,10 +184,18 @@ Group.prototype.has = function(sprites) {
    }, this);
 };
 
+/**
+ * Get the sprites in this group
+ * @returns {Array} An array of `gamejs.sprite.Sprite` instances
+ */
 Group.prototype.sprites = function() {
    return this._sprites;
 }
 
+/**
+ * Draw all the sprites in this group. This is equivalent to calling each
+ * sprite's draw method.
+ */
 Group.prototype.draw = function() {
    var args = arguments;
    this._sprites.forEach(function(sprite) {
@@ -151,6 +204,9 @@ Group.prototype.draw = function() {
    return;
 };
 
+/**
+ * Remove all sprites from this group
+ */
 Group.prototype.empty = function() {
    this._sprites = [];
    return;
@@ -166,16 +222,29 @@ Group.prototype.collidePoint = function() {
    }, this);
 }
 
+/**
+ * Loop over each sprite in this group. This is a shortcut for
+ * `group.sprites().forEach(...)`.
+ */
 Group.prototype.forEach = function() {
    Array.prototype.forEach.apply(this._sprites, arguments);
 };
 
+/**
+ * Check whether some sprite in this group passes a test. This is a shortcut
+ * for `group.sprites().some(...)`.
+ */
 Group.prototype.some = function() {
    return Array.prototype.some.apply(this._sprites, arguments);
 };
 
 /**
- * find Sprites in a Group that intersect another Sprite
+ * Find sprites in a group that intersect another sprite
+ * @param {gamejs.sprite.Sprite} sprite The sprite to check
+ * @param {gamejs.sprite.Group} group The group to check
+ * @param {Boolean} doKill If true, kill sprites in the group when collided
+ * @param {function} collided Collision function to use, defaults to `gamejs.sprite.collideRect`
+ * @returns {Array} An array of `gamejs.sprite.Sprite` instances that collided
  */
 exports.spriteCollide = function(sprite, group, doKill, collided) {
    var collided = collided || collideRect;
@@ -194,8 +263,22 @@ exports.spriteCollide = function(sprite, group, doKill, collided) {
 
 /**
  * Find all Sprites that collide between two Groups.
- * Returns a list of objects with properties 'a', 'b', that hold
- * a ref to colliding objects from A and B.
+ *
+ * @example
+ * groupCollide(group1, group2).forEach(function (collision) {
+ *    var group1Sprite = collision.a;
+ *    var group2Sprite = collision.b;
+ *    // Do processing here!
+ * });
+ *
+ * @param {gamejs.sprite.Group} groupA First group to check
+ * @param {gamejs.sprite.Group} groupB Second group to check
+ * @param {Boolean} doKillA If true, kill sprites in the first group when
+ * collided
+ * @param {Boolean} doKillB If true, kill sprites in the second group when
+ * collided
+ * @returns {Array} A list of objects where properties 'a' and 'b' that 
+ * correspond with objects from the first and second groups
  */
 exports.groupCollide = function(groupA, groupB, doKillA, doKillB) {
    var doKillA = doKillA || false;
@@ -221,19 +304,23 @@ exports.groupCollide = function(groupA, groupB, doKillA, doKillB) {
 };
 
 /**
- * Collision detection between two sprites, using rects.
+ * Check for collisions between two sprites using their rects.
+ *
+ * @param {gamejs.sprite.Sprite} spriteA First sprite to check
+ * @param {gamejs.sprite.Sprite} spriteB Second sprite to check
+ * @returns {Boolean} True if they collide, false otherwise
  */
 var collideRect = exports.collideRect = function(spriteA, spriteB) {
    return spriteA.rect.collideRect(spriteB.rect);
 };
 
 /**
- * Collision detection between to sprites utilizing the optional `mask` attribute
- * on the sprites. Beware: expensive operation.
+ * Collision detection between two sprites utilizing the optional `mask` 
+ * attribute on the sprites. Beware: expensive operation.
  *
- * @param {gamejs.Sprite} spriteA with 'mask' property set to a gamejs.mask.Mask
- * @param {gamejs.Sprite} spriteB with 'mask' property set to a gamejs.mask.Mask
- * @returns {Boolean} true if at least if pixels of the two sprites collide
+ * @param {gamejs.sprite.Sprite} spriteA Sprite with 'mask' property set to a `gamejs.mask.Mask`
+ * @param {gamejs.sprite.Sprite} spriteB Sprite with 'mask' property set to a `gamejs.mask.Mask`
+ * @returns {Boolean} True if any mask pixels collide, false otherwise
  */
 exports.collideMask = function(spriteA, spriteB) {
    if (!spriteA.mask || !spriteB.mask) {

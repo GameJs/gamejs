@@ -21,15 +21,19 @@ var _PRELOADING = false;
 /**
  * Load image and return it on a Surface.
  *
- * **Note**
+ * **Preloading**
  *
  * All images must be preloaded like this:
  *
  *     gamejs.preload(["./images/ship.png", "./images/sunflower.png"]);
  *
- * before they can base used within the gamejs.ready() callback.
+ * before they can be used within the gamejs.ready() callback.
  *
- * @param {String|dom.Image} uriOrImage ressource uri for image or the image as Dom Element (e.g. from <img>)
+ * **Used Resources**
+ *
+ * This creates a new canvas DOM element each time it is called.
+ *
+ * @param {String|dom.Image} uriOrImage resource uri for image or the image as a DOM Element (e.g. from <img>)
  * @returns {gamejs.Surface} surface with the image on it.
  */
 exports.load = function(key) {
