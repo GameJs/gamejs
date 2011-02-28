@@ -41,3 +41,29 @@ exports.scale = function(surface, dims) {
    newSurface.blit(surface);
    return newSurface;
 };
+
+/**
+ * Flip a Surface either vertically, horizontally or both. This returns
+ * a new Surface (i.e: nondestructive).
+ */
+exports.flip = function(surface, flipHorizontal, flipVertical) {
+   var dims = surface.getSize();
+   var newSurface = new Surface(dims);
+   var scaleX = 1;
+   var scaleY = 1;
+   var xPos = 0;
+   var yPos = 0;
+   if (flipHorizontal === true) {
+      scaleX = -1;
+      xPos = -dims[0];
+   }
+   if (flipVertical === true) {
+      scaleY = -1;
+      yPos = -dims[1];
+   }
+   newSurface.context.save();
+   newSurface.context.scale(scaleX, scaleY);
+   newSurface.context.drawImage(surface.canvas, xPos, yPos);
+   newSurface.context.restore();
+   return newSurface;
+};
