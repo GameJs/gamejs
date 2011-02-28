@@ -1,5 +1,9 @@
 /**
  * A bare bones Sprite and sprite Group example.
+ *
+ * We move a lot of Ship sprites across the screen with varying speed. The sprites
+ * rotate themselves randomly. The sprites bounce back from the bottom of the
+ * screen.
  */
 
 var gamejs = require('gamejs');
@@ -50,7 +54,7 @@ function main() {
          gShips.update(msDuration);
          gShips.draw(mainSurface);
    };
-   gamejs.time.fpsCallback(tick, this, 15);
+   gamejs.time.fpsCallback(tick, this, 20);
 }
 
 /**

@@ -9,24 +9,35 @@ var font = require('gamejs/font');
 
 function main() {
    // set resolution & title
-   var mainSurface = gamejs.display.setMode([800, 600]);
+   var display = gamejs.display.setMode([800, 600]);
    gamejs.display.setCaption("Example Draw");
 
-   // last parameter in all draw.* methods is the border width. 0 = fill
-   draw.line(mainSurface, '#ff0000', [0,0], [100,100], 1);
-   draw.lines(mainSurface, '#00ff00', true, [[50,50], [100,50], [100,100], [50,100]], 4);
+   var colorOne = '#ff0000';
+   var colorTwo = 'rgb(255, 50, 60)';
+   var colorThree = 'rgba(50, 0, 150, 0.8)';
 
-   draw.polygon(mainSurface, '#0000ff', [[150,50], [200,50], [200,100]], 0);
+   // All gamejs.draw methods share a parameter order:
+   //
+   //  * surface
+   //  * color
+   //  * position related: gamejs.Rect or [x,y] or array of [x, y]
+   //  * [radius if circle]
+   //  * line width; 0 line width = fill the structure
 
-   draw.circle(mainSurface, '#0000ff', [150, 150], 50, 10);
-   draw.circle(mainSurface, '#00ccff', [250, 250], 50, 0);
+   draw.line(display, colorOne, [0,0], [100,100], 1);
+   draw.lines(display, colorOne, true, [[50,50], [100,50], [100,100], [50,100]], 4);
 
-   draw.rect(mainSurface, '#cccccc', new gamejs.Rect(10, 150, 20, 20), 2);
-   draw.rect(mainSurface, '#cccccc', new gamejs.Rect(50, 150, 20, 20), 0);
+   draw.polygon(display, colorTwo, [[150,50], [200,50], [200,100]], 0);
 
-   // create font object
-   var defaultFont = new font.Font("20px Verdana"); // css font definition
-   // render text, this returns a surface
+   draw.circle(display, colorThree, [150, 150], 50, 10);
+   draw.circle(display, '#ff0000', [250, 250], 50, 0);
+
+   draw.rect(display, '#aaaaaa', new gamejs.Rect(10, 150, 20, 20), 2);
+   draw.rect(display, '#555555', new gamejs.Rect(50, 150, 20, 20), 0);
+
+   // Font object, create with css font definition
+   var defaultFont = new font.Font("20px Verdana");
+   // render() returns a white transparent Surface containing the text (default color: black)
    var textSurface = defaultFont.render("Example Draw Test 101", "#bbbbbb");
    mainSurface.blit(textSurface, [300, 50]);
 };

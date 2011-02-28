@@ -1,8 +1,7 @@
-/** 
+/**
  * @fileoverview
  * A simple game. One way to have a game with multiple screens and the possibility
- * to restart it. Simple scoring is implemented as well.
- *
+ * to restart it.
  */
 var gamejs = require('gamejs');
 // Tyround is a custom module written for this example. Use a relative require()
