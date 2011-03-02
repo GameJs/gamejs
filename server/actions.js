@@ -26,7 +26,6 @@ app.get('/', function(req) {
 // app site
 app.get('/:appId/', function(req, appId) {
    var customSkin = module.resolve(join(FS.apps, appId, 'index.html'));
-   print (customSkin);
    return app.render( exists(customSkin) ? customSkin.toString() : module.resolve('./skins/app.html'), {
       appId: appId,
    });
