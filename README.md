@@ -60,7 +60,7 @@ Several links to the example apps should show up. The source to those apps is in
 Static Deployment
 =================
 
-You can deploy your game as plain HTML and Javascript using the following:
+You can deploy your game as plain HTML and JavaScript using the following:
 
     gjs-statify.sh <app> <output-directory>
 
@@ -69,6 +69,17 @@ For example, to deploy one of the example apps:
     gjs-statify.sh example-draw /var/www/games/foo
 
 **Note:** You lose the ability to use the gamejs.http module with static deployment as it requires server-side scripts!
+
+API documentation
+===================
+
+<http://docs.gamejs.org/>
+
+The API docs are created with the `ringo-doc` command. Issue this inside your GameJs installation:
+
+    server/ringojs/bin/ringo-doc --file-urls -s ./server/packages/gamejs/lib/ -d ./docs/api/
+
+This will write the API docs to `docs/api/`. This directory must be empty.
 
 Retarded Edition
 ==================
