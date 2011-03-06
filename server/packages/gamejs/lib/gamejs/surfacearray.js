@@ -5,6 +5,21 @@ var accessors = require('gamejs/utils/objects').accessors;
  */ 
 
 /**
+ * 
+ * Directly copy values from an array into a Surface.
+ *
+ * This is faster than using SurfaceArray.image to convert into a Surface
+ * and then blitting.
+ *
+ * The array must be the same dimensions as the Surface and will completely 
+ * replace all pixel values.
+ */
+exports.blitArray = function(surface, surfaceArray) {
+   surface.context.putImageData(surfaceArray.imageData, 0, 0);
+   return;
+}
+
+/**
  * The SurfaceArray can be constructed with a surface whose values
  * are then used to initialize the pixel array.
  *
@@ -60,29 +75,23 @@ var SurfaceArray = exports.SurfaceArray = function(surfaceOrDimensions) {
    };
 
    /**
-    * @returns a new gamejs.Surface on every access, representing
+    * @returns {gamejs.Surface} a new gamejs.Surface on every access, representing
     * the current state of the SurfaceArray.
     */
    accessors(this, {
-      image: {
+      surface: {
          get: function() {
             var s = new gamejs.Surface(size);
             s.context.putImageData(imageData, 0, 0);
             return s;
          }
+      },
+      imageData: {
+         get: function() {
+            return imageData;
+         }
       }
    });
-   
-   /**
-    * This is a faster way to get the pixel data as a Surface, if you already
-    * have a Surface on which SurfaceArray can put the data onto.
-    *
-    * @returns {Surface} blits the image data onto the passed surface and returns the surface
-    */
-   this.getImage = function(surface) {
-      surface.context.putImageData(imageData, 0, 0);
-      return surface;
-   };
    
    /**
     * constructor
