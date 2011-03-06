@@ -48,8 +48,8 @@ var keys = exports.keys = function(obj) {
    if (Object.keys) return Object.keys(obj);
    
    var ret=[],p;
-   for(p in o) {
-      if(Object.prototype.hasOwnProperty.call(o,p)) {
+   for (p in obj) {
+      if(Object.prototype.hasOwnProperty.call(obj, p)) {
          ret.push(p);
       }
    }
