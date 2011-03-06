@@ -84,9 +84,13 @@ var SurfaceArray = exports.SurfaceArray = function(surfaceOrDimensions) {
    };
 
    /**
-    * @returns {gamejs.Surface} a new gamejs.Surface on every access, representing
+    * a new gamejs.Surface on every access, representing
     * the current state of the SurfaceArray.
+    * @type {gamejs.Surface}
     */
+   // for jsdoc only
+   this.surface = null;
+   
    accessors(this, {
       surface: {
          get: function() {
