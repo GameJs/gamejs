@@ -2,6 +2,15 @@ var gamejs = require('gamejs');
 var accessors = require('gamejs/utils/objects').accessors;
 /**
  * @fileoverview Fast pixel access.
+ *
+ * @example
+ *   // create array from display surface
+ *   var srfArray = new SurfaceArray(display);
+ *   // direct pixel access
+ *   srfArray.set(50, 100, [255, 0, 0, 100]);
+ *   console.log(srfArray.get(30, 50));
+ *   // blit modified array back to display surface
+ *   blitArray(display, srfArray);
  */ 
 
 /**
@@ -60,8 +69,8 @@ var SurfaceArray = exports.SurfaceArray = function(surfaceOrDimensions) {
 
    /**
     * Get rgba value at position xy,
-    * @param {Number}
-    * @param {Number}
+    * @param {Number} x
+    * @param {Number} y
     * @returns {Array} [red, green, blue, alpha]
     */   
    this.get = function(x, y) {
