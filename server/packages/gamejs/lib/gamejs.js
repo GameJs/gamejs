@@ -451,18 +451,6 @@ objects.accessors(Surface.prototype, {
 });
 
 /**
- * The data must be represented in left-to-right order, row by row top to bottom,
- * starting with the top left, with each pixel's red, green, blue, and alpha components
- * being given in that order for each pixel.
- * @see http://dev.w3.org/html5/2dcontext/#canvaspixelarray
- * @returns {Array} the pixel image data (the canvas pixel array in html speak)
- */
-Surface.prototype.getImageData = function() {
-   var size = this.getSize();
-   return this.context.getImageData(0, 0, size[0], size[1]).data;
-};
-
-/**
  * @returns {gamejs.Surface} a clone of this surface
  */
 Surface.prototype.clone = function() {
