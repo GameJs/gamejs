@@ -42,17 +42,19 @@ exports.merge = function() {
  * fallback for Object.keys
  * @param {Object} obj
  * @returns {Array} list of own properties
+ * @see https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/keys
  */
 var keys = exports.keys = function(obj) {
-   var ks = [];
-   for (var k in obj) {
-      if (k !== undefined) {
-         ks.push(k);
+   if (Object.keys) return Object.keys(obj);
+   
+   var ret=[],p;
+   for (p in obj) {
+      if(Object.prototype.hasOwnProperty.call(obj, p)) {
+         ret.push(p);
       }
    }
-   return ks;
-};
-
+   return ret;
+}
 /**
  * Create object accessors
  * @param {Object} object The object on which to define the property

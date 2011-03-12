@@ -451,18 +451,6 @@ objects.accessors(Surface.prototype, {
 });
 
 /**
- * The data must be represented in left-to-right order, row by row top to bottom,
- * starting with the top left, with each pixel's red, green, blue, and alpha components
- * being given in that order for each pixel.
- * @see http://dev.w3.org/html5/2dcontext/#canvaspixelarray
- * @returns {Array} the pixel image data (the canvas pixel array in html speak)
- */
-Surface.prototype.getImageData = function() {
-   var size = this.getSize();
-   return this.context.getImageData(0, 0, size[0], size[1]).data;
-};
-
-/**
  * @returns {gamejs.Surface} a clone of this surface
  */
 Surface.prototype.clone = function() {
@@ -491,48 +479,6 @@ Surface.prototype.setAlpha = function(alpha) {
    return (1 - this._blitAlpha);
 };
 
-// FIXME get rid of this, currently required by all apps
-/**
- * @ignore
- */
-exports.utils = {};
-/**
- * @ignore
- */
-exports.utils.arrays = require('gamejs/utils/arrays');
-/**
- * @ignore
- */
-exports.utils.objects = require('gamejs/utils/objects');
-
-/**
- * @ignore
- */
-exports.event = require('gamejs/event');
-/**
- * @ignore
- */
-exports.time = require('gamejs/time');
-/**
- * @ignore
- */
-exports.matrix = require('gamejs/utils/matrix');
-/**
- * @ignore
- */
-exports.transform = require('gamejs/transform');
-/**
- * @ignore
- */
-exports.image = require('gamejs/image');
-/**
- * @ignore
- */
-exports.draw = require('gamejs/draw');
-/**
- * @ignore
- */
-exports.sprite = require('gamejs/sprite');
 /**
  * @ignore
  */
@@ -540,7 +486,27 @@ exports.display = require('gamejs/display');
 /**
  * @ignore
  */
+exports.draw = require('gamejs/draw');
+/**
+ * @ignore
+ */
+exports.event = require('gamejs/event');
+/**
+ * @ignore
+ */
 exports.font = require('gamejs/font');
+/**
+ * @ignore
+ */
+exports.http = require('gamejs/http');
+/**
+ * @ignore
+ */
+exports.image = require('gamejs/image');
+/**
+ * @ignore
+ */
+exports.mask = require('gamejs/mask');
 /**
  * @ignore
  */
@@ -552,14 +518,37 @@ exports.scene = require('gamejs/scene');
 /**
  * @ignore
  */
-exports.mask = require('gamejs/mask');
+exports.sprite = require('gamejs/sprite');
 /**
  * @ignore
  */
-exports.http = require('gamejs/http');
+exports.surfacearray = require('gamejs/surfacearray');
+/**
+ * @ignore
+ */
+exports.time = require('gamejs/time');
+/**
+ * @ignore
+ */
+exports.transform = require('gamejs/transform');
+
+/**
+ * @ignore
+ */
+exports.utils = {
+   arrays: require('gamejs/utils/arrays'),
+   objects: require('gamejs/utils/objects'),
+   matrix: require('gamejs/utils/matrix')
+};
+
+/**
+ * @ignore
+ */
+exports.pathfinding = {
+   astar: require('gamejs/pathfinding/astar')
+};
 
 // preloading stuff
-// NEEDS ITS OWN COPY OF GAMEJS
 var gamejs = require('gamejs');
 var RESOURCES = {};
 
