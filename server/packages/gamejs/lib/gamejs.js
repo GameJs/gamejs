@@ -8,13 +8,48 @@ var objects = require('gamejs/utils/objects');
  *
  */
 
+var DEBUG_LEVELS = ['info', 'warn', 'error', 'fatal'];
+var debugLevel = 2;
+
+/**
+ * set logLevel as string or number
+ * 0 = debug; 1 = warn; 2 = error;
+ *
+ * @example
+ * gamejs.setLogLevel(0); // debug
+ * gamejs.setLogLevel('error'); // equal to setLogLevel(2)
+ */
+exports.setLogLevel = function(logLevel) {
+   if (typeof logLevel === 'string' && DEBUG_LEVELS.indexOf(logLevel)) {
+      debugLevel = DEBUG_LEVELS.indexOf(logLevel);
+   } else if (typeof logLevel === 'number') {
+      debugLevel = logLevel;
+   } else {
+      throw new Error('invalid logLevel ', logLevel, ' Must be one of: ', DEBUG_LEVELS);
+   }
+   return debugLevel;
+};
 /**
  * Log a msg to the console if console is enable
  * @param {String} msg the msg to log
  */
-exports.log = function() {
+var log = exports.log = function() {
    // IEFIX can't call apply on console
-   if (window.console !== undefined && console.log.apply) console.log.apply(console, arguments);
+   var args = Array.prototype.slice.apply(arguments, [0]);
+   args.unshift(Date.now());
+   if (window.console !== undefined && console.log.apply) console.log.apply(console, args);
+};
+exports.debug = function() {
+   if (debugLevel > 0) return;
+   log.apply(this, arguments);
+};
+exports.warn = function() {
+   if (debugLevel > 1) return;
+   log.apply(this, arguments);
+};
+exports.error = function() {
+   if (debugLevel > 2) return;
+   log.apply(this, arguments);
 };
 
 /**
