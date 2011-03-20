@@ -2,6 +2,7 @@ var sys = require('system');
 var {get} = require('ringo/httpclient');
 var {join, copyTree, write, copy, exists, makeDirectory} = require('fs');
 var {render} = require('ringo/skin');
+var objects = require('ringo/utils/objects');
 
 var myself = sys.args.shift();
 var appName = sys.args[0];
@@ -28,10 +29,10 @@ var appJsUrl = GAMEJS_SERVER + '/lib/' + appName + '/main.js';
 
 // render index.html
 var appSpecific = join(appDirectory, 'index.html');
-var indexHtml = render(exists(appSpecific) ? appSpecific : module.resolve('skins/app.html'), {
+var indexHtml = render(exists(appSpecific) ? appSpecific : module.resolve('skins/app.html'), objects.merge({
    appName: appName,
    statifier: true,
-});
+}, require('./statify/macros')));
 write(join(destinationDirectory, 'index.html'), indexHtml);
 
 // download & copy main.js
