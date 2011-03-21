@@ -2,7 +2,7 @@ var gamejs = require('gamejs');
 
 /**
  * @fileoverview Playing sounds with the html5 audio tag. Audio files must be preloaded
- * with the usual `gamejs.preload()` function. Only ogg files supported.
+ * with the usual `gamejs.preload()` function. Ogg, wav and webm supported.
  */
 
 var CACHE = {};
@@ -101,8 +101,8 @@ exports.Sound = function Sound(uriOrAudio) {
       cachedAudio = uriOrAudio;
    }
    if (!cachedAudio) {
-      // FIXME sync audio loading
-      throw "audio sync loading not support; precache to play";
+      // TODO sync audio loading
+      throw new Error('Missing "' + uriOrAudio + '", gamejs.preload() all audio files before loading');
    }
 
    var audio = new Audio();
