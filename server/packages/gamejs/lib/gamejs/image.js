@@ -41,9 +41,8 @@ exports.load = function(key) {
    if (typeof key === 'string') {
       img = CACHE[key];
       if (!img) {
-         // FIXME sync image loading
-			gamejs.log('[image] not in cache ' + key);
-			throw new Error('could not load image');
+         // TODO sync image loading
+			throw new Error('Missing "' + key + '", gamejs.preload() all images before trying to load them.');
       }
    } else {
       img = key;
@@ -101,8 +100,8 @@ exports.preload = function(imgIdents) {
          return;
       }, true);
       img.addEventListener('error', function() {
-      	gamejs.log('[image] failed to load ' + this.src);
          incrementLoaded();
+      	throw new Error('Error loading ' + this.src);
          return;
       }, true);
       img.src = imgIdents[key];

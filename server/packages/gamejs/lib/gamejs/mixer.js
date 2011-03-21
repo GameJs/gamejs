@@ -52,8 +52,8 @@ exports.preload = function(audioUrls, showProgressOrImage) {
          return;
       }, true);
       audio.addEventListener('error', function() {
-         gamejs.log('[mixer] failed to load ' + this);
          incrementLoaded();
+         throw new Error('Error loading ' + this.src);
          return;
       }, true);
       audio.src = audioUrls[key];
