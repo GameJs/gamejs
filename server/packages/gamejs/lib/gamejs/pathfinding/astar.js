@@ -5,12 +5,15 @@
  * Use the `findRoute(map, from, to, [timeout])` function to get the linked list
  * leading `from` a point `to` another on the given `map`.
  *
- * The map interface is seen in `Map`.
+ * The map must implement interface `gamejs.pathfinding.Map` (this
+ * class really holds an example implementation & data for you to study).
  *
  * The resulting point list includes the two points `from` and `to` and in
- * between all points leading from `to` to `from` (sic! optimization).
+ * between all points leading from `to` to `from` (yes, in reverted order.
+ * It is quicker that way. If you need them the other way around: revert yourself).
  *
- * Example result:
+ * Example result
+ *
  *     ({
  *         point: [
  *             3,
@@ -22,20 +25,7 @@
  *                 2
  *             ],
  *             from: {
- *                 point: [
- *                     1,
- *                     1
- *                 ],
- *                 from: {
- *                     point: [
- *                         0,
- *                         0
- *                     ],
- *                     from: null,
- *                     length: 0
- *                 },
- *                 length: 291,
- *                 score: 573
+ *                <<< cut for clarity >>>
  *             },
  *             length: 524,
  *             score: 665
@@ -75,17 +65,17 @@ function ReachedList() {
 /** A* search function.
  *
  * This function expects a `Map` implementation and the origin and destination
- * `Point`s. If there is a path between the two it will return the optimal
+ * points given as [x,y] arrays. If there is a path between the two it will return the optimal
  * path as a linked list. If there is no path it will return null.
  *
  * The linked list is in reverse order: the first item is the destination and
  * the path to the origin follows.
  *
  * @param {Map} map map instance, must follow interface defined in {Map}
- * @param {Point} origin
- * @param {Point} destination
+ * @param {Array} origin
+ * @param {Array} destination
  * @param {Number} timeout milliseconds after which search should be canceled
- * @param {Object} the linked list leading from `to` to `from` (sic!).
+ * @returns {Object} the linked list leading from `to` to `from` (sic!).
  **/
 exports.findRoute = function(map, from, to, timeout) {
    var open = new BinaryHeap(routeScore);
