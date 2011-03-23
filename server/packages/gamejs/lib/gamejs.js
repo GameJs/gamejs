@@ -599,7 +599,11 @@ exports.ready = function(readyFn) {
          return window.setTimeout(_ready, 13);
       }
       gamejs.image.preload(RESOURCES);
-      gamejs.mixer.preload(RESOURCES);
+      try {
+         gamejs.mixer.preload(RESOURCES);
+      } catch (e) {
+         gamejs.debug('Error loading image files ', e);
+      }
       window.setTimeout(_readyResources, 13);
    }
    // 3.
