@@ -89,6 +89,7 @@ exports.KEY_UP = 2;
 exports.MOUSE_MOTION = 3;
 exports.MOUSE_UP = 4
 exports.MOUSE_DOWN = 5;
+exports.MOUSE_WHEEL = 6;
 
 var QUEUE = [];
 
@@ -180,7 +181,7 @@ exports.init = function() {
          'metaKey': ev.metaKey
       });
 
-      if (!ev.ctrlKey && !ev.metaKey && 
+      if (!ev.ctrlKey && !ev.metaKey &&
          (key >= exports.K_LEFT && key <= exports.K_DOWN
        || key >= exports.K_0    && key <= exports.K_z
        || key >= exports.K_KP1  && key <= exports.K_KP9
@@ -222,6 +223,17 @@ exports.init = function() {
       return;
    };
 
+   function onMouseScroll(ev) {
+      var canvasOffset = display._getCanvasOffset();
+      var currentPos = [ev.clientX - canvasOffset[0], ev.clientY - canvasOffset[1]];
+      QUEUE.push({
+         type: gamejs.event.MOUSE_WHEEL,
+         pos: currentPos,
+         delta: ev.detail || (- ev.wheelDeltaY / 40)
+      });
+      return;
+   }
+
    function onBeforeUnload (ev) {
       QUEUE.push({
          'type': gamejs.event.QUIT,
@@ -233,16 +245,15 @@ exports.init = function() {
    // MOZFIX but in moz & opera events don't reach body if mouse outside window or on menubar
    // hook onto document.body not canvas to avoid dependancy into gamejs.display
    document.addEventListener('mousedown', onMouseDown, false);
-
    document.addEventListener('mouseup', onMouseUp, false);
-
    document.addEventListener('keydown', onKeyDown, false);
-
    document.addEventListener('keyup', onKeyUp, false);
-
    var lastPos = [];
    document.addEventListener('mousemove', onMouseMove, false);
-
+   document.addEventListener('mousewheel', onMouseScroll, false);
+   // MOZFIX
+   // https://developer.mozilla.org/en/Code_snippets/Miscellaneous#Detecting_mouse_wheel_events
+   document.addEventListener('DOMMouseScroll', onMouseScroll, false);
    document.addEventListener('beforeunload', onBeforeUnload, false);
 
 };
