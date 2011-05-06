@@ -9,20 +9,24 @@ This is the gist of what your game will do:
   * and finally draw the objects to the screen
   * repeat
 
-We will talk about interesting things like collision detection and actually drawing on the screen in a second. Please bear with me during the next paragraph when I define the most basic bulding block of GameJs that allows us to do those interesting things in a uniform way: `gamejs.sprite.Sprite`.
+We will talk about interesting things like collision detection and actually drawing on the screen in a second. Please bear with me during the next paragraph when I define the most basic bulding block of GameJs that allows us to do those interesting things in a uniform way: [gamejs.sprite.Sprite](http://docs.gamejs.org/gamejs/sprite/#Sprite).
 
 Sprites
 ----------
+
 Think of sprites as being a convention that helps you deal with the eval-update-draw cycle mentioned above. Those are the properties that define a sprite:
 
-  * `rect` & `image`: `image` holds the surface of that sprite and `rect` tells us where on the display the sprite wants to be.
-  * `sprite.update(msDuration)`: the sprite should update its model and can optionally update `rect` or `image` if necessary (`msDuration` is the duration in milliseconds since `update()` was last called).
-  * `sprite.draw(display)`: the sprite draws itself on the passed surface
+  * `image` holds the surface of that sprite and `rect` is a Rectangle object telling us where on the display the sprite is drawn
+  * `sprite.update(msDuration)`: the sprite should update its model data and/or `rect` and/or `image` if necessary. `msDuration` is the duration in milliseconds since `update()` was last called.
+  * `sprite.draw(display)`: the sprite should draw itself on the passed surface
+
+See the API docs on [gamejs.sprite.Sprite]([gamejs.sprite.Sprite](http://docs.gamejs.org/gamejs/sprite/#Sprite)) for the full list; the ones I just mentioned are essential.
 
 The nice thing of following this convention is that we can have containers for sprites and utility functions that operate on a high level.
 
 Collission detection & event handling
 --------------------------------------
+
 Let's say the user clicked and you want to find out on which of the monster sprites (if any) he clicked. You should already have a sprite group holding all the monsters:
 
     var monsters = new gamejs.sprite.Group();
@@ -40,10 +44,13 @@ Then to get all sprites colliding with a point call `Group.collidePoint`. In thi
         }
     }
 
-There is lots of those kind of high level functions that know how deal with sprites, sprite groups or rectangles. You too are encouraged to think in those terms and concepts when trying to structure your game.
+There are four different `collide*` functions in [gamejs.sprite](http://docs.gamejs.org/gamejs/sprite/) and you should know them all.
+
+There is lots of those kind of high level functions that understand and operate on the concepts of sprites, sprite groups and rectangles. You too are encouraged to think in those terms and concepts when structuring your game.
 
 Updating a sprite's position & appeareance
 ---------------------------------------------
+
 A simple example for an `update()` method would be, that the monster just moves a certain amount in the direction we created at instantiation (stored in `Monster.directionVector`). What we do is we update the position of `this.rect` by adding the amount we moved (`movementDelta`) to it:
 
     var $v = require('gamejs/utils/vectors');
@@ -64,6 +71,7 @@ Back to the eval-update-draw cycle; we have everything to actually build it. One
 
 Timers
 ---------
+
 In GameJs you create such timers with the `gamejs.time.fpsCallback(function, thisObject, fps)` function. In the following example the (arbitrarily named) function `tick` is called 25 times per second:
 
     function tick(msDuration) {};
@@ -71,6 +79,7 @@ In GameJs you create such timers with the `gamejs.time.fpsCallback(function, thi
 
 Putting it all together
 --------------------------
+
 Inside tick we will run the updates and draw methods of the monster sprite group and the sprite group will in turn call those methods on all the sprites it holds:
 
     var display = gamejs.display.getSurface();
@@ -86,11 +95,4 @@ Last but not least we must evaluate the user's input with the `evaluateEvent()` 
 
 This is all it takes to get something moving on the screen that reacts to your input. Of course there is more to GameJs.
 
-Would you like to know more?
----------------------------------
-If you want to learn more about GameJs in general and patterns on how to structure your game, then look at the source of the following. Ordered by growing complexity :)
-
-  * the example apps `example-draw` and `example-sprite`
-  * `gamejs.scene.Scene` is a class that holds an eval-update-draw cycle as described in this tutorial; and `gamejs.scene.MovingSprite` is just that: a moving sprite with functions like `setSpeed(value)` or `rotateBy(amount)` for your convinience when prototype.
-  * there is an example app called `example-scene` which heavily utilizes `Scene` and `MovingSprite`.
-  * `gamejs.iso.AnimatedSprite` - this sprite is animated, meaning it changes its `image` depending on the animation and direction set by you. There's an example app for it too: `example-iso`. Note: you will need an art pipeline if you want to do ISO sprites. I provide a script to do most of the work of importing the ISO sprites from <http://reinerstileset.4players.de/>.
+End of Tutorial
