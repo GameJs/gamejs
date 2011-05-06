@@ -11,16 +11,16 @@ var accessors = require('gamejs/utils/objects').accessors;
  *   console.log(srfArray.get(30, 50));
  *   // blit modified array back to display surface
  *   blitArray(display, srfArray);
- */ 
+ */
 
 /**
- * 
+ *
  * Directly copy values from an array into a Surface.
  *
  * This is faster than using SurfaceArray.image to convert into a Surface
  * and then blitting.
  *
- * The array must be the same dimensions as the Surface and will completely 
+ * The array must be the same dimensions as the Surface and will completely
  * replace all pixel values.
  */
 exports.blitArray = function(surface, surfaceArray) {
@@ -44,10 +44,10 @@ var SurfaceArray = exports.SurfaceArray = function(surfaceOrDimensions) {
 
    /*
     * Set rgba value at position x, y.
-    * 
+    *
     * For performance reasons this function has only one signature
     * being Number, Number, Array[4].
-    * 
+    *
     * @param {Number} x x position of pixel
     * @param {Number} y y position of pixel
     * @param {Array} rgba [red, green, blue, alpha] values [255, 255, 255, 1] (alpha, last argument: defaults to 0)
@@ -57,7 +57,7 @@ var SurfaceArray = exports.SurfaceArray = function(surfaceOrDimensions) {
       var offset = (x * 4) + (y * size[0] * 4);
       /** faster without
       if (offset + 3 >= data.length || x < 0 || y < 0) {
-         throw new Error('x, y out of range', x, y);  
+         throw new Error('x, y out of range', x, y);
       }
       **/
       data[offset] = rgba[0];
@@ -72,7 +72,7 @@ var SurfaceArray = exports.SurfaceArray = function(surfaceOrDimensions) {
     * @param {Number} x
     * @param {Number} y
     * @returns {Array} [red, green, blue, alpha]
-    */   
+    */
    this.get = function(x, y) {
       var offset = (x * 4) + (y * size[0] * 4);
       return [
@@ -90,7 +90,7 @@ var SurfaceArray = exports.SurfaceArray = function(surfaceOrDimensions) {
     */
    // for jsdoc only
    this.surface = null;
-   
+
    accessors(this, {
       surface: {
          get: function() {
@@ -105,7 +105,7 @@ var SurfaceArray = exports.SurfaceArray = function(surfaceOrDimensions) {
          }
       }
    });
-   
+
    /**
     * constructor
     */
@@ -117,7 +117,7 @@ var SurfaceArray = exports.SurfaceArray = function(surfaceOrDimensions) {
       imageData = gamejs.display.getSurface().context.createImageData(size[0], size[1]);
    } else {
       size = surfaceOrDimensions.getSize();
-      imageData = surfaceOrDimensions.context.getImageData(0, 0, size[0], size[1]);
+      imageData = surfaceOrDimensions.getImageData(0, 0, size[0], size[1]);
    }
    data = imageData.data;
    return this;
