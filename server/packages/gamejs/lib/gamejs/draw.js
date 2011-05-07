@@ -104,9 +104,10 @@ exports.rect = function(surface, color, rect, width) {
    var ctx =surface.context;
    ctx.save();
    ctx.strokeStyle = ctx.fillStyle = color;
-   if (width === undefined || width === 0) {
+   if (isNaN(width) || width === 0) {
       ctx.fillRect(rect.left, rect.top, rect.width, rect.height);
    } else {
+      ctx.lineWidth = width;
       ctx.strokeRect(rect.left, rect.top, rect.width, rect.height);
    }
    ctx.restore();
@@ -120,9 +121,10 @@ exports.arc= function(surface, color, rect, startAngle, stopAngle, width) {
             rect.width/2,
             startAngle * (Math.PI/180), stopAngle * (Math.PI/180), false
          );
-   if (width === undefined || width === 0) {
+   if (isNaN(width) || width === 0) {
       ctx.fill();
    } else {
+      ctx.lineWidth = width;
       ctx.stroke();
    }
    ctx.restore();
