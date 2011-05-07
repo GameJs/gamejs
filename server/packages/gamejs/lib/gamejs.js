@@ -561,10 +561,6 @@ exports.mixer = require('gamejs/mixer');
 /**
  * @ignore
  */
-exports.scene = require('gamejs/scene');
-/**
- * @ignore
- */
 exports.sprite = require('gamejs/sprite');
 /**
  * @ignore
