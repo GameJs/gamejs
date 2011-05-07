@@ -1,43 +1,11 @@
 /**
  * @fileoverview Make synchronous http requests to your game's serverside component.
  *
- * If you have a `server` module in your app that exports a stick web application
- * then that app is started by GameJs. You can send & load objects from the
- * server-side with the  `gamejs.http.load(url)` and `gamejs.http.save(url, object)` functions.
+ * If you have provide a `server.js` module exporiting a stick application and a `package.json`
+ * then GameJs will start those listing for http calls the client-side makes.
  *
- * You will need stick! install it with `ringo-admin`:
- *
- *     ringo-admin install ringo/stick
- *
- *
- * ### Example
- *
- * Server-side in `server.js`:
- *
- *     var {Application} = require('stick');
- *     var {jsonResponse} = require('stick/helpers');
- *
- *     // create & export a stick application
- *     var app = exports.app = Application();
- *     app.configure('params', 'notfound', 'error', 'route');
- *
- *     // route url /foobar to this function
- *     // see stick docu for more info on how to route.
- *     app.get('/foobar', function() {
- *         return jsonResponse({"hello": "world"});
- *     });
- *
- * Client-side:
- *
- *      var response = gamejs.http.load("/foobar");
- *      gamejs.log(response);
- *      // outputs: {"hello": "world"}
- *
- * more on how to write web applications with stick:
- *  * <http://ringojs.org/api/stick/stick/>
- *  * <http://github.com/hns/stick>
- *
- * @see http://ringojs.org/api/stick/stick/
+ * @see example application 'example-http'
+ * @see http://github.com/hns/stick/
  */
 
 /**

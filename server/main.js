@@ -1,7 +1,7 @@
 // stdlib
 var {Application} = require('stick');
-var {Response} = require('ringo/webapp/response');
-var {mimeType} = require("ringo/webapp/mime");
+var response = require('ringo/jsgi/response');
+var {mimeType} = require("ringo/mime");
 var {Server} = require('ringo/httpserver');
 var {join, list} = require('fs');
 var log = require('ringo/logging').getLogger(module.id);
@@ -22,7 +22,7 @@ app.mount('/resources', function(req) {
    var path = join(FS.apps, appId, resourceType, resourcePath);
    var resource = getResource(path);
    if (resource && resource.exists()) {
-      return Response.static(resource, mimeType(path, 'text/plain'));
+      return response.static(resource, mimeType(path, 'text/plain'));
    }
 });
 
@@ -30,11 +30,10 @@ app.mount('/resources', function(req) {
 list(module.resolve(FS.apps)).forEach(function(appId) {
    try {
       var mountPoint = '/server/' + appId;
-      var module = join(FS.apps, appId, 'server').toString();
-      app.mount(mountPoint, require(module));
-      log.info('mounted ', appId, ' @ ', mountPoint);
+      app.mount(mountPoint, require(appId));
+      log.info('Mounted stick application ' + appId);
    } catch (e) {
-      if (e.name != 'JavaException') {
+      if (e.name != 'InternalError') {
          log.error(e);
       }
       return;
@@ -44,6 +43,7 @@ list(module.resolve(FS.apps)).forEach(function(appId) {
 // html & js
 app.mount('/', require('./actions'));
 
+// start server if run as main script
 if (require.main === module) {
-   require('stick/server').main(module.id);
+   require("ringo/httpserver").main(module.id);
 }

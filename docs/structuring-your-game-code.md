@@ -2,7 +2,7 @@ Files your app consists off
 ==============================
 
   * `main.js` called by GameJs to bootstrap your game in the browser in a CommonJs environment
-  * `index.html` (optional) overwrites the usual GameJs template; for example: <https://gist.github.com/753363>
+  * `index.html` (optional) overwrites the usual GameJs template; default is `gamejs/server/templates/app.html`
   * `server.js` (optional) [stick web application](http://github.com/ringo/stick) whose URLs can be requested with `gamejs.http`'s load() and save()`
   * subdirectories of your app:
      * `images`, `sounds`, `json` (optionally) - your resources

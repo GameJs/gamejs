@@ -1,12 +1,12 @@
 /**
  * This server application responds with {text: 'Hello World'} if 'foobar'
  * is loaded.
- * 
- * This file will be executed by the GameJs server! See main.js for the 
+ *
+ * This file will be executed by the GameJs server! See main.js for the
  * client-side part.
  */
 var {Application} = require('stick');
-var {jsonResponse} = require('stick/helpers');
+var response = require('ringo/jsgi/response');
 
 // create & export a stick application
 // for more info on stick see http://github.com/hns/stick
@@ -16,5 +16,5 @@ app.configure('params', 'notfound', 'error', 'route');
 // route url /foobar to this function
 app.get('/foobar', function() {
    // send an object
-   return jsonResponse({"text": "Hello World!"});
+   return response.json({"text": "Hello World!"});
 });

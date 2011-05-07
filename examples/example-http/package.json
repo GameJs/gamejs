@@ -1,0 +1,7 @@
+{
+    "name": "example-http",
+    "version": "0.0.1",
+    "description": "Http example app",
+    "author": "Simon Oberhammer <simon@nekapuzer.at>",
+    "main": "./server.js"
+}

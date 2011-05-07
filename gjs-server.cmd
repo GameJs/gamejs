@@ -1,1 +1,1 @@
-@java -jar "%~dp0\server\ringojs\run.jar" --packages server\packages\  "%~dp0\server\main.js"
+@java -jar "%~dp0\server\ringojs\run.jar" --modules server\packages\ --modules examples\  "%~dp0\server\main.js"

@@ -1,8 +1,27 @@
 var sys = require('system');
 var {get} = require('ringo/httpclient');
 var {join, copyTree, write, copy, exists, makeDirectory} = require('fs');
-var {render} = require('ringo/skin');
 var objects = require('ringo/utils/objects');
+var mustache = require('ringo/mustache');
+
+function render(path, data) {
+   var context = objects.merge({
+      resourceHref: function() {
+         return './';
+      },
+      ajaxHref: function() {
+         return './json/';
+      },
+      rand: function() {
+         return [Math.random() * Date.now(), Math.random() * Date.now()].join('.');
+      },
+      pathToMain: function() {
+         return "./javascript/main.js";
+      }
+   }, data);
+   var template = getResource(path).content;
+   return mustache.to_html(template, context);
+};
 
 var myself = sys.args.shift();
 var appName = sys.args[0];
@@ -29,10 +48,10 @@ var appJsUrl = GAMEJS_SERVER + '/lib/' + appName + '/main.js';
 
 // render index.html
 var appSpecific = join(appDirectory, 'index.html');
-var indexHtml = render(exists(appSpecific) ? appSpecific : module.resolve('skins/app.html'), objects.merge({
-   appName: appName,
-   statifier: true,
-}, require('./statify/macros')));
+var template = exists(appSpecific) ? appSpecific : module.resolve('templates/app.html');
+var indexHtml = render(template, objects.merge({
+   appId: appName,
+}));
 write(join(destinationDirectory, 'index.html'), indexHtml);
 
 // download & copy main.js

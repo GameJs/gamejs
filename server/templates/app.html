@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>gamejs.org</title>
+   <title>{{appId}} - gamejs.org</title>
 <link rel="icon" type="image/x-icon"
 href="data:image/x-icon;base64,	AAABAAEAEBAAAAAAAABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAEAAAAAAAAAAAAAAAEA
 AAAAAAAAAAAAsXf/ALB6WABn1fAAa2/+AG3MUADdm9kA67BgALLr0ABzqv8AAAAAAAAAAAAAAAAA
@@ -31,17 +31,30 @@ AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAD//wAA//8AAMRHAADERwAAxEcAAP//
 AADERwAAxEcAAMRHAAD//wAAxEcAAMRHAADERwAA//8AAP//AAA=">
 
 <style type=text/css>
-/*dive into minimalism(c)2008 Mark Pilgrim,MIT-licensed including graphics; modified by simon@nekapuzer.at 2010*/
-html{background:white;color:black;margin:0em;padding:1em;text-align:center;}
-body{font:1em medium 'Gill Sans','Gill Sans MT','Goudy Bookletter 1911','Linux Libertine O','Liberation Serif',Candara,serif;margin:0em;padding:0em;color:#503e2b}
-h1,h2,h3{font-size:1.4em}
-h1,h2{background-color:#cccccc;}
-canvas {border:5px solid #4c594c;}
+body{
+   font-family: "Lucida Grande","Lucida Sans Unicode",sans-serif;
+   background:#fff;
+   color:#222;
+   line-height:140%;
+   margin:1em 0 2em 6em;
+   padding:0;
+}
 </style>
-	<% render header %>
-	<% render head %>
+<script>
+   var $g = {};
+   $g.appId = '{{appId}}';
+   $g.resourceBaseHref = '{{resourceHref}}';
+   $g.ajaxBaseHref = '{{ajaxHref}}';
+</script>
+<script src="{{pathToMain}}/main.js?rnd={{rand}}"></script>
 </head>
 <body>
-   <% render content %>
+ <div>
+      <canvas id="jsgamecanvas"></canvas>
+      <h3> {{appId}} </h3>
+      <p>
+         Powered by <a href="http://gamejs.org">GameJs</a>.
+      </p>
+   </div>
 </body>
 </html>
