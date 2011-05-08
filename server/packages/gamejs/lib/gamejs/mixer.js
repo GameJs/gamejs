@@ -27,24 +27,28 @@ exports.init = function() {
 /**
  * Preload the audios into cache
  * @param {String[]} List of audio URIs to load
+ * @returns {Function} which returns 0-1 for preload progress
  * @ignore
  */
 exports.preload = function(audioUrls, showProgressOrImage) {
-   var TOTAL_SOUNDS = 0;
+   var countTotal = 0;
    var countLoaded = 0;
 
-   var incrementLoaded = function() {
+   function incrementLoaded() {
       countLoaded++;
-      if (countLoaded == TOTAL_SOUNDS) {
+      if (countLoaded == countTotal) {
          _PRELOADING = false;
       }
    };
+   function getProgress() {
+      return countTotal > 0 ? countLoaded / countTotal : 1;
+   }
 
    for (var key in audioUrls) {
       if (key.indexOf('wav') == -1 && key.indexOf('ogg') == -1 && key.indexOf('webm') == -1) {
          continue;
       }
-      TOTAL_SOUNDS++;
+      countTotal++;
       var audio = new Audio();
       audio.addEventListener('canplay', function() {
          addToCache(this);
@@ -60,10 +64,10 @@ exports.preload = function(audioUrls, showProgressOrImage) {
       audio.gamejsKey = key;
       audio.load();
    }
-   if (TOTAL_SOUNDS > 0) {
+   if (countTotal > 0) {
       _PRELOADING = true;
    }
-   return;
+   return getProgress;
 };
 
 /**

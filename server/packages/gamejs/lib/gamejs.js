@@ -601,23 +601,31 @@ var RESOURCES = {};
  * @name ready
  */
 exports.ready = function(readyFn) {
+
+   var getMixerProgress = null;
+   var getImageProgress = null;
+
+   // 1.
+   window.setTimeout(_ready, 13);
+
    // 2.
-   var _ready = function() {
+   function _ready() {
       if (!document.body) {
-         return window.setTimeout(_ready, 13);
+         return window.setTimeout(_ready, 50);
       }
-      gamejs.image.preload(RESOURCES);
+      getImageProgress = gamejs.image.preload(RESOURCES);
       try {
-         gamejs.mixer.preload(RESOURCES);
+         getMixerProgress = gamejs.mixer.preload(RESOURCES);
       } catch (e) {
-         gamejs.debug('Error loading image files ', e);
+         gamejs.debug('Error loading audio files ', e);
       }
-      window.setTimeout(_readyResources, 13);
+      window.setTimeout(_readyResources, 50);
    }
+
    // 3.
-   var _readyResources = function() {
-      if (gamejs.image.isPreloading() || gamejs.mixer.isPreloading()) {
-         return window.setTimeout(_readyResources, 13);
+   function _readyResources() {
+      if (getImageProgress() < 1 || getMixerProgress() < 1) {
+         return window.setTimeout(_readyResources, 100);
       }
       gamejs.time.init();
       gamejs.display.init();
@@ -627,9 +635,14 @@ exports.ready = function(readyFn) {
       readyFn();
    }
 
-   // 1.
-   window.setTimeout(_ready, 13);
-   return;
+   function getLoadProgress() {
+      if (getImageProgress) {
+         return (0.5 * getImageProgress()) + (0.5 * getMixerProgress());
+      }
+      return 0.1;
+   };
+
+   return getLoadProgress;
 };
 
 /**

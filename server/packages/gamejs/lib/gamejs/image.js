@@ -11,7 +11,7 @@ var gamejs = require('gamejs');
  */
 
 var CACHE = {};
-var TOTAL_IMGS = 0;
+
 /**
  * need to export preloading status for require
  * @ignore
@@ -73,26 +73,33 @@ exports.init = function() {
 
 /**
  * preload the given img URIs
+ * @returns {Function} which returns 0-1 for preload progress
  * @ignore
  */
 exports.preload = function(imgIdents) {
 
    var countLoaded = 0;
+   var countTotal = 0;
 
-   var incrementLoaded = function() {
+   function incrementLoaded() {
       countLoaded++;
-      if (countLoaded == TOTAL_IMGS) {
+      if (countLoaded == countTotal) {
          _PRELOADING = false;
       }
       if (countLoaded % 10 == 0) {
-         gamejs.log('loaded  ' + countLoaded + ' of ' + TOTAL_IMGS);
+         gamejs.log('gamejs.image: preloaded  ' + countLoaded + ' of ' + countTotal);
       }
    };
+
+   function getProgress() {
+      return countTotal > 0 ? countLoaded / countTotal : 1;
+   }
    for (var key in imgIdents) {
-      if (key.indexOf('png') == -1 && key.indexOf('jpg') == -1 && key.indexOf('gif') == -1) {
+      if (key.indexOf('png') == -1 &&
+            key.indexOf('jpg') == -1 &&
+            key.indexOf('gif') == -1) {
          continue;
       }
-      TOTAL_IMGS++;
       var img = new Image();
       img.addEventListener('load',function() {
          addToCache(this);
@@ -106,19 +113,13 @@ exports.preload = function(imgIdents) {
       }, true);
       img.src = imgIdents[key];
       img.gamejsKey = key;
+      countTotal++;
    }
-   if (TOTAL_IMGS > 0) {
+   if (countTotal > 0) {
       _PRELOADING = true;
    }
-   return;
+   return getProgress;
 };
-
-/**
- * @ignore
- */
-exports.isPreloading = function() {
-   return _PRELOADING;
-}
 
 /**
  * add the given <img> dom elements into the cache.
