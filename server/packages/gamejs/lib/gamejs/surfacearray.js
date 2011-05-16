@@ -17,8 +17,7 @@ var accessors = require('gamejs/utils/objects').accessors;
  *
  * Directly copy values from an array into a Surface.
  *
- * This is faster than using SurfaceArray.image to convert into a Surface
- * and then blitting.
+ * This is faster than blitting the `surface` property on a SurfaceArray
  *
  * The array must be the same dimensions as the Surface and will completely
  * replace all pixel values.
@@ -50,7 +49,7 @@ var SurfaceArray = exports.SurfaceArray = function(surfaceOrDimensions) {
     *
     * @param {Number} x x position of pixel
     * @param {Number} y y position of pixel
-    * @param {Array} rgba [red, green, blue, alpha] values [255, 255, 255, 1] (alpha, last argument: defaults to 0)
+    * @param {Array} rgba [red, green, blue, alpha] values [255, 255, 255, 255] (alpha, the last argument defaults to 255)
     * @throws Error if x, y out of range
     */
    this.set = function(x, y, rgba) {
@@ -63,7 +62,7 @@ var SurfaceArray = exports.SurfaceArray = function(surfaceOrDimensions) {
       data[offset] = rgba[0];
       data[offset+1] = rgba[1];
       data[offset+2] = rgba[2];
-      data[offset+3] = rgba[3] ||  255;
+      data[offset+3] = rgba[3] === undefined ? 255 : rgba[3];
       return;
    };
 
@@ -106,6 +105,10 @@ var SurfaceArray = exports.SurfaceArray = function(surfaceOrDimensions) {
       }
    });
 
+   this.getSize = function() {
+      return size;
+   };
+
    /**
     * constructor
     */
@@ -115,10 +118,10 @@ var SurfaceArray = exports.SurfaceArray = function(surfaceOrDimensions) {
    if (surfaceOrDimensions instanceof Array) {
       size = surfaceOrDimensions;
       imageData = gamejs.display.getSurface().context.createImageData(size[0], size[1]);
+      data = imageData.data;
    } else {
       size = surfaceOrDimensions.getSize();
-      imageData = surfaceOrDimensions.getImageData(0, 0, size[0], size[1]);
+      data = imageData = surfaceOrDimensions.getImageData(0, 0, size[0], size[1]);
    }
-   data = imageData.data;
    return this;
 };
