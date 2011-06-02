@@ -1,7 +1,7 @@
 GameJs
 =======
 
-GameJs is a JavaScript library for writing 2D games or other interactive graphic applications for the HTML Canvas. Its API is modeled after the successful PyGame library <http://pygame.org>.
+GameJs is a JavaScript library for writing 2D games or other interactive graphic applications for the HTML Canvas <http://gamejs.org>. Its API is modeled after the successful PyGame library <http://pygame.org>.
 
 GameJs comes with a development server to make it easier to write your software as CommonJs modules <http://ringojs.org/wiki/Modules_in_RingoJS>. Optionally, you can ditch the server and let a loader like Yabble deal with the CommonJs requirements <https://github.com/jbrantly/yabble>.
 
