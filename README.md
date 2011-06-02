@@ -33,6 +33,13 @@ Option 2: Static files
 
 Your `index.html` only loads `yabble.js` and calls your entry point `javascript/main.js` module:
 
+    <script>
+     // GameJs globals
+     var $g = {
+       resourceBaseHref: './',
+       ajaxBaseHref: './json/'
+     };
+    </script>
     <script src="yabble/lib/yabble.js"></script>
     <script>
        require.setModuleRoot('./javascript');
