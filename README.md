@@ -1,21 +1,16 @@
 GameJs
 =======
 
-GameJs is a JavaScript library for writing 2D games or other interactive graphic applications for the HTML Canvas. Its API is modeled after the successful PyGame <http://pygame.org> library.
+GameJs is a JavaScript library for writing 2D games or other interactive graphic applications for the HTML Canvas. Its API is modeled after the successful PyGame library <http://pygame.org>.
 
-  * Powerful, proven, and thin abstraction for 2D
-  * Sane JavaScript! With CommonJs support
-  * Runs in modern browsers
-  * optional server-side integration with RingoJs <http://ringojs.org>
-
-The API will change though it will converge to a sensible translation of PyGame concepts to JavaScript.
+GameJs comes with a development server to make it easier to write your software as CommonJs modules <http://ringojs.org/wiki/Modules_in_RingoJS>. Optionally, you can ditch the server and let a loader like Yabble deal with the CommonJs requirements <https://github.com/jbrantly/yabble>.
 
 Install
 ========
 
-If you downloaded a release just unzip the files.
+If you downloaded a release just unzip the files. Read more in section 'Usage'.
 
-Developer Version
+Install Developer Version
 ----------------------------------
 
 You need:
@@ -40,12 +35,15 @@ Compile RingoJs:
 
     ant -f ./server/ringojs/build.xml jar
 
-You should now be able to start the GameJs server.
+Read more in section 'Usage'.
 
 Usage
 =========
 
-You need Java 1.5+.
+Option 1: GameJs Dev Server
+----------------------------
+
+You need Java 1.5+
 
 Start the GameJs web server with:
 
@@ -57,18 +55,20 @@ And view the dashboard in your browser:
 
 Several links to the example apps should show up. The source to those apps is in the `examples` directory of your GameJs installation.
 
-Static Deployment
-=================
+Option 2: Static files
+------------------------
 
-You can deploy your game as plain HTML and JavaScript using the following:
+Your `index.html` only loads `yabble.js` and calls your entry point `javascript/main.js` module:
 
-    gjs-statify.sh <app> <output-directory>
+    <script src="yabble/lib/yabble.js"></script>
+    <script>
+       require.setModuleRoot('./javascript');
+       require.run('main')
+    <script>
 
-For example, to deploy one of the example apps:
+You must download the Yabble project yourself from <https://github.com/jbrantly/yabble>.
 
-    gjs-statify.sh example-draw /var/www/games/foo
-
-**Note:** You lose the ability to use the gamejs.http module with static deployment as it requires server-side scripts!
+Additionally you must copy (or better: alias or symlink) all the GameJs JavaScript files from `server/packages/gamejs/lib/*` into the project's `./javascript/` directory.
 
 API documentation
 ===================
@@ -81,10 +81,16 @@ The API docs are created with the `ringo-doc` command. Issue this inside your Ga
 
 This will write the API docs to `docs/api/`. This directory must be empty.
 
-Retarded Edition
-==================
+GameJs Dev Server - Static Deployment
+=======================================
 
-Only recommended for demonstration purposes. More infos in the help file 'docs/retarted-edition' <https://github.com/oberhamsi/gamejs/blob/master/docs/retarded-edition.md>
+You can deploy your games as plain HTML and JavaScript, even when using the GameJs Development server with the `gjs-statify` command:
+
+    gjs-statify.sh <app> <output-directory>
+
+For example, to deploy one of the example apps:
+
+    gjs-statify.sh example-draw /var/www/games/foo
 
 More Help
 ===========
