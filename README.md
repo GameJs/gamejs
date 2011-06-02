@@ -8,34 +8,7 @@ GameJs comes with a development server to make it easier to write your software 
 Install
 ========
 
-If you downloaded a release just unzip the files. Read more in section 'Usage'.
-
-Install Developer Version
-----------------------------------
-
-You need:
-
-  * Java 1.5+
-  * git and ant
-
-Clone the GameJs repository:
-
-    git clone git://github.com/oberhamsi/gamejs.git
-
-Change into the GameJs directory
-
-    cd gamejs
-
-Get all needed submodules with git:
-
-    git submodule init
-    git submodule update
-
-Compile RingoJs:
-
-    ant -f ./server/ringojs/build.xml jar
-
-Read more in section 'Usage'.
+If you downloaded a release just unzip the files. If you choose the git version see 'Install Developer Version'.
 
 Usage
 =========
@@ -100,3 +73,30 @@ Check the `docs` folder of your GameJs installation.
 A couple of example apps can be found in the `examples` directory.
 
 See the [GameJs Website](http://gamejs.org) for more help or drop us an email in the [Mailing List](http://groups.google.com/group/gamejs).
+
+Install Developer Version
+============================
+
+You need:
+
+  * Java 1.5+
+  * git and ant
+
+Clone the GameJs repository:
+
+    git clone git://github.com/oberhamsi/gamejs.git
+
+Change into the GameJs directory
+
+    cd gamejs
+
+Get all needed submodules with git:
+
+    git submodule init
+    git submodule update
+
+Compile RingoJs:
+
+    ant -f ./server/ringojs/build.xml jar
+
+Read more in section 'Usage'.
