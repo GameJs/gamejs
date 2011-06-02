@@ -8,7 +8,7 @@ GameJs comes with a development server to make it easier to write your software 
 Install
 ========
 
-If you downloaded a release just unzip the files. If you choose the git version see 'Install Developer Version'.
+If you downloaded a release just unzip the files. If you chose the git version see 'Install Developer Version'.
 
 Usage
 =========
