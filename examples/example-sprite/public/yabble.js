@@ -562,5 +562,7 @@
 	// Export to the require global
 	window.require = Yabble;
 })(function(code) {
-	return (window.eval || eval)(code, null);
+   with (window) {
+      return eval(code);
+   };
 });
