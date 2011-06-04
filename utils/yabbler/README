@@ -1,0 +1,76 @@
+A general purpose browser-side CommonJS module loader 
+
+Yabble is a general purpose browser-side CommonJS module loader. Other similar module loaders are available, but Yabble strives to be a flexible loader in a small package.
+
+To see live unit tests, visit:
+http://jbrantly.github.com/yabble/test/index.html
+
+To see an overview of the goals, visit:
+http://blog.jbrantly.com/2010/04/introducing-yabble.html
+
+Features:
+ * Compliant with Modules 1.1.1
+ * Supports async XHR/eval()
+   - Allows the use of non-transport-wrapped module code for quick development
+ * Supports script tags with a Transport format
+   - Easier debugging, potential for file concatenation
+   - Supports Transport/D and Transport/C
+ * Supports require.ensure() for lazy-loading modules
+ * Passes unit tests on YUI's A-grade browsers
+ * Includes a tool for automatically wrapping modules in a Transport format
+ * Small size (<600 lines, ~15kb raw, ~5kb minified, and ~2kb when minified/gzipped)
+
+Roadmap:
+ * Stability
+   - Even more cross-browser testing
+   - More unit tests for Async/A
+ * Features
+   - Async/A error handling once its decided (maybe before)
+   - Tested support for loading from another domain (it may work now..)
+ * Documentation
+ * Tooling
+   - Currently under-developed. Not recommended to use.
+   - Use loader code in tooling (no copy/paste code)
+   - Explicit support for concatenated Transport files tooling (loader should already support)   
+   - Expand supported engines for tooling (node.js)
+   - Better consideration for platform (line endings, encoding, etc)
+
+Usage:
+
+require.setModuleRoot(path)
+
+   Use this to configure the root path to find modules. Think of this as a 
+   single entry in require.paths.
+
+require.useScriptTags()
+
+   The default behavior is to use XHR+eval() and expects unwrapped modules. Call this method
+   to configure Yabble to use script tags and expect wrapped modules.
+    
+require.run(programId)
+
+   This kicks off an application using the specified module ID.
+   
+require.ensure(dependencies, callback)
+
+   See Async/A for more details. Can be used to retrieve modules and run code without using
+   require.run().
+
+See unit tests for example usage.
+
+Changelog:
+
+v0.3.0 (2010-04-18)
+	- Restructured to use Packages/1.0
+
+v0.2.0 (2010-04-14)
+	- Now using QUnit for unit tests
+	- Added support for Modules 1.1.1 plus unit tests
+	- Finished support for Transport/D plus unit tests
+	- Added support for Transport/C plus unit tests
+	- Added unit tests for Async/A and fixed bugs
+	- Added unit tests for resolveModuleId and determineShallowDependencies
+
+v0.1.0 (2010-04-12)
+	- Initial commit
+
