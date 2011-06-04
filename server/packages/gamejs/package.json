@@ -1,8 +1,0 @@
-{
-    "name": "gamejs",
-    "version": "0.0.1",
-    "description": "Game library for the HTML canvas.",
-    "keywords": ["commonjs", "browser", "graphics", "interactive"],
-    "author": "Simon Oberhammer <simon@nekapuzer.at>",
-    "main": "./lib/gamejs.js"
-}

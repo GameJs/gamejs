@@ -1,0 +1,34 @@
+<html>
+<head>
+    <title>GameJS Application</title>
+<!-- Styling -->
+    <style type=text/css>
+        body{
+           background:#fff;
+           color:#222;
+           margin:1em 0 2em 6em;
+           padding:0;
+        }
+        #gjs-loader {
+            width: 50%;
+            height: 50%;
+        }
+    </style>
+<!-- Boilerplate -->
+    <script src="./public/yabble.js"></script>
+    <script src="./public/gamejs-wrapped.js"></script>
+    <script>
+        require.setModuleRoot('./javascript/');
+        require.run('main')
+    </script>
+</head>
+<body>
+    <div>
+        <img id="gjs-loader" src="./public/ajax-loader.gif">
+        <canvas id="gjs-canvas"></canvas>
+        <p>
+        Powered by <a href="http://gamejs.org">GameJs</a>.
+        </p>
+    </div>
+</body>
+</html>

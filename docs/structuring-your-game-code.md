@@ -1,21 +1,3 @@
-Files your app consists off
-==============================
-
-  * `main.js` called by GameJs to bootstrap your game in the browser in a CommonJs environment
-  * `index.html` (optional) overwrites the usual GameJs template; default is `gamejs/server/templates/app.html`
-  * `server.js` (optional) [stick web application](http://github.com/ringo/stick) whose URLs can be requested with `gamejs.http`'s load() and save()`
-  * subdirectories of your app:
-     * `images`, `sounds`, `json` (optionally) - your resources
-     * `javascript`, `data` - reserved directories
-     * other folders - holding CommonJs modules used by your game
-
-You game code can `require()` modules:
-
-   * from GameJs
-   * any CommonJs compatible module you created in  your app directory (or any subdirectory)
-   * modules from packages you installed with `ringo-admin install` (lots of CommonJs modules but not a lot of them run in the browser)
-   * [any RingoJs module](http://ringojs.org/api/master/) (currently only ringo.utils.* useful & work in browser)
-
 How can I divide my code into various files / modules?
 ========================================================
 
