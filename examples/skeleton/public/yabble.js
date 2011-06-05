@@ -302,7 +302,7 @@
 		};
 
 		var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-		xhr.open('GET', resolveModuleUri(moduleId), true);
+		xhr.open('GET', resolveModuleUri(moduleId) + '?rnd=' + (9999999 * Math.random()), true);
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState === 4) {
 				clearTimeout(timeoutHandle);

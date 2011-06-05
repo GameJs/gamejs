@@ -3,7 +3,10 @@
 
 TEMP_WORKING=/tmp/gjs-wrapped/
 EXEC_YABBLER="java -jar ./utils/rhino/js.jar ./utils/yabbler/yabbler.js"
-EXEC_CLOSURE="java -jar ./utils/closure-compiler/compiler.jar --jscomp_warning=internetExplorerChecks"
+EXEC_CLOSURE="cat"
+if [ "$1" = "compress" ] ; then
+   EXEC_CLOSURE="java -jar ./utils/closure-compiler/compiler.jar --jscomp_warning=internetExplorerChecks"
+fi
 
 mkdir -p ${TEMP_WORKING}
 rm -rf ${TEMP_WORKING}/*
