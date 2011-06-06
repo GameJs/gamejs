@@ -302,7 +302,8 @@
 		};
 
 		var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
-		xhr.open('GET', resolveModuleUri(moduleId) + '?rnd=' + (9999999 * Math.random()), true);
+		var moduleUri = resolveModuleUri(moduleId);
+		xhr.open('GET', moduleUri + '?rnd=' + (9999999 * Math.random()), true);
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState === 4) {
 				clearTimeout(timeoutHandle);
@@ -314,8 +315,17 @@
 					for (var i = deps.length; i--;) {
 						deps[i] = resolveModuleId(deps[i], moduleDir);
 					}
-
-					moduleDefs[moduleId] = globalEval('({fn: function(require, exports, module) {\r\n' + moduleCode + '\r\n}})').fn;
+               try {
+   					moduleDefs[moduleId] = globalEval('({fn: function(require, exports, module) {\r\n' + moduleCode + '\r\n}})').fn;
+					} catch (e) {
+					   if (e instanceof SyntaxError) {
+                     console.log('Syntax error: line', e.lineNumber - 576, ' in file', moduleUri);
+                     if (!e.lineNumber) {
+					         console.log('GameJs: Use Firefox and/or Firebug for better debugging of syntax errors.');
+                     }
+                  }
+				      throw e;
+					}
 
 					Yabble.define(moduleDefs, deps);
 				}
