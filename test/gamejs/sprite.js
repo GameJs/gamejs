@@ -1,4 +1,6 @@
 var sprite = require('../../lib/gamejs/sprite');
+var gamejs = require('../../lib/gamejs');
+
 var assert = require('assert');
 
 exports.testSpriteConstructor = function() {
@@ -59,4 +61,22 @@ exports.testSpriteGroup = function() {
       group.remove(sp);
       assert.isFalse(group.has(sp));
    }
+};
+
+exports.testSpriteCollisions = function() {
+   var a = new sprite.Sprite();
+   a.rect = new gamejs.Rect([0, 0], [10, 10]);
+   var b = new sprite.Sprite();
+   b.rect = new gamejs.Rect([10, 10], [10, 10]);
+
+   assert.isTrue(gamejs.sprite.collideCircle(a, b));
+
+   a.radius = 4;
+   b.radius = 4;
+   assert.isFalse(gamejs.sprite.collideCircle(a, b));
+
+   a.radius = 5;
+   b.radius = 5;
+   assert.isTrue(gamejs.sprite.collideCircle(a, b));
+
 };
