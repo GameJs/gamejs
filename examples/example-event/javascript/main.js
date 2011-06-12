@@ -63,7 +63,7 @@ function main() {
 
       // draw sparkles
       display.fill('#000000');
-      display.blit(instructionFont.render('Move mouse. Press Cursor up.', '#ffffff'));
+      display.blit(instructionFont.render('Move mouse. Press Cursor up.', '#ffffff'), [20, 20]);
       sparkles.forEach(function(sparkle) {
          starImage.setAlpha(sparkle.alpha);
          display.blit(starImage, [sparkle.left, sparkle.top]);
