@@ -31,7 +31,7 @@
 
 	Yabble.unit = {};
 
-	var _moduleRoot = [],
+	var _moduleRoot = '',
 		_modules,
 		_callbacks,
 		_fetchFunc,
@@ -303,11 +303,11 @@
 
 		var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
 		var moduleUri = resolveModuleUri(moduleId);
-		xhr.open('GET', moduleUri + '?rnd=' + (9999999 * Math.random()), true);
+		xhr.open('GET', moduleUri, true);
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState === 4) {
 				clearTimeout(timeoutHandle);
-				if (xhr.status == 200) {
+				if (xhr.status == 200 || xhr.status === 0) {
 					var moduleCode = xhr.responseText,
 						deps = determineShallowDependencies(moduleCode),
 						moduleDir = moduleId.substring(0, moduleId.lastIndexOf('/')+1),
@@ -315,16 +315,20 @@
 					for (var i = deps.length; i--;) {
 						deps[i] = resolveModuleId(deps[i], moduleDir);
 					}
-               try {
-   					moduleDefs[moduleId] = globalEval('({fn: function(require, exports, module) {\r\n' + moduleCode + '\r\n}})').fn;
+					try {
+						moduleDefs[moduleId] = globalEval('({fn: function(require, exports, module) {\r\n' + moduleCode + '\r\n}})').fn;
 					} catch (e) {
-					   if (e instanceof SyntaxError) {
-                     console.log('Syntax error: line', e.lineNumber - 576, ' in file', moduleUri);
-                     if (!e.lineNumber) {
-					         console.log('GameJs: Use Firefox and/or Firebug for better debugging of syntax errors.');
-                     }
-                  }
-				      throw e;
+						if (e instanceof SyntaxError) {
+							var msg = 'Syntax Error: ';
+							if (e.lineNumber) {
+								msg += 'line ' + e.lineNumber;
+							} else {
+								console.log('GameJs tip: use Firefox to see line numbers in Syntax Errors.');
+							}
+							msg += ' in file ' + moduleUri;
+							console.log(msg);
+						}
+						throw e;
 					}
 
 					Yabble.define(moduleDefs, deps);
