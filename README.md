@@ -12,7 +12,7 @@ Usage
 
 See `examples/skeleton/` directory for a minimal GameJs app.
 
-**Note** that you need to run the examples via `http://` (not `file://`).
+**Note** that you need to run the examples via `http://` (not `file://`) unless you use Firefox or Safari.
 
 GameJs Development
 =====================================
