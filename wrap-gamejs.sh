@@ -1,6 +1,9 @@
 #!/bin/bash
 # Creates ./gamejs-wrapped.js file for game use
 
+GAMEJS_DIR="${0%/*}"
+cd ${GAMEJS_DIR}
+
 TEMP_WORKING=/tmp/gjs-wrapped/
 EXEC_YABBLER="java -jar ./utils/rhino/js.jar ./utils/yabbler/yabbler.js"
 EXEC_CLOSURE="cat"
