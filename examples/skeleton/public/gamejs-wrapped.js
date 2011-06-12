@@ -117,9 +117,7 @@ function normalizeRectArguments() {
  * new Rect([left, top], [width, height])
  * new Rect(oldRect) clone of oldRect is created
  *
- * @property {Number} left
  * @property {Number} right
- * @property {Number} top
  * @property {Number} bottom
  * @property {Number} center
  *
@@ -146,14 +144,12 @@ var Rect = exports.Rect = function() {
 
    /**
     * Width of rectangle
-    * @name Rect.prototype.width
     * @type Number
     */
    this.width = args.width;
 
    /**
     * Height of rectangle
-    * @name Rect.prototype.height
     * @type Number
     */
    this.height = args.height;
@@ -752,11 +748,20 @@ require.define({
  * you would put into your main loop and pass that to `fpsCallback()`:
  *
  * @example
- * function main() {
- *     // update models
- *     // draw to screen
- *  };
- *  gamejs.time.fpsCallback(main, this, 30);
+ *     function main() {
+ *         // update models
+ *         // draw to screen
+ *      };
+ *      gamejs.time.fpsCallback(main, this, 30);
+ *      ;
+ *      function aiUpdate() {
+ *         // do stuff that needs low update rates
+ *      }
+ *      gamejs.time.fpsCallback(aiUpdate, this, 10);
+ *
+ * You are encouraged to use multiple `fpsCallbacks()` for the different
+ * kind of update rates you need, e.g. one at 30 fps for rendering and
+ * another at 10 fps for the AI updates.
  *
  */
 
@@ -871,8 +876,17 @@ exports.fromSurface = function(surface, threshold) {
  *
  */
 var Mask = exports.Mask = function(dims) {
+   /**
+    * @ignore
+    */
    this.width = dims[0];
+   /**
+    * @ignore
+    */
    this.height = dims[1];
+   /**
+    * @ignore
+    */
    this._bits = [];
    for (var i=0;i<this.width;i++) {
       this._bits[i] = [];
@@ -1064,12 +1078,11 @@ var display = require('./display');
 var gamejs = require('../gamejs');
 
 /**
- * @fileoverview Methods for polling mouse, keyboard and ntwork;
+ * @fileoverview Methods for polling mouse and keyboard.
  *
  * Call get() in your main loop to get a list of events that happend since you last called.
  *
- *
- * A pattern for using this might look like so: your main game function (tick in this example)
+ * A pattern for using the event loop : your main game function (tick in this example)
  * is being called by [gamejs.time.fpsCallback()](../time/#fpsCallback) 25 times per second.
  * Inside tick we call [gamejs.event.get()](#get) for a list of events that happened since the last
  * tick and we loop over each event and act on the event properties.
@@ -1083,6 +1096,9 @@ var gamejs = require('../gamejs');
  *        }
  *     });
  *
+ * Note that some events, which would trigger a default browser action, are prevented
+ * from triggering their default behaviour; i.e. event.preventDefault() is called
+ * on those specific events, not on all events.
  */
 // key constants
 exports.K_UP = 38;
@@ -1340,7 +1356,7 @@ require.define({
 
 /**
  * @param {gamejs.Surface} surface the Surface to draw on
- * @param {String} a valid #RGB string, e.g., "#ff0000"
+ * @param {String} color valid #RGB string, e.g., "#ff0000"
  * @param {Array} startPos [x, y] position of line start
  * @param {Array} endPos [x, y] position of line end
  * @param {Number} width of the line, defaults to 1
@@ -1397,7 +1413,7 @@ exports.lines = function(surface, color, closed, pointlist, width) {
  * @param {gamejs.Surface} surface the Surface to draw on
  * @param {String} color a valid #RGB String, #ff00cc
  * @param {Array} pos [x, y] position of the circle center
- * @param {Number} radious of the circle
+ * @param {Number} radius of the circle
  * @param {Number} width width of the circle, if not given or 0 the circle is filled
  */
 exports.circle = function(surface, color, pos, radius, width) {
@@ -1513,12 +1529,12 @@ exports.init = function() {
  * Set the width and height of the Display. Conviniently this will
  * return the actual display Surface - the same as calling [gamejs.display.getSurface()](#getSurface))
  * later on.
- * @param {Array} [width, height] of the display surface
+ * @param {Array} dimensions [width, height] of the display surface
  */
-exports.setMode = function(rect) {
+exports.setMode = function(dimensions) {
    var canvas = getCanvas();
-   canvas.width = rect[0];
-   canvas.height = rect[1];
+   canvas.width = dimensions[0];
+   canvas.height = dimensions[1];
    return getSurface();
 };
 
@@ -1585,6 +1601,7 @@ var accessors = require('./utils/objects').accessors;
  * @fileoverview Fast pixel access.
  *
  * @example
+ *
  *   // create array from display surface
  *   var srfArray = new SurfaceArray(display);
  *   // direct pixel access
@@ -1595,7 +1612,6 @@ var accessors = require('./utils/objects').accessors;
  */
 
 /**
- *
  * Directly copy values from an array into a Surface.
  *
  * This is faster than blitting the `surface` property on a SurfaceArray
@@ -1713,11 +1729,26 @@ require.define({
 /**
  * @fileoverview Make synchronous http requests to your game's serverside component.
  *
- * If you have provide a `server.js` module exporiting a stick application and a `package.json`
- * then GameJs will start those listing for http calls the client-side makes.
+ * If you configure a ajax base URL you can make http requests to your
+ * server using those functions.
+
+ * The most high-level functions are `load()` and `save()` which take
+ * and return a JavaScript object, which they will send to / recieve from
+ * the server-side in JSON format.
  *
- * @see example application 'example-http'
- * @see http://github.com/hns/stick/
+ *     <script>
+ *     // Same Origin policy applies! You can only make requests
+ *     // to the server from which the html page is served.
+ *      var $g = {
+ *         ajaxBaseHref: "http://the-same-server.com/ajax/"
+ *      };
+ *      </script>
+ *      <script src="./public/gamejs-wrapped.js"></script>
+ *      ....
+ *      typeof gamejs.load('userdata/') === 'object'
+ *      typeof gamejs.get('userdata/') === 'string'
+ *      ...
+ *
  */
 
 /**
@@ -1731,7 +1762,7 @@ require.define({
  */
 exports.Response = function() {
    /**
-    * @param {String} header;
+    * @param {String} header
     */
    this.getResponseHeader = function(header)  {
    };
@@ -1751,7 +1782,7 @@ var ajax = exports.ajax = function(method, url, data, type) {
    var response = new XMLHttpRequest();
    response.open(method, url, false);
    if (type) {
-      response.setRequestHeader("Accept", type );
+      response.setRequestHeader("Accept", type);
    }
    if (data instanceof Object) {
       data = JSON.stringify(data);
@@ -2091,18 +2122,19 @@ exports.spriteCollide = function(sprite, group, doKill, collided) {
  * collided
  * @param {Boolean} doKillB If true, kill sprites in the second group when
  * collided
+ * @param {function} collided Collision function to use, defaults to `gamejs.sprite.collideRect`
  * @returns {Array} A list of objects where properties 'a' and 'b' that
  * correspond with objects from the first and second groups
  */
-exports.groupCollide = function(groupA, groupB, doKillA, doKillB) {
+exports.groupCollide = function(groupA, groupB, doKillA, doKillB, collided) {
    var doKillA = doKillA || false;
    var doKillB = doKillB || false;
 
    var collideList = [];
-
+   var collideFn = collided || collideRect;
    groupA.sprites().forEach(function(groupSpriteA) {
       groupB.sprites().forEach(function(groupSpriteB) {
-         if (collideRect(groupSpriteA, groupSpriteB)) {
+         if (collideFn(groupSpriteA, groupSpriteB)) {
             if (doKillA) groupSpriteA.kill();
             if (doKillB) groupSpriteB.kill();
 
@@ -2145,6 +2177,23 @@ exports.collideMask = function(spriteA, spriteB) {
       spriteB.rect.top - spriteA.rect.top
    ];
    return spriteA.mask.overlap(spriteB.mask, offset);
+};
+
+/**
+ * Collision detection between two sprites using circles at centers.
+ * There sprite property `radius` is used if present, otherwise derived from bounding rect.
+ * @param {gamejs.sprite.Sprite} spriteA First sprite to check
+ * @param {gamejs.sprite.Sprite} spriteB Second sprite to check
+ * @returns {Boolean} True if they collide, false otherwise
+ */
+exports.collideCircle = function(spriteA, spriteB) {
+   var distance = spriteA.rect.center[0] * spriteA.rect.center[0] + spriteA.rect.center[1] * spriteA.rect.center[1];
+   var radiusA = spriteA.radius * spriteA.radius ||
+            (spriteA.rect.width*spriteA.rect.width + spriteA.rect.height*spriteA.rect.height) / 4
+   var radiusB = spriteB.radius * spriteB.radius ||
+            (spriteB.rect.width*spriteB.rect.width + spriteB.rect.height*spriteB.rect.height) / 4;
+
+   return distance <= radiusA + radiusB;
 };
 
 }}, ["gamejs", "gamejs/utils/arrays"]);/* This file has been generated by yabbler.js */
@@ -2198,7 +2247,7 @@ Font.prototype.render = function(text, color) {
    var ctx = surface.context;
    ctx.save();
    ctx.font = this.sampleSurface.context.font;
-   ctx.textBaseline = this.sampleSurface.context.textBaseline;
+   //ctx.textBaseline = this.sampleSurface.context.textBaseline;
    ctx.textAlign = this.sampleSurface.context.textAlign;
    ctx.fillStyle = ctx.strokeStyle = color || "#000000";
    ctx.fillText(text, 0, surface.rect.height, surface.rect.width);
@@ -2244,37 +2293,9 @@ require.define({
  * The map must implement interface `gamejs.pathfinding.Map` (this
  * class really holds an example implementation & data for you to study).
  *
- * The resulting point list includes the two points `from` and `to` and in
- * between all points leading from `to` to `from` (yes, in reverted order.
- * It is quicker that way. If you need them the other way around: revert yourself).
- *
- * Example result
- *
- *     ({
- *         point: [
- *             3,
- *             3
- *         ],
- *         from: {
- *             point: [
- *                 2,
- *                 2
- *             ],
- *             from: {
- *                <<< cut for clarity >>>
- *             },
- *             length: 524,
- *             score: 665
- *         },
- *         length: 729,
- *         score: 729
- *     })
- *
  * Optionally, the search is canceld after `timeout` in millseconds.
  *
  * If there is no route `null` is returned.
- *
- * Points are given as an Array [x, y].
  *
  * @see http://eloquentjavascript.net/chapter7.html
  */
@@ -2450,7 +2471,7 @@ var add = exports.add = function(a, b) {
  * multiply vector with scalar or other vector
  * @param {Array} vector [v0, v1]
  * @param {Number|Array} vector or number
- * @param {Number|Array} result
+ * @returns {Number|Array} result
  */
 exports.multiply = function(a, s) {
    if (typeof s === 'number') {
@@ -2499,11 +2520,18 @@ require.define({
 // *  gamejs.utils.matrix will be used in gamejs.transforms, modifing the surfaces.matrix
 // * this matrix must be applied to the context in Surface.draw()
 
-
+/**
+ * @returns {Array} [1, 0, 0, 1, 0, 0]
+ */
 var identiy = exports.identity = function () {
    return [1, 0, 0, 1, 0, 0];
 };
 
+/**
+ * @param {Array} matrix
+ * @param {Array} matrix
+ * @returns {Array} matrix sum
+ */
 var add = exports.add = function(m1, m2) {
    return [
       m1[0] + m2[0],
@@ -2516,6 +2544,11 @@ var add = exports.add = function(m1, m2) {
    ];
 };
 
+/**
+ * @param {Array} matrix A
+ * @param {Array} matrix B
+ * @returns {Array} matrix product
+ */
 var multiply = exports.multiply = function(m1, m2) {
    return [
       m1[0] * m2[0] + m1[2] * m2[1],
@@ -2527,10 +2560,21 @@ var multiply = exports.multiply = function(m1, m2) {
    ];
 };
 
+/**
+ * @param {Array} matrix
+ * @param {Number} dx
+ * @param {Number} dy
+ * @returns {Array} translated matrix
+ */
 var translate = exports.translate = function(m1, dx, dy) {
    return multiply(m1, [1, 0, 0, 1, dx, dy]);
 };
 
+/**
+ * @param {Array} matrix
+ * @param {Number} angle in radians
+ * @returns {Array} rotated matrix
+ */
 var rotate = exports.rotate = function(m1, angle) {
    // radians
    var sin = Math.sin(angle);
@@ -2538,11 +2582,19 @@ var rotate = exports.rotate = function(m1, angle) {
    return multiply(m1, [cos, sin, -sin, cos, 0, 0]);
 };
 
-   // get current rotation in rads
+/**
+ * @param {Array} matrix
+ * @returns {Number} rotation in radians
+ */
 var rotation = exports.rotation = function(m1) {
       return Math.atan2(m1[1], m1[0]);
 };
 
+/**
+ * @param {Array} matrix
+ * @param {Array} vector [a, b]
+ * @returns {Array} scaled matrix
+ */
 var scale = exports.scale = function(m1, svec) {
    var sx = svec[0];
    var sy = svec[1];
@@ -2558,7 +2610,13 @@ require.define({
  * @see http://eloquentjavascript.net/appendix2.html
  */
 var BinaryHeap = exports.BinaryHeap = function(scoreFunction){
+   /**
+    * @ignore
+    */
    this.content = [];
+   /**
+    * @ignore
+    */
    this.scoreFunction = scoreFunction;
    return this;
 }
@@ -2804,11 +2862,17 @@ var gamejs = require('../gamejs');
 
 /**
  * @fileoverview Load images as Surfaces.
- * All images must be preloaded:
  *
- *     gamejs.preload(["images/ship.png", "images/sunflower.png"]);
+ * Sounds & Images are loaded relative to './'. You can change that, by setting
+ * $g.resourceBaseHref in your page *before* loading the GameJs modules:
  *
- * and can then be loaded as Surfaces with [gamejs.image.load](#load).
+ *     <script>
+ *     var $g = {
+ *        resourceBaseHref: 'http://example.com/resources/'
+ *     }
+ *     </script>
+ *     <script src="./gamejs-wrapped.js"></script>
+ *     ....
  *
  */
 
@@ -2825,17 +2889,15 @@ var _PRELOADING = false;
  *
  * **Preloading**
  *
- * All images must be preloaded like this:
+ * All images must be preloaded:
  *
  *     gamejs.preload(["./images/ship.png", "./images/sunflower.png"]);
  *
- * before they can be used within the gamejs.ready() callback.
+ * before they can be used:
  *
- * **Used Resources**
+ *     display.blit(gamejs.load('images/ship.png'))
  *
- * This creates a new canvas DOM element each time it is called.
- *
- * @param {String|dom.Image} uriOrImage resource uri for image or the image as a DOM Element (e.g. from <img>)
+ * @param {String|dom.Image} uriOrImage resource uri for image
  * @returns {gamejs.Surface} surface with the image on it.
  */
 exports.load = function(key) {
@@ -2940,6 +3002,20 @@ var gamejs = require('../gamejs');
 /**
  * @fileoverview Playing sounds with the html5 audio tag. Audio files must be preloaded
  * with the usual `gamejs.preload()` function. Ogg, wav and webm supported.
+ *
+ * Sounds & Images are loaded relative to './'. You can change that, by setting
+ * $g.resourceBaseHref in your page *before* loading the GameJs modules:
+ *
+ *     <script>
+ *     var $g = {
+ *        resourceBaseHref: 'http://example.com/resources/'
+ *     }
+ *     </script>
+ *     <script src="./gamejs-wrapped.js"></script>
+ *     ....
+ *
+ * **Note**: sound doesn't work very well across browsers yet. Firefox is best, but all still have
+ * bugs.
  */
 
 var CACHE = {};
