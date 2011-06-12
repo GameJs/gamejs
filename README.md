@@ -1,8 +1,7 @@
 GameJs
 =======
 
-GameJs is a JavaScript library for writing 2D games or other interactive
-graphic applications for the HTML Canvas <http://gamejs.org>.
+GameJs is a JavaScript library for writing 2D games or other interactive graphic applications for the HTML Canvas <http://gamejs.org>.
 
 Its API is modeled after the successful PyGame library <http://pygame.org>.
 
@@ -13,27 +12,16 @@ Usage
 
 See `examples/skeleton/` directory for a minimal GameJs app.
 
+**Note** that you need to run the examples via `http://` (not `file://`).
+
 GameJs Development
 =====================================
 
-If you use the git version of GameJs or made modification to the GameJs
-source files in the `lib/` directory you might want to know how to
-build the `gamejs-wrapped.js` file, which is used by all games.
+One trivial, cross-plattform solution to serve a directory with a web server is this executable: <http://code.google.com/p/mongoose/>.
 
-Building gamejs-wrapped.js
-----------------------------
+Instead of using the `gamejs-wrapped.js` file you can also put all the GameJs files (everything below `./lib`) into the JavaScript directory of your application. Your code should then transparently use those files.
 
-Use `create-wrapped.sh` to update the `examples/skeleton/public/gamejs-wrapped.js`
-file. This command uses Yabbler to convert the GameJs commonjs modules into a format
-usable in browsers.
-
-    FIXME
-      create-wrapped.sh
-         1) generalize so app developers can use it to wrap their code
-         1) explain require.useScriptTags() and the require.setModuleRoot('./dist/')
-         1) build in minification https://github.com/douglascrockford/JSMin
-
-Run unit tests, require RingoJs:
+Run GameJs unit tests, require RingoJs:
 
     $ ringo test/all.js
 
