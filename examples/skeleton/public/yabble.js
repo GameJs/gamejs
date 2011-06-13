@@ -321,7 +321,7 @@
 						if (e instanceof SyntaxError) {
 							var msg = 'Syntax Error: ';
 							if (e.lineNumber) {
-								msg += 'line ' + e.lineNumber;
+								msg += 'line ' + (e.lineNumber - 581);
 							} else {
 								console.log('GameJs tip: use Firefox to see line numbers in Syntax Errors.');
 							}
