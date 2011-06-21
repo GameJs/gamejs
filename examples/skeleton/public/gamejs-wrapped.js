@@ -130,14 +130,12 @@ var Rect = exports.Rect = function() {
 
    /**
     * Left, X coordinate
-    * @name Rect.prototype.left
     * @type Number
     */
    this.left = args.left;
 
    /**
     * Top, Y coordinate
-    * @name Rect.prototype.top
     * @type Number
     */
    this.top = args.top;
@@ -160,6 +158,7 @@ var Rect = exports.Rect = function() {
 objects.accessors(Rect.prototype, {
    /**
     * Bottom, Y coordinate
+    * @name Rect.prototype.bottom
     * @type Number
     */
    'bottom': {
@@ -173,6 +172,7 @@ objects.accessors(Rect.prototype, {
    },
    /**
     * Right, X coordinate
+    * @name Rect.prototype.right
     * @type Number
     */
    'right': {
@@ -185,6 +185,7 @@ objects.accessors(Rect.prototype, {
    },
    /**
     * Center Position. You can assign a rectangle form.
+    * @name Rect.prototype.center
     * @type Array
     */
    'center': {
