@@ -1,0 +1,379 @@
+<!DOCTYPE html >
+
+<html lang="de" dir="ltr">
+<head>
+    <title>gamejs/draw - GameJs API</title>
+    <link rel="shortcut icon" href="http://ringojs.org/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="http://ringojs.org/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../../static/style.css" />
+    <link rel="stylesheet" href="../../static/jsdoc.css" />
+<script type="text/javascript" src="../../static/jquery.js"></script>
+<script type="text/javascript" src="../../static/jsdoc.js"></script>
+<script>
+$(document).ready(jsdocSetup);
+</script>
+
+</head>
+
+<body>
+<div class="wrap">
+
+    <div class="main">
+        <div class="content">
+                    <h1 class="modulename">Module gamejs/draw</h1>
+            <div class="fileoverview">
+                <p>Utilities for drawing geometrical objects to Surfaces. If you want to put images on
+the screen see <code>gamejs.image</code>.</p>
+
+<p><h3>Colors</h3>
+There are several ways to specify colors. Whenever the docs says "valid #RGB string"
+you can pass in any of those formats:</p>
+
+<pre><code>"#ff00ff"
+"rgb(255, 0, 255)"
+"rgba(255,0, 255, 1)"</code></pre>
+
+
+            </div>
+
+            <div class="classoverview">
+
+                                <div>
+                    <h3>Functions</h3>
+                    <ul class="propertyoverview">
+                                                <li>
+                            <a href="#arc" class="jsdoc-title"> arc</a>(surface, color, rect, startAngle, stopAngle, width)
+                        </li>
+                                                <li>
+                            <a href="#circle" class="jsdoc-title"> circle</a>(surface, color, pos, radius, width)
+                        </li>
+                                                <li>
+                            <a href="#line" class="jsdoc-title"> line</a>(surface, color, startPos, endPos, width)
+                        </li>
+                                                <li>
+                            <a href="#lines" class="jsdoc-title"> lines</a>(surface, color, closed, pointlist, width)
+                        </li>
+                                                <li>
+                            <a href="#polygon" class="jsdoc-title"> polygon</a>(surface, color, pointlist, width)
+                        </li>
+                                                <li>
+                            <a href="#rect" class="jsdoc-title"> rect</a>(surface, color, rect, width)
+                        </li>
+                        </ul>
+                </div>
+                <div class="classes">
+                    </div>
+            </div>
+                <hr/>
+                <div class="details">
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="arc">
+                            <h3>
+                                <span class="itemtitle"><a id="arc" href="#arc" class="itemtitle itemname">arc</a></span>
+                                <span class="itemtitle light">(surface, color, rect, startAngle, stopAngle, width)</span></h3>
+                            <div>
+                                
+
+
+                            </div>
+                                                        <div>
+                                <h4>Parameters</h4>
+                                <table>
+                                                                        <tr>
+                                        <td></td>
+                                        <td class="paramname">surface</td>
+                                        <td></td>
+                                    </tr>
+                                                                        <tr>
+                                        <td></td>
+                                        <td class="paramname">color</td>
+                                        <td></td>
+                                    </tr>
+                                                                        <tr>
+                                        <td></td>
+                                        <td class="paramname">rect</td>
+                                        <td></td>
+                                    </tr>
+                                                                        <tr>
+                                        <td></td>
+                                        <td class="paramname">startAngle</td>
+                                        <td></td>
+                                    </tr>
+                                                                        <tr>
+                                        <td></td>
+                                        <td class="paramname">stopAngle</td>
+                                        <td></td>
+                                    </tr>
+                                                                        <tr>
+                                        <td></td>
+                                        <td class="paramname">width</td>
+                                        <td></td>
+                                    </tr>
+                                    </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="circle">
+                            <h3>
+                                <span class="itemtitle"><a id="circle" href="#circle" class="itemtitle itemname">circle</a></span>
+                                <span class="itemtitle light">(surface, color, pos, radius, width)</span></h3>
+                            <div>
+                                <p>Draw a circle on Surface</p>
+
+
+                            </div>
+                                                        <div>
+                                <h4>Parameters</h4>
+                                <table>
+                                                                        <tr>
+                                        <td>gamejs.Surface</td>
+                                        <td class="paramname">surface</td>
+                                        <td>the Surface to draw on</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>String</td>
+                                        <td class="paramname">color</td>
+                                        <td>a valid #RGB String, #ff00cc</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Array</td>
+                                        <td class="paramname">pos</td>
+                                        <td>[x, y] position of the circle center</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Number</td>
+                                        <td class="paramname">radius</td>
+                                        <td>of the circle</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Number</td>
+                                        <td class="paramname">width</td>
+                                        <td>width of the circle, if not given or 0 the circle is filled</td>
+                                    </tr>
+                                    </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="line">
+                            <h3>
+                                <span class="itemtitle"><a id="line" href="#line" class="itemtitle itemname">line</a></span>
+                                <span class="itemtitle light">(surface, color, startPos, endPos, width)</span></h3>
+                            <div>
+                                
+
+
+                            </div>
+                                                        <div>
+                                <h4>Parameters</h4>
+                                <table>
+                                                                        <tr>
+                                        <td>gamejs.Surface</td>
+                                        <td class="paramname">surface</td>
+                                        <td>the Surface to draw on</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>String</td>
+                                        <td class="paramname">color</td>
+                                        <td>valid #RGB string, e.g., "#ff0000"</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Array</td>
+                                        <td class="paramname">startPos</td>
+                                        <td>[x, y] position of line start</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Array</td>
+                                        <td class="paramname">endPos</td>
+                                        <td>[x, y] position of line end</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Number</td>
+                                        <td class="paramname">width</td>
+                                        <td>of the line, defaults to 1</td>
+                                    </tr>
+                                    </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="lines">
+                            <h3>
+                                <span class="itemtitle"><a id="lines" href="#lines" class="itemtitle itemname">lines</a></span>
+                                <span class="itemtitle light">(surface, color, closed, pointlist, width)</span></h3>
+                            <div>
+                                <p>Draw connected lines. Use this instead of indiviudal line() calls for
+better performance</p>
+
+
+                            </div>
+                                                        <div>
+                                <h4>Parameters</h4>
+                                <table>
+                                                                        <tr>
+                                        <td>gamejs.Surface</td>
+                                        <td class="paramname">surface</td>
+                                        <td>the Surface to draw on</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>String</td>
+                                        <td class="paramname">color</td>
+                                        <td>a valid #RGB string, "#ff0000"</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Boolean</td>
+                                        <td class="paramname">closed</td>
+                                        <td>if true the last and first point are connected</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Array</td>
+                                        <td class="paramname">pointlist</td>
+                                        <td>holding array [x,y] arrays of points</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Number</td>
+                                        <td class="paramname">width</td>
+                                        <td>width of the lines, defaults to 1</td>
+                                    </tr>
+                                    </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="polygon">
+                            <h3>
+                                <span class="itemtitle"><a id="polygon" href="#polygon" class="itemtitle itemname">polygon</a></span>
+                                <span class="itemtitle light">(surface, color, pointlist, width)</span></h3>
+                            <div>
+                                <p>Draw a polygon on the surface. The pointlist argument are the vertices
+for the polygon.</p>
+
+
+                            </div>
+                                                        <div>
+                                <h4>Parameters</h4>
+                                <table>
+                                                                        <tr>
+                                        <td>gamejs.Surface</td>
+                                        <td class="paramname">surface</td>
+                                        <td>the Surface to draw on</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>String</td>
+                                        <td class="paramname">color</td>
+                                        <td>a valid #RGB String, #ff00cc</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Array</td>
+                                        <td class="paramname">pointlist</td>
+                                        <td>array of vertices [x, y] of the polygon</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Number</td>
+                                        <td class="paramname">width</td>
+                                        <td>the width of line, if 0 or not given the polygon is filled.</td>
+                                    </tr>
+                                    </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="rect">
+                            <h3>
+                                <span class="itemtitle"><a id="rect" href="#rect" class="itemtitle itemname">rect</a></span>
+                                <span class="itemtitle light">(surface, color, rect, width)</span></h3>
+                            <div>
+                                
+
+
+                            </div>
+                                                        <div>
+                                <h4>Parameters</h4>
+                                <table>
+                                                                        <tr>
+                                        <td>gamejs.Surface</td>
+                                        <td class="paramname">surface</td>
+                                        <td>the Surface to draw on</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>String</td>
+                                        <td class="paramname">color</td>
+                                        <td>a valid #RGB String, #ff00cc</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>gamejs.Rect</td>
+                                        <td class="paramname">rect</td>
+                                        <td>the position and dimension attributes of this Rect will be used</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Number</td>
+                                        <td class="paramname">width</td>
+                                        <td>the width of line drawing the Rect, if 0 or not given the Rect is filled.</td>
+                                    </tr>
+                                    </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                    </div>
+            </div>
+        </div>
+
+
+
+    <div class="menu" style="margin-top: 1em; font-size: 13px;">
+    <p>
+        <a class="repositoryname" href="../../index.html">GameJs API </a>
+    </p>
+
+        Filter:<br />
+    <input id="jsdoc-leftnavsearch" type="search" size="14">
+    <ul class="jsdoc-leftnav leftnav">
+                <li><a href="../../gamejs/index.html"> gamejs </a></li>
+                <li><a href="../../gamejs/display/index.html"> gamejs/display </a></li>
+                <li><a href="../../gamejs/draw/index.html"> gamejs/draw </a></li>
+                <li><a href="../../gamejs/event/index.html"> gamejs/event </a></li>
+                <li><a href="../../gamejs/font/index.html"> gamejs/font </a></li>
+                <li><a href="../../gamejs/http/index.html"> gamejs/http </a></li>
+                <li><a href="../../gamejs/image/index.html"> gamejs/image </a></li>
+                <li><a href="../../gamejs/mask/index.html"> gamejs/mask </a></li>
+                <li><a href="../../gamejs/mixer/index.html"> gamejs/mixer </a></li>
+                <li><a href="../../gamejs/sprite/index.html"> gamejs/sprite </a></li>
+                <li><a href="../../gamejs/surfacearray/index.html"> gamejs/surfacearray </a></li>
+                <li><a href="../../gamejs/time/index.html"> gamejs/time </a></li>
+                <li><a href="../../gamejs/transform/index.html"> gamejs/transform </a></li>
+                <li><a href="../../gamejs/pathfinding/astar/index.html"> gamejs/pathfinding/astar </a></li>
+                <li><a href="../../gamejs/utils/arrays/index.html"> gamejs/utils/arrays </a></li>
+                <li><a href="../../gamejs/utils/binaryheap/index.html"> gamejs/utils/binaryheap </a></li>
+                <li><a href="../../gamejs/utils/matrix/index.html"> gamejs/utils/matrix </a></li>
+                <li><a href="../../gamejs/utils/objects/index.html"> gamejs/utils/objects </a></li>
+                <li><a href="../../gamejs/utils/vectors/index.html"> gamejs/utils/vectors </a></li>
+        </ul>
+
+
+</div>
+</div>
+</body>
+</html>
+
+
+
+

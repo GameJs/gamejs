@@ -1,0 +1,430 @@
+<!DOCTYPE html >
+
+<html lang="de" dir="ltr">
+<head>
+    <title>gamejs/mask - GameJs API</title>
+    <link rel="shortcut icon" href="http://ringojs.org/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="http://ringojs.org/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../../static/style.css" />
+    <link rel="stylesheet" href="../../static/jsdoc.css" />
+<script type="text/javascript" src="../../static/jquery.js"></script>
+<script type="text/javascript" src="../../static/jsdoc.js"></script>
+<script>
+$(document).ready(jsdocSetup);
+</script>
+
+</head>
+
+<body>
+<div class="wrap">
+
+    <div class="main">
+        <div class="content">
+                    <h1 class="modulename">Module gamejs/mask</h1>
+            <div class="fileoverview">
+                <p>Image masks. Usefull for pixel perfect collision detection.</p>
+
+
+            </div>
+
+            <div class="classoverview">
+
+                                <div>
+                    <h3>Functions</h3>
+                    <ul class="propertyoverview">
+                                                <li>
+                            <a href="#fromSurface" class="jsdoc-title"> fromSurface</a>(surface, threshold)
+                        </li>
+                        </ul>
+                </div>
+                <div class="classes">
+                                        <h2>Class <a href="#Mask" class="jsdoc-title">Mask</a></h2>
+                                        <div>
+                        <h3>Instance Methods</h3>
+                        <ul class="propertyoverview">
+                                                        <li>
+                                <a href="#Mask.prototype.getAt" class="jsdoc-title"> getAt</a>(x, y)
+                            </li>
+                                                        <li>
+                                <a href="#Mask.prototype.getSize" class="jsdoc-title"> getSize</a>()
+                            </li>
+                                                        <li>
+                                <a href="#Mask.prototype.invert" class="jsdoc-title"> invert</a>()
+                            </li>
+                                                        <li>
+                                <a href="#Mask.prototype.overlap" class="jsdoc-title"> overlap</a>(otherMask, offset)
+                            </li>
+                                                        <li>
+                                <a href="#Mask.prototype.overlapArea" class="jsdoc-title"> overlapArea</a>(otherMask, offset)
+                            </li>
+                                                        <li>
+                                <a href="#Mask.prototype.overlapMask" class="jsdoc-title"> overlapMask</a>(otherMask, offset)
+                            </li>
+                                                        <li>
+                                <a href="#Mask.prototype.overlapRect" class="jsdoc-title"> overlapRect</a>(otherMask, offset)
+                            </li>
+                                                        <li>
+                                <a href="#Mask.prototype.setAt" class="jsdoc-title"> setAt</a>(x, y)
+                            </li>
+                            </ul>
+                    </div>
+                    </div>
+            </div>
+                <hr/>
+                <div class="details">
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="Mask">
+                            <h3>
+                                <span class="itemtitle"><a id="Mask" href="#Mask" class="itemtitle itemname">Mask</a></span>
+                                <span class="itemtitle light">(dimensions)</span></h3>
+                            <div>
+                                <p>Image Mask</p>
+
+
+                            </div>
+                                                        <div>
+                                <h4>Parameters</h4>
+                                <table>
+                                                                        <tr>
+                                        <td>Array</td>
+                                        <td class="paramname">dimensions</td>
+                                        <td>[width, height]</td>
+                                    </tr>
+                                    </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="Mask.prototype.getAt">
+                            <h3>
+                                <span class="itemtitle">Mask.prototype.<a id="Mask.prototype.getAt" href="#Mask.prototype.getAt" class="itemtitle itemname">getAt</a></span>
+                                <span class="itemtitle light">(x, y)</span></h3>
+                            <div>
+                                <p>Get bit at position.</p>
+
+
+                            </div>
+                                                        <div>
+                                <h4>Parameters</h4>
+                                <table>
+                                                                        <tr>
+                                        <td>Number</td>
+                                        <td class="paramname">x</td>
+                                        <td></td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Number</td>
+                                        <td class="paramname">y</td>
+                                        <td></td>
+                                    </tr>
+                                    </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="Mask.prototype.getSize">
+                            <h3>
+                                <span class="itemtitle">Mask.prototype.<a id="Mask.prototype.getSize" href="#Mask.prototype.getSize" class="itemtitle itemname">getSize</a></span>
+                                <span class="itemtitle light">()</span></h3>
+                            <div>
+                                
+
+
+                            </div>
+                                                        <div>
+                                <h4>Returns</h4>
+                                <table>
+                                    <tr>
+                                        <td>Array</td>
+                                        <td> the dimensions of the map</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="Mask.prototype.invert">
+                            <h3>
+                                <span class="itemtitle">Mask.prototype.<a id="Mask.prototype.invert" href="#Mask.prototype.invert" class="itemtitle itemname">invert</a></span>
+                                <span class="itemtitle light">()</span></h3>
+                            <div>
+                                <p>Flip the bits in this map.</p>
+
+
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="Mask.prototype.overlap">
+                            <h3>
+                                <span class="itemtitle">Mask.prototype.<a id="Mask.prototype.overlap" href="#Mask.prototype.overlap" class="itemtitle itemname">overlap</a></span>
+                                <span class="itemtitle light">(otherMask, offset)</span></h3>
+                            <div>
+                                
+
+
+                            </div>
+                                                        <div>
+                                <h4>Parameters</h4>
+                                <table>
+                                                                        <tr>
+                                        <td>Mask</td>
+                                        <td class="paramname">otherMask</td>
+                                        <td></td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Array</td>
+                                        <td class="paramname">offset</td>
+                                        <td></td>
+                                    </tr>
+                                    </table>
+                            </div>
+                                                        <div>
+                                <h4>Returns</h4>
+                                <table>
+                                    <tr>
+                                        <td></td>
+                                        <td>True if the otherMask overlaps with this map.</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="Mask.prototype.overlapArea">
+                            <h3>
+                                <span class="itemtitle">Mask.prototype.<a id="Mask.prototype.overlapArea" href="#Mask.prototype.overlapArea" class="itemtitle itemname">overlapArea</a></span>
+                                <span class="itemtitle light">(otherMask, offset)</span></h3>
+                            <div>
+                                
+
+
+                            </div>
+                                                        <div>
+                                <h4>Parameters</h4>
+                                <table>
+                                                                        <tr>
+                                        <td></td>
+                                        <td class="paramname">otherMask</td>
+                                        <td></td>
+                                    </tr>
+                                                                        <tr>
+                                        <td></td>
+                                        <td class="paramname">offset</td>
+                                        <td></td>
+                                    </tr>
+                                    </table>
+                            </div>
+                                                        <div>
+                                <h4>Returns</h4>
+                                <table>
+                                    <tr>
+                                        <td></td>
+                                        <td>the number of overlapping pixels</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="Mask.prototype.overlapMask">
+                            <h3>
+                                <span class="itemtitle">Mask.prototype.<a id="Mask.prototype.overlapMask" href="#Mask.prototype.overlapMask" class="itemtitle itemname">overlapMask</a></span>
+                                <span class="itemtitle light">(otherMask, offset)</span></h3>
+                            <div>
+                                
+
+
+                            </div>
+                                                        <div>
+                                <h4>Parameters</h4>
+                                <table>
+                                                                        <tr>
+                                        <td></td>
+                                        <td class="paramname">otherMask</td>
+                                        <td></td>
+                                    </tr>
+                                                                        <tr>
+                                        <td></td>
+                                        <td class="paramname">offset</td>
+                                        <td></td>
+                                    </tr>
+                                    </table>
+                            </div>
+                                                        <div>
+                                <h4>Returns</h4>
+                                <table>
+                                    <tr>
+                                        <td></td>
+                                        <td>a mask of the overlapping pixels</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="Mask.prototype.overlapRect">
+                            <h3>
+                                <span class="itemtitle">Mask.prototype.<a id="Mask.prototype.overlapRect" href="#Mask.prototype.overlapRect" class="itemtitle itemname">overlapRect</a></span>
+                                <span class="itemtitle light">(otherMask, offset)</span></h3>
+                            <div>
+                                
+
+
+                            </div>
+                                                        <div>
+                                <h4>Parameters</h4>
+                                <table>
+                                                                        <tr>
+                                        <td></td>
+                                        <td class="paramname">otherMask</td>
+                                        <td></td>
+                                    </tr>
+                                                                        <tr>
+                                        <td></td>
+                                        <td class="paramname">offset</td>
+                                        <td></td>
+                                    </tr>
+                                    </table>
+                            </div>
+                                                        <div>
+                                <h4>Returns</h4>
+                                <table>
+                                    <tr>
+                                        <td></td>
+                                        <td>the overlapping rectangle or null if there is no overlap;</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="Mask.prototype.setAt">
+                            <h3>
+                                <span class="itemtitle">Mask.prototype.<a id="Mask.prototype.setAt" href="#Mask.prototype.setAt" class="itemtitle itemname">setAt</a></span>
+                                <span class="itemtitle light">(x, y)</span></h3>
+                            <div>
+                                <p>Set bit at position.</p>
+
+
+                            </div>
+                                                        <div>
+                                <h4>Parameters</h4>
+                                <table>
+                                                                        <tr>
+                                        <td>Number</td>
+                                        <td class="paramname">x</td>
+                                        <td></td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Number</td>
+                                        <td class="paramname">y</td>
+                                        <td></td>
+                                    </tr>
+                                    </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="fromSurface">
+                            <h3>
+                                <span class="itemtitle"><a id="fromSurface" href="#fromSurface" class="itemtitle itemname">fromSurface</a></span>
+                                <span class="itemtitle light">(surface, threshold)</span></h3>
+                            <div>
+                                <p>Creates an image mask from the given Surface. The alpha of each pixel is checked
+to see if it is greater than the given threshold. If it is greater then
+that pixel is set as non-colliding.</p>
+
+
+                            </div>
+                                                        <div>
+                                <h4>Parameters</h4>
+                                <table>
+                                                                        <tr>
+                                        <td>gamejs.Surface</td>
+                                        <td class="paramname">surface</td>
+                                        <td></td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Number</td>
+                                        <td class="paramname">threshold</td>
+                                        <td>0 to 255. defaults to: 255, fully transparent</td>
+                                    </tr>
+                                    </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                    </div>
+            </div>
+        </div>
+
+
+
+    <div class="menu" style="margin-top: 1em; font-size: 13px;">
+    <p>
+        <a class="repositoryname" href="../../index.html">GameJs API </a>
+    </p>
+
+        Filter:<br />
+    <input id="jsdoc-leftnavsearch" type="search" size="14">
+    <ul class="jsdoc-leftnav leftnav">
+                <li><a href="../../gamejs/index.html"> gamejs </a></li>
+                <li><a href="../../gamejs/display/index.html"> gamejs/display </a></li>
+                <li><a href="../../gamejs/draw/index.html"> gamejs/draw </a></li>
+                <li><a href="../../gamejs/event/index.html"> gamejs/event </a></li>
+                <li><a href="../../gamejs/font/index.html"> gamejs/font </a></li>
+                <li><a href="../../gamejs/http/index.html"> gamejs/http </a></li>
+                <li><a href="../../gamejs/image/index.html"> gamejs/image </a></li>
+                <li><a href="../../gamejs/mask/index.html"> gamejs/mask </a></li>
+                <li><a href="../../gamejs/mixer/index.html"> gamejs/mixer </a></li>
+                <li><a href="../../gamejs/sprite/index.html"> gamejs/sprite </a></li>
+                <li><a href="../../gamejs/surfacearray/index.html"> gamejs/surfacearray </a></li>
+                <li><a href="../../gamejs/time/index.html"> gamejs/time </a></li>
+                <li><a href="../../gamejs/transform/index.html"> gamejs/transform </a></li>
+                <li><a href="../../gamejs/pathfinding/astar/index.html"> gamejs/pathfinding/astar </a></li>
+                <li><a href="../../gamejs/utils/arrays/index.html"> gamejs/utils/arrays </a></li>
+                <li><a href="../../gamejs/utils/binaryheap/index.html"> gamejs/utils/binaryheap </a></li>
+                <li><a href="../../gamejs/utils/matrix/index.html"> gamejs/utils/matrix </a></li>
+                <li><a href="../../gamejs/utils/objects/index.html"> gamejs/utils/objects </a></li>
+                <li><a href="../../gamejs/utils/vectors/index.html"> gamejs/utils/vectors </a></li>
+        </ul>
+
+
+</div>
+</div>
+</body>
+</html>
+
+
+
+

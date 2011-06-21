@@ -1,0 +1,997 @@
+<!DOCTYPE html >
+
+<html lang="de" dir="ltr">
+<head>
+    <title>gamejs - GameJs API</title>
+    <link rel="shortcut icon" href="http://ringojs.org/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="http://ringojs.org/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="../static/style.css" />
+    <link rel="stylesheet" href="../static/jsdoc.css" />
+<script type="text/javascript" src="../static/jquery.js"></script>
+<script type="text/javascript" src="../static/jsdoc.js"></script>
+<script>
+$(document).ready(jsdocSetup);
+</script>
+
+</head>
+
+<body>
+<div class="wrap">
+
+    <div class="main">
+        <div class="content">
+                    <h1 class="modulename">Module gamejs</h1>
+            <div class="fileoverview">
+                <p>This module holds the essential <code>Rect</code> and <code>Surface</code> classes as
+well as static methods for preloading assets. <code>gamejs.ready()</code> is maybe
+the most important as it kickstarts your app.</p>
+
+
+            </div>
+
+            <div class="classoverview">
+
+                                <div>
+                    <h3>Functions</h3>
+                    <ul class="propertyoverview">
+                                                <li>
+                            <a href="#debug" class="jsdoc-title"> debug</a>()
+                        </li>
+                                                <li>
+                            <a href="#error" class="jsdoc-title"> error</a>()
+                        </li>
+                                                <li>
+                            <a href="#log" class="jsdoc-title"> log</a>(msg)
+                        </li>
+                                                <li>
+                            <a href="#preload" class="jsdoc-title"> preload</a>(resources)
+                        </li>
+                                                <li>
+                            <a href="#ready" class="jsdoc-title"> ready</a>(readyFn)
+                        </li>
+                                                <li>
+                            <a href="#setLogLevel" class="jsdoc-title"> setLogLevel</a>(logLevel)
+                        </li>
+                                                <li>
+                            <a href="#warn" class="jsdoc-title"> warn</a>()
+                        </li>
+                        </ul>
+                </div>
+                <div class="classes">
+                                        <h2>Class <a href="#Rect" class="jsdoc-title">Rect</a></h2>
+                                        <div>
+                        <h3>Instance Methods</h3>
+                        <ul class="propertyoverview">
+                                                        <li>
+                                <a href="#Rect.prototype.clone" class="jsdoc-title"> clone</a>()
+                            </li>
+                                                        <li>
+                                <a href="#Rect.prototype.collideLine" class="jsdoc-title"> collideLine</a>(pointA, pointB)
+                            </li>
+                                                        <li>
+                                <a href="#Rect.prototype.collidePoint" class="jsdoc-title"> collidePoint</a>(point)
+                            </li>
+                                                        <li>
+                                <a href="#Rect.prototype.collideRect" class="jsdoc-title"> collideRect</a>(rect)
+                            </li>
+                                                        <li>
+                                <a href="#Rect.prototype.move" class="jsdoc-title"> move</a>(x, y)
+                            </li>
+                                                        <li>
+                                <a href="#Rect.prototype.moveIp" class="jsdoc-title"> moveIp</a>(x, y)
+                            </li>
+                                                        <li>
+                                <a href="#Rect.prototype.toString" class="jsdoc-title"> toString</a>()
+                            </li>
+                            </ul>
+                    </div>
+                                        <div>
+                        <h3>Instance Properties</h3>
+                        <ul class="propertyoverview">
+                                                        <li>
+                                <a href="#Rect.prototype.height" class="jsdoc-title"> height</a>
+                            </li>
+                                                        <li>
+                                <a href="#Rect.prototype.left" class="jsdoc-title"> left</a>
+                            </li>
+                                                        <li>
+                                <a href="#Rect.prototype.top" class="jsdoc-title"> top</a>
+                            </li>
+                                                        <li>
+                                <a href="#Rect.prototype.width" class="jsdoc-title"> width</a>
+                            </li>
+                                                        <li>
+                                <a href="#Rect.prototype.bottom" class="jsdoc-title"> bottom</a>
+                            </li>
+                                                        <li>
+                                <a href="#Rect.prototype.center" class="jsdoc-title"> center</a>
+                            </li>
+                                                        <li>
+                                <a href="#Rect.prototype.right" class="jsdoc-title"> right</a>
+                            </li>
+                            </ul>
+                    </div>
+                                        <h2>Class <a href="#Surface" class="jsdoc-title">Surface</a></h2>
+                                        <div>
+                        <h3>Instance Methods</h3>
+                        <ul class="propertyoverview">
+                                                        <li>
+                                <a href="#Surface.prototype.blit" class="jsdoc-title"> blit</a>(src, dst, area, [special_flags])
+                            </li>
+                                                        <li>
+                                <a href="#Surface.prototype.clear" class="jsdoc-title"> clear</a>()
+                            </li>
+                                                        <li>
+                                <a href="#Surface.prototype.clone" class="jsdoc-title"> clone</a>()
+                            </li>
+                                                        <li>
+                                <a href="#Surface.prototype.fill" class="jsdoc-title"> fill</a>(CSS)
+                            </li>
+                                                        <li>
+                                <a href="#Surface.prototype.getAlpha" class="jsdoc-title"> getAlpha</a>()
+                            </li>
+                                                        <li>
+                                <a href="#Surface.prototype.getImageData" class="jsdoc-title"> getImageData</a>()
+                            </li>
+                                                        <li>
+                                <a href="#Surface.prototype.getSize" class="jsdoc-title"> getSize</a>()
+                            </li>
+                                                        <li>
+                                <a href="#Surface.prototype.setAlpha" class="jsdoc-title"> setAlpha</a>(alpha)
+                            </li>
+                            </ul>
+                    </div>
+                    </div>
+            </div>
+                <hr/>
+                <div class="details">
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="Rect">
+                            <h3>
+                                <span class="itemtitle"><a id="Rect" href="#Rect" class="itemtitle itemname">Rect</a></span>
+                                <span class="itemtitle light">(position, dimensions)</span></h3>
+                            <div>
+                                <p>Creates a Rect. Rects are used to hold rectangular areas. There are a couple
+of convinient ways to create Rects with different arguments and defaults.</p>
+
+<p>Any function that requires a <code>gamejs.Rect</code> argument also accepts any of the
+constructor value combinations <code>Rect</code> accepts.</p>
+
+<p>Rects are used a lot. They are good for collision detection, specifying
+an area on the screen (for blitting) or just to hold an objects position.</p>
+
+<p><code>left</code>, <code>top</code>, <code>width</code>, <code>height</code>, and <code>center</code> are assignable.</p>
+
+<p><code>bottom</code> and <code>right</code> are read-only for now.</p>
+
+
+                            </div>
+                                                        <div>
+                                <h4> Example </h4>
+                                <pre class="sh_javascript sh_sourceCode">new Rect([left, top]) width & height default to 0
+new Rect(left, top) width & height default to 0
+new Rect(left, top, width, height)
+new Rect([left, top], [width, height])
+new Rect(oldRect) clone of oldRect is created</pre>
+                            </div>
+                                                        <div>
+                                <h4>Parameters</h4>
+                                <table>
+                                                                        <tr>
+                                        <td>Array|gamejs.Rect</td>
+                                        <td class="paramname">position</td>
+                                        <td>Array holding left and top coordinates</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Array</td>
+                                        <td class="paramname">dimensions</td>
+                                        <td>Array holding width and height</td>
+                                    </tr>
+                                    </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="Rect.prototype.height">
+                            <h3>
+                                <span class="itemtitle">Rect.prototype.<a id="Rect.prototype.height" href="#Rect.prototype.height" class="itemtitle itemname">height</a></span>
+                                </h3>
+                            <div>
+                                <p>Height of rectangle</p>
+
+
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="Rect.prototype.left">
+                            <h3>
+                                <span class="itemtitle">Rect.prototype.<a id="Rect.prototype.left" href="#Rect.prototype.left" class="itemtitle itemname">left</a></span>
+                                </h3>
+                            <div>
+                                <p>Left, X coordinate</p>
+
+
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="Rect.prototype.top">
+                            <h3>
+                                <span class="itemtitle">Rect.prototype.<a id="Rect.prototype.top" href="#Rect.prototype.top" class="itemtitle itemname">top</a></span>
+                                </h3>
+                            <div>
+                                <p>Top, Y coordinate</p>
+
+
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="Rect.prototype.width">
+                            <h3>
+                                <span class="itemtitle">Rect.prototype.<a id="Rect.prototype.width" href="#Rect.prototype.width" class="itemtitle itemname">width</a></span>
+                                </h3>
+                            <div>
+                                <p>Width of rectangle</p>
+
+
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="Rect.prototype.bottom">
+                            <h3>
+                                <span class="itemtitle">Rect.prototype.<a id="Rect.prototype.bottom" href="#Rect.prototype.bottom" class="itemtitle itemname">bottom</a></span>
+                                </h3>
+                            <div>
+                                <p>Bottom, Y coordinate</p>
+
+
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="Rect.prototype.center">
+                            <h3>
+                                <span class="itemtitle">Rect.prototype.<a id="Rect.prototype.center" href="#Rect.prototype.center" class="itemtitle itemname">center</a></span>
+                                </h3>
+                            <div>
+                                <p>Center Position. You can assign a rectangle form.</p>
+
+
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="Rect.prototype.clone">
+                            <h3>
+                                <span class="itemtitle">Rect.prototype.<a id="Rect.prototype.clone" href="#Rect.prototype.clone" class="itemtitle itemname">clone</a></span>
+                                <span class="itemtitle light">()</span></h3>
+                            <div>
+                                
+
+
+                            </div>
+                                                        <div>
+                                <h4>Returns</h4>
+                                <table>
+                                    <tr>
+                                        <td>gamejs.Rect</td>
+                                        <td> A new copy of this rect</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="Rect.prototype.collideLine">
+                            <h3>
+                                <span class="itemtitle">Rect.prototype.<a id="Rect.prototype.collideLine" href="#Rect.prototype.collideLine" class="itemtitle itemname">collideLine</a></span>
+                                <span class="itemtitle light">(pointA, pointB)</span></h3>
+                            <div>
+                                
+
+
+                            </div>
+                                                        <div>
+                                <h4>Parameters</h4>
+                                <table>
+                                                                        <tr>
+                                        <td>Array</td>
+                                        <td class="paramname">pointA</td>
+                                        <td>start point of the line</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Array</td>
+                                        <td class="paramname">pointB</td>
+                                        <td>end point of the line</td>
+                                    </tr>
+                                    </table>
+                            </div>
+                                                        <div>
+                                <h4>Returns</h4>
+                                <table>
+                                    <tr>
+                                        <td></td>
+                                        <td>true if the line intersects with the rectangle</td>
+                                    </tr>
+                                </table>
+                            </div>
+                                                        <div>
+                                <h4>See</h4>
+                                <div class="extrainfo">
+                                    <a href="http://stackoverflow.com/questions/99353/how-to-test-if-a-line-segment-intersects-an-axis-aligned-rectange-in-2d/293052#293052">http://stackoverflow.com/questions/99353/how-to-test-if-a-line-segment-intersects-an-axis-aligned-rectange-in-2d/293052#293052</a>
+                                </div>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="Rect.prototype.collidePoint">
+                            <h3>
+                                <span class="itemtitle">Rect.prototype.<a id="Rect.prototype.collidePoint" href="#Rect.prototype.collidePoint" class="itemtitle itemname">collidePoint</a></span>
+                                <span class="itemtitle light">(point)</span></h3>
+                            <div>
+                                <p>Check for collision with a point.</p>
+
+<p><code>collidePoint(x,y)</code> or <code>collidePoint([x,y])</code> or <code>collidePoint(new Rect(x,y))</code></p>
+
+
+                            </div>
+                                                        <div>
+                                <h4>Parameters</h4>
+                                <table>
+                                                                        <tr>
+                                        <td>Array|gamejs.Rect</td>
+                                        <td class="paramname">point</td>
+                                        <td>the x and y coordinates of the point to test for collision</td>
+                                    </tr>
+                                    </table>
+                            </div>
+                                                        <div>
+                                <h4>Returns</h4>
+                                <table>
+                                    <tr>
+                                        <td>Boolean</td>
+                                        <td> true if the point collides with this Rect</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="Rect.prototype.collideRect">
+                            <h3>
+                                <span class="itemtitle">Rect.prototype.<a id="Rect.prototype.collideRect" href="#Rect.prototype.collideRect" class="itemtitle itemname">collideRect</a></span>
+                                <span class="itemtitle light">(rect)</span></h3>
+                            <div>
+                                <p>Check for collision with a Rect.</p>
+
+
+                            </div>
+                                                        <div>
+                                <h4>Parameters</h4>
+                                <table>
+                                                                        <tr>
+                                        <td>gamejs.Rect</td>
+                                        <td class="paramname">rect</td>
+                                        <td>the Rect to test check for collision</td>
+                                    </tr>
+                                    </table>
+                            </div>
+                                                        <div>
+                                <h4>Returns</h4>
+                                <table>
+                                    <tr>
+                                        <td>Boolean</td>
+                                        <td> true if the given Rect collides with this Rect</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="Rect.prototype.move">
+                            <h3>
+                                <span class="itemtitle">Rect.prototype.<a id="Rect.prototype.move" href="#Rect.prototype.move" class="itemtitle itemname">move</a></span>
+                                <span class="itemtitle light">(x, y)</span></h3>
+                            <div>
+                                <p>Move returns a new Rect, which is a version of this Rect
+moved by the given amounts. Accepts any rectangle form.
+as argument.</p>
+
+
+                            </div>
+                                                        <div>
+                                <h4>Parameters</h4>
+                                <table>
+                                                                        <tr>
+                                        <td>Number|gamejs.Rect</td>
+                                        <td class="paramname">x</td>
+                                        <td>amount to move on x axis</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Number</td>
+                                        <td class="paramname">y</td>
+                                        <td>amount to move on y axis</td>
+                                    </tr>
+                                    </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="Rect.prototype.moveIp">
+                            <h3>
+                                <span class="itemtitle">Rect.prototype.<a id="Rect.prototype.moveIp" href="#Rect.prototype.moveIp" class="itemtitle itemname">moveIp</a></span>
+                                <span class="itemtitle light">(x, y)</span></h3>
+                            <div>
+                                <p>Move this Rect in place - not returning a new Rect like <code>move(x, y)</code> would.</p>
+
+<p><code>moveIp(x,y)</code> or <code>moveIp([x,y])</code></p>
+
+
+                            </div>
+                                                        <div>
+                                <h4>Parameters</h4>
+                                <table>
+                                                                        <tr>
+                                        <td>Number|gamejs.Rect</td>
+                                        <td class="paramname">x</td>
+                                        <td>amount to move on x axis</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Number</td>
+                                        <td class="paramname">y</td>
+                                        <td>amount to move on y axis</td>
+                                    </tr>
+                                    </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="Rect.prototype.right">
+                            <h3>
+                                <span class="itemtitle">Rect.prototype.<a id="Rect.prototype.right" href="#Rect.prototype.right" class="itemtitle itemname">right</a></span>
+                                </h3>
+                            <div>
+                                <p>Right, X coordinate</p>
+
+
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="Rect.prototype.toString">
+                            <h3>
+                                <span class="itemtitle">Rect.prototype.<a id="Rect.prototype.toString" href="#Rect.prototype.toString" class="itemtitle itemname">toString</a></span>
+                                <span class="itemtitle light">()</span></h3>
+                            <div>
+                                
+
+
+                            </div>
+                                                        <div>
+                                <h4>Returns</h4>
+                                <table>
+                                    <tr>
+                                        <td>String</td>
+                                        <td> Like "[x, y][w, h]"</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="Surface">
+                            <h3>
+                                <span class="itemtitle"><a id="Surface" href="#Surface" class="itemtitle itemname">Surface</a></span>
+                                <span class="itemtitle light">(dimensions)</span></h3>
+                            <div>
+                                <p>A Surface represents a bitmap image with a fixed width and height. The
+most important feature of a Surface is that they can be <code>blitted</code>
+onto each other.</p>
+
+
+                            </div>
+                                                        <div>
+                                <h4> Example </h4>
+                                <pre class="sh_javascript sh_sourceCode">new gamejs.Surface([width, height]);
+new gamejs.Surface(width, height);
+new gamejs.Surface(rect);</pre>
+                            </div>
+                                                        <div>
+                                <h4>Parameters</h4>
+                                <table>
+                                                                        <tr>
+                                        <td>Array</td>
+                                        <td class="paramname">dimensions</td>
+                                        <td>Array holding width and height</td>
+                                    </tr>
+                                    </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="Surface.prototype.blit">
+                            <h3>
+                                <span class="itemtitle">Surface.prototype.<a id="Surface.prototype.blit" href="#Surface.prototype.blit" class="itemtitle itemname">blit</a></span>
+                                <span class="itemtitle light">(src, dst, area, [special_flags])</span></h3>
+                            <div>
+                                <p>Blits another Surface on this Surface. The destination where to blit to
+can be given (or it defaults to the top left corner) as well as the
+Area from the Surface which should be blitted (e.g., for cutting out parts of
+a Surface).</p>
+
+
+                            </div>
+                                                        <div>
+                                <h4> Example </h4>
+                                <pre class="sh_javascript sh_sourceCode">// blit flower in top left corner of display
+displaySurface.blit(flowerSurface);
+
+// position flower at 10/10 of display
+displaySurface.blit(flowerSurface, [10, 10])
+
+// ... `dest` can also be a rect whose topleft position is taken:
+displaySurface.blit(flowerSurface, new gamejs.Rect([10, 10]);
+
+// only blit half of the flower onto the display
+var flowerRect = flowerSurface.rect;
+flowerRect = new gamejs.Rect([0,0], [flowerRect.width/2, flowerRect.height/2])
+displaySurface.blit(flowerSurface, [0,0], flowerRect);</pre>
+                            </div>
+                                                        <div>
+                                <h4>Parameters</h4>
+                                <table>
+                                                                        <tr>
+                                        <td>gamejs.Surface</td>
+                                        <td class="paramname">src</td>
+                                        <td>The Surface which will be blitted onto this one</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>gamejs.Rect|Array</td>
+                                        <td class="paramname">dst</td>
+                                        <td>the Destination x, y position in this Surface.
+           If a Rect is given, it's top and left values are taken. If this argument
+           is not supplied the blit happens at [0,0].</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>gamesjs.Rect|Array</td>
+                                        <td class="paramname">area</td>
+                                        <td>the Area from the passed Surface which
+           should be blitted onto this Surface.</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Number</td>
+                                        <td class="paramname">[special_flags]</td>
+                                        <td>FIXME add special flags for composite operations</td>
+                                    </tr>
+                                    </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="Surface.prototype.clear">
+                            <h3>
+                                <span class="itemtitle">Surface.prototype.<a id="Surface.prototype.clear" href="#Surface.prototype.clear" class="itemtitle itemname">clear</a></span>
+                                <span class="itemtitle light">()</span></h3>
+                            <div>
+                                <p>Clear the surface.</p>
+
+
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="Surface.prototype.clone">
+                            <h3>
+                                <span class="itemtitle">Surface.prototype.<a id="Surface.prototype.clone" href="#Surface.prototype.clone" class="itemtitle itemname">clone</a></span>
+                                <span class="itemtitle light">()</span></h3>
+                            <div>
+                                
+
+
+                            </div>
+                                                        <div>
+                                <h4>Returns</h4>
+                                <table>
+                                    <tr>
+                                        <td>gamejs.Surface</td>
+                                        <td> a clone of this surface</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="Surface.prototype.fill">
+                            <h3>
+                                <span class="itemtitle">Surface.prototype.<a id="Surface.prototype.fill" href="#Surface.prototype.fill" class="itemtitle itemname">fill</a></span>
+                                <span class="itemtitle light">(CSS)</span></h3>
+                            <div>
+                                <p>Fills the whole Surface with a color. Usefull for erasing a Surface.</p>
+
+
+                            </div>
+                                                        <div>
+                                <h4>Parameters</h4>
+                                <table>
+                                                                        <tr>
+                                        <td>String</td>
+                                        <td class="paramname">CSS</td>
+                                        <td>color string, e.g. '#0d120a' or '#0f0' or 'rgba(255, 0, 0, 0.5)'</td>
+                                    </tr>
+                                    </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="Surface.prototype.getAlpha">
+                            <h3>
+                                <span class="itemtitle">Surface.prototype.<a id="Surface.prototype.getAlpha" href="#Surface.prototype.getAlpha" class="itemtitle itemname">getAlpha</a></span>
+                                <span class="itemtitle light">()</span></h3>
+                            <div>
+                                
+
+
+                            </div>
+                                                        <div>
+                                <h4>Returns</h4>
+                                <table>
+                                    <tr>
+                                        <td>Number</td>
+                                        <td> current alpha value</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="Surface.prototype.getImageData">
+                            <h3>
+                                <span class="itemtitle">Surface.prototype.<a id="Surface.prototype.getImageData" href="#Surface.prototype.getImageData" class="itemtitle itemname">getImageData</a></span>
+                                <span class="itemtitle light">()</span></h3>
+                            <div>
+                                <p>The data must be represented in left-to-right order, row by row top to bottom,
+starting with the top left, with each pixel's red, green, blue, and alpha components
+being given in that order for each pixel.</p>
+
+
+                            </div>
+                                                        <div>
+                                <h4>Returns</h4>
+                                <table>
+                                    <tr>
+                                        <td>Array</td>
+                                        <td> the pixel image data (the canvas pixel array in html speak)</td>
+                                    </tr>
+                                </table>
+                            </div>
+                                                        <div>
+                                <h4>See</h4>
+                                <div class="extrainfo">
+                                    <a href="http://dev.w3.org/html5/2dcontext/#canvaspixelarray">http://dev.w3.org/html5/2dcontext/#canvaspixelarray</a>
+                                </div>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="Surface.prototype.getSize">
+                            <h3>
+                                <span class="itemtitle">Surface.prototype.<a id="Surface.prototype.getSize" href="#Surface.prototype.getSize" class="itemtitle itemname">getSize</a></span>
+                                <span class="itemtitle light">()</span></h3>
+                            <div>
+                                
+
+
+                            </div>
+                                                        <div>
+                                <h4>Returns</h4>
+                                <table>
+                                    <tr>
+                                        <td>Number[]</td>
+                                        <td> the width and height of the Surface</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="Surface.prototype.setAlpha">
+                            <h3>
+                                <span class="itemtitle">Surface.prototype.<a id="Surface.prototype.setAlpha" href="#Surface.prototype.setAlpha" class="itemtitle itemname">setAlpha</a></span>
+                                <span class="itemtitle light">(alpha)</span></h3>
+                            <div>
+                                <p>Set the alpha value for the whole Surface. When blitting the Surface on
+a destination, the pixels will be drawn slightly transparent.</p>
+
+
+                            </div>
+                                                        <div>
+                                <h4>Parameters</h4>
+                                <table>
+                                                                        <tr>
+                                        <td>Number</td>
+                                        <td class="paramname">alpha</td>
+                                        <td>value in range 0.0 - 1.0</td>
+                                    </tr>
+                                    </table>
+                            </div>
+                                                        <div>
+                                <h4>Returns</h4>
+                                <table>
+                                    <tr>
+                                        <td>Number</td>
+                                        <td> current alpha value</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="debug">
+                            <h3>
+                                <span class="itemtitle"><a id="debug" href="#debug" class="itemtitle itemname">debug</a></span>
+                                <span class="itemtitle light">()</span></h3>
+                            <div>
+                                
+
+
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="error">
+                            <h3>
+                                <span class="itemtitle"><a id="error" href="#error" class="itemtitle itemname">error</a></span>
+                                <span class="itemtitle light">()</span></h3>
+                            <div>
+                                
+
+
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="log">
+                            <h3>
+                                <span class="itemtitle"><a id="log" href="#log" class="itemtitle itemname">log</a></span>
+                                <span class="itemtitle light">(msg)</span></h3>
+                            <div>
+                                <p>Log a msg to the console if console is enable</p>
+
+
+                            </div>
+                                                        <div>
+                                <h4>Parameters</h4>
+                                <table>
+                                                                        <tr>
+                                        <td>String</td>
+                                        <td class="paramname">msg</td>
+                                        <td>the msg to log</td>
+                                    </tr>
+                                    </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="preload">
+                            <h3>
+                                <span class="itemtitle"><a id="preload" href="#preload" class="itemtitle itemname">preload</a></span>
+                                <span class="itemtitle light">(resources)</span></h3>
+                            <div>
+                                <p>Preload resources.</p>
+
+
+                            </div>
+                                                        <div>
+                                <h4>Parameters</h4>
+                                <table>
+                                                                        <tr>
+                                        <td>Array</td>
+                                        <td class="paramname">resources</td>
+                                        <td>list of resources paths</td>
+                                    </tr>
+                                    </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="ready">
+                            <h3>
+                                <span class="itemtitle"><a id="ready" href="#ready" class="itemtitle itemname">ready</a></span>
+                                <span class="itemtitle light">(readyFn)</span></h3>
+                            <div>
+                                <p>ReadyFn is called once all modules and assets are loaded.</p>
+
+
+                            </div>
+                                                        <div>
+                                <h4>Parameters</h4>
+                                <table>
+                                                                        <tr>
+                                        <td>Function</td>
+                                        <td class="paramname">readyFn</td>
+                                        <td>the function to be called once gamejs finished loading</td>
+                                    </tr>
+                                    </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="setLogLevel">
+                            <h3>
+                                <span class="itemtitle"><a id="setLogLevel" href="#setLogLevel" class="itemtitle itemname">setLogLevel</a></span>
+                                <span class="itemtitle light">(logLevel)</span></h3>
+                            <div>
+                                <p>set logLevel as string or number
+0 = debug; 1 = warn; 2 = error;</p>
+
+
+                            </div>
+                                                        <div>
+                                <h4> Example </h4>
+                                <pre class="sh_javascript sh_sourceCode">gamejs.setLogLevel(0); // debug
+gamejs.setLogLevel('error'); // equal to setLogLevel(2)</pre>
+                            </div>
+                                                        <div>
+                                <h4>Parameters</h4>
+                                <table>
+                                                                        <tr>
+                                        <td></td>
+                                        <td class="paramname">logLevel</td>
+                                        <td></td>
+                                    </tr>
+                                    </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="warn">
+                            <h3>
+                                <span class="itemtitle"><a id="warn" href="#warn" class="itemtitle itemname">warn</a></span>
+                                <span class="itemtitle light">()</span></h3>
+                            <div>
+                                
+
+
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                    </div>
+            </div>
+        </div>
+
+
+
+    <div class="menu" style="margin-top: 1em; font-size: 13px;">
+    <p>
+        <a class="repositoryname" href="../index.html">GameJs API </a>
+    </p>
+
+        Filter:<br />
+    <input id="jsdoc-leftnavsearch" type="search" size="14">
+    <ul class="jsdoc-leftnav leftnav">
+                <li><a href="../gamejs/index.html"> gamejs </a></li>
+                <li><a href="../gamejs/display/index.html"> gamejs/display </a></li>
+                <li><a href="../gamejs/draw/index.html"> gamejs/draw </a></li>
+                <li><a href="../gamejs/event/index.html"> gamejs/event </a></li>
+                <li><a href="../gamejs/font/index.html"> gamejs/font </a></li>
+                <li><a href="../gamejs/http/index.html"> gamejs/http </a></li>
+                <li><a href="../gamejs/image/index.html"> gamejs/image </a></li>
+                <li><a href="../gamejs/mask/index.html"> gamejs/mask </a></li>
+                <li><a href="../gamejs/mixer/index.html"> gamejs/mixer </a></li>
+                <li><a href="../gamejs/sprite/index.html"> gamejs/sprite </a></li>
+                <li><a href="../gamejs/surfacearray/index.html"> gamejs/surfacearray </a></li>
+                <li><a href="../gamejs/time/index.html"> gamejs/time </a></li>
+                <li><a href="../gamejs/transform/index.html"> gamejs/transform </a></li>
+                <li><a href="../gamejs/pathfinding/astar/index.html"> gamejs/pathfinding/astar </a></li>
+                <li><a href="../gamejs/utils/arrays/index.html"> gamejs/utils/arrays </a></li>
+                <li><a href="../gamejs/utils/binaryheap/index.html"> gamejs/utils/binaryheap </a></li>
+                <li><a href="../gamejs/utils/matrix/index.html"> gamejs/utils/matrix </a></li>
+                <li><a href="../gamejs/utils/objects/index.html"> gamejs/utils/objects </a></li>
+                <li><a href="../gamejs/utils/vectors/index.html"> gamejs/utils/vectors </a></li>
+        </ul>
+
+
+</div>
+</div>
+</body>
+</html>
+
+
+
+
