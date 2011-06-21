@@ -605,6 +605,9 @@ exports.ready = function(readyFn) {
    var getMixerProgress = null;
    var getImageProgress = null;
 
+   // init time instantly - we need it for preloaders
+   gamejs.time.init();
+
    // 1.
    window.setTimeout(_ready, 13);
 
@@ -627,7 +630,6 @@ exports.ready = function(readyFn) {
       if (getImageProgress() < 1 || getMixerProgress() < 1) {
          return window.setTimeout(_readyResources, 100);
       }
-      gamejs.time.init();
       gamejs.display.init();
       gamejs.image.init();
       gamejs.mixer.init();
@@ -1108,6 +1110,7 @@ exports.K_RIGHT = 39;
 exports.K_LEFT = 37;
 
 exports.K_SPACE = 32;
+exports.K_BACKSPACE = 8;
 exports.K_TAB = 9;
 exports.K_ENTER = 13;
 exports.K_SHIFT = 16;
@@ -1273,7 +1276,10 @@ exports.init = function() {
        || key >= exports.K_KP1  && key <= exports.K_KP9
        || key === exports.K_SPACE
        || key === exports.K_TAB
-       || key === exports.K_ENTER)) {
+       || key === exports.K_ENTER)
+
+       || key === exports.K_ALT
+       || key === exports.K_BACKSPACE) {
         ev.preventDefault();
       }
    };
