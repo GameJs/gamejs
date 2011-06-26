@@ -1,0 +1,11 @@
+{
+    "name": "gamejs",
+    "version": "2011.06.13",
+    "description": "GameJs, html canvas wrapper",
+    "keywords": ["gamedev"],
+    "author": ["Simon Oberhammer <simon@nekapuzer.at>"],
+    "main": "./lib/gamejs",
+    "directories": {
+        "lib": "lib/gamejs"
+    }
+}
