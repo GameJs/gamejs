@@ -143,6 +143,57 @@ exports.testRectCollide = function() {
    assert.isFalse(rect.collideLine([-10,-10], [-20,-20]));
 };
 
+exports.testRectClip = function() {
+   var rect = new gamejs.Rect(0, 0, 20, 20);
+   var rectTwo = new gamejs.Rect(50, 0, 20, 20);
+
+   // not overlaping
+   assert.deepEqual(rect.clip(rectTwo), new gamejs.Rect(0,0,0,0));
+
+   // A inside B
+   rectTwo = new gamejs.Rect(5, 5, 5, 5);
+   assert.deepEqual(rect.clip(rectTwo), rectTwo);
+
+   // B inside A
+   rectTwo = new gamejs.Rect(-1, -1, 21, 21);
+   assert.deepEqual(rect.clip(rectTwo), rect);
+
+   // A clip A
+   assert.deepEqual(rect.clip(rect), rect);
+
+   // top left
+   rectTwo = new gamejs.Rect(-1, -1, 11, 11);
+   assert.deepEqual(rect.clip(rectTwo), new gamejs.Rect(0, 0, 10, 10));
+
+   // top left inverse
+   rectTwo = new gamejs.Rect(5, 5, 30, 30);
+   assert.deepEqual(rect.clip(rectTwo), new gamejs.Rect(5, 5, 15, 15));
+
+   // top right
+   rectTwo = new gamejs.Rect(5, 5, 11, 11);
+   assert.deepEqual(rect.clip(rectTwo), new gamejs.Rect(5, 5, 11, 11));
+
+   // top right inverse
+   rectTwo = new gamejs.Rect(-5, 5, 30, 30);
+   assert.deepEqual(rect.clip(rectTwo), new gamejs.Rect(0, 5, 20, 15));
+
+   // bottom left
+   rectTwo = new gamejs.Rect(-1, 18, 3, 3);
+   assert.deepEqual(rect.clip(rectTwo), new gamejs.Rect(0, 18, 2, 2));
+
+   // bottom left inverse
+   rectTwo = new gamejs.Rect(18, -18, 20, 20);
+   assert.deepEqual(rect.clip(rectTwo), new gamejs.Rect(18, 0, 2, 2));
+
+   // bottom right
+   rectTwo = new gamejs.Rect(18, 18, 3, 3);
+   assert.deepEqual(rect.clip(rectTwo), new gamejs.Rect(18, 18, 2, 2));
+
+   // bottom right inverse
+   rectTwo = new gamejs.Rect(-18, -18, 20, 20);
+   assert.deepEqual(rect.clip(rectTwo), new gamejs.Rect(0, 0, 2, 2));
+}
+
 exports.testSurfaceConstructors = function() {
    // browser objects
    global.document = {
