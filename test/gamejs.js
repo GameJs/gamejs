@@ -194,6 +194,24 @@ exports.testRectClip = function() {
    assert.deepEqual(rect.clip(rectTwo), new gamejs.Rect(0, 0, 2, 2));
 }
 
+exports.testRectUnion = function() {
+   var rect = new gamejs.Rect(0, 0, 10, 10);
+   var rectTwo = new gamejs.Rect(15, 15, 1, 1);
+   // outside
+   assert.deepEqual(rect.union(rectTwo), new gamejs.Rect(0, 0, 16, 16));
+
+   // identity
+   assert.deepEqual(rect.union(rect), rect);
+
+   // inside
+   rectTwo = new gamejs.Rect(3, 3, 3, 3);
+   assert.deepEqual(rect.union(rectTwo), rect);
+
+   // overlaping
+   rectTwo = new gamejs.Rect(-5, 2, 16, 15);
+   assert.deepEqual(rect.union(rectTwo), new gamejs.Rect(-5, 0, 11, 17));
+}
+
 exports.testSurfaceConstructors = function() {
    // browser objects
    global.document = {
