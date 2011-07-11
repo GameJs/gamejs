@@ -7,6 +7,7 @@ cd ${GAMEJS_DIR}
 TEMP_WORKING=/tmp/gjs-wrapped/
 EXEC_YABBLER="java -jar ./utils/rhino/js.jar ./utils/yabbler/yabbler.js"
 EXEC_CLOSURE="cat"
+OUTPUT_FILE="./examples/skeleton/public/gamejs-wrapped.js"
 if [ "$1" = "compress" ] ; then
    EXEC_CLOSURE="java -jar ./utils/closure-compiler/compiler.jar --jscomp_warning=internetExplorerChecks"
 fi
@@ -14,5 +15,6 @@ fi
 mkdir -p ${TEMP_WORKING}
 rm -rf ${TEMP_WORKING}/*
 ${EXEC_YABBLER} -i ./lib/ -o ${TEMP_WORKING}
-find ${TEMP_WORKING} -type f -exec cat {} \; | ${EXEC_CLOSURE} > ./examples/skeleton/public/gamejs-wrapped.js
+find ${TEMP_WORKING} -type f -exec cat {} \; | ${EXEC_CLOSURE} > ${OUTPUT_FILE}
 rm -rf ${TEMP_WORKING}/*
+echo "Wrote ${OUTPUT_FILE}"
