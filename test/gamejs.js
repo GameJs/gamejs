@@ -209,7 +209,10 @@ exports.testRectUnion = function() {
 
    // overlaping
    rectTwo = new gamejs.Rect(-5, 2, 16, 15);
-   assert.deepEqual(rect.union(rectTwo), new gamejs.Rect(-5, 0, 11, 17));
+   assert.deepEqual(rect.union(rectTwo), new gamejs.Rect(-5, 0, 16, 17));
+
+   rectTwo = new gamejs.Rect(9, 9, 2, 2);
+   assert.deepEqual(rect.union(rectTwo), new gamejs.Rect(0, 0, 11, 11));
 }
 
 exports.testSurfaceConstructors = function() {
