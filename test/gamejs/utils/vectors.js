@@ -36,8 +36,6 @@ exports.testRotate = function(){
    //rotate 180 degrees
    assert.isTrue(vectorsEqual(rotate([0.0, -1.0], Math.PI),
                                      [0, 1]));
-<<<<<<< HEAD
-   
    //rotate 540 degrees
    assert.isTrue(vectorsEqual(rotate([0.0, -1.0], 3*Math.PI),
                                      [0, 1]));
@@ -53,24 +51,6 @@ exports.testRotate = function(){
    //rotate  a vector 0 radians
    assert.isTrue(vectorsEqual(rotate([0, -1], 0),
                               [0, -1])); 
-=======
-
-   //rotate 540 degrees
-   assert.isTrue(vectorsEqual(rotate([0.0, -1.0], 3*Math.PI),
-                                     [0, 1]));
-
-   //rotate -90 degrees
-   assert.isTrue(vectorsEqual(rotate([0, -1], -Math.PI/2),
-                              [-1, 0]));
-
-   //rotate zero length vector
-   assert.isTrue(vectorsEqual(rotate([0, 0], 3),
-                              [0, 0]));
-
-   //rotate  a vector 0 radians
-   assert.isTrue(vectorsEqual(rotate([0, -1], 0),
-                              [0, -1]));
->>>>>>> ecb22b57273051bfa32490890ad6855e2f6f2356
 };
 
 exports.testDot = function(){
@@ -80,15 +60,6 @@ exports.testDot = function(){
 exports.testAngle = function(){
    //90 degree angle
    assert.isTrue(Math.abs(angle([0, -1], [1, 0]))-Math.PI/2 < EPS);
-<<<<<<< HEAD
-   
-   //90 degree angle, other direction
-   assert.isTrue(Math.abs(angle([0, -1], [-1, 0]))-Math.PI/2 < EPS);
-   
-   //180 degree angle
-   assert.isTrue(Math.abs(angle([1, 0], [-1, 0]))-Math.PI < EPS);
-   
-=======
 
    //90 degree angle, other direction
    assert.isTrue(Math.abs(angle([0, -1], [-1, 0]))-Math.PI/2 < EPS);
@@ -96,7 +67,6 @@ exports.testAngle = function(){
    //180 degree angle
    assert.isTrue(Math.abs(angle([1, 0], [-1, 0]))-Math.PI < EPS);
 
->>>>>>> ecb22b57273051bfa32490890ad6855e2f6f2356
    //0 degrees
    assert.isTrue(angle([0, -1], [0, -1]) < EPS);
 };
