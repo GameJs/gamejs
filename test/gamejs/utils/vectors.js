@@ -37,6 +37,7 @@ exports.testRotate = function(){
    //rotate 180 degrees
    assert.isTrue(vectorsEqual(rotate([0.0, -1.0], Math.PI),
                                      [0, 1]));
+
    //rotate 540 degrees
    assert.isTrue(vectorsEqual(rotate([0.0, -1.0], 3*Math.PI),
                                      [0, 1]));
