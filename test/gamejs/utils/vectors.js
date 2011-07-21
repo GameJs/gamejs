@@ -33,24 +33,25 @@ exports.testRotate = function(){
    //rotate 90 degrees
    assert.isTrue(vectorsEqual(rotate([0, -1], Math.PI/2),
                               [1, 0]));
+
    //rotate 180 degrees
    assert.isTrue(vectorsEqual(rotate([0.0, -1.0], Math.PI),
                                      [0, 1]));
    //rotate 540 degrees
    assert.isTrue(vectorsEqual(rotate([0.0, -1.0], 3*Math.PI),
                                      [0, 1]));
-   
+
    //rotate -90 degrees
    assert.isTrue(vectorsEqual(rotate([0, -1], -Math.PI/2),
                               [-1, 0]));
-   
+
    //rotate zero length vector
    assert.isTrue(vectorsEqual(rotate([0, 0], 3),
                               [0, 0]));
-   
+
    //rotate  a vector 0 radians
    assert.isTrue(vectorsEqual(rotate([0, -1], 0),
-                              [0, -1])); 
+                              [0, -1]));
 };
 
 exports.testDot = function(){

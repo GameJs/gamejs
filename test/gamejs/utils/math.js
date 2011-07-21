@@ -5,7 +5,6 @@ include('../../../lib/gamejs/utils/math');
 var EPS = 0.000001;
 
 exports.testDegrees=function(){
-    assert.isTrue(degrees(0)==0);   
     assert.isTrue(degrees(0)==0);
     assert.isTrue(degrees(Math.PI)==180);
     assert.isTrue(degrees(Math.PI*3)==180*3);
