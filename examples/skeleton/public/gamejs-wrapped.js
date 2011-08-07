@@ -16,7 +16,10 @@ var debugLevel = 2;
 
 /**
  * set logLevel as string or number
- * 0 = debug; 1 = warn; 2 = error;
+ *   * 0 = info
+ *   * 1 = warn
+ *   * 2 = error
+ *   * 3 = fatal
  *
  * @example
  * gamejs.setLogLevel(0); // debug
@@ -40,19 +43,29 @@ var log = exports.log = function() {
    // IEFIX can't call apply on console
    var args = Array.prototype.slice.apply(arguments, [0]);
    args.unshift(Date.now());
-   if (window.console !== undefined && console.log.apply) console.log.apply(console, args);
+   if (window.console !== undefined && console.log.apply) {
+      console.log.apply(console, args);
+   }
 };
-exports.debug = function() {
-   if (debugLevel > 0) return;
-   log.apply(this, arguments);
+exports.info = function() {
+   if (debugLevel <= DEBUG_LEVELS.indexOf('info')) {
+      log.apply(this, arguments);
+   }
 };
 exports.warn = function() {
-   if (debugLevel > 1) return;
-   log.apply(this, arguments);
+   if (debugLevel <= DEBUG_LEVELS.indexOf('warn')) {
+      log.apply(this, arguments);
+   }
 };
 exports.error = function() {
-   if (debugLevel > 2) return;
-   log.apply(this, arguments);
+   if (debugLevel <= DEBUG_LEVELS.indexOf('error')) {
+      log.apply(this, arguments);
+   }
+};
+exports.fatal = function() {
+   if (debugLevel <= DEBUG_LEVELS.indexOf('fatal')) {
+      log.apply(this, arguments);
+   }
 };
 
 /**
@@ -94,7 +107,7 @@ function normalizeRectArguments() {
       throw new Error('not a valid rectangle specification');
    }
    return {left: left || 0, top: top || 0, width: width || 0, height: height || 0};
-};
+}
 
 /**
  * Creates a Rect. Rects are used to hold rectangular areas. There are a couple
@@ -200,8 +213,7 @@ objects.accessors(Rect.prototype, {
          this.top = args.top - (this.height / 2);
          return;
       }
-   },
-
+   }
 });
 
 /**
@@ -233,6 +245,66 @@ Rect.prototype.moveIp = function() {
 };
 
 /**
+ * Return the area in which this Rect and argument Rect overlap.
+ *
+ * @param {gamejs.Rect} Rect to clip this one into
+ * @returns {gamejs.Rect} new Rect which is completely inside the argument Rect, 
+ * zero sized Rect if the two rectangles do not overlap
+ */
+Rect.prototype.clip = function(rect) {
+   if(!this.collideRect(rect)) {
+      return new Rect(0,0,0,0);
+   }
+
+   var x, y, width, height;
+
+   // Left
+   if ((this.left >= rect.left) && (this.left < rect.right)) {
+      x = this.left;
+   } else if ((rect.left >= this.left) && (rect.left < this.right)) {
+      x = rect.left;
+   }
+
+   // Right
+   if ((this.right > rect.left) && (this.right <= rect.right)) {
+      width = this.right - x;
+   } else if ((rect.right > this.left) && (rect.right <= this.right)) {
+      width = rect.right - x;
+   }
+
+   // Top
+   if ((this.top >= rect.top) && (this.top < rect.bottom)) {
+      y = this.top;
+   } else if ((rect.top >= this.top) && (rect.top < this.bottom)) {
+      y = rect.top;
+   }
+
+   // Bottom
+   if ((this.bottom > rect.top) && (this.bottom <= rect.bottom)) {
+     height = this.bottom - y;
+   } else if ((rect.bottom > this.top) && (rect.bottom <= this.bottom)) {
+     height = rect.bottom - y;
+   }
+   return new Rect(x, y, width, height);
+};
+
+/*
+ * Join two rectangles
+ *
+ * @param {gamejs.Rect} union with this rectangle
+ * @returns {gamejs.Rect} rectangle containing area of both rectangles
+ */
+Rect.prototype.union = function(rect) {
+   var x, y, width, height;
+
+   x = Math.min(this.left, rect.left);
+   y = Math.min(this.top, rect.top);
+   width = Math.max(this.right, rect.right) - x;
+   height = Math.max(this.bottom, rect.bottom) - y;
+   return new Rect(x, y, width, height);
+};
+
+/**
  * Check for collision with a point.
  *
  * `collidePoint(x,y)` or `collidePoint([x,y])` or `collidePoint(new Rect(x,y))`
@@ -243,7 +315,7 @@ Rect.prototype.moveIp = function() {
 Rect.prototype.collidePoint = function() {
    var args = normalizeRectArguments.apply(this, arguments);
    return (this.left <= args.left && args.left <= this.right) &&
-       (this.top <= args.top && args.top <= this.bottom)
+       (this.top <= args.top && args.top <= this.bottom);
 };
 
 /**
@@ -270,7 +342,7 @@ Rect.prototype.collideLine = function(p1, p2) {
    var y2 = p2[1];
 
    function linePosition(point) {
-      var x = point[0]
+      var x = point[0];
       var y = point[1];
       return (y2 - y1) * x + (x1 - x2) * y + (x2 * y1 - x1 * y2);
    }
@@ -285,9 +357,13 @@ Rect.prototype.collideLine = function(p1, p2) {
    var noPositive = true;
    var noZero = true;
    relPoses.forEach(function(relPos) {
-      if (relPos > 0) noPositive = false;
-      if (relPos < 0) noNegative = false;
-      if (relPos === 0) noZero = false;
+      if (relPos > 0) {
+         noPositive = false;
+      } else if (relPos < 0) {
+         noNegative = false;
+      } else if (relPos === 0) {
+         noZero = false;
+      }
    }, this);
 
    if ( (noNegative || noPositive) && noZero) {
@@ -298,14 +374,14 @@ Rect.prototype.collideLine = function(p1, p2) {
             (y1 < this.top && y2 < this.top) ||
             (y1 > this.bottom && y2 > this.bottom)
             );
-}
+};
 
 /**
  * @returns {String} Like "[x, y][w, h]"
  */
 Rect.prototype.toString = function() {
    return ["[", this.left, ",", this.top, "]"," [",this.width, ",", this.height, "]"].join("");
-}
+};
 
 /**
  * @returns {gamejs.Rect} A new copy of this rect
@@ -380,6 +456,7 @@ var Surface = exports.Surface = function() {
  * @param {gamesjs.Rect|Array} area the Area from the passed Surface which
  *            should be blitted onto this Surface.
  * @param {Number} [special_flags] FIXME add special flags for composite operations
+ * @returns {gamejs.Rect} Rect actually repainted
  */
 Surface.prototype.blit = function(src, dest, area, special_flags) {
 
@@ -389,8 +466,12 @@ Surface.prototype.blit = function(src, dest, area, special_flags) {
    if (dest instanceof Rect) {
       rDest = dest.clone(); // new gamejs.Rect([dest.left, dest.top], src.getSize());
       var srcSize = src.getSize();
-      if (!rDest.width) rDest.width = srcSize[0];
-      if (!rDest.height) rDest.height = srcSize[1];
+      if (!rDest.width) {
+         rDest.width = srcSize[0];
+      }
+      if (!rDest.height) {
+         rDest.height = srcSize[1];
+      }
     } else if (dest && dest instanceof Array && dest.length == 2) {
       rDest = new Rect(dest, src.getSize());
     } else {
@@ -418,7 +499,7 @@ Surface.prototype.blit = function(src, dest, area, special_flags) {
    srcRect = src.getRect();
    // drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
    this.context.globalAlpha = src._blitAlpha;
-   this.context.drawImage(src.canvas, rArea.left, rArea.top, rArea.width, rArea.height, 0, 0, rDest.width, rDest.height)
+   this.context.drawImage(src.canvas, rArea.left, rArea.top, rArea.width, rArea.height, 0, 0, rDest.width, rDest.height);
    this.context.restore();
    return;
 };
@@ -482,7 +563,7 @@ objects.accessors(Surface.prototype, {
       get: function() {
          return this._canvas;
       }
-   },
+   }
 });
 
 /**
@@ -508,7 +589,9 @@ Surface.prototype.getAlpha = function() {
  * @returns {Number} current alpha value
  */
 Surface.prototype.setAlpha = function(alpha) {
-   if (isNaN(alpha) || alpha < 0 || alpha > 1) return;
+   if (isNaN(alpha) || alpha < 0 || alpha > 1) {
+      return;
+   }
 
    this._blitAlpha = (1 - alpha);
    return (1 - this._blitAlpha);
@@ -581,7 +664,9 @@ exports.transform = require('./gamejs/transform');
 exports.utils = {
    arrays: require('./gamejs/utils/arrays'),
    objects: require('./gamejs/utils/objects'),
-   matrix: require('./gamejs/utils/matrix')
+   matrix: require('./gamejs/utils/matrix'),
+   vectors: require('./gamejs/utils/vectors'),
+   math: require('./gamejs/utils/math')
 };
 
 /**
@@ -608,8 +693,6 @@ exports.ready = function(readyFn) {
    // init time instantly - we need it for preloaders
    gamejs.time.init();
 
-   // 1.
-   window.setTimeout(_ready, 13);
 
    // 2.
    function _ready() {
@@ -637,12 +720,15 @@ exports.ready = function(readyFn) {
       readyFn();
    }
 
+   // 1.
+   window.setTimeout(_ready, 13);
+
    function getLoadProgress() {
       if (getImageProgress) {
          return (0.5 * getImageProgress()) + (0.5 * getMixerProgress());
       }
       return 0.1;
-   };
+   }
 
    return getLoadProgress;
 };
@@ -665,11 +751,13 @@ var preload = exports.preload = function(resources) {
    return;
 };
 
-}}, ["gamejs/utils/matrix", "gamejs/utils/objects", "gamejs/display", "gamejs/draw", "gamejs/event", "gamejs/font", "gamejs/http", "gamejs/image", "gamejs/mask", "gamejs/mixer", "gamejs/sprite", "gamejs/surfacearray", "gamejs/time", "gamejs/transform", "gamejs/utils/arrays", "gamejs/pathfinding/astar"]);/* This file has been generated by yabbler.js */
+}}, ["gamejs/utils/matrix", "gamejs/utils/objects", "gamejs/display", "gamejs/draw", "gamejs/event", "gamejs/font", "gamejs/http", "gamejs/image", "gamejs/mask", "gamejs/mixer", "gamejs/sprite", "gamejs/surfacearray", "gamejs/time", "gamejs/transform", "gamejs/utils/arrays", "gamejs/utils/vectors", "gamejs/utils/math", "gamejs/pathfinding/astar"]);/* This file has been generated by yabbler.js */
 require.define({
 "gamejs/transform": function(require, exports, module) {
 var Surface = require('../gamejs').Surface;
 var matrix = require('./utils/matrix');
+var math = require('./utils/math');
+var vectors = require('./utils/vectors');
 
 /**
  * @fileoverview Rotate and scale Surfaces.
@@ -682,15 +770,36 @@ var matrix = require('./utils/matrix');
  * @returns {Surface} new, rotated surface
  */
 exports.rotate = function (surface, angle) {
-   // degrees
-   // FIXME the size of the new surface should be increased if the rotation requires taht
    var origSize = surface.getSize();
-   var newSurface = new Surface(origSize);
+   var radians = (angle * Math.PI / 180);
+   var newSize = origSize;
+   // find new bounding box
+   if (angle % 90 !== 0) {
+      var rect = surface.getRect();
+      var points = [
+         [-rect.width/2, rect.height/2],
+         [rect.width/2, rect.height/2],
+         [-rect.width/2, -rect.height/2],
+         [rect.width/2, -rect.height/2]
+      ];
+      var rotPoints = points.map(function(p) {
+         return vectors.rotate(p, radians);
+      });
+      var xs = rotPoints.map(function(p) { return p[0]; });
+      var ys = rotPoints.map(function(p) { return p[1]; });
+      var left = Math.min.apply(Math, xs);
+      var right = Math.max.apply(Math, xs);
+      var bottom = Math.min.apply(Math, ys);
+      var top = Math.max.apply(Math, ys);
+      newSize = [right-left, top-bottom];
+   }
+   var newSurface = new Surface(newSize);
    var oldMatrix = surface._matrix;
    surface._matrix = matrix.translate(surface._matrix, origSize[0]/2, origSize[1]/2);
-   surface._matrix = matrix.rotate(surface._matrix, (angle * Math.PI / 180));
+   surface._matrix = matrix.rotate(surface._matrix, radians);
    surface._matrix = matrix.translate(surface._matrix, -origSize[0]/2, -origSize[1]/2);
-   newSurface.blit(surface);
+   var offset = [(newSize[0] - origSize[0]) / 2, (newSize[1] - origSize[1]) / 2]
+   newSurface.blit(surface, offset);
    surface._matrix = oldMatrix;
    return newSurface;
 };
@@ -715,6 +824,7 @@ exports.scale = function(surface, dims) {
 /**
  * Flip a Surface either vertically, horizontally or both. This returns
  * a new Surface (i.e: nondestructive).
+ * @param {gamejs.Surface} surface
  */
 exports.flip = function(surface, flipHorizontal, flipVertical) {
    var dims = surface.getSize();
@@ -738,7 +848,7 @@ exports.flip = function(surface, flipHorizontal, flipVertical) {
    return newSurface;
 };
 
-}}, ["gamejs", "gamejs/utils/matrix"]);/* This file has been generated by yabbler.js */
+}}, ["gamejs", "gamejs/utils/matrix", "gamejs/utils/math", "gamejs/utils/vectors"]);/* This file has been generated by yabbler.js */
 require.define({
 "gamejs/time": function(require, exports, module) {
 /**
@@ -791,14 +901,14 @@ exports.init = function() {
  */
 exports.fpsCallback = function(fn, thisObj, fps) {
    fps = parseInt(1000/fps, 10);
-   if (CALLBACKS[fps] === undefined) CALLBACKS[fps] = [];
-   if (CALLBACKS_LASTCALL[fps] === undefined) CALLBACKS_LASTCALL[fps] = 0;
+   CALLBACKS[fps] = CALLBACKS[fps] || [];
+   CALLBACKS_LASTCALL[fps] = CALLBACKS_LASTCALL[fps] || 0;
 
    CALLBACKS[fps].push({
       'rawFn': fn,
       'callback': function(msWaited) {
          fn.apply(thisObj, [msWaited]);
-      },
+      }
    });
    return;
 };
@@ -808,12 +918,16 @@ exports.fpsCallback = function(fn, thisObj, fps) {
  * @param {Number} fps
  */
 exports.deleteCallback = function(callback, fps) {
-   fps = parseInt(1000/fps, 10)
+   fps = parseInt(1000/fps, 10);
    var callbacks = CALLBACKS[fps];
-   if (!callbacks) return;
+   if (!callbacks) {
+      return;
+   }
 
    CALLBACKS[fps] = callbacks.filter(function(fnInfo, idx) {
-      if (fnInfo.rawFn !== callback) return true;
+      if (fnInfo.rawFn !== callback) {
+         return true;
+      }
       return false;
    });
    return;
@@ -822,6 +936,9 @@ exports.deleteCallback = function(callback, fps) {
 var perInterval = function() {
    var msNow = Date.now();
    var lastCalls = CALLBACKS_LASTCALL;
+   function callbackWrapper(fnInfo) {
+      fnInfo.callback(msWaited);
+   }
    for (var fpsKey in lastCalls) {
       if (!lastCalls[fpsKey]) {
          CALLBACKS_LASTCALL[fpsKey] = msNow;
@@ -829,9 +946,7 @@ var perInterval = function() {
       var msWaited = msNow - lastCalls[fpsKey];
       if (fpsKey <= msWaited) {
          CALLBACKS_LASTCALL[fpsKey] = msNow;
-         CALLBACKS[fpsKey].forEach(function(fnInfo) {
-            fnInfo.callback(msWaited);
-         }, this);
+         CALLBACKS[fpsKey].forEach(callbackWrapper, this);
       }
    }
    return;
@@ -856,9 +971,9 @@ var objects = require('./utils/objects');
  * @param {Number} threshold 0 to 255. defaults to: 255, fully transparent
  */
 exports.fromSurface = function(surface, threshold) {
-   var threshold = threshold && (255 - threshold) || 255;
+   threshold = threshold && (255 - threshold) || 255;
    var imgData = surface.getImageData();
-   var dims = surface.getSize()
+   var dims = surface.getSize();
    var mask = new Mask(dims);
    for (var i=0;i<imgData.length;i += 4) {
       // y: pixel # / width
@@ -869,7 +984,7 @@ exports.fromSurface = function(surface, threshold) {
       if (alpha >= threshold) {
          mask.setAt(x, y);
       }
-   };
+   }
    return mask;
 };
 
@@ -896,11 +1011,13 @@ var Mask = exports.Mask = function(dims) {
       for (var j=0;j<this.height;j++) {
          this._bits[i][j] = false;
       }
-   };
+   }
    return;
 };
 
 /**
+ * @param {gamejs.mask.Mask} otherMask
+ * @param {Array} offset [x,y]
  * @returns the overlapping rectangle or null if there is no overlap;
  */
 Mask.prototype.overlapRect = function(otherMask, offset) {
@@ -912,7 +1029,7 @@ Mask.prototype.overlapRect = function(otherMask, offset) {
    // bounding box intersect
    if (!brect.collideRect(arect)) {
       return null;
-   };
+   }
    var xStart = Math.max(arect.left, brect.left);
    var xEnd = Math.min(arect.right, brect.right);
 
@@ -947,13 +1064,18 @@ Mask.prototype.overlap = function(otherMask, offset) {
              otherMask.getAt(x - brect.left, y - brect.top)) {
              return true;
          }
-      };
-   };
-   // NOTE this should not happen
+      }
+   }
+   // NOTE this should not happen because either we bailed out
+   // long ago because the rects do not overlap or there is an
+   // overlap and we should not have gotten this far.
+   // throw new Error("Maks.overlap: overlap detected but could not create mask for it.");
    return false;
 };
 
 /**
+ * @param {gamejs.mask.Mask} otherMask
+ * @param {Array} offset [x,y]
  * @returns the number of overlapping pixels
  */
 Mask.prototype.overlapArea = function(otherMask, offset) {
@@ -975,12 +1097,14 @@ Mask.prototype.overlapArea = function(otherMask, offset) {
              otherMask.getAt(x - brect.left, y - brect.top)) {
              count++;
          }
-      };
-   };
+      }
+   }
    return count;
 };
 
 /**
+ * @param {gamejs.mask.Mask} otherMask
+ * @param {Array} offset [x,y]
  * @returns a mask of the overlapping pixels
  */
 Mask.prototype.overlapMask = function(otherMask, offset) {
@@ -1002,8 +1126,8 @@ Mask.prototype.overlapMask = function(otherMask, offset) {
              otherMask.getAt(x - brect.left, y - brect.top)) {
              mask.setAt(x, y);
          }
-      };
-   };
+      }
+   }
    return mask;
 };
 
@@ -1025,8 +1149,9 @@ Mask.prototype.setAt = function(x, y) {
 Mask.prototype.getAt = function(x, y) {
    x = parseInt(x, 10);
    y = parseInt(y, 10);
-   if (x < 0 || y < 0 || x >= this.width || y >= this.height) return false;
-
+   if (x < 0 || y < 0 || x >= this.width || y >= this.height) {
+      return false;
+   }
    return this._bits[x][y];
 };
 
@@ -1066,7 +1191,9 @@ objects.accessors(Mask.prototype, {
          var c = 0;
          this._bits.forEach(function(row) {
             row.forEach(function(b) {
-               if (b) c++;
+               if (b) {
+                  c++;
+               }
             });
          });
          return c;
@@ -1170,7 +1297,7 @@ exports.QUIT = 0;
 exports.KEY_DOWN = 1;
 exports.KEY_UP = 2;
 exports.MOUSE_MOTION = 3;
-exports.MOUSE_UP = 4
+exports.MOUSE_UP = 4;
 exports.MOUSE_DOWN = 5;
 exports.MOUSE_WHEEL = 6;
 
@@ -1246,7 +1373,7 @@ exports.init = function() {
          'ctrlKey': ev.ctrlKey,
          'metaKey': ev.metaKey
       });
-   };
+   }
 
    function onMouseUp (ev) {
       var canvasOffset = display._getCanvasOffset();
@@ -1258,7 +1385,7 @@ exports.init = function() {
          'ctrlKey': ev.ctrlKey,
          'metaKey': ev.metaKey
       });
-   };
+   }
 
    function onKeyDown (ev) {
       var key = ev.keyCode || ev.which;
@@ -1270,19 +1397,18 @@ exports.init = function() {
          'metaKey': ev.metaKey
       });
 
-      if (!ev.ctrlKey && !ev.metaKey &&
-         (key >= exports.K_LEFT && key <= exports.K_DOWN
-       || key >= exports.K_0    && key <= exports.K_z
-       || key >= exports.K_KP1  && key <= exports.K_KP9
-       || key === exports.K_SPACE
-       || key === exports.K_TAB
-       || key === exports.K_ENTER)
-
-       || key === exports.K_ALT
-       || key === exports.K_BACKSPACE) {
+      if ((!ev.ctrlKey && !ev.metaKey &&
+         (key >= exports.K_LEFT && key <= exports.K_DOWN ||
+         key >= exports.K_0    && key <= exports.K_z ||
+         key >= exports.K_KP1  && key <= exports.K_KP9 ||
+         key === exports.K_SPACE ||
+         key === exports.K_TAB ||
+         key === exports.K_ENTER)) ||
+         key === exports.K_ALT ||
+         key === exports.K_BACKSPACE) {
         ev.preventDefault();
       }
-   };
+   }
 
    function onKeyUp (ev) {
       QUEUE.push({
@@ -1292,7 +1418,7 @@ exports.init = function() {
          'ctrlKey': ev.ctrlKey,
          'metaKey': ev.metaKey
       });
-   };
+   }
 
    function onMouseMove (ev) {
       var canvasOffset = display._getCanvasOffset();
@@ -1309,11 +1435,11 @@ exports.init = function() {
          'pos': currentPos,
          'rel': relativePos,
          'buttons': null, // FIXME, fixable?
-         'timestamp': ev.timeStamp,
+         'timestamp': ev.timeStamp
       });
       lastPos = currentPos;
       return;
-   };
+   }
 
    function onMouseScroll(ev) {
       var canvasOffset = display._getCanvasOffset();
@@ -1328,7 +1454,7 @@ exports.init = function() {
 
    function onBeforeUnload (ev) {
       QUEUE.push({
-         'type': gamejs.event.QUIT,
+         'type': gamejs.event.QUIT
       });
       return;
    }
@@ -1399,7 +1525,7 @@ exports.line = function(surface, color, startPos, endPos, width) {
  * @param {Number} width width of the lines, defaults to 1
  */
 exports.lines = function(surface, color, closed, pointlist, width) {
-   var closed = closed || false;
+   closed = closed || false;
    var ctx = surface.context;
    ctx.save();
    ctx.beginPath();
@@ -1431,8 +1557,12 @@ exports.lines = function(surface, color, closed, pointlist, width) {
  * @param {Number} width width of the circle, if not given or 0 the circle is filled
  */
 exports.circle = function(surface, color, pos, radius, width) {
-   if (!radius) throw new Error('[circle] radius required argument');
-   if (!pos || !typeof(pos) === 'array') throw new Error('[circle] pos must be given & array' + pos);
+   if (!radius) {
+      throw new Error('[circle] radius required argument');
+   }
+   if (!pos || typeof(pos) !== 'array') {
+      throw new Error('[circle] pos must be given & array' + pos);
+   }
 
    var ctx = surface.context;
    ctx.save();
@@ -1468,6 +1598,14 @@ exports.rect = function(surface, color, rect, width) {
    ctx.restore();
 };
 
+/**
+ * @param {gamejs.Surface} surface the Surface to draw on
+ * @param {String} color a valid #RGB String, #ff00cc
+ * @param {gamejs.Rect} rect the position and dimension attributes of this Rect will be used
+ * @param {Number} startAngle
+ * @param {Number} stopAngle
+ * @param {Number} width the width of line, if 0 or not given the arc is filled.
+ */
 exports.arc= function(surface, color, rect, startAngle, stopAngle, width) {
    var ctx = surface.context;
    ctx.save();
@@ -1529,7 +1667,7 @@ exports.init = function() {
       jsGameCanvas = document.createElement("canvas");
       jsGameCanvas.setAttribute("id", CANVAS_ID);
       document.body.appendChild(jsGameCanvas);
-   };
+   }
    // remove loader if any;
    var $loader = document.getElementById('gjs-loader');
    if ($loader) {
@@ -1582,9 +1720,9 @@ exports._getCanvasOffset = function() {
  * @returns {gamejs.Surface} the display Surface
  */
 var getSurface = exports.getSurface = function() {
-   if (SURFACE == null) {
+   if (SURFACE === null) {
       var canvas = getCanvas();
-      var SURFACE = new Surface([canvas.clientWidth, canvas.clientHeight]);
+      SURFACE = new Surface([canvas.clientWidth, canvas.clientHeight]);
       SURFACE._canvas = canvas;
    }
    return SURFACE;
@@ -1632,11 +1770,13 @@ var accessors = require('./utils/objects').accessors;
  *
  * The array must be the same dimensions as the Surface and will completely
  * replace all pixel values.
+ * @param {gamejs.Surface} surface
+ * @param {gamejs.surfacearray.SurfaceArray} surfaceArray
  */
 exports.blitArray = function(surface, surfaceArray) {
    surface.context.putImageData(surfaceArray.imageData, 0, 0);
    return;
-}
+};
 
 /**
  * The SurfaceArray can be constructed with a surface whose values
@@ -1652,7 +1792,7 @@ exports.blitArray = function(surface, surfaceArray) {
  */
 var SurfaceArray = exports.SurfaceArray = function(surfaceOrDimensions) {
 
-   /*
+   /**
     * Set rgba value at position x, y.
     *
     * For performance reasons this function has only one signature
@@ -1690,7 +1830,7 @@ var SurfaceArray = exports.SurfaceArray = function(surfaceOrDimensions) {
          data[offset+1],
          data[offset+2],
          data[offset+3]
-      ]
+      ];
    };
 
    /**
@@ -1783,7 +1923,7 @@ exports.Response = function() {
    throw new Error('response class not instantiable');
 };
 
-/*
+/**
  * Make http request to server-side
  * @param {String} method http method
  * @param {String} url
@@ -1827,13 +1967,13 @@ var post = exports.post = function(url, data, type) {
 };
 
 function stringify(response) {
-   // we control origin
+   // eval is evil
    return eval('(' + response.responseText + ')');
-};
+}
 
 function ajaxBaseHref() {
     return window.$g && $g.ajaxBaseHref || './';
-};
+}
 
 /**
  * Load an object from the server-side.
@@ -1917,7 +2057,9 @@ Sprite.prototype.kill = function() {
  * instances
  */
 Sprite.prototype.remove = function(groups) {
-   if (!(groups instanceof Array)) groups = [groups];
+   if (!(groups instanceof Array)) {
+      groups = [groups];
+   }
 
    groups.forEach(function(group) {
       group.remove(this);
@@ -1931,7 +2073,9 @@ Sprite.prototype.remove = function(groups) {
  * instances
  */
 Sprite.prototype.add = function(groups) {
-   if (!(groups instanceof Array)) groups = [groups];
+   if (!(groups instanceof Array)) {
+      groups = [groups];
+   }
 
    groups.forEach(function(group) {
       group.add(this);
@@ -2005,7 +2149,9 @@ Group.prototype.update = function() {
  * `gamejs.sprite.Sprite` instances
  */
 Group.prototype.add = function(sprites) {
-   if (!(sprites instanceof Array)) sprites = [sprites];
+   if (!(sprites instanceof Array)) {
+      sprites = [sprites];
+   }
 
    sprites.forEach(function(sprite) {
       this._sprites.push(sprite);
@@ -2020,7 +2166,9 @@ Group.prototype.add = function(sprites) {
  * `gamejs.sprite.Sprite` instances
  */
 Group.prototype.remove = function(sprites) {
-   if (!(sprites instanceof Array)) sprites = [sprites];
+   if (!(sprites instanceof Array)) {
+      sprites = [sprites];
+   }
 
    sprites.forEach(function(sp) {
       arrays.remove(sp, this._sprites);
@@ -2036,7 +2184,9 @@ Group.prototype.remove = function(sprites) {
  * @returns {Boolean} True if every sprite is in this group, false otherwise
  */
 Group.prototype.has = function(sprites) {
-   if (!(sprites instanceof Array)) sprites = [sprites];
+   if (!(sprites instanceof Array)) {
+      sprites = [sprites];
+   }
 
    return sprites.every(function(sp) {
       return this._sprites.indexOf(sp) !== -1;
@@ -2049,7 +2199,7 @@ Group.prototype.has = function(sprites) {
  */
 Group.prototype.sprites = function() {
    return this._sprites;
-}
+};
 
 /**
  * Draw all the sprites in this group. This is equivalent to calling each
@@ -2062,6 +2212,18 @@ Group.prototype.draw = function() {
    }, this);
    return;
 };
+
+/**
+ * Draw background over each sprite in the group.
+ *
+ * @param {gamejs.Surface} the surface to draw on
+ * @param {gamejs.Surface} source surface
+ */
+Group.prototype.clear = function(destination, source) {
+   this._sprites.forEach(function(sprite) {
+      destination.blit(source, sprite.rect);
+   }, this);
+}
 
 /**
  * Remove all sprites from this group
@@ -2079,7 +2241,7 @@ Group.prototype.collidePoint = function() {
    return this._sprites.filter(function(sprite) {
       return sprite.rect.collidePoint.apply(sprite.rect, args);
    }, this);
-}
+};
 
 /**
  * Loop over each sprite in this group. This is a shortcut for
@@ -2106,14 +2268,15 @@ Group.prototype.some = function() {
  * @returns {Array} An array of `gamejs.sprite.Sprite` instances that collided
  */
 exports.spriteCollide = function(sprite, group, doKill, collided) {
-   var collided = collided || collideRect;
-   var doKill = doKill || false;
+   collided = collided || collideRect;
+   doKill = doKill || false;
 
    var collidingSprites = [];
    group.sprites().forEach(function(groupSprite) {
       if (collided(sprite, groupSprite)) {
-         if (doKill) groupSprite.kill();
-
+         if (doKill) {
+            groupSprite.kill();
+         }
          collidingSprites.push(groupSprite);
       }
    });
@@ -2141,16 +2304,20 @@ exports.spriteCollide = function(sprite, group, doKill, collided) {
  * correspond with objects from the first and second groups
  */
 exports.groupCollide = function(groupA, groupB, doKillA, doKillB, collided) {
-   var doKillA = doKillA || false;
-   var doKillB = doKillB || false;
+   doKillA = doKillA || false;
+   doKillB = doKillB || false;
 
    var collideList = [];
    var collideFn = collided || collideRect;
    groupA.sprites().forEach(function(groupSpriteA) {
       groupB.sprites().forEach(function(groupSpriteB) {
          if (collideFn(groupSpriteA, groupSpriteB)) {
-            if (doKillA) groupSpriteA.kill();
-            if (doKillB) groupSpriteB.kill();
+            if (doKillA) {
+               groupSpriteA.kill();
+            }
+            if (doKillB) {
+               groupSpriteB.kill();
+            }
 
             collideList.push({
                'a': groupSpriteA,
@@ -2170,7 +2337,7 @@ exports.groupCollide = function(groupA, groupB, doKillA, doKillB, collided) {
  * @param {gamejs.sprite.Sprite} spriteB Second sprite to check
  * @returns {Boolean} True if they collide, false otherwise
  */
-var collideRect = exports.collideRect = function(spriteA, spriteB) {
+var collideRect = exports.collideRect = function (spriteA, spriteB) {
    return spriteA.rect.collideRect(spriteB.rect);
 };
 
@@ -2203,7 +2370,7 @@ exports.collideMask = function(spriteA, spriteB) {
 exports.collideCircle = function(spriteA, spriteB) {
    var distance = spriteA.rect.center[0] * spriteA.rect.center[0] + spriteA.rect.center[1] * spriteA.rect.center[1];
    var radiusA = spriteA.radius * spriteA.radius ||
-            (spriteA.rect.width*spriteA.rect.width + spriteA.rect.height*spriteA.rect.height) / 4
+            (spriteA.rect.width*spriteA.rect.width + spriteA.rect.height*spriteA.rect.height) / 4;
    var radiusB = spriteB.radius * spriteB.radius ||
             (spriteB.rect.width*spriteB.rect.width + spriteB.rect.height*spriteB.rect.height) / 4;
 
@@ -2289,9 +2456,12 @@ objects.accessors(Font.prototype, {
    'fontHeight': {
       get: function() {
          // Returns an approximate line height of the text
+         // »This version of the specification does not provide a way to obtain
+         // the bounding box dimensions of the text.«
+         // see http://www.whatwg.org/specs/web-apps/current-work/multipage/the-canvas-element.html#dom-context-2d-measuretext
          return this.sampleSurface.context.measureText('M').width * 1.5;
-      },
-   },
+      }
+   }
 
 });
 
@@ -2331,7 +2501,7 @@ function ReachedList() {
       return list[hash(point)];
    };
    return this;
-};
+}
 
 
 /** A* search function.
@@ -2354,7 +2524,7 @@ exports.findRoute = function(map, from, to, timeout) {
    var reached = new ReachedList();
 
    function routeScore(route) {
-      if (route.score == undefined) {
+      if (route.score === undefined) {
          route.score = map.estimatedDistance(route.point, to) + route.length;
       }
       return route.score;
@@ -2367,25 +2537,28 @@ exports.findRoute = function(map, from, to, timeout) {
                 from: null,
                 length: 0});
 
+   function processNewPoints(direction) {
+      var known = reached.find(direction);
+      var newLength = route.length + map.actualDistance(route.point, direction);
+      if (!known || known.length > newLength){
+         if (known) {
+            open.remove(known);
+         }
+         addOpenRoute({
+            point: direction,
+            from: route,
+            length: newLength
+         });
+      }
+   }
    var startMs = Date.now();
+   var route = null;
    while (open.size() > 0 && (!timeout || Date.now() - startMs < timeout)) {
-      var route = open.pop();
+      route = open.pop();
       if (equals(to, route.point)) {
          return route;
       }
-      map.adjacent(route.point).forEach(function(direction) {
-         var known = reached.find(direction);
-         var newLength = route.length +
-                         map.actualDistance(route.point, direction);
-         if (!known || known.length > newLength){
-            if (known) {
-               open.remove(known);
-            }
-            addOpenRoute({point: direction,
-                          from: route,
-                           length: newLength});
-         }
-      });
+      map.adjacent(route.point).forEach(processNewPoints);
    } // end while
    return null;
 };
@@ -2397,7 +2570,7 @@ exports.findRoute = function(map, from, to, timeout) {
  */
 function hash(p) {
   return p[0] + "-" + p[1];
-};
+}
 
 /**
  * Are two points equal?
@@ -2407,7 +2580,7 @@ function hash(p) {
  */
 function equals(a, b) {
    return a[0] === b[0] && a[1] === b[1];
-};
+}
 
 /**
  * This is the interface for a Map that can be passed to the `findRoute()`
@@ -2441,13 +2614,15 @@ Map.prototype.estimatedDistance = function(pointA, pointB) {
  * @returns {Number} the actual distance between two points
  */
 Map.prototype.actualDistance = function(pointA, pointB) {
-}
+};
 
 }}, ["gamejs/utils/binaryheap"]);/* This file has been generated by yabbler.js */
 require.define({
 "gamejs/utils/arrays": function(require, exports, module) {
 /**
  * @fileoverview Utility functions for working with Objects
+ * @param {Object} item
+ * @param {Array} array
  */
 
 exports.remove = function(item, array) {
@@ -2457,6 +2632,8 @@ exports.remove = function(item, array) {
 }}, []);/* This file has been generated by yabbler.js */
 require.define({
 "gamejs/utils/vectors": function(require, exports, module) {
+var math=require('./math');
+
 /**
  * @param {Array} origin point [b0, b1]
  * @param {Array} target point [b0, b1]
@@ -2468,6 +2645,8 @@ exports.distance = function(a, b) {
 
 /**
  * substracts vectors [a0, a1] - [a0, a1]
+ * @param {Array} a
+ * @param {Array} b
  * @returns {Array} vector
  */
 var substract = exports.substract = function(a, b) {
@@ -2476,6 +2655,8 @@ var substract = exports.substract = function(a, b) {
 
 /**
  * adds vectors [a0, a1] - [a0, a1]
+ * @param {Array} a vector
+ * @param {Array} b vector
  * @returns {Array} vector
  */
 var add = exports.add = function(a, b) {
@@ -2496,6 +2677,10 @@ exports.multiply = function(a, s) {
    return [a[0] * s[0], a[1] * s[1]];
 };
 
+/**
+ * @param {Array} a vector
+ * @param {Number} s
+ */
 exports.divide = function(a, s) {
    if (typeof s === 'number') {
       return [a[0] / s, a[1] / s];
@@ -2519,9 +2704,97 @@ var len = exports.len = function(v) {
  */
 exports.unit = function(v) {
    var l = len(v);
-   return [v[0] / l, v[1] / l];
+   if(l) return [v[0] / l, v[1] / l];
+   return [0, 0];
 };
 
+/**
+ *
+ * rotate vector
+ * @param {Array} vector [v0, v1]
+ * @param {Number} angle to rotate vector by, radians. can be negative
+ * @returns {Array} rotated vector [v0, v1]
+ */
+exports.rotate=function(v, angle){
+   angle=math.normaliseRadians(angle);
+   return [v[0]* Math.cos(angle)-v[1]*Math.sin(angle),
+           v[0]* Math.sin(angle)+v[1]*Math.cos(angle)];
+
+};
+
+/**
+ *
+ * calculate vector dot product
+ * @param {Array} vector [v0, v1]
+ * @param {Array} vector [v0, v1]
+ * @returns {Number} dot product of v1 and v2
+ */
+exports.dot=function(v1, v2){
+   return v1[0]*v2[0]+v1[1]*v2[1];
+};
+
+/**
+ *
+ * calculate angle between vectors
+ * @param {Array} vector [v0, v1]
+ * @param {Array} vector [v0, v1]
+ * @returns {Number} angle between v1 and v2 in radians
+ */
+exports.angle=function(v1, v2){
+   var len1=len(v1);
+   var len2=len(v2);
+   if(len1&&len2){
+       var cosan=(v1[0]*v2[0]+v1[1]*v2[1])/(len1*len2);
+       return Math.acos(cosan);
+   }else return 0;
+};
+
+}}, ["gamejs/utils/math"]);/* This file has been generated by yabbler.js */
+require.define({
+"gamejs/utils/math": function(require, exports, module) {
+/**
+ *
+ * absolute angle to relative angle, in degrees
+ * @param {Number} absolute angle in degrees
+ * @returns {Number} relative angle in degrees
+ */
+exports.normaliseDegrees=function(degrees){
+    degrees=degrees % 360;
+    if(degrees<0)degrees+=360;
+    return degrees;
+};
+
+/**
+ *
+ * absolute angle to relative angle, in radians
+ * @param {Number} absolute angle in radians
+ * @returns {Number} relative angle in radians
+ */
+exports.normaliseRadians=function(radians){
+    radians=radians % (2*Math.PI);
+    if(radians<0)radians+=(2*Math.PI);
+    return radians;
+};
+
+/**
+ *
+ * convert radians to degrees
+ * @param {Number} radians
+ * @returns {Number} degrees
+ */
+exports.degrees=function(radians) {
+    return radians*(180/Math.PI);
+};
+
+/**
+ *
+ * convert degrees to radians
+ * @param {Number} degrees
+ * @returns {Number} radians
+ */
+exports.radians=function(degrees) {
+    return degrees*(Math.PI/180);
+};
 }}, []);/* This file has been generated by yabbler.js */
 require.define({
 "gamejs/utils/matrix": function(require, exports, module) {
@@ -2571,7 +2844,7 @@ var multiply = exports.multiply = function(m1, m2) {
       m1[0] * m2[2] + m1[2] * m2[3],
       m1[1] * m2[2] + m1[3] * m2[3],
       m1[0] * m2[4] + m1[2] * m2[5] + m1[4],
-      m1[1] * m2[4] + m1[3] * m2[5] + m1[5],
+      m1[1] * m2[4] + m1[3] * m2[5] + m1[5]
    ];
 };
 
@@ -2634,7 +2907,7 @@ var BinaryHeap = exports.BinaryHeap = function(scoreFunction){
     */
    this.scoreFunction = scoreFunction;
    return this;
-}
+};
 
 /**
  * Add element to heap.
@@ -2688,7 +2961,9 @@ BinaryHeap.prototype.remove = function(node) {
       }
       return false;
    }, this);
-   if (!isFound) throw new Error("Node not found.");
+   if (!isFound) {
+      throw new Error("Node not found.");
+   }
    return;
 };
 
@@ -2754,13 +3029,13 @@ BinaryHeap.prototype.bubbleUp = function(idx) {
       if (child2Idx < length) {
          var child2 = this.content[child2Idx];
          var child2Score = this.scoreFunction(child2);
-         if (child2Score < (swapIdx == null ? elemScore : child1Score)) {
+         if (child2Score < (swapIdx === null ? elemScore : child1Score)) {
             swapIdx = child2Idx;
          }
       }
 
       // If the element needs to be moved, swap it, and continue.
-      if (swapIdx != null) {
+      if (swapIdx !== null) {
          this.content[idx] = this.content[swapIdx];
          this.content[swapIdx] = element;
          idx = swapIdx;
@@ -2785,9 +3060,13 @@ require.define({
  * @param {Object} superClass
  */
 exports.extend = function(subClass, superClass) {
-   if (subClass === undefined) throw new Error('unknown subClass');
-   if (superClass === undefined) throw new Error('unknown superClass');
-
+   if (subClass === undefined) {
+      throw new Error('unknown subClass');
+   }
+   if (superClass === undefined) {
+      throw new Error('unknown superClass');
+   }
+   // new Function() is evil
    var f = new Function();
    f.prototype = superClass.prototype;
 
@@ -2822,8 +3101,10 @@ exports.merge = function() {
  * @see https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object/keys
  */
 var keys = exports.keys = function(obj) {
-   if (Object.keys) return Object.keys(obj);
-   
+   if (Object.keys) {
+      return Object.keys(obj);
+   }
+
    var ret=[],p;
    for (p in obj) {
       if(Object.prototype.hasOwnProperty.call(obj, p)) {
@@ -2831,7 +3112,8 @@ var keys = exports.keys = function(obj) {
       }
    }
    return ret;
-}
+};
+
 /**
  * Create object accessors
  * @param {Object} object The object on which to define the property
@@ -2868,7 +3150,6 @@ exports.accessors = function(object, props) {
    });
    return;
 };
-
 
 }}, []);/* This file has been generated by yabbler.js */
 require.define({
@@ -2931,12 +3212,10 @@ exports.load = function(key) {
    canvas.width = img.naturalWidth || img.width;
    canvas.height = img.naturalHeight || img.height;
    var context = canvas.getContext('2d');
-   //context.fillStyle = "#00ff00";
-   //context.fillRect(0, 0, canvas.width, canvas.height);
-   context.drawImage(img, 0, 0)
+   context.drawImage(img, 0, 0);
    img.getSize = function() { return [img.naturalWidth, img.naturalHeight]; };
    var surface = new gamejs.Surface(img.getSize());
-   // NOTE hack setting _canvas directly, don't do this yourself
+   // NOTE hack setting protected _canvas directly
    surface._canvas = canvas;
    return surface;
 };
@@ -2965,14 +3244,24 @@ exports.preload = function(imgIdents) {
       if (countLoaded == countTotal) {
          _PRELOADING = false;
       }
-      if (countLoaded % 10 == 0) {
+      if (countLoaded % 10 === 0) {
          gamejs.log('gamejs.image: preloaded  ' + countLoaded + ' of ' + countTotal);
       }
-   };
+   }
 
    function getProgress() {
       return countTotal > 0 ? countLoaded / countTotal : 1;
    }
+
+   function successHandler() {
+      addToCache(this);
+      incrementLoaded();
+   }
+   function errorHandler() {
+      incrementLoaded();
+      throw new Error('Error loading ' + this.src);
+   }
+
    for (var key in imgIdents) {
       if (key.indexOf('png') == -1 &&
             key.indexOf('jpg') == -1 &&
@@ -2980,16 +3269,8 @@ exports.preload = function(imgIdents) {
          continue;
       }
       var img = new Image();
-      img.addEventListener('load',function() {
-         addToCache(this);
-         incrementLoaded();
-         return;
-      }, true);
-      img.addEventListener('error', function() {
-         incrementLoaded();
-      	throw new Error('Error loading ' + this.src);
-         return;
-      }, true);
+      img.addEventListener('load', successHandler, true);
+      img.addEventListener('error', errorHandler, true);
       img.src = imgIdents[key];
       img.gamejsKey = key;
       countTotal++;
@@ -3039,7 +3320,7 @@ var CACHE = {};
  * need to export preloading status for require
  * @ignore
  */
-var _PRELOADING = false
+var _PRELOADING = false;
 
 /**
  * put all audios on page in cache
@@ -3067,9 +3348,19 @@ exports.preload = function(audioUrls, showProgressOrImage) {
       if (countLoaded == countTotal) {
          _PRELOADING = false;
       }
-   };
+   }
+
    function getProgress() {
       return countTotal > 0 ? countLoaded / countTotal : 1;
+   }
+
+   function successHandler() {
+      addToCache(this);
+      incrementLoaded();
+   }
+   function errorHandler() {
+      incrementLoaded();
+      throw new Error('Error loading ' + this.src);
    }
 
    for (var key in audioUrls) {
@@ -3078,16 +3369,8 @@ exports.preload = function(audioUrls, showProgressOrImage) {
       }
       countTotal++;
       var audio = new Audio();
-      audio.addEventListener('canplay', function() {
-         addToCache(this);
-         incrementLoaded();
-         return;
-      }, true);
-      audio.addEventListener('error', function() {
-         incrementLoaded();
-         throw new Error('Error loading ' + this.src);
-         return;
-      }, true);
+      audio.addEventListener('canplay', successHandler, true);
+      audio.addEventListener('error', errorHandler, true);
       audio.src = audioUrls[key];
       audio.gamejsKey = key;
       audio.load();
@@ -3103,21 +3386,23 @@ exports.preload = function(audioUrls, showProgressOrImage) {
  */
 exports.isPreloading = function() {
    return _PRELOADING;
-}
+};
 
 /**
  * @param {dom.ImgElement} audios the <audio> elements to put into cache
  * @ignore
  */
-var addToCache = function(audios) {
-   if (!(audios instanceof Array)) audios = [audios];
+function addToCache(audios) {
+   if (!(audios instanceof Array)) {
+      audios = [audios];
+   }
 
    var docLoc = document.location.href;
    audios.forEach(function(audio) {
       CACHE[audio.gamejsKey] = audio;
    });
    return;
-};
+}
 
 /**
  * Sounds can be played back.
@@ -3148,14 +3433,14 @@ exports.Sound = function Sound(uriOrAudio) {
       if (audio.ended || audio.paused) {
          audio.play();
       }
-   }
+   };
 
    /**
     * Stop the sound
     */
    this.stop = function() {
       audio.pause();
-   }
+   };
 
    /**
     * Set volume of this sound
@@ -3163,14 +3448,14 @@ exports.Sound = function Sound(uriOrAudio) {
     */
    this.setVolume = function(value) {
       audio.volume = value;
-   }
+   };
 
    /**
     * @returns {Number} the sound's volume from 0 to 1
     */
    this.getVolume = function() {
       return audio.volume;
-   }
+   };
 
    /**
     * @returns {Number} Duration of this sound in seconds
