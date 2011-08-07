@@ -29,7 +29,7 @@ function main() {
    draw.line(display, colorOne, [0,0], [100,100], 1);
    draw.lines(display, colorOne, true, [[50,50], [100,50], [100,100], [50,100]], 4);
 
-   draw.polygon(display, colorTwo, [[150,50], [200,50], [200,100]], 0);
+   draw.polygon(display, colorTwo, [[155,35], [210,50], [200,100]], 0);
 
    // surface, color, center, radius, width
    draw.circle(display, colorThree, [150, 150], 50, 10);
