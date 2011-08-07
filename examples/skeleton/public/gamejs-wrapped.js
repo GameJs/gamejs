@@ -1564,7 +1564,7 @@ exports.circle = function(surface, color, pos, radius, width) {
    if (!radius) {
       throw new Error('[circle] radius required argument');
    }
-   if (!pos || typeof(pos) !== 'array') {
+   if (!pos || !(pos instanceof Array)) {
       throw new Error('[circle] pos must be given & array' + pos);
    }
 
