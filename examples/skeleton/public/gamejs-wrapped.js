@@ -816,7 +816,7 @@ exports.scale = function(surface, dims) {
    var newDims = surface.getSize();
    newDims = [newDims[0] * dims[0], newDims[1] * dims[1]];
    var newSurface = new Surface(newDims);
-   newSurface._matrix = matrix.scale(newSurface._matrix, [width, height]);
+   surface._matrix = matrix.scale(surface._matrix, [width, height]);
    newSurface.blit(surface);
    return newSurface;
 };
