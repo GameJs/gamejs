@@ -1596,7 +1596,7 @@ exports.rect = function(surface, color, rect, width) {
    if (isNaN(width) || width === 0) {
       ctx.fillRect(rect.left, rect.top, rect.width, rect.height);
    } else {
-      ctx.lineWidth = width;
+      ctx.lineWidth = width || 1;
       ctx.strokeRect(rect.left, rect.top, rect.width, rect.height);
    }
    ctx.restore();
@@ -1621,7 +1621,7 @@ exports.arc= function(surface, color, rect, startAngle, stopAngle, width) {
    if (isNaN(width) || width === 0) {
       ctx.fill();
    } else {
-      ctx.lineWidth = width;
+      ctx.lineWidth = width || 1;
       ctx.stroke();
    }
    ctx.restore();
@@ -1652,6 +1652,7 @@ exports.polygon = function(surface, color, pointlist, width) {
    if (isNaN(width) || width === 0) {
       ctx.fill();
    } else {
+      ctx.lineWidth = width || 1;
       ctx.stroke();
    }
    ctx.restore();
