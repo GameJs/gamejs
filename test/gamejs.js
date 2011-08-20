@@ -92,6 +92,17 @@ exports.testRectSetters = function() {
       left + parseInt(width / 2, 10),
       top + parseInt(height / 2, 10)
    ]);
+
+   // set bottom
+   rect.bottom = 50;
+   assert.strictEqual(rect.bottom, 50);
+   assert.strictEqual(rect.top, 50 - height);
+
+   // set right
+   rect.right = 50;
+   assert.strictEqual(rect.right, 50);
+   assert.strictEqual(rect.left, 50 - width);
+
 };
 
 exports.testRectCollide = function() {
