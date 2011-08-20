@@ -47,7 +47,7 @@ function main() {
             }
          } else if (event.type === gamejs.event.MOUSE_MOTION) {
             if (display.rect.collidePoint(event.pos)) {
-               spearPosition = $v.substract(event.pos, spear.getSize());
+               spearPosition = $v.subtract(event.pos, spear.getSize());
             }
          }
       });
@@ -59,7 +59,7 @@ function main() {
       // collision
       // the relative offset is automatically calculated by
       // the higher-level gamejs.sprite.collideMask(spriteA, spriteB)
-      var relativeOffset = $v.substract(spearPosition, unitPosition);
+      var relativeOffset = $v.subtract(spearPosition, unitPosition);
       var hasMaskOverlap = mUnit.overlap(mSpear, relativeOffset);
       if (hasMaskOverlap) {
          display.blit(font.render('COLLISION', '#ff0000'), [250, 50]);

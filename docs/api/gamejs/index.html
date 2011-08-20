@@ -35,10 +35,13 @@ the most important as it kickstarts your app.</p>
                     <h3>Functions</h3>
                     <ul class="propertyoverview">
                                                 <li>
-                            <a href="#debug" class="jsdoc-title"> debug</a>()
+                            <a href="#error" class="jsdoc-title"> error</a>()
                         </li>
                                                 <li>
-                            <a href="#error" class="jsdoc-title"> error</a>()
+                            <a href="#fatal" class="jsdoc-title"> fatal</a>()
+                        </li>
+                                                <li>
+                            <a href="#info" class="jsdoc-title"> info</a>()
                         </li>
                                                 <li>
                             <a href="#log" class="jsdoc-title"> log</a>(msg)
@@ -63,6 +66,9 @@ the most important as it kickstarts your app.</p>
                         <h3>Instance Methods</h3>
                         <ul class="propertyoverview">
                                                         <li>
+                                <a href="#Rect.prototype.clip" class="jsdoc-title"> clip</a>(Rect)
+                            </li>
+                                                        <li>
                                 <a href="#Rect.prototype.clone" class="jsdoc-title"> clone</a>()
                             </li>
                                                         <li>
@@ -82,6 +88,9 @@ the most important as it kickstarts your app.</p>
                             </li>
                                                         <li>
                                 <a href="#Rect.prototype.toString" class="jsdoc-title"> toString</a>()
+                            </li>
+                                                        <li>
+                                <a href="#Rect.prototype.union" class="jsdoc-title"> union</a>(rect)
                             </li>
                             </ul>
                     </div>
@@ -108,6 +117,9 @@ the most important as it kickstarts your app.</p>
                             </li>
                                                         <li>
                                 <a href="#Rect.prototype.right" class="jsdoc-title"> right</a>
+                            </li>
+                                                        <li>
+                                <a href="#Rect.prototype.topleft" class="jsdoc-title"> topleft</a>
                             </li>
                             </ul>
                     </div>
@@ -279,6 +291,41 @@ new Rect(oldRect) clone of oldRect is created</pre>
                                 <p>Center Position. You can assign a rectangle form.</p>
 
 
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="Rect.prototype.clip">
+                            <h3>
+                                <span class="itemtitle">Rect.prototype.<a id="Rect.prototype.clip" href="#Rect.prototype.clip" class="itemtitle itemname">clip</a></span>
+                                <span class="itemtitle light">(Rect)</span></h3>
+                            <div>
+                                <p>Return the area in which this Rect and argument Rect overlap.</p>
+
+
+                            </div>
+                                                        <div>
+                                <h4>Parameters</h4>
+                                <table>
+                                                                        <tr>
+                                        <td>gamejs.Rect</td>
+                                        <td class="paramname">Rect</td>
+                                        <td>to clip this one into</td>
+                                    </tr>
+                                    </table>
+                            </div>
+                                                        <div>
+                                <h4>Returns</h4>
+                                <table>
+                                    <tr>
+                                        <td>gamejs.Rect</td>
+                                        <td> new Rect which is completely inside the argument Rect, 
+zero sized Rect if the two rectangles do not overlap</td>
+                                    </tr>
+                                </table>
                             </div>
                             </div>
                         <hr/>
@@ -528,6 +575,46 @@ as argument.</p>
 
                                         <!-- tpl-docitem -->
                     <div>
+                        <div class="docitem" docitem="Rect.prototype.topleft">
+                            <h3>
+                                <span class="itemtitle">Rect.prototype.<a id="Rect.prototype.topleft" href="#Rect.prototype.topleft" class="itemtitle itemname">topleft</a></span>
+                                </h3>
+                            <div>
+                                <p>Top-left Position. You can assign a rectangle form.</p>
+
+
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="Rect.prototype.union">
+                            <h3>
+                                <span class="itemtitle">Rect.prototype.<a id="Rect.prototype.union" href="#Rect.prototype.union" class="itemtitle itemname">union</a></span>
+                                <span class="itemtitle light">(rect)</span></h3>
+                            <div>
+                                
+
+
+                            </div>
+                                                        <div>
+                                <h4>Parameters</h4>
+                                <table>
+                                                                        <tr>
+                                        <td></td>
+                                        <td class="paramname">rect</td>
+                                        <td></td>
+                                    </tr>
+                                    </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
                         <div class="docitem" docitem="Surface">
                             <h3>
                                 <span class="itemtitle"><a id="Surface" href="#Surface" class="itemtitle itemname">Surface</a></span>
@@ -616,6 +703,15 @@ displaySurface.blit(flowerSurface, [0,0], flowerRect);</pre>
                                         <td>FIXME add special flags for composite operations</td>
                                     </tr>
                                     </table>
+                            </div>
+                                                        <div>
+                                <h4>Returns</h4>
+                                <table>
+                                    <tr>
+                                        <td>gamejs.Rect</td>
+                                        <td> Rect actually repainted</td>
+                                    </tr>
+                                </table>
                             </div>
                             </div>
                         <hr/>
@@ -802,9 +898,9 @@ a destination, the pixels will be drawn slightly transparent.</p>
 
                                         <!-- tpl-docitem -->
                     <div>
-                        <div class="docitem" docitem="debug">
+                        <div class="docitem" docitem="error">
                             <h3>
-                                <span class="itemtitle"><a id="debug" href="#debug" class="itemtitle itemname">debug</a></span>
+                                <span class="itemtitle"><a id="error" href="#error" class="itemtitle itemname">error</a></span>
                                 <span class="itemtitle light">()</span></h3>
                             <div>
                                 
@@ -817,9 +913,24 @@ a destination, the pixels will be drawn slightly transparent.</p>
 
                                         <!-- tpl-docitem -->
                     <div>
-                        <div class="docitem" docitem="error">
+                        <div class="docitem" docitem="fatal">
                             <h3>
-                                <span class="itemtitle"><a id="error" href="#error" class="itemtitle itemname">error</a></span>
+                                <span class="itemtitle"><a id="fatal" href="#fatal" class="itemtitle itemname">fatal</a></span>
+                                <span class="itemtitle light">()</span></h3>
+                            <div>
+                                
+
+
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="info">
+                            <h3>
+                                <span class="itemtitle"><a id="info" href="#info" class="itemtitle itemname">info</a></span>
                                 <span class="itemtitle light">()</span></h3>
                             <div>
                                 
@@ -912,8 +1023,11 @@ a destination, the pixels will be drawn slightly transparent.</p>
                                 <span class="itemtitle"><a id="setLogLevel" href="#setLogLevel" class="itemtitle itemname">setLogLevel</a></span>
                                 <span class="itemtitle light">(logLevel)</span></h3>
                             <div>
-                                <p>set logLevel as string or number
-0 = debug; 1 = warn; 2 = error;</p>
+                                set logLevel as string or number
+<ul><li>0 = info</li>
+<li>1 = warn</li>
+<li>2 = error</li>
+<li>3 = fatal</li></ul>
 
 
                             </div>
@@ -958,12 +1072,10 @@ gamejs.setLogLevel('error'); // equal to setLogLevel(2)</pre>
 
 
     <div class="menu" style="margin-top: 1em; font-size: 13px;">
-    <p>
-        <a class="repositoryname" href="../index.html">GameJs API </a>
-    </p>
-
-        Filter:<br />
-    <input id="jsdoc-leftnavsearch" type="search" size="14">
+    GameJs API<br/>
+        <a href="../index.html">Module list</a>
+    <a href="../index_all.html">Full index</a><br/>
+    <input id="jsdoc-leftnavsearch" type="search" placeholder="Filter module list" size="14">
     <ul class="jsdoc-leftnav leftnav">
                 <li><a href="../gamejs/index.html"> gamejs </a></li>
                 <li><a href="../gamejs/display/index.html"> gamejs/display </a></li>
@@ -981,17 +1093,13 @@ gamejs.setLogLevel('error'); // equal to setLogLevel(2)</pre>
                 <li><a href="../gamejs/pathfinding/astar/index.html"> gamejs/pathfinding/astar </a></li>
                 <li><a href="../gamejs/utils/arrays/index.html"> gamejs/utils/arrays </a></li>
                 <li><a href="../gamejs/utils/binaryheap/index.html"> gamejs/utils/binaryheap </a></li>
+                <li><a href="../gamejs/utils/math/index.html"> gamejs/utils/math </a></li>
                 <li><a href="../gamejs/utils/matrix/index.html"> gamejs/utils/matrix </a></li>
                 <li><a href="../gamejs/utils/objects/index.html"> gamejs/utils/objects </a></li>
                 <li><a href="../gamejs/utils/vectors/index.html"> gamejs/utils/vectors </a></li>
         </ul>
 
-
 </div>
 </div>
 </body>
 </html>
-
-
-
-

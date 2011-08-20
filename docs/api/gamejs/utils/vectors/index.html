@@ -36,10 +36,16 @@ $(document).ready(jsdocSetup);
                             <a href="#add" class="jsdoc-title"> add</a>(a, b)
                         </li>
                                                 <li>
+                            <a href="#angle" class="jsdoc-title"> angle</a>(vector, vector)
+                        </li>
+                                                <li>
                             <a href="#distance" class="jsdoc-title"> distance</a>(origin, target)
                         </li>
                                                 <li>
                             <a href="#divide" class="jsdoc-title"> divide</a>(a, s)
+                        </li>
+                                                <li>
+                            <a href="#dot" class="jsdoc-title"> dot</a>(vector, vector)
                         </li>
                                                 <li>
                             <a href="#len" class="jsdoc-title"> len</a>(vector)
@@ -48,7 +54,10 @@ $(document).ready(jsdocSetup);
                             <a href="#multiply" class="jsdoc-title"> multiply</a>(vector, vector)
                         </li>
                                                 <li>
-                            <a href="#substract" class="jsdoc-title"> substract</a>(a, b)
+                            <a href="#rotate" class="jsdoc-title"> rotate</a>(vector, angle)
+                        </li>
+                                                <li>
+                            <a href="#subtract" class="jsdoc-title"> subtract</a>(a, b)
                         </li>
                                                 <li>
                             <a href="#unit" class="jsdoc-title"> unit</a>(vector)
@@ -75,14 +84,14 @@ $(document).ready(jsdocSetup);
                                 <h4>Parameters</h4>
                                 <table>
                                                                         <tr>
-                                        <td></td>
+                                        <td>Array</td>
                                         <td class="paramname">a</td>
-                                        <td></td>
+                                        <td>vector</td>
                                     </tr>
                                                                         <tr>
-                                        <td></td>
+                                        <td>Array</td>
                                         <td class="paramname">b</td>
-                                        <td></td>
+                                        <td>vector</td>
                                     </tr>
                                     </table>
                             </div>
@@ -92,6 +101,45 @@ $(document).ready(jsdocSetup);
                                     <tr>
                                         <td>Array</td>
                                         <td> vector</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="angle">
+                            <h3>
+                                <span class="itemtitle"><a id="angle" href="#angle" class="itemtitle itemname">angle</a></span>
+                                <span class="itemtitle light">(vector, vector)</span></h3>
+                            <div>
+                                <p>calculate angle between vectors</p>
+
+
+                            </div>
+                                                        <div>
+                                <h4>Parameters</h4>
+                                <table>
+                                                                        <tr>
+                                        <td>Array</td>
+                                        <td class="paramname">vector</td>
+                                        <td>[v0, v1]</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Array</td>
+                                        <td class="paramname">vector</td>
+                                        <td>[v0, v1]</td>
+                                    </tr>
+                                    </table>
+                            </div>
+                                                        <div>
+                                <h4>Returns</h4>
+                                <table>
+                                    <tr>
+                                        <td>Number</td>
+                                        <td> angle between v1 and v2 in radians</td>
                                     </tr>
                                 </table>
                             </div>
@@ -153,16 +201,55 @@ $(document).ready(jsdocSetup);
                                 <h4>Parameters</h4>
                                 <table>
                                                                         <tr>
-                                        <td></td>
+                                        <td>Array</td>
                                         <td class="paramname">a</td>
-                                        <td></td>
+                                        <td>vector</td>
                                     </tr>
                                                                         <tr>
-                                        <td></td>
+                                        <td>Number</td>
                                         <td class="paramname">s</td>
                                         <td></td>
                                     </tr>
                                     </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="dot">
+                            <h3>
+                                <span class="itemtitle"><a id="dot" href="#dot" class="itemtitle itemname">dot</a></span>
+                                <span class="itemtitle light">(vector, vector)</span></h3>
+                            <div>
+                                <p>calculate vector dot product</p>
+
+
+                            </div>
+                                                        <div>
+                                <h4>Parameters</h4>
+                                <table>
+                                                                        <tr>
+                                        <td>Array</td>
+                                        <td class="paramname">vector</td>
+                                        <td>[v0, v1]</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Array</td>
+                                        <td class="paramname">vector</td>
+                                        <td>[v0, v1]</td>
+                                    </tr>
+                                    </table>
+                            </div>
+                                                        <div>
+                                <h4>Returns</h4>
+                                <table>
+                                    <tr>
+                                        <td>Number</td>
+                                        <td> dot product of v1 and v2</td>
+                                    </tr>
+                                </table>
                             </div>
                             </div>
                         <hr/>
@@ -243,12 +330,12 @@ $(document).ready(jsdocSetup);
 
                                         <!-- tpl-docitem -->
                     <div>
-                        <div class="docitem" docitem="substract">
+                        <div class="docitem" docitem="rotate">
                             <h3>
-                                <span class="itemtitle"><a id="substract" href="#substract" class="itemtitle itemname">substract</a></span>
-                                <span class="itemtitle light">(a, b)</span></h3>
+                                <span class="itemtitle"><a id="rotate" href="#rotate" class="itemtitle itemname">rotate</a></span>
+                                <span class="itemtitle light">(vector, angle)</span></h3>
                             <div>
-                                <p>substracts vectors [a0, a1] - [a0, a1]</p>
+                                <p>rotate vector</p>
 
 
                             </div>
@@ -256,12 +343,51 @@ $(document).ready(jsdocSetup);
                                 <h4>Parameters</h4>
                                 <table>
                                                                         <tr>
-                                        <td></td>
+                                        <td>Array</td>
+                                        <td class="paramname">vector</td>
+                                        <td>[v0, v1]</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Number</td>
+                                        <td class="paramname">angle</td>
+                                        <td>to rotate vector by, radians. can be negative</td>
+                                    </tr>
+                                    </table>
+                            </div>
+                                                        <div>
+                                <h4>Returns</h4>
+                                <table>
+                                    <tr>
+                                        <td>Array</td>
+                                        <td> rotated vector [v0, v1]</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="subtract">
+                            <h3>
+                                <span class="itemtitle"><a id="subtract" href="#subtract" class="itemtitle itemname">subtract</a></span>
+                                <span class="itemtitle light">(a, b)</span></h3>
+                            <div>
+                                <p>subtracts vectors [a0, a1] - [a0, a1]</p>
+
+
+                            </div>
+                                                        <div>
+                                <h4>Parameters</h4>
+                                <table>
+                                                                        <tr>
+                                        <td>Array</td>
                                         <td class="paramname">a</td>
                                         <td></td>
                                     </tr>
                                                                         <tr>
-                                        <td></td>
+                                        <td>Array</td>
                                         <td class="paramname">b</td>
                                         <td></td>
                                     </tr>
@@ -321,12 +447,10 @@ $(document).ready(jsdocSetup);
 
 
     <div class="menu" style="margin-top: 1em; font-size: 13px;">
-    <p>
-        <a class="repositoryname" href="../../../index.html">GameJs API </a>
-    </p>
-
-        Filter:<br />
-    <input id="jsdoc-leftnavsearch" type="search" size="14">
+    GameJs API<br/>
+        <a href="../../../index.html">Module list</a>
+    <a href="../../../index_all.html">Full index</a><br/>
+    <input id="jsdoc-leftnavsearch" type="search" placeholder="Filter module list" size="14">
     <ul class="jsdoc-leftnav leftnav">
                 <li><a href="../../../gamejs/index.html"> gamejs </a></li>
                 <li><a href="../../../gamejs/display/index.html"> gamejs/display </a></li>
@@ -344,17 +468,13 @@ $(document).ready(jsdocSetup);
                 <li><a href="../../../gamejs/pathfinding/astar/index.html"> gamejs/pathfinding/astar </a></li>
                 <li><a href="../../../gamejs/utils/arrays/index.html"> gamejs/utils/arrays </a></li>
                 <li><a href="../../../gamejs/utils/binaryheap/index.html"> gamejs/utils/binaryheap </a></li>
+                <li><a href="../../../gamejs/utils/math/index.html"> gamejs/utils/math </a></li>
                 <li><a href="../../../gamejs/utils/matrix/index.html"> gamejs/utils/matrix </a></li>
                 <li><a href="../../../gamejs/utils/objects/index.html"> gamejs/utils/objects </a></li>
                 <li><a href="../../../gamejs/utils/vectors/index.html"> gamejs/utils/vectors </a></li>
         </ul>
 
-
 </div>
 </div>
 </body>
 </html>
-
-
-
-
