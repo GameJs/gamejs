@@ -173,7 +173,10 @@ the dimensions of the SurfaceArray [width, height].</p>
                                 <span class="itemtitle">SurfaceArray.prototype.<a id="SurfaceArray.prototype.set" href="#SurfaceArray.prototype.set" class="itemtitle itemname">set</a></span>
                                 <span class="itemtitle light">(x, y, rgba)</span></h3>
                             <div>
-                                
+                                <p>Set rgba value at position x, y.</p>
+
+<p>For performance reasons this function has only one signature
+being Number, Number, Array[4].</p>
 
 
                             </div>
@@ -181,21 +184,27 @@ the dimensions of the SurfaceArray [width, height].</p>
                                 <h4>Parameters</h4>
                                 <table>
                                                                         <tr>
-                                        <td></td>
+                                        <td>Number</td>
                                         <td class="paramname">x</td>
-                                        <td></td>
+                                        <td>x position of pixel</td>
                                     </tr>
                                                                         <tr>
-                                        <td></td>
+                                        <td>Number</td>
                                         <td class="paramname">y</td>
-                                        <td></td>
+                                        <td>y position of pixel</td>
                                     </tr>
                                                                         <tr>
-                                        <td></td>
+                                        <td>Array</td>
                                         <td class="paramname">rgba</td>
-                                        <td></td>
+                                        <td>[red, green, blue, alpha] values [255, 255, 255, 255] (alpha, the last argument defaults to 255)</td>
                                     </tr>
                                     </table>
+                            </div>
+                                                        <div>
+                                <h4>Throws</h4>
+                                <div class="extrainfo">
+                                    Error if x, y out of range
+                                </div>
                             </div>
                             </div>
                         <hr/>
@@ -237,12 +246,12 @@ replace all pixel values.</p>
                                 <h4>Parameters</h4>
                                 <table>
                                                                         <tr>
-                                        <td></td>
+                                        <td>gamejs.Surface</td>
                                         <td class="paramname">surface</td>
                                         <td></td>
                                     </tr>
                                                                         <tr>
-                                        <td></td>
+                                        <td>gamejs.surfacearray.SurfaceArray</td>
                                         <td class="paramname">surfaceArray</td>
                                         <td></td>
                                     </tr>
@@ -259,12 +268,10 @@ replace all pixel values.</p>
 
 
     <div class="menu" style="margin-top: 1em; font-size: 13px;">
-    <p>
-        <a class="repositoryname" href="../../index.html">GameJs API </a>
-    </p>
-
-        Filter:<br />
-    <input id="jsdoc-leftnavsearch" type="search" size="14">
+    GameJs API<br/>
+        <a href="../../index.html">Module list</a>
+    <a href="../../index_all.html">Full index</a><br/>
+    <input id="jsdoc-leftnavsearch" type="search" placeholder="Filter module list" size="14">
     <ul class="jsdoc-leftnav leftnav">
                 <li><a href="../../gamejs/index.html"> gamejs </a></li>
                 <li><a href="../../gamejs/display/index.html"> gamejs/display </a></li>
@@ -282,17 +289,13 @@ replace all pixel values.</p>
                 <li><a href="../../gamejs/pathfinding/astar/index.html"> gamejs/pathfinding/astar </a></li>
                 <li><a href="../../gamejs/utils/arrays/index.html"> gamejs/utils/arrays </a></li>
                 <li><a href="../../gamejs/utils/binaryheap/index.html"> gamejs/utils/binaryheap </a></li>
+                <li><a href="../../gamejs/utils/math/index.html"> gamejs/utils/math </a></li>
                 <li><a href="../../gamejs/utils/matrix/index.html"> gamejs/utils/matrix </a></li>
                 <li><a href="../../gamejs/utils/objects/index.html"> gamejs/utils/objects </a></li>
                 <li><a href="../../gamejs/utils/vectors/index.html"> gamejs/utils/vectors </a></li>
         </ul>
 
-
 </div>
 </div>
 </body>
 </html>
-
-
-
-

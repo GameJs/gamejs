@@ -1130,16 +1130,16 @@ var math=require('./math');
  * @returns {Number} distance between two points
  */
 exports.distance = function(a, b) {
-   return len(substract(a, b));
+   return len(subtract(a, b));
 };
 
 /**
- * substracts vectors [a0, a1] - [a0, a1]
+ * subtracts vectors [a0, a1] - [a0, a1]
  * @param {Array} a
  * @param {Array} b
  * @returns {Array} vector
  */
-var substract = exports.substract = function(a, b) {
+var subtract = exports.subtract = function(a, b) {
    return [a[0] - b[0], a[1] - b[1]];
 };
 
