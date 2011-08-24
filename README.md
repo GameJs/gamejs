@@ -18,11 +18,11 @@ See `examples/skeleton/` directory for a minimal GameJs app.
 **Note** that you need to run the examples via `http://` (not `file://`)
 unless you use Firefox or Safari.
 
-GameJs Development
-=====================================
-
 One trivial, cross-plattform solution to serve a directory via http
 is this executable: <http://code.google.com/p/mongoose/>.
+
+GameJs Development
+=====================================
 
 Instead of using the `gamejs-wrapped.js` file you can also put all the
 GameJs files (everything below `./lib`) into the JavaScript directory of
