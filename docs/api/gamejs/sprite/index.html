@@ -61,7 +61,7 @@ groups of objects on the screen.</p>
                                 <a href="#Group.prototype.add" class="jsdoc-title"> add</a>(sprites)
                             </li>
                                                         <li>
-                                <a href="#Group.prototype.clear" class="jsdoc-title"> clear</a>(the, source)
+                                <a href="#Group.prototype.clear" class="jsdoc-title"> clear</a>(destination, source)
                             </li>
                                                         <li>
                                 <a href="#Group.prototype.collidePoint" class="jsdoc-title"> collidePoint</a>()
@@ -181,9 +181,14 @@ of objects which are rendered to the screen in a particular order.</p>
                         <div class="docitem" docitem="Group.prototype.clear">
                             <h3>
                                 <span class="itemtitle">Group.prototype.<a id="Group.prototype.clear" href="#Group.prototype.clear" class="itemtitle itemname">clear</a></span>
-                                <span class="itemtitle light">(the, source)</span></h3>
+                                <span class="itemtitle light">(destination, source)</span></h3>
                             <div>
-                                <p>Draw background over each sprite in the group.</p>
+                                <p>Draw background (<code>source</code> argument) over each sprite in the group
+on the <code>destination</code> surface.</p>
+
+<p>This can, for example, be used to clear the
+display surface to a a static background image in all the places
+occupied by the sprites of all group.</p>
 
 
                             </div>
@@ -192,8 +197,8 @@ of objects which are rendered to the screen in a particular order.</p>
                                 <table>
                                                                         <tr>
                                         <td>gamejs.Surface</td>
-                                        <td class="paramname">the</td>
-                                        <td>surface to draw on</td>
+                                        <td class="paramname">destination</td>
+                                        <td>the surface to draw on</td>
                                     </tr>
                                                                         <tr>
                                         <td>gamejs.Surface</td>
