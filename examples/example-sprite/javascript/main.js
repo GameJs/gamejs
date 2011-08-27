@@ -14,9 +14,10 @@ var gamejs = require('gamejs');
 var Ship = function(rect) {
    // call superconstructor
    Ship.superConstructor.apply(this, arguments);
-   this.origImage = gamejs.image.load("images/ship.png");
    this.speed = 40 + (10 * Math.random());
-   this.image = gamejs.transform.rotate(this.origImage, 50 + parseInt(90*Math.random()));
+   var image = gamejs.image.load("images/ship.png");
+   this.image = gamejs.transform.scale(image, [1.5 - Math.random(), 1.5 - Math.random()]);
+   this.image = gamejs.transform.rotate(this.image, 50 + parseInt(90*Math.random()));
    this.rect = new gamejs.Rect(rect);
    return this;
 };
