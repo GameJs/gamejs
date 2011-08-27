@@ -14,10 +14,15 @@ var gamejs = require('gamejs');
 var Ship = function(rect) {
    // call superconstructor
    Ship.superConstructor.apply(this, arguments);
-   this.speed = 40 + (10 * Math.random());
-   var image = gamejs.image.load("images/ship.png");
-   this.image = gamejs.transform.scale(image, [1.5 - Math.random(), 1.5 - Math.random()]);
-   this.image = gamejs.transform.rotate(this.image, 50 + parseInt(90*Math.random()));
+   this.speed = 20 + (40 * Math.random());
+   // ever ship has its own scale
+   this.originalImage = gamejs.image.load("images/ship.png");
+   this.originalImage = gamejs.transform.scale(
+                                this.originalImage,
+                                [1.5 - Math.random(), 1.5 - Math.random()]
+                        );
+   this.rotation = 50 + parseInt(120*Math.random());
+   this.image = gamejs.transform.rotate(this.originalImage, this.rotation);
    this.rect = new gamejs.Rect(rect);
    return this;
 };
@@ -28,8 +33,10 @@ Ship.prototype.update = function(msDuration) {
    this.rect.moveIp(0, this.speed * (msDuration/1000));
    if (this.rect.top > 600) {
       this.speed *= -1;
+      this.image = gamejs.transform.rotate(this.originalImage, this.rotation + 180);
    } else if (this.rect.top < 0 ) {
       this.speed *= -1;
+      this.image = gamejs.transform.rotate(this.originalImage, this.rotation);
    }
 };
 
