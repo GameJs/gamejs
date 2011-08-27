@@ -227,6 +227,22 @@ objects.accessors(Rect.prototype, {
          this.top = args.top;
          return;
       }
+   },
+   /**
+    * Bottom-left Position. You can assign a rectangle form.
+    * @name Rect.prototype.bottomleft
+    * @type Array
+    */
+   'bottomleft': {
+      get: function() {
+         return [this.left, this.bottom];
+      },
+      set: function() {
+         var args = normalizeRectArguments.apply(this, arguments);
+         this.left = args.left;
+         this.bottom = args.bottom;
+         return;
+      }
    }
 });
 
