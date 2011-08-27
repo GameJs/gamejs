@@ -12,6 +12,7 @@
         #gjs-loader {
             width: 50%;
             height: 50%;
+            background: url('./public/ajax-loader.gif');
         }
     </style>
 <!-- Start javascript/main.js -->
@@ -25,7 +26,9 @@
 <!-- Html -->
 <body>
     <div>
-        <img id="gjs-loader" src="./public/ajax-loader.gif">
+        <div id="gjs-loader">
+         Loading...
+        </div>
         <canvas id="gjs-canvas"></canvas>
         <p>
         Powered by <a href="http://gamejs.org">GameJs</a>.
