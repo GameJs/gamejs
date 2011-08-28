@@ -44,7 +44,7 @@ The `SpriteSheet` class delegates most of its work to [gamejs.Surface.blit](http
            for (var j=0;j<image.rect.height;j+=height) {
              var surface = new gamejs.Surface([width, height]);
              var rect = new gamejs.Rect(i, j, width, height);
-             surface.blit(image, imgsize, rect);
+             surface.blit(image, imgSize, rect);
              surfaceCache.push(surface);
           }
        }
