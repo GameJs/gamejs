@@ -81,7 +81,7 @@ The `Director` class, which provides the above functionality, needs to keep trac
           return activeScene;
        };
        var display = gamejs.display.setMode([width, height]);
-       gamejs.gamejs.time.fpsCallback(tick, this, 30);
+       gamejs.time.fpsCallback(tick, this, 30);
        return this;
     };
 
