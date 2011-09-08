@@ -71,12 +71,25 @@ exports.testSpriteCollisions = function() {
 
    assert.isTrue(gamejs.sprite.collideCircle(a, b));
 
-   a.radius = 4;
-   b.radius = 4;
+   a.radius = 1;
+   b.radius = 1;
    assert.isFalse(gamejs.sprite.collideCircle(a, b));
 
-   a.radius = 5;
-   b.radius = 5;
+   a.radius = 6;
+   b.radius = 6;
    assert.isTrue(gamejs.sprite.collideCircle(a, b));
+
+   a.rect = new gamejs.Rect([0,0], [5,5]);
+   b.rect = new gamejs.Rect([-1,-1], [5,5]);
+   assert.isTrue(gamejs.sprite.collideCircle(a,b));
+
+   a.radius = 6;
+   b.radius = 6;
+   assert.isTrue(gamejs.sprite.collideCircle(a,b));
+
+   a.radius = 0.3;
+   b.radius = 0.3;
+   assert.isFalse(gamejs.sprite.collideCircle(a,b));
+
 
 };

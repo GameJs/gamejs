@@ -90,7 +90,7 @@ the most important as it kickstarts your app.</p>
                                 <a href="#Rect.prototype.toString" class="jsdoc-title"> toString</a>()
                             </li>
                                                         <li>
-                                <a href="#Rect.prototype.union" class="jsdoc-title"> union</a>(rect)
+                                <a href="#Rect.prototype.union" class="jsdoc-title"> union</a>(union)
                             </li>
                             </ul>
                     </div>
@@ -113,6 +113,12 @@ the most important as it kickstarts your app.</p>
                                 <a href="#Rect.prototype.bottom" class="jsdoc-title"> bottom</a>
                             </li>
                                                         <li>
+                                <a href="#Rect.prototype.bottomleft" class="jsdoc-title"> bottomleft</a>
+                            </li>
+                                                        <li>
+                                <a href="#Rect.prototype.bottomright" class="jsdoc-title"> bottomright</a>
+                            </li>
+                                                        <li>
                                 <a href="#Rect.prototype.center" class="jsdoc-title"> center</a>
                             </li>
                                                         <li>
@@ -120,6 +126,9 @@ the most important as it kickstarts your app.</p>
                             </li>
                                                         <li>
                                 <a href="#Rect.prototype.topleft" class="jsdoc-title"> topleft</a>
+                            </li>
+                                                        <li>
+                                <a href="#Rect.prototype.topright" class="jsdoc-title"> topright</a>
                             </li>
                             </ul>
                     </div>
@@ -173,9 +182,7 @@ constructor value combinations <code>Rect</code> accepts.</p>
 <p>Rects are used a lot. They are good for collision detection, specifying
 an area on the screen (for blitting) or just to hold an objects position.</p>
 
-<p><code>left</code>, <code>top</code>, <code>width</code>, <code>height</code>, and <code>center</code> are assignable.</p>
-
-<p><code>bottom</code> and <code>right</code> are read-only for now.</p>
+<p><code>left</code>, <code>top</code>, <code>width</code>, <code>height</code>, <code>bottom</code>, <code>right</code>, and <code>center</code> are assignable.</p>
 
 
                             </div>
@@ -283,6 +290,36 @@ new Rect(oldRect) clone of oldRect is created</pre>
 
                                         <!-- tpl-docitem -->
                     <div>
+                        <div class="docitem" docitem="Rect.prototype.bottomleft">
+                            <h3>
+                                <span class="itemtitle">Rect.prototype.<a id="Rect.prototype.bottomleft" href="#Rect.prototype.bottomleft" class="itemtitle itemname">bottomleft</a></span>
+                                </h3>
+                            <div>
+                                <p>Bottom-left Position. You can assign a rectangle form.</p>
+
+
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="Rect.prototype.bottomright">
+                            <h3>
+                                <span class="itemtitle">Rect.prototype.<a id="Rect.prototype.bottomright" href="#Rect.prototype.bottomright" class="itemtitle itemname">bottomright</a></span>
+                                </h3>
+                            <div>
+                                <p>Bottom-right Position. You can assign a rectangle form.</p>
+
+
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
                         <div class="docitem" docitem="Rect.prototype.center">
                             <h3>
                                 <span class="itemtitle">Rect.prototype.<a id="Rect.prototype.center" href="#Rect.prototype.center" class="itemtitle itemname">center</a></span>
@@ -322,7 +359,7 @@ new Rect(oldRect) clone of oldRect is created</pre>
                                 <table>
                                     <tr>
                                         <td>gamejs.Rect</td>
-                                        <td> new Rect which is completely inside the argument Rect, 
+                                        <td> new Rect which is completely inside the argument Rect,
 zero sized Rect if the two rectangles do not overlap</td>
                                     </tr>
                                 </table>
@@ -590,12 +627,27 @@ as argument.</p>
 
                                         <!-- tpl-docitem -->
                     <div>
+                        <div class="docitem" docitem="Rect.prototype.topright">
+                            <h3>
+                                <span class="itemtitle">Rect.prototype.<a id="Rect.prototype.topright" href="#Rect.prototype.topright" class="itemtitle itemname">topright</a></span>
+                                </h3>
+                            <div>
+                                <p>Top-right Position. You can assign a rectangle form.</p>
+
+
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
                         <div class="docitem" docitem="Rect.prototype.union">
                             <h3>
                                 <span class="itemtitle">Rect.prototype.<a id="Rect.prototype.union" href="#Rect.prototype.union" class="itemtitle itemname">union</a></span>
-                                <span class="itemtitle light">(rect)</span></h3>
+                                <span class="itemtitle light">(union)</span></h3>
                             <div>
-                                
+                                <p>Join two rectangles</p>
 
 
                             </div>
@@ -603,11 +655,20 @@ as argument.</p>
                                 <h4>Parameters</h4>
                                 <table>
                                                                         <tr>
-                                        <td></td>
-                                        <td class="paramname">rect</td>
-                                        <td></td>
+                                        <td>gamejs.Rect</td>
+                                        <td class="paramname">union</td>
+                                        <td>with this rectangle</td>
                                     </tr>
                                     </table>
+                            </div>
+                                                        <div>
+                                <h4>Returns</h4>
+                                <table>
+                                    <tr>
+                                        <td>gamejs.Rect</td>
+                                        <td> rectangle containing area of both rectangles</td>
+                                    </tr>
+                                </table>
                             </div>
                             </div>
                         <hr/>

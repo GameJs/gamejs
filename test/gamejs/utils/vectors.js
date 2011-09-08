@@ -60,13 +60,13 @@ exports.testDot = function(){
 
 exports.testAngle = function(){
    //90 degree angle
-   assert.isTrue(Math.abs(angle([0, -1], [1, 0]))-Math.PI/2 < EPS);
+   assert.isTrue(angle([0, -1], [1, 0])+Math.PI/2 < EPS);
 
    //90 degree angle, other direction
-   assert.isTrue(Math.abs(angle([0, -1], [-1, 0]))-Math.PI/2 < EPS);
+   assert.isTrue(angle([0, -1], [-1, 0])-Math.PI/2 < EPS);
 
    //180 degree angle
-   assert.isTrue(Math.abs(angle([1, 0], [-1, 0]))-Math.PI < EPS);
+   assert.isTrue(angle([1, 0], [-1, 0])-Math.PI < EPS);
 
    //0 degrees
    assert.isTrue(angle([0, -1], [0, -1]) < EPS);
