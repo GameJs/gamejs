@@ -275,6 +275,34 @@ objects.accessors(Rect.prototype, {
          this.bottom = args.bottom;
          return;
       }
+   },
+   /**
+    * Bottom-right Position. You can assign a rectangle form.
+    * @name Rect.prototype.bottomright
+    * @type Array
+    */
+   'x': {
+      get: function() {
+         return this.left;
+      },
+      set: function(newValue) {
+         this.left = newValue;
+         return;
+      }
+   },
+   /**
+    * Bottom-right Position. You can assign a rectangle form.
+    * @name Rect.prototype.bottomright
+    * @type Array
+    */
+   'y': {
+      get: function() {
+         return this.top;
+      },
+      set: function(newValue) {
+         this.top = newValue;
+         return;
+      }
    }
 });
 
