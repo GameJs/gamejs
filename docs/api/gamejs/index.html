@@ -130,6 +130,9 @@ the most important as it kickstarts your app.</p>
                                                         <li>
                                 <a href="#Rect.prototype.topright" class="jsdoc-title"> topright</a>
                             </li>
+                                                        <li>
+                                <a href="#Rect.prototype.y" class="jsdoc-title"> y</a>
+                            </li>
                             </ul>
                     </div>
                                         <h2>Class <a href="#Surface" class="jsdoc-title">Surface</a></h2>
@@ -182,7 +185,18 @@ constructor value combinations <code>Rect</code> accepts.</p>
 <p>Rects are used a lot. They are good for collision detection, specifying
 an area on the screen (for blitting) or just to hold an objects position.</p>
 
-<p><code>left</code>, <code>top</code>, <code>width</code>, <code>height</code>, <code>bottom</code>, <code>right</code>, and <code>center</code> are assignable.</p>
+<p>The Rect object has several virtual attributes which can be used to move and align the Rect:</p>
+
+<p>top, left, bottom, right
+topleft, bottomleft, topright, bottomright
+center
+width, height
+w,h</p>
+
+<p>All of these attributes can be assigned to.
+Assigning to width or height changes the dimensions of the rectangle; all other
+assignments move the rectangle without resizing it. Notice that some attributes
+are Numbers and others are pairs of Numbers.</p>
 
 
                             </div>
@@ -669,6 +683,21 @@ as argument.</p>
                                         <td> rectangle containing area of both rectangles</td>
                                     </tr>
                                 </table>
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="Rect.prototype.y">
+                            <h3>
+                                <span class="itemtitle">Rect.prototype.<a id="Rect.prototype.y" href="#Rect.prototype.y" class="itemtitle itemname">y</a></span>
+                                </h3>
+                            <div>
+                                <p>Position x value, alias for <code>left</code>.</p>
+
+
                             </div>
                             </div>
                         <hr/>
