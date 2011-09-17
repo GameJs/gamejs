@@ -17,9 +17,10 @@ var Ship = function(rect) {
    this.speed = 20 + (40 * Math.random());
    // ever ship has its own scale
    this.originalImage = gamejs.image.load("images/ship.png");
+   var dims = this.originalImage.getSize();
    this.originalImage = gamejs.transform.scale(
                                 this.originalImage,
-                                [1.5 - Math.random(), 1.5 - Math.random()]
+                                [dims[0] * (0.5 + Math.random()), dims[1] *  (0.5 + Math.random())]
                         );
    this.rotation = 50 + parseInt(120*Math.random());
    this.image = gamejs.transform.rotate(this.originalImage, this.rotation);
