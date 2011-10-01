@@ -39,7 +39,7 @@ $(document).ready(jsdocSetup);
                             <a href="#rotate" class="jsdoc-title"> rotate</a>(surface, angle)
                         </li>
                                                 <li>
-                            <a href="#scale" class="jsdoc-title"> scale</a>(surface, scale)
+                            <a href="#scale" class="jsdoc-title"> scale</a>(surface, dimensions)
                         </li>
                         </ul>
                 </div>
@@ -118,7 +118,7 @@ a new Surface (i.e: nondestructive).</p>
                         <div class="docitem" docitem="scale">
                             <h3>
                                 <span class="itemtitle"><a id="scale" href="#scale" class="itemtitle itemname">scale</a></span>
-                                <span class="itemtitle light">(surface, scale)</span></h3>
+                                <span class="itemtitle light">(surface, dimensions)</span></h3>
                             <div>
                                 <p>Returns a new surface holding the scaled surface.</p>
 
@@ -134,8 +134,8 @@ a new Surface (i.e: nondestructive).</p>
                                     </tr>
                                                                         <tr>
                                         <td>Array</td>
-                                        <td class="paramname">scale</td>
-                                        <td>new [widthScale, heightScale] in range; e.g.: [2,2] would double the size</td>
+                                        <td class="paramname">dimensions</td>
+                                        <td>new [width, height] of surface after scaling</td>
                                     </tr>
                                     </table>
                             </div>

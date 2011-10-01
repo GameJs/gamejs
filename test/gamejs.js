@@ -103,6 +103,16 @@ exports.testRectSetters = function() {
    assert.strictEqual(rect.right, 50);
    assert.strictEqual(rect.left, 50 - width);
 
+   // set x
+   rect.x = 88;
+   assert.strictEqual(rect.left, 88);
+   assert.strictEqual(rect.left, rect.x);
+
+   // set y
+   rect.y = 88;
+   assert.strictEqual(rect.top, 88);
+   assert.strictEqual(rect.top, rect.y);
+
 };
 
 exports.testRectCollide = function() {

@@ -119,7 +119,18 @@ function normalizeRectArguments() {
  * Rects are used a lot. They are good for collision detection, specifying
  * an area on the screen (for blitting) or just to hold an objects position.
  *
- * `left`, `top`, `width`, `height`, `bottom`, `right`, and `center` are assignable.
+ * The Rect object has several virtual attributes which can be used to move and align the Rect:
+ *
+ *   top, left, bottom, right
+ *   topleft, bottomleft, topright, bottomright
+ *   center
+ *   width, height
+ *   w,h
+ *
+ * All of these attributes can be assigned to.
+ * Assigning to width or height changes the dimensions of the rectangle; all other
+ * assignments move the rectangle without resizing it. Notice that some attributes
+ * are Numbers and others are pairs of Numbers.
  *
  * @example
  * new Rect([left, top]) width & height default to 0
@@ -273,6 +284,34 @@ objects.accessors(Rect.prototype, {
          var args = normalizeRectArguments.apply(this, arguments);
          this.right = args.right;
          this.bottom = args.bottom;
+         return;
+      }
+   },
+   /**
+    * Position x value, alias for `left`.
+    * @name Rect.prototype.y
+    * @type Array
+    */
+   'x': {
+      get: function() {
+         return this.left;
+      },
+      set: function(newValue) {
+         this.left = newValue;
+         return;
+      }
+   },
+   /**
+    * Position y value, alias for `top`.
+    * @name Rect.prototype.y
+    * @type Array
+    */
+   'y': {
+      get: function() {
+         return this.top;
+      },
+      set: function(newValue) {
+         this.top = newValue;
          return;
       }
    }
@@ -840,7 +879,7 @@ exports.rotate = function (surface, angle) {
    var radians = (angle * Math.PI / 180);
    var newSize = origSize;
    // find new bounding box
-   if (angle % 90 !== 0) {
+   if (angle % 360 !== 0) {
       var rect = surface.getRect();
       var points = [
          [-rect.width/2, rect.height/2],
@@ -873,16 +912,17 @@ exports.rotate = function (surface, angle) {
 /**
  * Returns a new surface holding the scaled surface.
  * @param {Surface} surface
- * @param {Array} scale new [widthScale, heightScale] in range; e.g.: [2,2] would double the size
+ * @param {Array} dimensions new [width, height] of surface after scaling
  * @returns {Surface} new, scaled surface
  */
 exports.scale = function(surface, dims) {
    var width = dims[0];
    var height = dims[1];
-   var newDims = surface.getSize();
-   newDims = [newDims[0] * dims[0], newDims[1] * dims[1]];
-   var newSurface = new Surface(newDims);
-   surface._matrix = matrix.scale(surface._matrix, [width, height]);
+   var oldDims = surface.getSize();
+   var ws = width / oldDims[0];
+   var hs = height / oldDims[1];
+   var newSurface = new Surface([width, height]);
+   surface._matrix = matrix.scale(surface._matrix, [ws, hs]);
    newSurface.blit(surface);
    return newSurface;
 };
