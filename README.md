@@ -29,7 +29,7 @@ To wrap your own game's JavaScript files into one single file, use
 
 This will produce one file `gjs-app-wrapped.js` holding all GameJs modules as
 well as your application code. You can then remove the `<script>` lines loading
-yabble & gamejs-wrapped and instead load this big file.
+yabble & gamejs-wrapped and should instead only load the `gjs-app-wrapped.js` file.
 
 More Help
 ===========
@@ -64,7 +64,7 @@ everything below `./lib` into your applications `javascript/` directory:
 Your application should now transparently load the single modules instead of the
 bundle.
 
-For the following features, RingoJs must be installed on your system:
+For the following features to work, RingoJs must be installed on your system:
 
-   $ ./create-jsdoc.sh     # render the API to the folder docs/api
-   $ ./run-unit-tests.sh   # run the GameJs unit tests
+    $ ./create-jsdoc.sh     # render the API to the folder docs/api
+    $ ./run-unit-tests.sh   # run the GameJs unit tests
