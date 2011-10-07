@@ -5,6 +5,8 @@ QUnit.extend( QUnit, {
 		QUnit.push(QUnit.equiv(actual, expected), actual, expected, message);
 	},
 	surfaceEqual: function(actual, expected, message) {
-      QUnit.push(actual._canvas.toDataURL() === expected._canvas.toDataURL(), actual, expected, message);
+	   var expectedString = typeof expected === 'string' ? expected : expected._canvas.toDataURL();
+	   var actualString = typeof actual === 'string'  ? actual : actual._canvas.toDataURL();
+      QUnit.push(actualString === expectedString, actualString, expectedString, message);
 	}
 });

@@ -4,6 +4,7 @@ var gamejs = require('gamejs');
 // maybe yabble bug
 require('./rectsurface');
 require('./sprite');
+require('./draw');
 require('./binaryheap');
 require('./mask');
 require('./math');
