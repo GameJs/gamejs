@@ -10,3 +10,4 @@ require('./mask');
 require('./math');
 require('./pathfinding');
 require('./vectors');
+require('./transform');
