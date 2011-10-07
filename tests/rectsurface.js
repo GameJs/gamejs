@@ -4,7 +4,10 @@ qModule('gamejs');
 test('RectConstructors', function() {
    // test various constructor forms
 
-   var [left, top, width, height] = [11, 12, 13, 14];
+   var left = 11;
+   var top = 12;
+   var width = 13;
+   var height = 14;
 
    var rect = new gamejs.Rect([left, top]);
    ok(rect instanceof gamejs.Rect);
@@ -60,7 +63,10 @@ test('RectConstructors', function() {
 });
 
 test('RectSetters', function() {
-   var [left, top, width, height] = [10, 20, 30, 40];
+   var left = 10;
+   var top = 20;
+   var width = 30;
+   var height = 40;
    var rect = new gamejs.Rect(left, top, width, height);
    var newCenter = [50, 60];
 
@@ -232,7 +238,8 @@ test('RectUnion', function() {
 
 test('SurfaceConstructors', function() {
 
-   var [width, height] = [30, 40];
+   var width = 30;
+   var height = 40;
    var surface = new gamejs.Surface(width, height);
    ok(surface instanceof gamejs.Surface);
    deepEqual(surface.getSize(), [width, height]);

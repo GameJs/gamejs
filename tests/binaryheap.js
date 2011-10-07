@@ -1,4 +1,4 @@
-var {BinaryHeap} = require('gamejs/utils/binaryheap');
+var BinaryHeap = require('gamejs/utils/binaryheap').BinaryHeap;
 qModule('gamejs/utils/binaryheap');
 
 test('PushPop', function() {

@@ -16,14 +16,18 @@ test('SpriteMethods', function() {
 });
 
 test('SpriteGroup', function() {
-   var sprites = [new sprite.Sprite() for (i in [1,2,3,4,5])];
+   var sprites = [];
+   var i = 5;
+   while (i-->0) {
+      sprites.push(new sprite.Sprite());
+   }
    var group = new sprite.Group(sprites);
    ok(group instanceof sprite.Group);
    // group has sprites?
    ok(group.has(sprites));
-   for each (var sp in sprites) {
+   sprites.forEach(function(sp) {
       ok(group.has(sp));
-   }
+   });
    // group cascades update & draw?
    sprites = sprites.map(function(sp) {
       sp._testUpdateCalled = false;
@@ -44,22 +48,22 @@ test('SpriteGroup', function() {
    }, this);
    var msDuration = 12345;
    group.update(msDuration);
-   for each (var sp in sprites) {
+   sprites.forEach(function(sp) {
       ok(sp._testUpdateCalled);
       equal(sp._testDurationPassed, msDuration);
-   };
+   });
    var surface = '{{A Surface Object}}';
    group.draw(surface);
-   for each (var sp in sprites) {
+   sprites.forEach(function(sp) {
       ok(sp._testDrawCalled);
       equal(sp._testSurfacePassed, surface);
-   };
+   });
 
    // remove one by one
-   for each (var sp in sprites) {
+   sprites.forEach(function(sp) {
       group.remove(sp);
       ok(!group.has(sp));
-   }
+   });
 });
 
 test('SpriteCollisions', function() {
