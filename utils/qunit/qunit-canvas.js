@@ -7,6 +7,34 @@ QUnit.extend( QUnit, {
 	surfaceEqual: function(actual, expected, message) {
 	   var expectedString = typeof expected === 'string' ? expected : expected._canvas.toDataURL();
 	   var actualString = typeof actual === 'string'  ? actual : actual._canvas.toDataURL();
-      QUnit.push(actualString === expectedString, actualString, expectedString, message);
+
+	   var testCanvas = document.createElement('canvas');
+	   var eImg = document.createElement('img');
+	   eImg.setAttribute('src', expectedString);
+	   var aImg = document.createElement('img');
+	   aImg.setAttribute('src', actualString);
+
+      var w = Math.max(aImg.width, eImg.width);
+      var h = Math.max(eImg.height, eImg.height);
+	   testCanvas.setAttribute('width', w + 'px');
+	   testCanvas.setAttribute('height', h + 'px');
+
+      var ctx = testCanvas.getContext('2d');
+      ctx.drawImage(eImg, 0,0);
+      ctx.globalCompositeOperation = 'xor';
+      ctx.drawImage(aImg, 0, 0);
+      //document.body.appendChild(testCanvas);
+      // count non transparent pixels
+      var imgData = ctx.getImageData(0,0,w-1,h-1);
+      var nonTransparent = 0;
+      var count = imgData.data.length;
+      for (var i=0;i<count-1;i+=4) {
+         if (imgData.data[i+3] !== 0) {
+            nonTransparent++;
+         }
+      }
+      var ratio = nonTransparent / count;
+      console.log(ratio);
+      QUnit.push(ratio < 0.08, actualString, expectedString, message);
 	}
 });
