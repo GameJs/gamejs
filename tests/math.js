@@ -16,8 +16,8 @@ test('Degrees', function(){
 
 test('Radians', function(){
     ok(radians(0)==0);
-    ok(Math.abs(radians(90)-Math.PI/2)<EPS);
-    ok(Math.abs(radians(180*3)-Math.PI*3)<EPS);
+    close(radians(90), Math.PI/2, EPS);
+    close(radians(180*3), Math.PI*3, EPS);
 });
 
 test('NormaliseDegrees', function(){
@@ -31,6 +31,6 @@ test('NormaliseDegrees', function(){
 test('NormaliseRadians', function(){
     ok(normaliseRadians(0)==0);
     ok(normaliseRadians(Math.PI)==Math.PI);
-    ok(normaliseRadians(Math.PI*3)-Math.PI < EPS);
-    ok(normaliseRadians(-Math.PI*9)-Math.PI < EPS);
+    close(normaliseRadians(Math.PI*3), Math.PI, EPS);
+    close(normaliseRadians(-Math.PI*9), Math.PI, EPS);
 });
