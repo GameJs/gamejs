@@ -1,29 +1,28 @@
-var sprite = require('../../lib/gamejs/sprite');
-var gamejs = require('../../lib/gamejs');
+var gamejs = require('gamejs');
+var sprite = require('gamejs/sprite');
+qModule('gamejs/sprite');
 
-var assert = require('assert');
-
-exports.testSpriteConstructor = function() {
+test('SpriteConstructor', function() {
    var sp = new sprite.Sprite();
-   assert.isTrue(sp instanceof sprite.Sprite);
-   assert.strictEqual(sp.image, null);
-   assert.strictEqual(sp.rect, null);
-};
+   ok(sp instanceof sprite.Sprite);
+   strictEqual(sp.image, null);
+   strictEqual(sp.rect, null);
+});
 
-exports.testSpriteMethods = function() {
+test('SpriteMethods', function() {
    var sp = new sprite.Sprite();
    sp.kill();
-   assert.isTrue(sp.isDead());
-};
+   ok(sp.isDead());
+});
 
-exports.testSpriteGroup = function() {
+test('SpriteGroup', function() {
    var sprites = [new sprite.Sprite() for (i in [1,2,3,4,5])];
    var group = new sprite.Group(sprites);
-   assert.isTrue(group instanceof sprite.Group);
+   ok(group instanceof sprite.Group);
    // group has sprites?
-   assert.isTrue(group.has(sprites));
+   ok(group.has(sprites));
    for each (var sp in sprites) {
-      assert.isTrue(group.has(sp));
+      ok(group.has(sp));
    }
    // group cascades update & draw?
    sprites = sprites.map(function(sp) {
@@ -46,50 +45,48 @@ exports.testSpriteGroup = function() {
    var msDuration = 12345;
    group.update(msDuration);
    for each (var sp in sprites) {
-      assert.isTrue(sp._testUpdateCalled);
-      assert.equal(sp._testDurationPassed, msDuration);
+      ok(sp._testUpdateCalled);
+      equal(sp._testDurationPassed, msDuration);
    };
    var surface = '{{A Surface Object}}';
    group.draw(surface);
    for each (var sp in sprites) {
-      assert.isTrue(sp._testDrawCalled);
-      assert.equal(sp._testSurfacePassed, surface);
+      ok(sp._testDrawCalled);
+      equal(sp._testSurfacePassed, surface);
    };
 
    // remove one by one
    for each (var sp in sprites) {
       group.remove(sp);
-      assert.isFalse(group.has(sp));
+      ok(!group.has(sp));
    }
-};
+});
 
-exports.testSpriteCollisions = function() {
+test('SpriteCollisions', function() {
    var a = new sprite.Sprite();
    a.rect = new gamejs.Rect([0, 0], [10, 10]);
    var b = new sprite.Sprite();
    b.rect = new gamejs.Rect([10, 10], [10, 10]);
 
-   assert.isTrue(gamejs.sprite.collideCircle(a, b));
+   ok(gamejs.sprite.collideCircle(a, b));
 
    a.radius = 1;
    b.radius = 1;
-   assert.isFalse(gamejs.sprite.collideCircle(a, b));
+   ok(!gamejs.sprite.collideCircle(a, b));
 
    a.radius = 6;
    b.radius = 6;
-   assert.isTrue(gamejs.sprite.collideCircle(a, b));
+   ok(gamejs.sprite.collideCircle(a, b));
 
    a.rect = new gamejs.Rect([0,0], [5,5]);
    b.rect = new gamejs.Rect([-1,-1], [5,5]);
-   assert.isTrue(gamejs.sprite.collideCircle(a,b));
+   ok(gamejs.sprite.collideCircle(a,b));
 
    a.radius = 6;
    b.radius = 6;
-   assert.isTrue(gamejs.sprite.collideCircle(a,b));
+   ok(gamejs.sprite.collideCircle(a,b));
 
    a.radius = 0.3;
    b.radius = 0.3;
-   assert.isFalse(gamejs.sprite.collideCircle(a,b));
-
-
-};
+   ok(!gamejs.sprite.collideCircle(a,b));
+});

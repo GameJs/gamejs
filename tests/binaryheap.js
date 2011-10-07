@@ -1,8 +1,7 @@
-var assert = require('assert');
+var {BinaryHeap} = require('gamejs/utils/binaryheap');
+qModule('gamejs/utils/binaryheap');
 
-var {BinaryHeap} = require('../../../lib/gamejs/utils/binaryheap');
-
-exports.testPushPop = function() {
+test('PushPop', function() {
    var ITEMS = [10, 3, 4, 8, 2, 9, 7, 1, 2, 6, 5];
    var heap = new BinaryHeap(function(x){return x;});
 
@@ -13,12 +12,12 @@ exports.testPushPop = function() {
    ITEMS.sort(function(a, b) { return a > b ? 1 : -1; });
    var i = 0;
    while (heap.size() > 0) {
-      assert.equal(heap.pop(), ITEMS[i]);
+      equal(heap.pop(), ITEMS[i]);
       i++;
    };
-};
+});
 
-exports.testRemove = function() {
+test('Remove', function() {
    var ITEMS = [10, 3, 4, 8, 2, 9, 7, 1, 2, 6, 5];
    var heap = new BinaryHeap(function(x){return x;});
 
@@ -26,8 +25,8 @@ exports.testRemove = function() {
       heap.push(item);
    });
 
-   assert.throws(function() { heap.remove(88); });
-   assert.isUndefined(heap.remove(2));
-   assert.isUndefined(heap.remove(2));
-   assert.throws(function() { heap.remove(2); });
-};
+   raises(function() { heap.remove(88); });
+   strictEqual(heap.remove(2), undefined);
+   strictEqual(heap.remove(2), undefined);
+   raises(function() { heap.remove(2); });
+});

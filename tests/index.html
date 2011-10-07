@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+   <head>
+   <meta charset="UTF-8" />
+   <title>GameJs Test Suite</title>
+   <link rel="stylesheet" href="../utils/qunit/qunit.css" type="text/css" media="screen">
+   <script type="text/javascript" src="../utils/qunit/qunit.js"></script>
+   <script type="text/javascript" src="../utils/qunit/qunit-canvas.js"></script>
+   <script>
+      qModule = module;
+   </script>
+   <script type="text/javascript" src="../examples/skeleton/public/yabble.js"></script>
+   <script type="text/javascript" src="../examples/skeleton/public/gamejs-wrapped.js"></script>
+    <script>
+        require.setModuleRoot('./');
+        require.run('main')
+    </script>
+</head>
+<body>
+   <h1 id="qunit-header">GameJs Test Suite</h1>
+   <h2 id="qunit-banner"></h2>
+   <div id="qunit-testrunner-toolbar"></div>
+   <h2 id="qunit-userAgent"></h2>
+   <ol id="qunit-tests"></ol>
+</body>
+</html>
