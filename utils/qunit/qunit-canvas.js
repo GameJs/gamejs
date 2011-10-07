@@ -34,7 +34,6 @@ QUnit.extend( QUnit, {
          }
       }
       var ratio = nonTransparent / count;
-      console.log(ratio);
       QUnit.push(ratio < 0.08, actualString, expectedString, message);
 	}
 });
