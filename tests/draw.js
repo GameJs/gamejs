@@ -6,12 +6,12 @@ test('DrawFunctions', function() {
 
    var surface = new gamejs.Surface([100,100]);
 
-   gamejs.draw.arc(surface, '#ff0000', new gamejs.Rect([50,50],[10, 10]), 0, 55);
-   surfaceEqual(surface, "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAZElEQVR4nO3OMQHCABAAsSuWUNGBBU31/SwdMAC/JApSAAAAAAAAAAAAAAAAAAAAAAAAAAAA8B9Tz+0DX6au7QO3qdfUuf2gmnpMvbcf3KaO7QMAAAAAAAAAAAAAAAAAAAD8wgfUrgic3pR28gAAAABJRU5ErkJggg==");
+   gamejs.draw.arc(surface, '#ff0000', new gamejs.Rect([50,50],[20, 20]), 0, 180);
+   surfaceEqual(surface, "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAAy0lEQVR4nO3XwU0DMRQE0JFC2os4hJ6SOgI1QUKqQDkzHNgCgKywdvWe5JMvHo3sLycAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADBpcmvSmdbH6DyL1+QyYyHn0XkWr8nLjIWcRudZvCZPMxayH51n8Zpsm1xnKOPS5GF0nlVosruzjM8mu9E5VqXJ8Y5CjqPPvzpNNk0Of7gZhyab0edfrSaPTd5/ODM8U/9hGvT7Js9N3vr9ebw1eW1ymvYMcAAAAAAAAAAAAAAA+JUvYb5Gx8qv8NAAAAAASUVORK5CYII=");
    surface.clear();
 
-   gamejs.draw.arc(surface, '#ff0000', new gamejs.Rect([50,50],[10, 10]), 0, 55, 3);
-   surfaceEqual(surface, "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAA8ElEQVR4nO3TIWuVcRiH4duDcGADbRY/x77Ckl9gy8uKTbAKJvO6n2rY1pYWLILlsbzhYFr7H3ivC57+g5unAAAAAAAAAAAAAAAAAAAAAAAAgLMydVi9gc3UYep29Q42UzdT31fvoJp6PfVLkDMxdTc1gpyBqePUoyBnYurjFkOQ1aYup55OgnxevWnXpr6cxJipD6s37dbU26nnkxjPU8fVu3Zr6tt/3/Fp9abdmno39fskxs+pV6t37dbUjy3E36mvYiw09X7qz9TD1NXqPbs3db/dxeotuzf1Zup69Q4AAAAAAAAAAAAAAAAAgJf6BwWsXwzVw9ZhAAAAAElFTkSuQmCC");
+   gamejs.draw.arc(surface, '#ff0000', new gamejs.Rect([50,50],[20, 20]), 0, 180, 3);
+   surfaceEqual(surface, "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAABbElEQVR4nO3YQU4UQRQG4B8mmHABvQfEvUuieAO8AzILvYGsYCNXkOBpZIE3mIUshf1jYZF0OpgoM01n6O9LKulMql7ee53q6p4EAAAAAAAAAAAAAAAAAAAAAAAAAAAAACahkjeVHA809saub+1U8rmSGmh8Gbu+tVPJfMAbMh+7vrVTyYdOA68q+bTk+NmJdzB2fWunktedBv6qZHOJWLMW4z7ezipznYRKNitZdJr4dolY7ztxFpVsrDLXyajktNPIy0q2HhHjRVt7H+dkiFwnoZJXldx2mvn1ETHOOut/V/JyiFwno5Kj3hvS2b/slEq2ejejKjl8ipyftUo2KjnvNfZHJe8qmT0wf1bJfu8xVS2Gs2MVKtmu5NsD3xPXlVy0s+a0ku/tt/6880q2x67jWWk75WMlN//xAXjT1tgZQ2kH/Unvlbg/Fm2OA/yptB2zW8lB/fmbZd6ud+wIAAAAAAAAAAAAAOBv7gBuyXKVwfTE2gAAAABJRU5ErkJggg==");
    surface.clear();
 
    gamejs.draw.circle(surface, '#ff0000', [50, 50], 5, 0);

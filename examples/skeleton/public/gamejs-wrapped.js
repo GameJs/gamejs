@@ -1523,6 +1523,9 @@ exports.scale = function(surface, dims) {
  * Flip a Surface either vertically, horizontally or both. This returns
  * a new Surface (i.e: nondestructive).
  * @param {gamejs.Surface} surface
+ * @param {Boolean} flipHorizontal
+ * @param {Boolean} flipVertical
+ * @returns {Surface} new, flipped surface
  */
 exports.flip = function(surface, flipHorizontal, flipVertical) {
    var dims = surface.getSize();
@@ -3305,7 +3308,7 @@ var Surface = exports.Surface = function() {
 
 	// disable gecko image scaling
 	// see https://developer.mozilla.org/en/Canvas_tutorial/Using_images#Controlling_image_scaling_behavior
-	// this.context.mozImageSmoothingEnabled = false;
+	this.context.mozImageSmoothingEnabled = false;
    return this;
 };
 
