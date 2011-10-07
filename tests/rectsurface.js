@@ -246,3 +246,93 @@ test('SurfaceConstructors', function() {
       width,
       height]);
 });
+
+test('SurfaceFillClear', function() {
+   var pixelEqual = QUnit.pixelEqual;
+
+   var surface = new gamejs.Surface([10,10]);
+
+   surface.fill('rgb(55, 66, 77)');
+   pixelEqual(surface, [1, 1], [55, 66, 77, 255]);
+
+   surface.fill('#ff0000');
+   pixelEqual(surface, [1, 1], [255, 0, 0, 255]);
+
+   surface.fill('rgb(12, 13, 14)');
+   pixelEqual(surface, [1, 1], [12, 13, 14, 255]);
+
+   surface.clear();
+   pixelEqual(surface, [1, 1], [0, 0, 0, 0]);
+});
+
+test('SurfaceClone', function() {
+   var surfaceEqual = QUnit.surfaceEqual;
+
+   var surface = new gamejs.Surface([20,20]);
+
+   surface.fill('#20394');
+
+   var clone = surface.clone();
+   equal(surface.width, clone.width);
+   equal(surface.height, clone.height);
+   equal(surface.getAlpha(), clone.getAlpha());
+   surfaceEqual(surface, clone);
+});
+
+test('SurfaceBlit', function() {
+   var surfaceEqual = QUnit.surfaceEqual;
+   var pixelEqual = QUnit.pixelEqual;
+
+   var big = new gamejs.Surface([100, 100]);
+   big.fill('rgb(255,0,0)');
+
+   var second = new gamejs.Surface([10,10]);
+   second.fill('rgb(0,255,0)');
+
+   // blitting without target puts it into top left corner
+   big.blit(second);
+   pixelEqual(big, [0,0], [0,255,0]);
+   pixelEqual(big, [9,9], [0,255,0]);
+   pixelEqual(big, [10,10], [255,0,0]);
+   pixelEqual(big, [99,99], [255,0,0]);
+
+   // blitting with whole big rect effectively fills
+   big.fill('rgb(255,0,0)');
+   big.blit(second, big.getRect());
+   pixelEqual(big, [0,0], [0,255,0]);
+   pixelEqual(big, [9,9], [0,255,0]);
+   pixelEqual(big, [10,10], [0,255,0]);
+   pixelEqual(big, [99,99], [0,255,0]);
+
+   // blitting at position
+   big.fill('rgb(255,0,0)');
+   big.blit(second, [20,20]);
+   pixelEqual(big, [0,0], [255,0,0]);
+   pixelEqual(big, [19,19], [255,0,0]);
+   pixelEqual(big, [20,20], [0,255,0]);
+   pixelEqual(big, [29,29], [0,255,0]);
+   pixelEqual(big, [30,30], [255,0,0]);
+
+   // blitting at position with smaller source area
+   big.fill('rgb(255,0,0)');
+   big.blit(second, [20,20], new gamejs.Rect([0,0],[5,5]));
+   pixelEqual(big, [0,0], [255,0,0]);
+   pixelEqual(big, [19,19], [255,0,0]);
+   pixelEqual(big, [20,20], [0,255,0]);
+   pixelEqual(big, [24,24], [0,255,0]);
+   pixelEqual(big, [25,25], [0,255,0]);
+   pixelEqual(big, [26,26], [0,255,0]);
+   pixelEqual(big, [30,30], [255,0,0]);
+});
+
+test('SurfaceAlpha', function() {
+   var pixelEqual = QUnit.pixelEqual;
+
+   var first = new gamejs.Surface([20,20]);
+   var second = new gamejs.Surface([20,20]);
+   second.fill('rgb(255,0,0)');
+   second.setAlpha(0.5);
+
+   first.blit(second);
+   pixelEqual(first, [5,5], [255,0,0,128]);
+});
