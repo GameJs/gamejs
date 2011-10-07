@@ -964,7 +964,6 @@ exports.init = function() {
    if ($loader) {
        $loader.parentNode.removeChild($loader);
    }
-   //jsGameCanvas.setAttribute("style", "width:95%;height:85%");
    return;
 };
 
@@ -1015,6 +1014,8 @@ var getSurface = exports.getSurface = function() {
       var canvas = getCanvas();
       SURFACE = new Surface([canvas.clientWidth, canvas.clientHeight]);
       SURFACE._canvas = canvas;
+      SURFACE._context = canvas.getContext('2d');
+      SURFACE._smooth();
    }
    return SURFACE;
 };
@@ -3306,10 +3307,30 @@ var Surface = exports.Surface = function() {
 	/** @ignore */
 	this._blitAlpha = 1.0;
 
-	// disable gecko image scaling
-	// see https://developer.mozilla.org/en/Canvas_tutorial/Using_images#Controlling_image_scaling_behavior
-	this.context.mozImageSmoothingEnabled = false;
+   /** @ignore */
+   this._context = this._canvas.getContext('2d')
+   this._smooth();
    return this;
+};
+
+/** @ignore */
+Surface.prototype._noSmooth = function() {
+	// disable image scaling
+	// see https://developer.mozilla.org/en/Canvas_tutorial/Using_images#Controlling_image_scaling_behavior
+	// and https://github.com/jbuck/processing-js/commit/65de16a8340c694cee471a2db7634733370b941c
+	this.context.mozImageSmoothingEnabled = false;
+   this.canvas.style.setProperty("image-rendering", "optimizeSpeed", "important");
+   this.canvas.style.setProperty("image-rendering", "-moz-crisp-edges", "important");
+   this.canvas.style.setProperty("image-rendering", "-webkit-optimize-contrast", "important");
+   this.canvas.style.setProperty("image-rendering", "optimize-contrast", "important");
+   this.canvas.style.setProperty("-ms-interpolation-mode", "nearest-neighbor", "important");
+   return;
+};
+
+Surface.prototype._smooth = function() {
+   this.canvas.style.setProperty("image-rendering", "optimizeQuality", "important");
+   this.canvas.style.setProperty("-ms-interpolation-mode", "bicubic", "important");
+   this.context.mozImageSmoothingEnabled = true;
 };
 
 /**
@@ -3440,7 +3461,7 @@ objects.accessors(Surface.prototype, {
     */
    'context': {
       get: function() {
-         return this._canvas.getContext('2d');
+         return this._context;
       }
    },
    'canvas': {
