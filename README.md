@@ -67,4 +67,3 @@ bundle.
 For the following features to work, RingoJs must be installed on your system:
 
     $ ./create-jsdoc.sh     # render the API to the folder docs/api
-    $ ./run-unit-tests.sh   # run the GameJs unit tests
