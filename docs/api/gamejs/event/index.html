@@ -44,6 +44,10 @@ events.forEach(function(event) {
 from triggering their default behaviour; i.e. event.preventDefault() is called
 on those specific events, not on all events.</p>
 
+<p>All events have a type identifier. This event type is in between the values
+of NOEVENT and NUMEVENTS. All user defined events can have the value of
+USEREVENT or higher. It is recommended make sure your event id's follow this system.</p>
+
 
             </div>
 
@@ -52,6 +56,9 @@ on those specific events, not on all events.</p>
                                 <div>
                     <h3>Functions</h3>
                     <ul class="propertyoverview">
+                                                <li>
+                            <a href="#clear" class="jsdoc-title"> clear</a>()
+                        </li>
                                                 <li>
                             <a href="#get" class="jsdoc-title"> get</a>()
                         </li>
@@ -256,7 +263,16 @@ on those specific events, not on all events.</p>
                             <a href="#MOUSE_WHEEL" class="jsdoc-title"> MOUSE_WHEEL</a>
                         </li>
                                                 <li>
+                            <a href="#NOEVENT" class="jsdoc-title"> NOEVENT</a>
+                        </li>
+                                                <li>
+                            <a href="#NUMEVENTS" class="jsdoc-title"> NUMEVENTS</a>
+                        </li>
+                                                <li>
                             <a href="#QUIT" class="jsdoc-title"> QUIT</a>
+                        </li>
+                                                <li>
+                            <a href="#USEREVENT" class="jsdoc-title"> USEREVENT</a>
                         </li>
                         </ul>
                 </div>
@@ -1323,12 +1339,72 @@ on those specific events, not on all events.</p>
 
                                         <!-- tpl-docitem -->
                     <div>
+                        <div class="docitem" docitem="NOEVENT">
+                            <h3>
+                                <span class="itemtitle"><a id="NOEVENT" href="#NOEVENT" class="itemtitle itemname">NOEVENT</a></span>
+                                </h3>
+                            <div>
+                                
+
+
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="NUMEVENTS">
+                            <h3>
+                                <span class="itemtitle"><a id="NUMEVENTS" href="#NUMEVENTS" class="itemtitle itemname">NUMEVENTS</a></span>
+                                </h3>
+                            <div>
+                                
+
+
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
                         <div class="docitem" docitem="QUIT">
                             <h3>
                                 <span class="itemtitle"><a id="QUIT" href="#QUIT" class="itemtitle itemname">QUIT</a></span>
                                 </h3>
                             <div>
                                 
+
+
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="USEREVENT">
+                            <h3>
+                                <span class="itemtitle"><a id="USEREVENT" href="#USEREVENT" class="itemtitle itemname">USEREVENT</a></span>
+                                </h3>
+                            <div>
+                                
+
+
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="clear">
+                            <h3>
+                                <span class="itemtitle"><a id="clear" href="#clear" class="itemtitle itemname">clear</a></span>
+                                <span class="itemtitle light">()</span></h3>
+                            <div>
+                                <p>Remove all events from the queue</p>
 
 
                             </div>

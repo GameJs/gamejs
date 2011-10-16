@@ -33,7 +33,7 @@ $(document).ready(jsdocSetup);
                     <h3>Functions</h3>
                     <ul class="propertyoverview">
                                                 <li>
-                            <a href="#flip" class="jsdoc-title"> flip</a>(surface)
+                            <a href="#flip" class="jsdoc-title"> flip</a>(surface, flipHorizontal, flipVertical)
                         </li>
                                                 <li>
                             <a href="#rotate" class="jsdoc-title"> rotate</a>(surface, angle)
@@ -53,7 +53,7 @@ $(document).ready(jsdocSetup);
                         <div class="docitem" docitem="flip">
                             <h3>
                                 <span class="itemtitle"><a id="flip" href="#flip" class="itemtitle itemname">flip</a></span>
-                                <span class="itemtitle light">(surface)</span></h3>
+                                <span class="itemtitle light">(surface, flipHorizontal, flipVertical)</span></h3>
                             <div>
                                 <p>Flip a Surface either vertically, horizontally or both. This returns
 a new Surface (i.e: nondestructive).</p>
@@ -68,7 +68,26 @@ a new Surface (i.e: nondestructive).</p>
                                         <td class="paramname">surface</td>
                                         <td></td>
                                     </tr>
+                                                                        <tr>
+                                        <td>Boolean</td>
+                                        <td class="paramname">flipHorizontal</td>
+                                        <td></td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>Boolean</td>
+                                        <td class="paramname">flipVertical</td>
+                                        <td></td>
+                                    </tr>
                                     </table>
+                            </div>
+                                                        <div>
+                                <h4>Returns</h4>
+                                <table>
+                                    <tr>
+                                        <td>Surface</td>
+                                        <td> new, flipped surface</td>
+                                    </tr>
+                                </table>
                             </div>
                             </div>
                         <hr/>

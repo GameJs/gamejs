@@ -268,6 +268,10 @@ test('SurfaceFillClear', function() {
    surface.fill('rgb(12, 13, 14)');
    pixelEqual(surface, [1, 1], [12, 13, 14, 255]);
 
+   surface.fill('rgb(13, 14, 15)', new gamejs.Rect(0, 0, 2, 2));
+   pixelEqual(surface, [1, 1], [13, 14, 15, 255]);
+   pixelEqual(surface, [3, 3], [12, 13, 14, 255]);
+
    surface.clear();
    pixelEqual(surface, [1, 1], [0, 0, 0, 0]);
 });

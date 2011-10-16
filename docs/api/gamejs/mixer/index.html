@@ -44,6 +44,17 @@ bugs.</p>
 
             <div class="classoverview">
 
+                                <div>
+                    <h3>Functions</h3>
+                    <ul class="propertyoverview">
+                                                <li>
+                            <a href="#getNumChannels" class="jsdoc-title"> getNumChannels</a>()
+                        </li>
+                                                <li>
+                            <a href="#setNumChannels" class="jsdoc-title"> setNumChannels</a>(count)
+                        </li>
+                        </ul>
+                </div>
                 <div class="classes">
                                         <h2>Class <a href="#Sound" class="jsdoc-title">Sound</a></h2>
                                         <div>
@@ -56,7 +67,7 @@ bugs.</p>
                                 <a href="#Sound.prototype.getVolume" class="jsdoc-title"> getVolume</a>()
                             </li>
                                                         <li>
-                                <a href="#Sound.prototype.play" class="jsdoc-title"> play</a>()
+                                <a href="#Sound.prototype.play" class="jsdoc-title"> play</a>(loop)
                             </li>
                                                         <li>
                                 <a href="#Sound.prototype.setVolume" class="jsdoc-title"> setVolume</a>(value)
@@ -149,11 +160,21 @@ bugs.</p>
                         <div class="docitem" docitem="Sound.prototype.play">
                             <h3>
                                 <span class="itemtitle">Sound.prototype.<a id="Sound.prototype.play" href="#Sound.prototype.play" class="itemtitle itemname">play</a></span>
-                                <span class="itemtitle light">()</span></h3>
+                                <span class="itemtitle light">(loop)</span></h3>
                             <div>
                                 <p>start the sound</p>
 
 
+                            </div>
+                                                        <div>
+                                <h4>Parameters</h4>
+                                <table>
+                                                                        <tr>
+                                        <td>Boolean</td>
+                                        <td class="paramname">loop</td>
+                                        <td>whether the audio should loop for ever or not</td>
+                                    </tr>
+                                    </table>
                             </div>
                             </div>
                         <hr/>
@@ -191,9 +212,50 @@ bugs.</p>
                                 <span class="itemtitle">Sound.prototype.<a id="Sound.prototype.stop" href="#Sound.prototype.stop" class="itemtitle itemname">stop</a></span>
                                 <span class="itemtitle light">()</span></h3>
                             <div>
-                                <p>Stop the sound</p>
+                                <p>Stop the sound.
+This will stop the playback of this Sound on any active Channels.</p>
 
 
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="getNumChannels">
+                            <h3>
+                                <span class="itemtitle"><a id="getNumChannels" href="#getNumChannels" class="itemtitle itemname">getNumChannels</a></span>
+                                <span class="itemtitle light">()</span></h3>
+                            <div>
+                                
+
+
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
+                        <div class="docitem" docitem="setNumChannels">
+                            <h3>
+                                <span class="itemtitle"><a id="setNumChannels" href="#setNumChannels" class="itemtitle itemname">setNumChannels</a></span>
+                                <span class="itemtitle light">(count)</span></h3>
+                            <div>
+                                <p>Sets the number of available channels for the mixer. The default value is 8.</p>
+
+
+                            </div>
+                                                        <div>
+                                <h4>Parameters</h4>
+                                <table>
+                                                                        <tr>
+                                        <td></td>
+                                        <td class="paramname">count</td>
+                                        <td></td>
+                                    </tr>
+                                    </table>
                             </div>
                             </div>
                         <hr/>

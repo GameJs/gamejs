@@ -140,6 +140,9 @@ the most important as it kickstarts your app.</p>
                         <h3>Instance Methods</h3>
                         <ul class="propertyoverview">
                                                         <li>
+                                <a href="#Surface.prototype._smooth" class="jsdoc-title"> _smooth</a>()
+                            </li>
+                                                        <li>
                                 <a href="#Surface.prototype.blit" class="jsdoc-title"> blit</a>(src, dst, area, [special_flags])
                             </li>
                                                         <li>
@@ -149,7 +152,7 @@ the most important as it kickstarts your app.</p>
                                 <a href="#Surface.prototype.clone" class="jsdoc-title"> clone</a>()
                             </li>
                                                         <li>
-                                <a href="#Surface.prototype.fill" class="jsdoc-title"> fill</a>(CSS)
+                                <a href="#Surface.prototype.fill" class="jsdoc-title"> fill</a>(CSS, a)
                             </li>
                                                         <li>
                                 <a href="#Surface.prototype.getAlpha" class="jsdoc-title"> getAlpha</a>()
@@ -738,6 +741,21 @@ new gamejs.Surface(rect);</pre>
 
                                         <!-- tpl-docitem -->
                     <div>
+                        <div class="docitem" docitem="Surface.prototype._smooth">
+                            <h3>
+                                <span class="itemtitle">Surface.prototype.<a id="Surface.prototype._smooth" href="#Surface.prototype._smooth" class="itemtitle itemname">_smooth</a></span>
+                                <span class="itemtitle light">()</span></h3>
+                            <div>
+                                
+
+
+                            </div>
+                            </div>
+                        <hr/>
+                    </div>
+
+                                        <!-- tpl-docitem -->
+                    <div>
                         <div class="docitem" docitem="Surface.prototype.blit">
                             <h3>
                                 <span class="itemtitle">Surface.prototype.<a id="Surface.prototype.blit" href="#Surface.prototype.blit" class="itemtitle itemname">blit</a></span>
@@ -799,7 +817,7 @@ displaySurface.blit(flowerSurface, [0,0], flowerRect);</pre>
                                 <table>
                                     <tr>
                                         <td>gamejs.Rect</td>
-                                        <td> Rect actually repainted</td>
+                                        <td> Rect actually repainted FIXME actually return something?</td>
                                     </tr>
                                 </table>
                             </div>
@@ -851,7 +869,7 @@ displaySurface.blit(flowerSurface, [0,0], flowerRect);</pre>
                         <div class="docitem" docitem="Surface.prototype.fill">
                             <h3>
                                 <span class="itemtitle">Surface.prototype.<a id="Surface.prototype.fill" href="#Surface.prototype.fill" class="itemtitle itemname">fill</a></span>
-                                <span class="itemtitle light">(CSS)</span></h3>
+                                <span class="itemtitle light">(CSS, a)</span></h3>
                             <div>
                                 <p>Fills the whole Surface with a color. Usefull for erasing a Surface.</p>
 
@@ -864,6 +882,11 @@ displaySurface.blit(flowerSurface, [0,0], flowerRect);</pre>
                                         <td>String</td>
                                         <td class="paramname">CSS</td>
                                         <td>color string, e.g. '#0d120a' or '#0f0' or 'rgba(255, 0, 0, 0.5)'</td>
+                                    </tr>
+                                                                        <tr>
+                                        <td>gamejs.Rect</td>
+                                        <td class="paramname">a</td>
+                                        <td>Rect of the area to fill (defauts to entire surface if not specified)</td>
                                     </tr>
                                     </table>
                             </div>
