@@ -1,5 +1,5 @@
-var assert = require('assert');
-var astar = require('../../lib/gamejs/pathfinding/astar');
+var astar = require('gamejs/pathfinding/astar');
+qModule('gamejs/pathfinding/astar');
 
 /**
  * This is an example implementation of a Map that can be passed to the `astar.findRoute()`
@@ -75,25 +75,21 @@ var Map = exports.Map = function() {
    return this;
 };
 
-exports.testSearch = function () {
+test('Search', function () {
    var map = new Map();
 
-   assert.deepEqual(astar.findRoute(map, [0,0], [19, 19]),
+   deepEqual(astar.findRoute(map, [0,0], [19, 19]),
       {point:[19, 19], from:{point:[19, 18], from:{point:[19, 17], from:{point:[18, 16], from:{point:[18, 15], from:{point:[17, 14], from:{point:[16, 13], from:{point:[15, 12], from:{point:[14, 11], from:{point:[13, 10], from:{point:[12, 9], from:{point:[11, 8], from:{point:[10, 7], from:{point:[9, 7], from:{point:[8, 6], from:{point:[7, 5], from:{point:[6, 4], from:{point:[5, 3], from:{point:[4, 2], from:{point:[3, 1], from:{point:[2, 0], from:{point:[1, 0], from:{point:[0, 0], from:null, length:0}, length:100, score:2738}, length:222, score:2819}, length:555, score:3011}, length:752, score:3067}, length:1097, score:3271}, length:1245, score:3278}, length:1424, score:3316}, length:1569, score:3320}, length:1735, score:3345}, length:1877, score:3446}, length:2036, score:3464}, length:2210, score:3497}, length:2352, score:3498}, length:2546, score:3551}, length:2725, score:3589}, length:2938, score:3661}, length:3101, score:3683}, length:3248, score:3689}, length:3361, score:3702}, length:3510, score:3710}, length:3646, score:3746}, length:3783, score:3783}
    );
 
-   assert.deepEqual(astar.findRoute(map, [0,0], [12, 8]),
+   deepEqual(astar.findRoute(map, [0,0], [12, 8]),
       {point:[12, 8], from:{point:[11, 7], from:{point:[10, 6], from:{point:[9, 5], from:{point:[8, 5], from:{point:[7, 4], from:{point:[6, 4], from:{point:[5, 3], from:{point:[4, 2], from:{point:[3, 1], from:{point:[2, 0], from:{point:[1, 0], from:{point:[0, 0], from:null, length:0}, length:100, score:1528}, length:222, score:1550}, length:555, score:1742}, length:752, score:1798}, length:1097, score:2002}, length:1245, score:2009}, length:1354, score:2018}, length:1560, score:2083}, length:1668, score:2091}, length:1814, score:2096}, length:1983, score:2124}, length:2174, score:2174}
    );
 
-   assert.deepEqual(astar.findRoute(map, [0,0], [4, 19]),
+   deepEqual(astar.findRoute(map, [0,0], [4, 19]),
       {point:[4, 19], from:{point:[4, 18], from:{point:[4, 17], from:{point:[3, 16], from:{point:[2, 15], from:{point:[2, 14], from:{point:[2, 13], from:{point:[2, 12], from:{point:[1, 11], from:{point:[1, 10], from:{point:[1, 9], from:{point:[0, 8], from:{point:[0, 7], from:{point:[0, 6], from:{point:[0, 5], from:{point:[0, 4], from:{point:[0, 3], from:{point:[0, 2], from:{point:[0, 1], from:{point:[0, 0], from:null, length:0}, length:288, score:2252}, length:434, score:2298}, length:534, score:2298}, length:654, score:2318}, length:768, score:2332}, length:906, score:2370}, length:1078, score:2442}, length:1264, score:2528}, length:1415, score:2538}, length:1535, score:2558}, length:1641, score:2564}, length:1784, score:2566}, length:1906, score:2588}, length:2047, score:2629}, length:2162, score:2644}, length:2353, score:2694}, length:2516, score:2716}, length:2742, score:2842}, length:2865, score:2865}
    );
-   assert.deepEqual(astar.findRoute(map, [0,0], [5, 5]),
+   deepEqual(astar.findRoute(map, [0,0], [5, 5]),
       {point:[5, 5], from:{point:[4, 4], from:{point:[3, 3], from:{point:[2, 2], from:{point:[1, 1], from:{point:[0, 0], from:null, length:0}, length:291, score:855}, length:524, score:947}, length:729, score:1011}, length:1048, score:1189}, length:1193, score:1193}
    );
-};
-
-if (require.main == module.id) {
-    require('test').run(exports);
-}
+});
