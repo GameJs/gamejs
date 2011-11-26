@@ -13,10 +13,15 @@ Its API is modeled after the successful PyGame library <http://pygame.org>.
 Usage
 =========
 
+If you downloaded the git version, you will have to build the GameJs JavaScript
+file. Go to the GameJs directory and execute this in a unix shell or in `git bash`:
+
+    $ ./wrap-gamejs.sh
+
 See the `examples/skeleton/` directory for a minimal GameJs app. We recommend
 you also use this as the scaffolding if you want to create a new game yourself.
 
-**Note** that you need to run the examples via `http://` (not `file://`)
+Note that you need to run the examples via `http://` (not `file://`)
 unless you use Firefox or Safari. One trivial, cross-plattform solution to serve
 a directory via http is this executable: <http://code.google.com/p/mongoose/>.
 
@@ -64,6 +69,15 @@ everything below `./lib` into your applications `javascript/` directory:
 Your application should now transparently load the single modules instead of the
 bundle.
 
-For the following features to work, RingoJs must be installed on your system:
+Unit Tests
+--------------
 
-    $ ./create-jsdoc.sh     # render the API to the folder docs/api
+We use QUnit <https://github.com/jquery/qunit> for the GameJs unit tests. Execute
+them by opening `tests/index.html`.
+
+JsDoc
+----------
+For the JavaScript documentation system, RingoJs must be installed on your system.
+This bash file will take care of rewriting the documentation into `docs/api/`:
+
+    $ ./create-jsdoc.sh

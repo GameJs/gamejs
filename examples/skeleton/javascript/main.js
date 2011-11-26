@@ -1,6 +1,6 @@
 var gamejs = require('gamejs');
 
-// $gamejs.preload([]);
+// gamejs.preload([]);
 
 gamejs.ready(function() {
 
@@ -10,7 +10,7 @@ gamejs.ready(function() {
     );
 
     /**
-    function tick() {
+    function tick(msDuration) {
         // game loop
         return;
     };
