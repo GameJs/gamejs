@@ -64,6 +64,11 @@ test('SpriteGroup', function() {
       group.remove(sp);
       ok(!group.has(sp));
    });
+   
+   // is other sprite removed if group.remove is called with invalid arg?
+   group.add(sprites[0]);
+   group.remove(sprites[1]);
+   ok(group.has(sprites[0]));
 });
 
 test('SpriteCollisions', function() {
