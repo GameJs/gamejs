@@ -54,20 +54,7 @@ GameJs modules (usually called `gamejs-wrapped.js`). This is what all the exampl
 do.
 
 Thus if you modify the files below `./lib` your changes won't show up in the
-examples. You have two options to hack on GameJs:
-
-  * rebundle the files with the `./wrap-gamejs.sh` command
-  * directly use the unbundled library files
-
-To use the unbundled JavaScript files directly, remove the `<script>` line including
-`gamejs-wrapped.js` from your `index.html` and instead create symbolic links of
-everything below `./lib` into your applications `javascript/` directory:
-
-    $ cd path-to-your-app/javascript/
-    $ ln -s ~/gamejs/lib/*
-
-Your application should now transparently load the single modules instead of the
-bundle.
+examples unless you re-bundle the files with the `./wrap-gamejs.sh` command
 
 Unit Tests
 --------------
