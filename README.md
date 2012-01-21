@@ -16,7 +16,9 @@ Usage
 If you downloaded the git version, you will have to build the GameJs JavaScript
 file. Go to the GameJs directory and execute this in a unix shell or in `git bash`:
 
-    $ ./wrap-gamejs.sh
+    $ ./bin/minify-gamejs.sh
+
+This should create a `gamejs.min.js` file in the GameJs home directory.
 
 See the `examples/skeleton/` directory for a minimal GameJs app. We recommend
 you also use this as the scaffolding if you want to create a new game yourself.
@@ -29,12 +31,12 @@ Bundle your application for production
 ======================================
 
 To wrap your own game's JavaScript files into one single file, use
-`./wrap-directory ./path-to-your-app/javascript/`. You can also add a second argument
+`./bin/minify-app.sh ./path-to-your-app/javascript/`. You can also add a second argument
 `compress` to optionally minify the resulting JS file.
 
-This will produce one file `gjs-app-wrapped.js` holding all GameJs modules as
-well as your application code. You can then remove the `<script>` lines loading
-yabble & gamejs-wrapped and should instead only load the `gjs-app-wrapped.js` file.
+This will produce one file `app.min.js` holding all GameJs modules as
+well as your application code. You can then remove all `<script>` lines except
+the one loading the `app.min.js` file.
 
 More Help
 ===========
@@ -50,11 +52,11 @@ GameJs Development
 =====================================
 
 In production, an application uses a bundled JavaScript file which contains all
-GameJs modules (usually called `gamejs-wrapped.js`). This is what all the examples
+GameJs modules (usually called `gamejs.min.js`). This is what all the examples
 do.
 
 Thus if you modify the files below `./lib` your changes won't show up in the
-examples unless you re-bundle the files with the `./wrap-gamejs.sh` command
+examples unless you re-bundle the files with the `./bin/minify-gamejs.sh` command
 
 Unit Tests
 --------------
@@ -67,4 +69,4 @@ JsDoc
 For the JavaScript documentation system, RingoJs must be installed on your system.
 This bash file will take care of rewriting the documentation into `docs/api/`:
 
-    $ ./create-jsdoc.sh
+    $ ./bin/create-jsdoc.sh

@@ -1,1 +1,2 @@
-examples/skeleton/public/gamejs-wrapped.js
+gamejs.min.js
+docs/api/*
