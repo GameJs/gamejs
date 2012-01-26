@@ -8,34 +8,10 @@
 #   JAVA_HOME    (Optional) JDK installation directory
 # -----------------------------------------------------------------------------
 # Many thanks to the RingoJs bash file writers.
-
-#
-# find_ringo_home - mostly an emulation of GNU's `readlink -f`
-#
-function find_gamejs_home() {
-    # save original working directory
-    ORIG_PWD="$(pwd -P)"
-
-    # walk the links! we cd into the dir of the target binary, read the link,
-    # make this link our new target, and start over. we stop as soon as the
-    # target is no link anymore.
-    T="$1"
-    while true; do
-        cd "$(dirname "$T")"
-        T="$(basename "$T")"
-        if [ ! -L "$T" ]; then break; fi
-        T="$(readlink "$T")"
-    done
-
-    # the final target is in bin/, change to parent and echo as home
-    cd ..
-    echo "$(pwd -P)"
-
-    # restore original working directory
-    cd "$ORIG_PWD"
-}
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 if [ -z "$GAMEJS_HOME" ]; then
+    source "$SCRIPT_DIR/find-gamejs-home.sh"
     GAMEJS_HOME="$(find_gamejs_home "$0")"
 fi
 
@@ -49,7 +25,7 @@ else
     fi
 fi
 
-TEMP_WORKING=`mktemp --directory`
+TEMP_WORKING=`mktemp -d /tmp/gamejs.XXXX`
 EXEC_YABBLER="${java_cmd} -jar ${GAMEJS_HOME}/utils/rhino/js.jar ${GAMEJS_HOME}/utils/yabbler/yabbler.js"
 EXEC_CLOSURE="cat"
 OUTPUT_FILE="${GAMEJS_HOME}/gamejs.min.js"
