@@ -480,7 +480,9 @@
 
 		_moduleRoot = path;
 	};
-
+	Yabble.getModuleRoot = function() {
+	   return _moduleRoot;
+	}
 	// Set a timeout period for async module loading
 	Yabble.setTimeoutLength = function(milliseconds) {
 		_timeoutLength = milliseconds;
