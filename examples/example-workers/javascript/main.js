@@ -17,14 +17,9 @@ function main() {
    var display = gamejs.display.getSurface();
    // create a background worker. you can only talk
    // to it through the event system.
-   var idx = document.location.href.indexOf('index.html');
-   var docLoc = idx > -1 ? document.location.href.substr(0, idx) : document.location.href;
-   var moduleRoot = docLoc + './javascript/';
    gamejs.worker.create(
       'astarOne',
-      './workers/astar',
-      moduleRoot,
-      [docLoc + '../skeleton/public/yabble.js', docLoc + '../skeleton/public/gamejs.min.js']
+      './workers/astar'
    );
    // the message will go to the workers event queue; we won't see it
    // again here
