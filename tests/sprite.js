@@ -83,8 +83,8 @@ test('SpriteCollisions', function() {
    b.radius = 1;
    ok(!gamejs.sprite.collideCircle(a, b));
 
-   a.radius = 6;
-   b.radius = 6;
+   a.radius = 7;
+   b.radius = 8;
    ok(gamejs.sprite.collideCircle(a, b));
 
    a.rect = new gamejs.Rect([0,0], [5,5]);
