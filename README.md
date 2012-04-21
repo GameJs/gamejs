@@ -6,9 +6,9 @@ graphic applications for the HTML Canvas <http://gamejs.org>.
 
 Its API is modeled after the successful PyGame library <http://pygame.org>.
 
-  * <http://gamejs.org>
-  * <http://gamejs.org/docs/>
-  * <http://gamejs.org/showcase/>
+  * Website <http://gamejs.org>
+  * Contributors <https://github.com/oberhamsi/gamejs/contributors>
+  * Showcase <http://gamejs.org/showcase/>
 
 Usage
 =========
