@@ -27,16 +27,24 @@ Note that you need to run the examples via `http://` (not `file://`)
 unless you use Firefox or Safari. One trivial, cross-plattform solution to serve
 a directory via http is this executable: <http://code.google.com/p/mongoose/>.
 
-Bundle your application for production
-======================================
+Bundle your application for production (or file:// usage)
+==========================================================
 
-To wrap your own game's JavaScript files into one single file, use
-`./bin/minify-app.sh ./path-to-your-app/javascript/`. You can also add a second argument
-`compress` to optionally minify the resulting JS file.
+To bundle all JavaScript files into one single file, use:
 
-This will produce one file `app.min.js` holding all GameJs modules as
-well as your application code. You can then remove all `<script>` lines except
-the one loading the `app.min.js` file.
+    $./bin/minify-app.sh ./path-to-your-app/javascript/
+
+You can also add a second argument `compress`. With `compress`, the resulting
+bundle file will be compressed for smaller file size as well as obfuscated. 
+
+`minify-app.sh` will create the bundled file `app.min.js` in your apps
+`javascript` folder.
+
+To use the bundled file add a `<script>` tag loading it and remove all
+other `<script>`s.
+
+A bundled game does no longer need to be served over http:// unless it uses
+the `SurfaceArray` class.
 
 More Help
 ===========
