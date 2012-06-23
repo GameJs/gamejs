@@ -23,7 +23,7 @@
   * OTHER DEALINGS IN THE SOFTWARE.
   */
 
-(function(globalEval) {
+(function(globalFunctionEval) {
 
 	var Yabble = function() {
 		throw "Synchronous require() is not supported.";
@@ -38,8 +38,10 @@
 		_timeoutLength = 20000,
 		_mainProgram;
 
+	var isWebWorker = this.importScripts !== undefined;
 
-	var head = document.getElementsByTagName('head')[0];
+
+	var head = !isWebWorker && document.getElementsByTagName('head')[0];
 
 	// Shortcut to native hasOwnProperty
 	var hasOwnProperty = Object.prototype.hasOwnProperty;
@@ -301,7 +303,7 @@
 			}
 		};
 
-		var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+		var xhr = this.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
 		var moduleUri = resolveModuleUri(moduleId);
 		xhr.open('GET', moduleUri, true);
 		xhr.onreadystatechange = function() {
@@ -316,7 +318,7 @@
 						deps[i] = resolveModuleId(deps[i], moduleDir);
 					}
 					try {
-						moduleDefs[moduleId] = globalEval('({fn: function(require, exports, module) {\r\n' + moduleCode + '\r\n}})').fn;
+						moduleDefs[moduleId] = globalFunctionEval('\r\n' + moduleCode + '\r\n');
 					} catch (e) {
 						if (e instanceof SyntaxError) {
 							var msg = 'Syntax Error: ';
@@ -466,7 +468,7 @@
 
 	// Set the uri which forms the conceptual module namespace root
 	Yabble.setModuleRoot = function(path) {
-		if (!(/^http(s?):\/\//.test(path))) {
+		if (this.window && !(/^http(s?):\/\//.test(path))) {
 			var href = window.location.href;
 			href = href.substr(0, href.lastIndexOf('/')+1);
 			path = combinePaths(path, href);
@@ -478,7 +480,9 @@
 
 		_moduleRoot = path;
 	};
-
+	Yabble.getModuleRoot = function() {
+	   return _moduleRoot;
+	}
 	// Set a timeout period for async module loading
 	Yabble.setTimeoutLength = function(milliseconds) {
 		_timeoutLength = milliseconds;
@@ -574,9 +578,13 @@
 	Yabble.reset();
 
 	// Export to the require global
-	window.require = Yabble;
+	if (isWebWorker) {
+		self.require = Yabble;
+	} else {
+		window.require = Yabble;
+	}
 })(function(code) {
-   with (window) {
-      return eval(code);
+   with (this.importScripts ? self : window) {
+      return (new Function('require', 'exports', 'module', code));
    };
 });
