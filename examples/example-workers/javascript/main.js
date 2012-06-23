@@ -20,7 +20,7 @@ function main() {
    var primeWorker = new gamejs.worker.Worker('./primes');
 
    // send a question to the worker
-   var startNumber = 1230023;
+   var startNumber = parseInt(1230023 + (Math.random() * 10000));
    display.blit(font.render('Asking worker for primes after ' + startNumber), [10,30]);
    primeWorker.post({
       todo: "nextprimes", start: startNumber
