@@ -1,6 +1,6 @@
-var uri = require('gamejs/uri');
+var uri = require('gamejs/utils/uri');
 
-qModule('gamejs/uri');
+qModule('gamejs/utils/uri');
 
 
 var data = [
