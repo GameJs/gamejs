@@ -23,14 +23,7 @@ function `add()`  like this:
     var foo = require('./foo');
     foo.add(2, 2)
 
-You can also split your files into directories. Check out this example
-app, it uses require() a lot:
-
-https://github.com/oberhamsi/gamejs/tree/master/examples/example-scene
-
-
-(especially see how main.js does `require('./tyround')` and in
-tyround.js more modules from the tyround/ directory are loaded).
+You can also split your files into directories. 
 
 For more in depth info on CommonJs Modules see:
 
