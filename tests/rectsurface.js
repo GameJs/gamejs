@@ -31,8 +31,8 @@ test('RectConstructors', function() {
    strictEqual(rect.bottom, top + height);
    strictEqual(rect.right, left + width);
    deepEqual(rect.center, [
-      left + width / 2,
-      top + height / 2
+      left + Math.floor(width / 2),
+      top + Math.floor(height / 2)
    ]);
 
    var rect = new gamejs.Rect([left, top, width, height]);
@@ -44,8 +44,8 @@ test('RectConstructors', function() {
    strictEqual(rect.bottom, top + height);
    strictEqual(rect.right, left + width);
    deepEqual(rect.center, [
-      left + width / 2,
-      top + height / 2
+      left + Math.floor(width / 2),
+      top + Math.floor(height / 2)
    ]);
 
    var rect = new gamejs.Rect(left, top, width, height);
@@ -57,8 +57,8 @@ test('RectConstructors', function() {
    strictEqual(rect.bottom, top + height);
    strictEqual(rect.right, left + width);
    deepEqual(rect.center, [
-      left + width / 2,
-      top + height / 2
+      left + Math.floor(width / 2),
+      top + Math.floor(height / 2)
    ]);
 });
 
@@ -113,6 +113,31 @@ test('RectSetters', function() {
    strictEqual(rect.top, 88);
    strictEqual(rect.top, rect.y);
 
+});
+
+test('RectInflate', function() {
+   var rect = new gamejs.Rect(0, 0, 10, 10);
+   var newRect = rect.inflate(1, 0);
+   strictEqual(newRect.left, 0);
+   strictEqual(newRect.top, 0);
+   strictEqual(newRect.width, 11);
+   strictEqual(newRect.height, 10);
+   
+   rect = new gamejs.Rect(5, 5, 12, 14);
+   newRect = rect.inflate(12, 3);
+   deepEqual(newRect.center, rect.center);
+   newRect = rect.inflate(-3, 3);
+   deepEqual(newRect.center, rect.center);
+   strictEqual(newRect.left, 7);
+   strictEqual(newRect.top, 4);
+   strictEqual(newRect.width, 9);
+   strictEqual(newRect.height, 17);
+
+   rect.inflateIp(-2, -2);
+   strictEqual(rect.left, 6);
+   strictEqual(rect.top, 6);
+   strictEqual(rect.width, 10);
+   strictEqual(rect.height, 12);
 });
 
 test('RectCollide', function() {
@@ -267,6 +292,10 @@ test('SurfaceFillClear', function() {
 
    surface.fill('rgb(12, 13, 14)');
    pixelEqual(surface, [1, 1], [12, 13, 14, 255]);
+
+   surface.fill('rgb(13, 14, 15)', new gamejs.Rect(0, 0, 2, 2));
+   pixelEqual(surface, [1, 1], [13, 14, 15, 255]);
+   pixelEqual(surface, [3, 3], [12, 13, 14, 255]);
 
    surface.clear();
    pixelEqual(surface, [1, 1], [0, 0, 0, 0]);

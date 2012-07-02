@@ -6,9 +6,9 @@ graphic applications for the HTML Canvas <http://gamejs.org>.
 
 Its API is modeled after the successful PyGame library <http://pygame.org>.
 
-  * <http://gamejs.org>
-  * <http://gamejs.org/docs/>
-  * <http://gamejs.org/showcase/>
+  * Website <http://gamejs.org>
+  * Contributors <https://github.com/oberhamsi/gamejs/contributors>
+  * Showcase <http://gamejs.org/showcase/>
 
 Usage
 =========
@@ -28,15 +28,26 @@ unless you use Firefox or Safari. One trivial, cross-plattform solution to serve
 a directory via http is this executable: <http://code.google.com/p/mongoose/>.
 
 Bundle your application for production
-======================================
+==========================================================
 
-To wrap your own game's JavaScript files into one single file, use
-`./bin/minify-app.sh ./path-to-your-app/javascript/`. You can also add a second argument
-`compress` to optionally minify the resulting JS file.
+A bundled game:
 
-This will produce one file `app.min.js` holding all GameJs modules as
-well as your application code. You can then remove all `<script>` lines except
-the one loading the `app.min.js` file.
+  * does not need to be served over http:// (unless it uses `SurfaceArray`)
+  * has a smaller file size
+  * has somewhat obfuscated code
+
+To bundle all JavaScript files into one single file, use:
+
+    $./bin/minify-app.sh ./path-to-your-app/javascript/
+
+You can also add a second argument `compress`. With `compress`, the resulting
+bundle file will be compressed for smaller file size as well as obfuscated. 
+
+`minify-app.sh` will create the bundled file `app.min.js` in your app's
+`javascript` folder.
+
+To use the bundled file add a `<script>` tag loading it and remove all
+other `<script>`s.
 
 More Help
 ===========
