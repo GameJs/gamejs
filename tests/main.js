@@ -11,6 +11,6 @@ require('./pathfinding');
 require('./rectsurface');
 require('./sprite');
 require('./transform');
+require('./uri');
 require('./vectors');
-
 require('./xml');
