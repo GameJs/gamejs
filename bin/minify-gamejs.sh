@@ -13,6 +13,10 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 if [ -z "$GAMEJS_HOME" ]; then
     source "$SCRIPT_DIR/find-gamejs-home.sh"
     GAMEJS_HOME="$(find_gamejs_home "$0")"
+
+    if [ "$OSTYPE" == 'cygwin' ]; then
+		GAMEJS_HOME=`cygpath -m ${GAMEJS_HOME}`
+	fi
 fi
 
 if [ -z "$JAVA_HOME" ] ; then
