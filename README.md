@@ -16,7 +16,7 @@ Usage
 If you downloaded the git version, you will have to build the GameJs JavaScript
 file. Go to the GameJs directory and execute this in a unix shell or in `git bash`:
 
-    $ ./bin/minify-gamejs.sh
+    $ ./build.sh
 
 This should create a `gamejs.min.js` file in the GameJs home directory.
 
@@ -41,7 +41,7 @@ To bundle all JavaScript files into one single file, use:
     $./bin/minify-app.sh ./path-to-your-app/javascript/
 
 You can also add a second argument `compress`. With `compress`, the resulting
-bundle file will be compressed for smaller file size as well as obfuscated. 
+bundle file will be compressed for smaller file size as well as obfuscated.
 
 `minify-app.sh` will create the bundled file `app.min.js` in your app's
 `javascript` folder.
