@@ -62,7 +62,7 @@ function main() {
          gShips.update(msDuration);
          gShips.draw(mainSurface);
    };
-   gamejs.time.fpsCallback(tick, this, 20);
+   gamejs.time.fpsCallback(tick, this, 60);
 }
 
 /**

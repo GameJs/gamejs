@@ -76,7 +76,7 @@ function main() {
    var display = gamejs.display.setMode([SCREEN_WIDTH, SCREEN_HEIGHT]);
    var ballCenter = [SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2];
    var ball = new Ball(ballCenter);
-   gamejs.time.fpsCallback(gameTick, this, 30);
+   gamejs.time.fpsCallback(gameTick, this, 60);
 };
 
 // call main after all resources have finished loading
