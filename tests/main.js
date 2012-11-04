@@ -8,6 +8,7 @@ require('./draw');
 require('./mask');
 require('./math');
 require('./pathfinding');
+require('./prng');
 require('./rectsurface');
 require('./sprite');
 require('./transform');
