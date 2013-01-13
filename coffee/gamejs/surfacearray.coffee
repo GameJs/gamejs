@@ -66,7 +66,7 @@ SurfaceArray = exports.SurfaceArray = (surfaceOrDimensions) ->
     data[offset] = rgba[0]
     data[offset+1] = rgba[1]
     data[offset+2] = rgba[2]
-    data[offset+3] = rgba[3] == undefined ? 255 : rgba[3]
+    data[offset+3] = if rgba[3] == undefined then 255 else rgba[3]
     return
 
   ###
