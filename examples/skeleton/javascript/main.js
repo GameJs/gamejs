@@ -14,6 +14,6 @@ gamejs.ready(function() {
         // game loop
         return;
     };
-    gamejs.time.fpsCallback(tick, this, 60);
+    gamejs.time.interval(tick);
     **/
 });

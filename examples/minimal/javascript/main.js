@@ -59,7 +59,7 @@ function main() {
    // update models.
    // clear screen.
    // draw screen.
-   // called ~ 30 times per second by fps.callback
+   // called ~ 30 times per second by gamejs.time.interval()
    // msDuration = actual time in milliseconds since last call
    function gameTick(msDuration) {
       gamejs.event.get().forEach(function(event) {
@@ -76,7 +76,7 @@ function main() {
    var display = gamejs.display.setMode([SCREEN_WIDTH, SCREEN_HEIGHT]);
    var ballCenter = [SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2];
    var ball = new Ball(ballCenter);
-   gamejs.time.fpsCallback(gameTick, this, 60);
+   gamejs.time.interval(gameTick);
 };
 
 // call main after all resources have finished loading

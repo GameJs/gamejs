@@ -34,6 +34,6 @@ gamejs.ready(function() {
       map.draw(display);
    };
 
-   gamejs.time.fpsCallback(tick, this, 60);
+   gamejs.time.interval(tick);
 
 });

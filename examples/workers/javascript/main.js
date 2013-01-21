@@ -47,7 +47,7 @@ function main() {
    var tick = function(msDuration) {
       gamejs.event.get().forEach(handleEvent);
    };
-   gamejs.time.fpsCallback(tick, this, 100);
+   gamejs.time.interval(tick);
 }
 
 gamejs.ready(main);

@@ -67,7 +67,7 @@ function main() {
       display.blit(font.render('Move with mouse or cursor keys.'), [10, 250])
 
    };
-   gamejs.time.fpsCallback(tick, this, 60);
+   gamejs.time.interval(tick);
 };
 
 gamejs.preload([

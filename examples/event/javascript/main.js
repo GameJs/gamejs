@@ -70,7 +70,7 @@ function main() {
       });
    };
 
-   gamejs.time.fpsCallback(tick, this, 60);
+   gamejs.time.interval(tick);
 };
 
 gamejs.preload(['images/sparkle.png']);
