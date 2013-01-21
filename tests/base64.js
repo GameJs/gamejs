@@ -1,4 +1,4 @@
-var base64 = require('gamejs/base64');
+var base64 = require('gamejs/utils/base64');
 
 var data = {
     "pleasure": ["cGxlYXN1cmU=", [166, 87, 154, 178, 234, 222]],
