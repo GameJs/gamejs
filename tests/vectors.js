@@ -4,14 +4,14 @@ qModule('gamejs/utils/vectors');
 var EPS = 0.000001;
 
 test('Distance', function() {
-   close($v.distance([0,0], [5, 5]), 7.0710678118654755, EPS);
-   close($v.distance([0,0], [-3, -5]), 5.830951894845301, EPS);
-   close($v.distance([-55,11], [-3, -5]), 54.405882034941776, EPS);
+   QUnit.close($v.distance([0,0], [5, 5]), 7.0710678118654755, EPS);
+   QUnit.close($v.distance([0,0], [-3, -5]), 5.830951894845301, EPS);
+   QUnit.close($v.distance([-55,11], [-3, -5]), 54.405882034941776, EPS);
 });
 
 test('Len', function() {
    equal(5, $v.len([0, 5]));
-   close($v.len([5, 8]), 9.433981132056603, EPS);
+   QUnit.close($v.len([5, 8]), 9.433981132056603, EPS);
 });
 
 test('Unit', function() {
@@ -46,14 +46,14 @@ test('Dot', function(){
 
 test('Angle', function(){
    //90 degree angle
-   close($v.angle([0, -1], [1, 0]), Math.PI/2, EPS);
+   QUnit.close($v.angle([1, 0], [0, -1]), -Math.PI/2, EPS);
 
    //90 degree angle, other direction
-   close($v.angle([0, -1], [-1, 0]), Math.PI/2, EPS);
+   QUnit.close($v.angle([0, -1], [-1, 0]), -Math.PI/2, EPS);
 
    //180 degree angle
-   close($v.angle([1, 0], [-1, 0]), Math.PI, EPS);
+   QUnit.close($v.angle([1, 0], [-1, 0]), -Math.PI, EPS);
 
    //0 degrees
-   close($v.angle([0, -1], [0, -1]), EPS);
+   QUnit.close($v.angle([0, -1], [0, -1]), 0, EPS);
 });

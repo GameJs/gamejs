@@ -21,7 +21,7 @@ test('fromString', function() {
    equal(doc.elements('gamejs')[0].attribute('desc'), 'html canvas library');
    doc.elements('classprop').forEach(function(classDoc, idx) {
       var value = classDoc.children()[0].value();
-      equals(value, props[idx]);
+      equal(value, props[idx]);
    });
 });
 

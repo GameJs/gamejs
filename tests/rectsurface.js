@@ -1,5 +1,7 @@
 var gamejs  = require('gamejs');
 qModule('gamejs');
+var surfaceEqual = QUnit.surfaceEqual;
+var pixelEqual = QUnit.pixelEqual;
 
 test('RectConstructors', function() {
    // test various constructor forms
@@ -345,8 +347,7 @@ test('SurfaceFillClear', function() {
    pixelEqual(surface, [1, 1], [0, 0, 0, 0]);
 });
 
-asyncTest('SurfaceClone', function() {
-   var surfaceEqual = QUnit.surfaceEqual;
+asyncTest('SurfaceClone', 4, function() {
 
    var surface = new gamejs.Surface([20,20]);
 
@@ -356,12 +357,10 @@ asyncTest('SurfaceClone', function() {
    equal(surface.width, clone.width);
    equal(surface.height, clone.height);
    equal(surface.getAlpha(), clone.getAlpha());
-   surfaceEqual(surface, clone);
+   surfaceEqual(surface, clone, QUnit.start);
 });
 
-asyncTest('SurfaceBlit', function() {
-   var surfaceEqual = QUnit.surfaceEqual;
-   var pixelEqual = QUnit.pixelEqual;
+test('SurfaceBlit', function() {
 
    var big = new gamejs.Surface([100, 100]);
    big.fill('rgb(255,0,0)');

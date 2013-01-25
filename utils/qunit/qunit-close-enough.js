@@ -27,13 +27,16 @@ QUnit.extend( QUnit, {
 	 * @param String message (optional)
 	 */
 	notClose: function(actual, expected, minDifference, message) {
-		QUnit.push(Math.abs(actual - expected) > minDifference, actual, expected, message);
+		var passes = Math.abs(actual - expected) > minDifference;
+		ok(passes);
+		QUnit.push(passes, actual, expected, message);
 	},
 
    vectorsClose: function(actual, expected, maxDifference, message) {
       var passes = actual.every(function(item, idx) {
          return (item === expected[idx]) || Math.abs(item - expected[idx]) <= maxDifference[idx];
       });
+      ok(passes);
       QUnit.push(passes, actual, expected, message);
    }
 });

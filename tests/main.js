@@ -1,6 +1,5 @@
 var gamejs = require('gamejs');
 
-
 gamejs.ready(function() {
    /// set to no-smoothing to be reproducable across browsers
    gamejs.display.setMode([0, 0], gamejs.display.NO_SMOOTHING);
