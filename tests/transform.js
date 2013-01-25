@@ -1,7 +1,7 @@
 var gamejs = require('gamejs');
 qModule('gamejs/transform');
 
-test('flip', function() {
+asyncTest('flip', function() {
    var surfaceEqual = QUnit.surfaceEqual;
 
    var surface = new gamejs.Surface([40, 70]);
@@ -16,7 +16,7 @@ test('flip', function() {
 
 });
 
-test('rotate', function() {
+asyncTest('rotate', function() {
    var surfaceEqual = QUnit.surfaceEqual;
 
    var surface = new gamejs.Surface([40, 70]);
@@ -35,7 +35,7 @@ test('rotate', function() {
 });
 
 
-test('scale', function() {
+asyncTest('scale', function() {
    var surfaceEqual = QUnit.surfaceEqual;
 
    var surface = new gamejs.Surface([40, 70]);

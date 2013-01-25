@@ -345,7 +345,7 @@ test('SurfaceFillClear', function() {
    pixelEqual(surface, [1, 1], [0, 0, 0, 0]);
 });
 
-test('SurfaceClone', function() {
+asyncTest('SurfaceClone', function() {
    var surfaceEqual = QUnit.surfaceEqual;
 
    var surface = new gamejs.Surface([20,20]);
@@ -359,7 +359,7 @@ test('SurfaceClone', function() {
    surfaceEqual(surface, clone);
 });
 
-test('SurfaceBlit', function() {
+asyncTest('SurfaceBlit', function() {
    var surfaceEqual = QUnit.surfaceEqual;
    var pixelEqual = QUnit.pixelEqual;
 

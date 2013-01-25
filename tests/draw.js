@@ -1,7 +1,7 @@
 var gamejs = require('gamejs');
 qModule('gamejs/draw');
 
-test('DrawFunctions', function() {
+asyncTest('DrawFunctions', function() {
    var surfaceEqual = QUnit.surfaceEqual;
 
    var surface = new gamejs.Surface([100,100]);
