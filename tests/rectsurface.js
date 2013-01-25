@@ -113,6 +113,50 @@ test('RectSetters', function() {
    strictEqual(rect.top, 88);
    strictEqual(rect.top, rect.y);
 
+   // set topleft
+   var r = new gamejs.Rect(left, top, width, height);
+   var newTopLeft = [11, 12];
+   r.topleft = newTopLeft;
+   strictEqual(r.bottom, newTopLeft[1] + height)
+   strictEqual(r.right, newTopLeft[0] + width)
+   strictEqual(r.top, newTopLeft[1]);
+   strictEqual(r.left, newTopLeft[0]);
+   strictEqual(r.width, width);
+   strictEqual(r.height, height);
+
+   // topright
+   var r = new gamejs.Rect(left, top, width, height);
+   var newTopRight = [11, 12];
+   r.topright = newTopRight;
+   strictEqual(r.bottom, newTopRight[1] + height)
+   strictEqual(r.left, newTopRight[0] - width)
+   strictEqual(r.top, newTopRight[1]);
+   strictEqual(r.right, newTopRight[0]);
+   strictEqual(r.width, width);
+   strictEqual(r.height, height);
+
+   // bottomleft
+   var r = new gamejs.Rect(left, top, width, height);
+   var newBottomLeft = [11, 12];
+   r.bottomleft = newBottomLeft;
+   strictEqual(r.bottom, newBottomLeft[1])
+   strictEqual(r.left, newBottomLeft[0])
+   strictEqual(r.top, newBottomLeft[1] - height);
+   strictEqual(r.right, newBottomLeft[0] + width);
+   strictEqual(r.width, width);
+   strictEqual(r.height, height);
+
+   // bottomright
+   var r = new gamejs.Rect(left, top, width, height);
+   var newBottomRight = [11, 12];
+   r.bottomright = newBottomRight;
+   strictEqual(r.bottom, newBottomRight[1])
+   strictEqual(r.left, newBottomRight[0] - width)
+   strictEqual(r.top, newBottomRight[1] - height);
+   strictEqual(r.right, newBottomRight[0]);
+   strictEqual(r.width, width);
+   strictEqual(r.height, height);
+
 });
 
 test('RectInflate', function() {
@@ -122,7 +166,7 @@ test('RectInflate', function() {
    strictEqual(newRect.top, 0);
    strictEqual(newRect.width, 11);
    strictEqual(newRect.height, 10);
-   
+
    rect = new gamejs.Rect(5, 5, 12, 14);
    newRect = rect.inflate(12, 3);
    deepEqual(newRect.center, rect.center);
