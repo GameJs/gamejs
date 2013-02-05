@@ -14,3 +14,12 @@ test('seedable', function() {
    });
 });
 
+test('instance', function() {
+   prng.init('unit testing');
+   equal(prng.int(2, 10), 4);
+   equal(prng.choose([1,2,3,4,5]), 3);
+   deepEqual(prng.vector([1,2], [10,10]), [3, 4]);
+   prng.init('re-init testing');
+   equal(prng.random(), 0.7048633336089551)
+})
+
