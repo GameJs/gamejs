@@ -30,6 +30,11 @@ else
 fi
 
 TEMP_WORKING=`mktemp -d /tmp/gamejs.XXXX`
+
+if [ "$OSTYPE" == 'cygwin' ]; then
+  TEMP_WORKING=`cygpath -m ${TEMP_WORKING}`
+fi
+
 EXEC_YABBLER="${java_cmd} -jar ${GAMEJS_HOME}/utils/rhino/js.jar ${GAMEJS_HOME}/utils/yabbler/yabbler.js"
 EXEC_CLOSURE="cat"
 OUTPUT_FILE="${GAMEJS_HOME}/gamejs.min.js"
