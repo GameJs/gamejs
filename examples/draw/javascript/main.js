@@ -40,6 +40,12 @@ function main() {
    draw.rect(display, '#555555', new gamejs.Rect([50, 150], [20, 20]), 0);
    draw.rect(display, '#aaaaaa', new gamejs.Rect([90, 150], [20, 20]), 10);
 
+   // surface, color, startPos, endPos, controlPos, width
+   draw.quadratic_curve(display, "#00ff00", [100, 350], [400, 350], [250, 30], 3);
+   
+   // surface, color, startPos, endPos, firstControlPos, secondControlPos, width
+   draw.bezier_curve(display, "#7EC736", [100, 300], [400, 300], [110, 350], [390, 350], 4);
+   
    // Font object, create with css font definition
    var defaultFont = new font.Font("20px Verdana");
    // render() returns a white transparent Surface containing the text (default color: black)
