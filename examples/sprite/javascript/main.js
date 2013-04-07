@@ -56,13 +56,12 @@ function main() {
    // game loop
    var mainSurface = gamejs.display.getSurface();
    // msDuration = time since last tick() call
-   var tick = function(msDuration) {
+   gamejs.onTick(function(msDuration) {
          mainSurface.fill("#FFFFFF");
          // update and draw the ships
          gShips.update(msDuration);
          gShips.draw(mainSurface);
-   };
-   gamejs.time.interval(tick);
+   });
 }
 
 /**

@@ -25,15 +25,13 @@ gamejs.ready(function() {
 
    var map = new view.Map('./data/example.tmx');
 
-   var tick = function(msDuration) {
-      gamejs.event.get().forEach(function(event) {
+   gamejs.onEvent(function(event) {
          map.handle(event);
-      });
+   });
+
+   gamejs.onTick(function(msDuration) {
       map.update(msDuration);
       display.clear();
       map.draw(display);
-   };
-
-   gamejs.time.interval(tick);
-
+   });
 });
