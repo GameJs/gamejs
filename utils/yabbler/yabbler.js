@@ -127,8 +127,8 @@ function writeFile(fileObj, contents) {
 	var encoding = 'UTF-8';
 	try {
 		fileObj.getParentFile().mkdirs();
-		var outStream = new java.io.FileOutputStream(fileObj);
-		outStream.write((new java.lang.String(contents)).getBytes(encoding));
+		var outStream = new java.io.OutputStreamWriter(new java.io.FileOutputStream(fileObj), encoding);
+		outStream.write(contents);
 	}
 	finally {
 		if (outStream) {
