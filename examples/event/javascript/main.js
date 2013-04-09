@@ -20,32 +20,31 @@ function main() {
    var displayRect = display.rect;
    var sparkles = [];
 
-   function tick(msDuration) {
-
+   gamejs.onEvent(function(event) {
       // handle key / mouse events
-      gamejs.event.get().forEach(function(event) {
-         if (event.type === gamejs.event.KEY_UP) {
-            if (event.key === gamejs.event.K_UP) {
-               // reverse Y direction of sparkles
-               sparkles.forEach(function(sparkle) {
-                  sparkle.deltaY *= -1;
-               });
-            };
-         } else if (event.type === gamejs.event.MOUSE_MOTION) {
-            // if mouse is over display surface
-            if (displayRect.collidePoint(event.pos)) {
-               // add sparkle at mouse position
-               sparkles.push({
-                  left: event.pos[0],
-                  top: event.pos[1],
-                  alpha: Math.random(),
-                  deltaX: 30 - Math.random() * 60,
-                  deltaY: 80 + Math.random() * 40,
-               });
-            }
+      if (event.type === gamejs.event.KEY_UP) {
+         if (event.key === gamejs.event.K_UP) {
+            // reverse Y direction of sparkles
+            sparkles.forEach(function(sparkle) {
+               sparkle.deltaY *= -1;
+            });
+         };
+      } else if (event.type === gamejs.event.MOUSE_MOTION) {
+         // if mouse is over display surface
+         if (displayRect.collidePoint(event.pos)) {
+            // add sparkle at mouse position
+            sparkles.push({
+               left: event.pos[0],
+               top: event.pos[1],
+               alpha: Math.random(),
+               deltaX: 30 - Math.random() * 60,
+               deltaY: 80 + Math.random() * 40,
+            });
          }
-      });
+      }
+   });
 
+   gamejs.onTick(function(msDuration) {
       // update sparkle position & alpha
       sparkles.forEach(function(sparkle) {
          // msDuration makes is frame rate independant: we don't want
@@ -68,9 +67,7 @@ function main() {
          starImage.setAlpha(sparkle.alpha);
          display.blit(starImage, [sparkle.left, sparkle.top]);
       });
-   };
-
-   gamejs.time.interval(tick);
+   });
 };
 
 gamejs.preload(['images/sparkle.png']);

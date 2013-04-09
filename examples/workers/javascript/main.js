@@ -21,33 +21,31 @@ function main() {
 
    // send a question to the worker
    var startNumber = parseInt(1230023 + (Math.random() * 10000));
-   display.blit(font.render('Asking worker for primes after ' + startNumber), [10,30]);
    primeWorker.post({
       todo: "nextprimes", start: startNumber
    });
-   // instead of using `Worker.post()` like above, you could also
-   // send the message via the normal gamejs.event queue:
-   /*
-   gamejs.event.post({
-      worker: primeWorker,
-      type: gamejs.event.WORKER,
-      data: {todo: "nextprimes", start: startNumber}
-   });
-   */
 
    // wait for results...
-   var yOffset = 50;
-   var handleEvent = function(event) {
-      if (event.type == gamejs.event.WORKER_RESULT) {
-         display.blit(font.render('Worker answered: ' + event.data.prime), [10, yOffset])
-         yOffset += 20;
-      }
-   }
+   var primes = [];
+   primeWorker.onEvent(function(event) {
+      primes.push(event.data.prime);
+   });
 
-   var tick = function(msDuration) {
-      gamejs.event.get().forEach(handleEvent);
-   };
-   gamejs.time.interval(tick);
+   primeWorker.onError(function(data) {
+      gamejs.log('worker threw an exception', data);
+   });
+
+   // draw resutls
+   gamejs.onTick(function(msDuration) {
+      var yOffset = 56;
+      display.clear();
+      display.blit(font.render('Worker is producing primes bigger than ' + startNumber), [10,30]);
+      primes.forEach(function(p, idx) {
+         display.blit(font.render('#' + idx  + ': ' + p), [10, yOffset])
+         yOffset += 20;
+      });
+
+   });
 }
 
 gamejs.ready(main);

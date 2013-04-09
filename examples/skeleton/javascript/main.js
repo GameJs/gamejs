@@ -1,6 +1,6 @@
 var gamejs = require('gamejs');
 
-// gamejs.preload([]);
+gamejs.preload([]);
 
 gamejs.ready(function() {
 
@@ -9,11 +9,11 @@ gamejs.ready(function() {
         (new gamejs.font.Font('30px Sans-serif')).render('Hello World')
     );
 
-    /**
-    function tick(msDuration) {
+    gamejs.onEvent(function(event) {
+        // event handling
+    });
+
+    gamejs.onTick(function(msDuration) {
         // game loop
-        return;
-    };
-    gamejs.time.interval(tick);
-    **/
+    });
 });

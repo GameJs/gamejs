@@ -29,29 +29,25 @@ function main() {
 
    var font = new gamejs.font.Font('20px monospace');
 
-   /**
-    * tick
-    */
-   function tick () {
-      // event handling
-      gamejs.event.get().forEach(function(event) {
-         var direction = {};
-         direction[gamejs.event.K_UP] = [0, -1];
-         direction[gamejs.event.K_DOWN] = [0, 1];
-         direction[gamejs.event.K_LEFT] = [-1, 0];
-         direction[gamejs.event.K_RIGHT] = [1, 0];
-         if (event.type === gamejs.event.KEY_DOWN) {
-            var delta = direction[event.key];
-            if (delta) {
-               spearPosition = $v.add(spearPosition, delta);
-            }
-         } else if (event.type === gamejs.event.MOUSE_MOTION) {
-            if (display.rect.collidePoint(event.pos)) {
-               spearPosition = $v.subtract(event.pos, spear.getSize());
-            }
+   gamejs.onEvent(function(event) {
+      var direction = {};
+      direction[gamejs.event.K_UP] = [0, -1];
+      direction[gamejs.event.K_DOWN] = [0, 1];
+      direction[gamejs.event.K_LEFT] = [-1, 0];
+      direction[gamejs.event.K_RIGHT] = [1, 0];
+      if (event.type === gamejs.event.KEY_DOWN) {
+         var delta = direction[event.key];
+         if (delta) {
+            spearPosition = $v.add(spearPosition, delta);
          }
-      });
+      } else if (event.type === gamejs.event.MOUSE_MOTION) {
+         if (display.rect.collidePoint(event.pos)) {
+            spearPosition = $v.subtract(event.pos, spear.getSize());
+         }
+      }
+   });
 
+   gamejs.onTick(function() {
       // draw
       display.clear();
       display.blit(unit, unitPosition);
@@ -65,9 +61,7 @@ function main() {
          display.blit(font.render('COLLISION', '#ff0000'), [250, 50]);
       }
       display.blit(font.render('Move with mouse or cursor keys.'), [10, 250])
-
-   };
-   gamejs.time.interval(tick);
+   });
 };
 
 gamejs.preload([
