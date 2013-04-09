@@ -12,13 +12,16 @@ var gamejs = require('gamejs');
 
 function main() {
 
-   var display = gamejs.display.setMode([850, 600]);
+   var display = gamejs.display.setMode([850, 600], gamejs.display.FULLSCREEN);
    gamejs.display.setCaption('example event');
    var starImage = gamejs.image.load('images/sparkle.png');
 
    var instructionFont = new gamejs.font.Font('30px monospace');
    var displayRect = display.rect;
    var sparkles = [];
+
+   // to keep track of pointer position after it is locked
+   var absolutePosition = [400, 300];
 
    gamejs.onEvent(function(event) {
       // handle key / mouse events
@@ -31,16 +34,21 @@ function main() {
          };
       } else if (event.type === gamejs.event.MOUSE_MOTION) {
          // if mouse is over display surface
-         if (displayRect.collidePoint(event.pos)) {
+         var pos = event.pos;
+         if (displayRect.collidePoint(pos)) {
             // add sparkle at mouse position
             sparkles.push({
-               left: event.pos[0],
-               top: event.pos[1],
+               left: pos[0],
+               top: pos[1],
                alpha: Math.random(),
                deltaX: 30 - Math.random() * 60,
                deltaY: 80 + Math.random() * 40,
             });
          }
+      } else if (event.type === gamejs.event.DISPLAY_FULLSCREEN_ENABLED) {
+         // if the game just went fullscreen: adapt the display size
+         display = gamejs.display.setMode([window.innerWidth-10, window.innerHeight-10]);
+         displayRect = display.rect;
       }
    });
 
