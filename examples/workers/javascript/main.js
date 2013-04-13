@@ -28,7 +28,7 @@ function main() {
    // wait for results...
    var primes = [];
    primeWorker.onEvent(function(event) {
-      primes.push(event.data.prime);
+      primes.push(event.prime);
    });
 
    primeWorker.onError(function(data) {
