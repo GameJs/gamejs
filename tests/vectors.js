@@ -52,7 +52,7 @@ test('Angle', function(){
    QUnit.close($v.angle([0, -1], [-1, 0]), -Math.PI/2, EPS);
 
    //180 degree angle
-   QUnit.close($v.angle([1, 0], [-1, 0]), -Math.PI, EPS);
+   QUnit.close($v.angle([1, 0], [-1, 0]), Math.PI, EPS);
 
    //0 degrees
    QUnit.close($v.angle([0, -1], [0, -1]), 0, EPS);
