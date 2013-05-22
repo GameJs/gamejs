@@ -4,6 +4,8 @@ GameJs
 GameJs is a JavaScript library for writing 2D games or other interactive
 graphic applications for the HTML Canvas <http://gamejs.org>.
 
+**Unless you downloaded a release zip: you have to build GameJs with `./bin/build.sh`.**
+
 Usage
 =========
 
