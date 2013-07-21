@@ -20,7 +20,7 @@ to run your code on the client. Here's a small example:
 
     cd ~/my-web-game/
     npm install gamejs
-    npm install -g browswerify
+    npm install -g browserify
     browserify ./main.js --out bundled.js
 
 ## Option 3: using the git version
