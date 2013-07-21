@@ -1,8 +1,8 @@
 {
     "name": "gamejs",
-    "version": "2011.06.13",
-    "description": "GameJs, html canvas wrapper",
-    "keywords": ["gamedev"],
+    "version": "1.0",
+    "description": "GameJs - a thin library on top of canvas",
+    "keywords": ["game", "gamedev", "web", "html5"],
     "author": ["Simon Oberhammer <simon@nekapuzer.at>"],
     "main": "./lib/gamejs",
     "directories": {
