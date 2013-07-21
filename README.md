@@ -11,17 +11,17 @@ Depending on how you got GameJs:
 
 ## Option 1: zip release
 
-Extract the zip file and try the examples in the zip file over http://
+Extract the zip file and try the examples in the zip file over http://.
 
 ## Option 2: Node package registry
 
-After you installed gamejs (`npm install -g gamejs`), you can use a 
-bundler like `browserify` to run your code on the client. 
-Here's a small example:
+After you installed gamejs, you can use a bundler like `browserify` 
+to run your code on the client. Here's a small example:
 
-    http://requirebin.com/?gist=6048278
-
-
+    cd ~/my-web-game/
+    npm install gamejs
+    npm install -g browswerify
+    browserify ./main.js --out bundled.js
 
 ## Option 3: using the git version
 
