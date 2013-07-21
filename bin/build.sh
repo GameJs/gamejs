@@ -44,7 +44,8 @@ if [ "$1" = "compress" ] ; then
 fi
 
 ${EXEC_YABBLER} -i ${GAMEJS_HOME}/lib/ -o ${TEMP_WORKING}
-find ${TEMP_WORKING} -type f -exec cat {} \; | ${EXEC_CLOSURE} > ${OUTPUT_FILE}
+cat ${GAMEJS_HOME}/utils/yabbler/yabble.js | ${EXEC_CLOSURE} > ${OUTPUT_FILE}
+find ${TEMP_WORKING} -type f -exec cat {} \; | ${EXEC_CLOSURE} >> ${OUTPUT_FILE}
 cp ${OUTPUT_FILE} ${OUTPUT_FILE_SKELETON}
 rm -rf ${TEMP_WORKING}
 echo "Wrote ${OUTPUT_FILE}"

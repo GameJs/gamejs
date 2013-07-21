@@ -52,7 +52,7 @@ fi
 rm -f ${WRAPPED_FILE}
 ${EXEC_YABBLER} -i $1 -o ${TEMP_WORKING}
 ${EXEC_YABBLER} -i ${GAMEJS_HOME}/lib/ -o ${TEMP_WORKING}
-cat ${GAMEJS_HOME}/examples/skeleton/public/yabble.js | ${EXEC_CLOSURE} > ${WRAPPED_FILE}
+cat ${GAMEJS_HOME}/utils/yabbler/yabble.js | ${EXEC_CLOSURE} > ${WRAPPED_FILE}
 find ${TEMP_WORKING} -type f -exec cat {} \; | ${EXEC_CLOSURE} >> ${WRAPPED_FILE}
 rm -rf ${TEMP_WORKING}
 echo "Wrote ${WRAPPED_FILE}"
