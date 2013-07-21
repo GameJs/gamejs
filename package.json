@@ -1,11 +1,24 @@
 {
-    "name": "gamejs",
-    "version": "1.0",
-    "description": "GameJs - a thin library on top of canvas",
-    "keywords": ["game", "gamedev", "web", "html5"],
-    "author": ["Simon Oberhammer <simon@nekapuzer.at>"],
-    "main": "./lib/gamejs",
-    "directories": {
-        "lib": "lib/gamejs"
-    }
+   "name": "gamejs",
+   "version": "1.0.0",
+   "description": "thin library on top of canvas",
+   "keywords": ["games", "gamedev", "web", "canvas", "game library"],
+   "author": {
+      "name": "Simon Oberhammer <simon@nekapuzer.at>",
+      "url": "http://nekapuzer.at"
+   },
+   "main": "./lib/gamejs",
+   "directories": {
+      "lib": "lib/"
+   },
+   "homepage": "http://gamejs.org",
+   "bugs": {
+      "email": "gamejs@googlegroups.com",
+      "url": "http://github.com/oberhamsi/gamejs/issues"
+   },
+   "license": "MIT",
+   "repository": {
+      "type": "git",
+      "url": "git://github.com/oberhamsi/gamejs.git"
+   }
 }
