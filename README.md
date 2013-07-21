@@ -4,35 +4,66 @@ GameJs
 GameJs is a JavaScript library for writing 2D games or other interactive
 graphic applications for the HTML Canvas <http://gamejs.org>.
 
-**Unless you downloaded a release zip: you have to build GameJs with `./bin/build.sh`.**
-
 Usage
 =========
 
-## Option 1: If you downloaded a release
+Depending on how you got GameJs:
 
-Try the examples in the zip file over http://
+## Option 1: zip release
 
-## Option 2: If you downloaded the git version
+Extract the zip file and try the examples in the zip file over http://
+
+## Option 2: Node package registry
+
+After you installed gamejs (`npm install -g gamejs`), you can use a 
+bundler like `browserify` to run your code on the client. 
+Here's a small example:
+
+    http://requirebin.com/?gist=6048278
+
+
+
+## Option 3: using the git version
 
 You will have to build GameJs. Go to the GameJs directory and execute this 
 in a unix shell, cygwin or in `git bash`:
 
     $ ./bin/build.sh
 
-This should create a `gamejs.min.js` file in the GameJs home directory.
+This should create the `gamejs.min.js` file in the GameJs home directory.
 
-See the `examples/skeleton/` directory for a minimal GameJs app. We recommend
-you also use this as the scaffolding if you want to create a new game yourself.
+Minimal example
+=================
 
-http:// vs file://
-----------------------
+Load the `gamejs.min.js` file tell the module loader where your
+"main" module lies (usually "./javascript/main.js"):
 
-Note that you need to run the examples via `http://` (not `file://`)
-unless you use Firefox or Safari. One trivial, cross-plattform solution to serve
-a directory via http is this executable: <http://code.google.com/p/mongoose/>.
+    <script src="./public/gamejs.min.js"></script>
+    <script>
+        require.setModuleRoot('./javascript/');
+        require.run('main')
+    </script>
 
-Bundled applications don't have the http:// requirement - see below.
+
+And inside "./javascript/main.js", you can `require` gamejs
+and start your game:
+
+    var gamejs = require('gamejs');
+    gamejs.ready(function() {
+       var display = gamejs.display.setMode([600, 400]);
+       display.blit(myImage);
+       ....
+    });
+
+More Help
+===========
+
+See the [GameJs Website](http://gamejs.org) for more help or drop us
+an email in the [Mailing List](http://groups.google.com/group/gamejs).
+
+Check the `docs` folder of your GameJs installation.
+
+Example application can be found in the `examples/` directory.
 
 Bundle your application for production
 ==========================================================
@@ -53,18 +84,14 @@ bundle file will be compressed for smaller file size as well as obfuscated.
 `minify-app.sh` will create the bundled file `app.min.js` in your app's
 `javascript` folder.
 
-To use the bundled file add a `<script>` tag loading it and remove all
-other `<script>`s.
+With browserify
+----------------
 
-More Help
-===========
+If you already have nodejs installed, this might be convinient:
 
-See the [GameJs Website](http://gamejs.org) for more help or drop us
-an email in the [Mailing List](http://groups.google.com/group/gamejs).
+   npm install -g browserify
+   npm install gamejs
 
-Check the `docs` folder of your GameJs installation.
-
-Example application can be found in the `examples/` directory.
 
 GameJs Contribution
 ===================
@@ -87,3 +114,4 @@ JsDoc
 For the JavaScript documentation system, RingoJs must be installed on your system.
 
     $ ./bin/create-jsdoc.sh
+
