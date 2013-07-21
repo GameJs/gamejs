@@ -16,7 +16,7 @@ var Ship = function(rect) {
    Ship.superConstructor.apply(this, arguments);
    this.speed = 20 + (40 * Math.random());
    // ever ship has its own scale
-   this.originalImage = gamejs.image.load("images/ship.png");
+   this.originalImage = gamejs.image.load("./ship.png");
    var dims = this.originalImage.getSize();
    this.originalImage = gamejs.transform.scale(
                                 this.originalImage,
@@ -67,5 +67,5 @@ function main() {
 /**
  * M A I N
  */
-gamejs.preload(['images/ship.png']);
+gamejs.preload(['./ship.png']);
 gamejs.ready(main);

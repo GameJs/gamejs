@@ -17,8 +17,8 @@ function main() {
 
    var display = gamejs.display.setMode([500, 350]);
 
-   var spear = gamejs.image.load('images/spear.png');
-   var unit = gamejs.image.load('images/unit.png');
+   var spear = gamejs.image.load('./spear.png');
+   var unit = gamejs.image.load('./unit.png');
 
    // create image masks from surface
    var mUnit = mask.fromSurface(unit);
@@ -65,7 +65,7 @@ function main() {
 };
 
 gamejs.preload([
-   'images/spear.png',
-   'images/unit.png',
+   './spear.png',
+   './unit.png',
 ]);
 gamejs.ready(main);

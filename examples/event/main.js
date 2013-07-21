@@ -14,7 +14,7 @@ function main() {
 
    var display = gamejs.display.setMode([850, 600], gamejs.display.FULLSCREEN);
    gamejs.display.setCaption('example event');
-   var starImage = gamejs.image.load('images/sparkle.png');
+   var starImage = gamejs.image.load('./sparkle.png');
 
    var instructionFont = new gamejs.font.Font('30px monospace');
    var displayRect = display.rect;
@@ -78,5 +78,5 @@ function main() {
    });
 };
 
-gamejs.preload(['images/sparkle.png']);
+gamejs.preload(['./sparkle.png']);
 gamejs.ready(main);

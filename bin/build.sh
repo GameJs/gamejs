@@ -38,7 +38,6 @@ fi
 EXEC_YABBLER="${java_cmd} -jar ${GAMEJS_HOME}/utils/rhino/js.jar ${GAMEJS_HOME}/utils/yabbler/yabbler.js"
 EXEC_CLOSURE="cat"
 OUTPUT_FILE="${GAMEJS_HOME}/gamejs.min.js"
-OUTPUT_FILE_SKELETON="${GAMEJS_HOME}/examples/skeleton/public/gamejs.min.js"
 if [ "$1" = "compress" ] ; then
    EXEC_CLOSURE="${java_cmd} -jar ${GAMEJS_HOME}/utils/closure-compiler/compiler.jar --jscomp_warning=internetExplorerChecks"
 fi
@@ -46,6 +45,5 @@ fi
 ${EXEC_YABBLER} -i ${GAMEJS_HOME}/lib/ -o ${TEMP_WORKING}
 cat ${GAMEJS_HOME}/utils/yabbler/yabble.js | ${EXEC_CLOSURE} > ${OUTPUT_FILE}
 find ${TEMP_WORKING} -type f -exec cat {} \; | ${EXEC_CLOSURE} >> ${OUTPUT_FILE}
-cp ${OUTPUT_FILE} ${OUTPUT_FILE_SKELETON}
 rm -rf ${TEMP_WORKING}
 echo "Wrote ${OUTPUT_FILE}"

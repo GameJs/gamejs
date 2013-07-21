@@ -10,15 +10,10 @@
            margin:1em 0 2em 6em;
            padding:0;
         }
-        #gjs-loader {
-            width: 50%;
-            height: 50%;
-            background: url('./public/ajax-loader.gif');
-        }
     </style>
-    <script src="./public/gamejs.min.js"></script>
+    <script src="../../gamejs.min.js"></script>
     <script>
-        require.setModuleRoot('./javascript/');
+        require.setModuleRoot('./');
         require.run('main')
     </script>
 </head>
