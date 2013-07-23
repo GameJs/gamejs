@@ -61,8 +61,6 @@ More Help
 See the [GameJs Website](http://gamejs.org) for more help or drop us
 an email in the [Mailing List](http://groups.google.com/group/gamejs).
 
-Check the `docs` folder of your GameJs installation.
-
 Example application can be found in the `examples/` directory.
 
 Bundle your application for production
