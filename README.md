@@ -35,7 +35,7 @@ This should create the `gamejs.min.js` file in the GameJs home directory.
 Minimal example
 =================
 
-Load the `gamejs.min.js` file tell the module loader where your
+Load the `gamejs.min.js` file and tell the module loader where your
 "main" module lies (usually "./javascript/main.js"):
 
     <script src="./public/gamejs.min.js"></script>
@@ -89,8 +89,8 @@ With browserify
 
 If you already have nodejs installed, this might be convinient:
 
-   npm install -g browserify
-   npm install gamejs
+    npm install -g browserify
+    npm install gamejs
 
 
 GameJs Contribution
