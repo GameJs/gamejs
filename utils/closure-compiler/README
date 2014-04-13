@@ -22,7 +22,7 @@ The Closure Compiler performs checking, instrumentation, and
 optimizations on JavaScript code. The purpose of this README is to
 explain how to build and run the Closure Compiler.
 
-The Closure Compiler requires Java 6 or higher.
+The Closure Compiler requires Java 7 or higher.
 http://www.java.com/
 
 
@@ -65,7 +65,7 @@ Under Eclipse's File menu, click "New > Project ..." and create a
 "Java Project."  You will see an options screen. Give the project a
 name, select "Create project from existing source," and choose the
 root of the checked-out source tree as the existing directory. Verify
-that you are using JRE version 6 or higher.
+that you are using JRE version 7 or higher.
 
 Eclipse can use the build.xml file to discover rules. When you
 navigate to the build.xml file, you will see all the build rules in
@@ -146,13 +146,13 @@ the parse tree data structures were extracted and modified
 significantly for use by Google's JavaScript compiler.
 
 Local Modifications: The packages have been renamespaced. All code not
-relavant to parsing has been removed. A JSDoc parser and static typing
+relevant to parsing has been removed. A JsDoc parser and static typing
 system have been added.
 
 
 -----
 Code in:
-lib/libtrunk_rhino_parser_jarjared.jar
+lib/rhino
 
 Rhino
 URL: http://www.mozilla.org/rhino
@@ -161,9 +161,8 @@ License:  Netscape Public License and MPL / GPL dual license
 
 Description: Mozilla Rhino is an implementation of JavaScript for the JVM.
 
-Local Modifications: None. We've used JarJar to renamespace the code
-post-compilation. See:
-http://code.google.com/p/jarjar/
+Local Modifications: Minor changes to parsing JSDoc that usually get pushed
+up-stream to Rhino trunk.
 
 
 -----
@@ -172,7 +171,7 @@ lib/args4j.jar
 
 Args4j
 URL: https://args4j.dev.java.net/
-Version: 2.0.12
+Version: 2.0.16
 License: MIT
 
 Description:
@@ -188,7 +187,7 @@ lib/guava.jar
 
 Guava Libraries
 URL: http://code.google.com/p/guava-libraries/
-Version:  r08
+Version:  15.0
 License: Apache License 2.0
 
 Description: Google's core Java libraries.
@@ -210,13 +209,28 @@ Description: Annotations for software defect detection.
 Local Modifications: None.
 
 
+-----
+Code in:
+lib/jarjar.jar
+
+Jar Jar Links
+URL: http://jarjar.googlecode.com/
+Version: 1.1
+License: Apache License 2.0
+
+Description:
+A utility for repackaging Java libraries.
+
+Local Modifications: None.
+
+
 ----
 Code in:
 lib/junit.jar
 
 JUnit
 URL:  http://sourceforge.net/projects/junit/
-Version:  4.8.2
+Version:  4.10
 License:  Common Public License 1.0
 
 Description: A framework for writing and running automated tests in Java.
@@ -230,7 +244,7 @@ lib/protobuf-java.jar
 
 Protocol Buffers
 URL: http://code.google.com/p/protobuf/
-Version: 2.3.0
+Version: 2.4.1
 License: New BSD License
 
 Description: Supporting libraries for protocol buffers,
@@ -266,13 +280,23 @@ JSON is a set of java files for use in transmitting data in JSON format.
 Local Modifications: None
 
 ---
-Code in:
-tools/maven-ant-tasks-2.1.1.jar
-URL: http://maven.apache.org
-Version 2.1.1
-License: Apache License 2.0
+Code in
+lib/mockito-core.jar
+URL: https://code.google.com/p/mockito
+Version: 1.9.5
+License: MIT license
 Description:
-  Maven Ant tasks are used to manage dependencies and to install/deploy to
-  maven repositories.
+Mockito is an open source testing framework for Java. The framework allows the creation of Test Double objects (called "Mock Objects") in automated unit tests for the purpose of Test-driven Development (TDD) or Behavior Driven Development (BDD).
+
+Local Modifications: None
+
+---
+Code in
+lib/objenesis.jar
+URL: http://objenesis.org
+Version: 1.2
+License: Apache 2.0 license
+Description:
+Depended by lib/mockito-core.jar, not used directly.
 
 Local Modifications: None
