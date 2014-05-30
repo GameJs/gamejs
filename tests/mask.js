@@ -1,5 +1,5 @@
-var Mask = require('gamejs/mask').Mask;
-qModule('gamejs/mask');
+var Mask = require('gamejs/pixelcollision').Mask;
+qModule('gamejs/pixelcollision');
 
 test('Mask collides', function() {
 

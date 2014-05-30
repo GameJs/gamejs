@@ -1,5 +1,5 @@
-var astar = require('gamejs/pathfinding/astar');
-qModule('gamejs/pathfinding/astar');
+var astar = require('gamejs/pathfinding');
+qModule('gamejs/pathfinding');
 
 /**
  * This is an example implementation of a Map that can be passed to the `astar.findRoute()`

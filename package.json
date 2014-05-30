@@ -1,24 +1,33 @@
 {
    "name": "gamejs",
-   "version": "1.0.0",
-   "description": "thin library on top of canvas",
-   "keywords": ["games", "gamedev", "web", "canvas", "game library"],
+   "version": "2.0.0-alpha",
+   "description": "thin CommonJs library for canvas and worker",
+   "keywords": ["games", "gamedev", "web", "canvas"],
    "author": {
       "name": "Simon Oberhammer <simon@nekapuzer.at>",
       "url": "http://nekapuzer.at"
    },
-   "main": "./lib/gamejs",
+   "main": "./src/gamejs",
    "directories": {
-      "lib": "lib/"
+      "lib": "src/"
    },
    "homepage": "http://gamejs.org",
    "bugs": {
       "email": "gamejs@googlegroups.com",
-      "url": "http://github.com/oberhamsi/gamejs/issues"
+      "url": "http://github.com/gamejs/gamejs/issues"
    },
    "license": "MIT",
    "repository": {
       "type": "git",
-      "url": "git://github.com/oberhamsi/gamejs.git"
+      "url": "git://github.com/gamejs/gamejs.git"
+   },
+   "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-jshint": "*",
+    "jshint-stylish": "~0.2.0",
+    "grunt-exec": "~0.4",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-concat": "~0.3",
+    "grunt-contrib-clean": "~0.5"
    }
 }

@@ -24,7 +24,7 @@ test('RectConstructors', function() {
       top
    ]);
 
-   var rect = new gamejs.Rect([left, top], [width, height]);
+   rect = new gamejs.Rect([left, top], [width, height]);
    ok(rect instanceof gamejs.Rect);
    strictEqual(rect.left, left);
    strictEqual(rect.top, top);
@@ -37,7 +37,7 @@ test('RectConstructors', function() {
       top + Math.floor(height / 2)
    ]);
 
-   var rect = new gamejs.Rect([left, top, width, height]);
+   rect = new gamejs.Rect([left, top, width, height]);
    ok(rect instanceof gamejs.Rect);
    strictEqual(rect.left, left);
    strictEqual(rect.top, top);
@@ -50,7 +50,7 @@ test('RectConstructors', function() {
       top + Math.floor(height / 2)
    ]);
 
-   var rect = new gamejs.Rect(left, top, width, height);
+   rect = new gamejs.Rect(left, top, width, height);
    ok(rect instanceof gamejs.Rect);
    strictEqual(rect.left, left);
    strictEqual(rect.top, top);
@@ -311,8 +311,8 @@ test('SurfaceConstructors', function() {
 
    var width = 30;
    var height = 40;
-   var surface = new gamejs.Surface(width, height);
-   ok(surface instanceof gamejs.Surface);
+   var surface = new gamejs.graphics.Surface(width, height);
+   ok(surface instanceof gamejs.graphics.Surface);
    deepEqual(surface.getSize(), [width, height]);
    ok(surface.rect instanceof gamejs.Rect);
    deepEqual([surface.rect.left,
@@ -328,7 +328,7 @@ test('SurfaceConstructors', function() {
 test('SurfaceFillClear', function() {
    var pixelEqual = QUnit.pixelEqual;
 
-   var surface = new gamejs.Surface([10,10]);
+   var surface = new gamejs.graphics.Surface([10,10]);
 
    surface.fill('rgb(55, 66, 77)');
    pixelEqual(surface, [1, 1], [55, 66, 77, 255]);
@@ -349,7 +349,7 @@ test('SurfaceFillClear', function() {
 
 asyncTest('SurfaceClone', 4, function() {
 
-   var surface = new gamejs.Surface([20,20]);
+   var surface = new gamejs.graphics.Surface([20,20]);
 
    surface.fill('#20394');
 
@@ -362,10 +362,10 @@ asyncTest('SurfaceClone', 4, function() {
 
 test('SurfaceBlit', function() {
 
-   var big = new gamejs.Surface([100, 100]);
+   var big = new gamejs.graphics.Surface([100, 100]);
    big.fill('rgb(255,0,0)');
 
-   var second = new gamejs.Surface([10,10]);
+   var second = new gamejs.graphics.Surface([10,10]);
    second.fill('rgb(0,255,0)');
 
    // blitting without target puts it into top left corner
@@ -407,8 +407,8 @@ test('SurfaceBlit', function() {
 test('SurfaceAlpha', function() {
    var pixelEqual = QUnit.pixelEqual;
 
-   var first = new gamejs.Surface([20,20]);
-   var second = new gamejs.Surface([20,20]);
+   var first = new gamejs.graphics.Surface([20,20]);
+   var second = new gamejs.graphics.Surface([20,20]);
    second.fill('rgb(255,0,0)');
    second.setAlpha(0.5);
 

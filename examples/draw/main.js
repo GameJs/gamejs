@@ -4,7 +4,7 @@
  * Render text in a certain font to the screen.
  */
 var gamejs = require('gamejs');
-var draw = require('gamejs/draw');
+var draw = require('gamejs/graphics');
 var font = require('gamejs/font');
 
 function main() {

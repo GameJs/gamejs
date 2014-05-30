@@ -1,5 +1,5 @@
-var $v = require('gamejs/utils/vectors');
-qModule('gamejs/utils/vectors');
+var $v = require('gamejs/math/vectors');
+qModule('gamejs/math/vectors');
 
 var EPS = 0.000001;
 

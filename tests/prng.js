@@ -1,6 +1,6 @@
-var prng = require('gamejs/utils/prng');
+var prng = require('gamejs/math/random');
 
-qModule('gamejs/utils/prng');
+qModule('gamejs/math/random');
 
 test('seedable', function() {
    var seeds = ['gamejs', '12345', new Date()];

@@ -10,8 +10,8 @@
  *
  */
 var gamejs = require('gamejs');
-var mask = require('gamejs/mask');
-var $v = require('gamejs/utils/vectors');
+var pixelcollision = require('gamejs/pixelcollision');
+var $v = require('gamejs/math/vectors');
 
 function main() {
 
@@ -21,29 +21,32 @@ function main() {
    var unit = gamejs.image.load('./unit.png');
 
    // create image masks from surface
-   var mUnit = mask.fromSurface(unit);
-   var mSpear = mask.fromSurface(spear);
+   var mUnit = new pixelcollision.Mask(unit);
+   var mSpear = new pixelcollision.Mask(spear);
 
    var unitPosition = [20, 20];
    var spearPosition = [6, 0];
 
    var font = new gamejs.font.Font('20px monospace');
 
-   gamejs.onEvent(function(event) {
-      var direction = {};
-      direction[gamejs.event.K_UP] = [0, -1];
-      direction[gamejs.event.K_DOWN] = [0, 1];
-      direction[gamejs.event.K_LEFT] = [-1, 0];
-      direction[gamejs.event.K_RIGHT] = [1, 0];
-      if (event.type === gamejs.event.KEY_DOWN) {
-         var delta = direction[event.key];
-         if (delta) {
-            spearPosition = $v.add(spearPosition, delta);
-         }
-      } else if (event.type === gamejs.event.MOUSE_MOTION) {
-         if (display.rect.collidePoint(event.pos)) {
-            spearPosition = $v.subtract(event.pos, spear.getSize());
-         }
+   var direction = {};
+   direction[gamejs.event.K_UP] = [0, -1];
+   direction[gamejs.event.K_DOWN] = [0, 1];
+   direction[gamejs.event.K_LEFT] = [-1, 0];
+   direction[gamejs.event.K_RIGHT] = [1, 0];
+   gamejs.event.onKeyUp(function(event) {
+
+   });
+   gamejs.event.onKeyDown(function(event) {
+      var delta = direction[event.key];
+      if (delta) {
+         spearPosition = $v.add(spearPosition, delta);
+      }
+   })
+
+   gamejs.event.onMouseMotion(function(event) {
+      if (display.rect.collidePoint(event.pos)) {
+         spearPosition = $v.subtract(event.pos, spear.getSize());
       }
    });
 

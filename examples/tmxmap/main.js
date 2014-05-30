@@ -15,22 +15,59 @@
  *
  */
 var gamejs = require('gamejs');
-var view = require('./view');
+var tiledmap = require('gamejs/tiledmap');
 
 gamejs.preload(['./data/tilesheet.png']);
+
+/**
+ * Loads the tmx at the given URL and holds all layers.
+ */
+var Map = exports.Map = function(url) {
+
+   // you can optionall pass a rectangle specification
+   // to control where on the display the mapView
+   // is drawn
+   this.draw = function(display) {
+      mapView.draw(display, [0,0]);
+   };
+
+   // change the mapView.viewRect to "scroll" to
+   // a different part of the map.
+   this.keyUpHandler = function(event) {
+       var xdiff = 0;
+       var ydiff = 0;
+       if (event.key === gamejs.event.K_LEFT) {
+          xdiff = -50;
+       } else if (event.key === gamejs.event.K_RIGHT) {
+          xdiff = 50;
+       } else if (event.key === gamejs.event.K_DOWN) {
+          ydiff = 50;
+       } else if (event.key === gamejs.event.K_UP) {
+          ydiff = -50;
+       }
+       // dont go outside the map
+       mapView.viewRect.left = Math.max(0, mapView.viewRect.left + xdiff);
+       mapView.viewRect.top = Math.max(0, mapView.viewRect.top + ydiff);
+
+   };
+
+   /**
+    * constructor
+    */
+   var map = new tiledmap.Map(url);
+   var mapView = new tiledmap.MapView(map);
+   return this;
+};
 
 gamejs.ready(function() {
    gamejs.display.setCaption('TMX viewer');
    var display = gamejs.display.setMode([800, 500]);
 
-   var map = new view.Map('./data/example.tmx');
+   var map = new Map('./data/example.tmx');
 
-   gamejs.onEvent(function(event) {
-         map.handle(event);
-   });
+   gamejs.event.onKeyUp(map.keyUpHandler, map);
 
    gamejs.onTick(function(msDuration) {
-      map.update(msDuration);
       display.clear();
       map.draw(display);
    });

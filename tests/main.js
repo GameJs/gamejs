@@ -14,7 +14,6 @@ gamejs.ready(function() {
    require('./pathfinding');
    require('./prng');
    require('./rectsurface');
-   require('./sprite');
    require('./transform');
    require('./uri');
    require('./vectors');

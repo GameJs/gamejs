@@ -34,7 +34,7 @@ Ball.prototype.nextColor = function() {
 Ball.prototype.draw = function(display) {
    var rgbColor = Ball.COLORS[this.color];
    var lineWidth = 0; // lineWidth zero fills the circle
-   gamejs.draw.circle(display, rgbColor, this.center, this.radius, lineWidth);
+   gamejs.graphics.circle(display, rgbColor, this.center, this.radius, lineWidth);
 };
 Ball.prototype.update = function(msDuration) {
    this.radius += this.growPerSec * (msDuration / 1000);
@@ -54,12 +54,8 @@ function main() {
    var ball = new Ball(ballCenter);
 
    // ball changes color on mouse up
-   gamejs.onEvent(function(event) {
-      switch(event.type) {
-         case gamejs.event.MOUSE_UP:
-            ball.nextColor();
-            break;
-      };
+   gamejs.event.onMouseUp(function() {
+      ball.nextColor();
    });
 
    // update ball position

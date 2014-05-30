@@ -1,5 +1,5 @@
-var $m = require('gamejs/utils/math');
-qModule('gamejs/utils/math');
+var $m = require('gamejs/math/angles');
+qModule('gamejs/math/angles');
 
 var degrees = $m.degrees;
 var radians = $m.radians;

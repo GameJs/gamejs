@@ -17,7 +17,7 @@ function main() {
    var font = new gamejs.font.Font();
 
    // create a background worker
-   var primeWorker = new gamejs.worker.Worker('./prime-worker');
+   var primeWorker = new gamejs.thread.Worker('./prime-worker');
 
    // send a question to the worker
    var startNumber = parseInt(1230023 + (Math.random() * 10000));

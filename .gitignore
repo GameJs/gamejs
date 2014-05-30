@@ -1,3 +1,6 @@
-gamejs.min.js
-docs/api/*
+node_modules/
+gamejs-*.js
+gamejs-*.min.js
+doc/api/*
+out/*
 *~

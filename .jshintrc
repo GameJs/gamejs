@@ -1,0 +1,35 @@
+{
+  "curly": true,
+  "eqeqeq": false,
+  "immed": true,
+  "latedef": true,
+  "newcap": true,
+  "noarg": true,
+  "sub": true,
+  "undef": true,
+  "boss": true,
+  "eqnull": true,
+  "node": true,
+  "browser": true,
+  // it's helpful for circular dependencies
+  "latedef": false,
+  "worker": true,
+  "globals" : {
+        //commonjs globals
+        "module": false,
+        "require": false,
+        // qunit
+        "QUnit": false,
+        "qModule": false,
+        "strictEqual": false,
+        "deepEqual": false,
+        "ok": false,
+        "test": false,
+        "asyncTest": false,
+        "equal": true,
+        // worker module loading; see gamejs.thread
+        "__scripts": true,
+        // why is this not already allowed with browser:true?
+        "XMLDocument": true
+    }
+}

@@ -1,6 +1,6 @@
-var xml = require('gamejs/xml');
+var xml = require('gamejs/utils/xml');
 
-qModule('gamejs/xml');
+qModule('gamejs/utils/xml');
 
 var props = ['topleft', 'bottomright'];
 var testXml = '<?xml version="1.0" encoding="UTF-8"?>\

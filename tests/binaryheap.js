@@ -1,5 +1,5 @@
-var BinaryHeap = require('gamejs/utils/binaryheap').BinaryHeap;
-qModule('gamejs/utils/binaryheap');
+var BinaryHeap = require('gamejs/math/binaryheap').BinaryHeap;
+qModule('gamejs/math/binaryheap');
 
 test('PushPop', function() {
    var ITEMS = [10, 3, 4, 8, 2, 9, 7, 1, 2, 6, 5];
@@ -26,7 +26,7 @@ test('Remove', function() {
    });
 
    //raises(function() { heap.remove(88); });
-   strictEqual(heap.remove(2), undefined);
-   strictEqual(heap.remove(2), undefined);
+   strictEqual(heap.remove(2), true);
+   strictEqual(heap.remove(2), true);
    //raises(function() { heap.remove(2); });
 });

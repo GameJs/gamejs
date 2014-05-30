@@ -23,7 +23,7 @@ var handleEvent = function(data) {
          if (x-- < 0) {
             primes.push(n);
             // found the next prime
-            gamejs.worker.post({
+            gamejs.thread.post({
                prime: n
             });
             x = 10000;
@@ -34,5 +34,5 @@ var handleEvent = function(data) {
    }
 }
 gamejs.ready(function() {
-   gamejs.onEvent(handleEvent);
+   gamejs.event.onEvent(handleEvent);
 })
