@@ -2,60 +2,14 @@
 
   * improved: jshinted all files
   * improved: gamejs.pixelcollision API
-  * removed: gamejs.sprite module
   * feature: add gamejs.tiledmap.MapView and tiledmap.LayerView to draw the map
+  * removed: gamejs.sprite and SpriteGroup module
   * adapted: all examples, most are nicer now
-  * feature: all onXXX() callback functions can be called multiple times to add multiple callbacks
+  * feature: all callback functions can be called multiple times to add multiple callbacks
   * feature: add "debug" loglevel (even lower than "info")
   * feature: special gamejs.event callbacks for different types of events: onMouseMotion, onKeyDown, onFullscreen(),...
-  * docs: overhaul all with better text and more relevant exampless
-  * rename: split utils and some others into: math.* and utils.*. e.g. math.vector or math.random just makes more sense.
+  * docs: overhaul all jsdoc with better text and more relevant examples
+  * rename: move some utils.* modules into math.*
   * rename: gamejs.callback -> gamejs.utils.callback
   * rename: gamejs.worker.Worker -> gamejs.thread.Worker
   * rename: gamejs.tmx -> gamejs.tiledmap
-
-
-wish list:
-  * source map for bundled and for eval'ed code in development
-  * use the basic travis and ci and gitignore crap and everything
-
-
-## Initializing
-
-gamejs.preload()
-gamejs.ready()
-gamejs.onTick()
-
-## Drawing on the screen
-
-gamejs.display
-gamejs.image
-gamejs.grahpics
-gamejs.font
-
-## Mouse and keyboard
-
-gamejs.event
-
-## Audio
-
-gamejs.audio
-
-# Game logic
-
-gamejs.animate
-gamejs.tiledmap
-gamejs.pathfinding
-gamejs.collisionmask
-
-## Advanced
-
-gamejs.thread
-gamejs.math.noise
-
-# Generally useful
-
-gamejs.http
-gamejs.math.*
-gamejs.utils.*
-

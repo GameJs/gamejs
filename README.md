@@ -2,62 +2,53 @@ GameJs
 =======
 
 GameJs is a JavaScript library for writing 2D games or other interactive
-graphic applications for the HTML Canvas <http://gamejs.org>.
+graphic applications for the HTML Canvas.
 
-Game showcase: <http://gamejs.org/showcase.html>
+Homepage: <http://gamejs.org>.
 
 Topics
 ========
 
-## Drawing on the screen
+### Drawing on the screen
 
- * gamejs.display
- * gamejs.image
- * gamejs.graphics
- * gamejs.font
+ * [gamejs.image](http://docs.gamejs.org/gamejs/image/) loading image files
+ * [gamejs.graphics](http://docs.gamejs.org/gamejs/graphics/) image transformation (rotate, transform,...) and drawing with geometric shapes
+ * [gamejs.font](http://docs.gamejs.org/gamejs/font/) rendering text
 
-## Mouse and keyboard
+### Mouse and keyboard
 
- * gamejs.event
+ * [gamejs.event](http://docs.gamejs.org/gamejs/event/) Recieve events for user input
 
-## Audio
+### Audio
 
- * gamejs.audio
+ * [gamejs.audio](http://docs.gamejs.org/gamejs/audio/) Playback with multiple channels
 
-### Kickstarting your game
+### Game logic
 
- * gamejs.ready()
- * gamejs.preload()
- * gamejs.onTick()
+ * [animate](http://docs.gamejs.org/gamejs/animate/) Spritesheets and animations
+ * [tiledmap](http://docs.gamejs.org/gamejs/tiledmap/) Load maps created with the [Tiled](http://www.mapeditor.org/) map editor
+ * [pathfinding](http://docs.gamejs.org/gamejs/pathfinding/) A* Pathfinding
+ * [pixelcollision](http://docs.gamejs.org/gamejs/pixelcollision) Pixel perfect collision detection
 
-# Game logic
+### Advanced
 
- * gamejs.animate
- * gamejs.tiledmap
- * gamejs.pathfinding
- * gamejs.collisionmask
+ * [thread](http://docs.gamejs.org/gamejs/thread/) utilize WebWorkers
+ * [math/noise](http://docs.gamejs.org/gamejs/math/noise/) random noise generator
 
-## Advanced
+### Math
 
- * gamejs.thread
- * gamejs.math.noise
-
-# Generally useful
-
- * gamejs.http
- * gamejs.math.*
- * gamejs.utils.*
-
-
+ * [math/vectors](http://localhost/gamejs/doc/api/gamejs/math/vectors/)
+ * [math/matrix](http://localhost/gamejs/doc/api/gamejs/math/matrix/)
+ * [math/random](http://localhost/gamejs/doc/api/gamejs/math/random/) random numbers and vectors
 
 
 Usage
 =================
 
-### Standalone
+## Standalone
 
-Load the `gamejs.min.js` file and tell the module loader where your
-"main" module lies (usually "./javascript/main.js"):
+Load the "gamejs.min.js" script and tell the module loader where your
+game's main module lies (usually "./javascript/main.js"):
 
     <script src="./public/gamejs.min.js"></script>
     <script>
@@ -71,22 +62,20 @@ and start your game:
 
     var gamejs = require('gamejs');
     gamejs.ready(function() {
-       var display = gamejs.display.setMode([600, 400]);
-       display.blit(myImage);
-       ....
+        ...
     });
 
-### RequireJs/Browserify
+## GameJs a node package with browserify
 
-GameJs is a CommonJs package published on NPM. You need to install the GameJs package:
+GameJs is a CommonJs package published on NPM. To use it with [browserify](http://browserify.org/) install GameJs in your game's directory:
 
     $ npm install gamejs
 
-And something to run your modules in the browser, for example browserify:
+And install browserify, if you don't already have it.
 
     $ npm install -g browserify
 
-Point browserify to your main module and produce a bundled JS file including GameJs and any other packages you use in your game:
+You can then bundle your application ("main.js") with all its dependencies - including GameJs - like so:
 
     $ browserify ./main.js --out bundled.js
 
@@ -101,7 +90,7 @@ Example application can be found in the `examples/` directory.
 Development - How to build
 ===================
 
-GameJs consists of CommonJs modules in `./src/` which we build and jshint with grunt. If you don't already have node and npm, install those. You will also need `java` on your path for building the CommonJs files.
+GameJs consists of CommonJs modules in `./src/` which we build and jshint with grunt. If you don't already have node and npm, install those. You will also need `java` on your path for building the distribution file.
 
 Install then grunt commandline interface:
 
