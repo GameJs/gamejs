@@ -255,6 +255,8 @@ var getSurface = exports.getSurface = function() {
       var canvas = getCanvas();
       SURFACE = new Surface([canvas.clientWidth, canvas.clientHeight]);
       SURFACE._canvas = canvas;
+      SURFACE._canvas.width = canvas.clientWidth;
+      SURFACE._canvas.height = canvas.clientHeight;
       SURFACE._context = canvas.getContext('2d');
       if (!(_flags & DISABLE_SMOOTHING)) {
          SURFACE._smooth();
