@@ -14,11 +14,17 @@
             box-shadow: 14px 10px 30px 0px rgba(50, 50, 50, 0.75);
             width: calc(100% - 40px);
             height: calc(100% - 60px);
-            position: absolute
+            position: absolute;
+            /** automatically made visible once game is loaded **/
+            display:none;
         }
         .footer {
             position:absolute;
             top: calc(100% - 50px);
+        }
+        #gjs-loader {
+            height: 100%;
+            padding: 10% 0% 0% 30%;
         }
     </style>
     <script src="../../gamejs-2.0.0-alpha.js"></script>
@@ -30,7 +36,8 @@
 <body>
     <div>
         <div id="gjs-loader">
-         Loading...
+         <progress max=1 min=0 steps=0.1></progress>
+         <br/>Loading...
         </div>
         <canvas id="gjs-canvas"></canvas>
         <p class="footer">

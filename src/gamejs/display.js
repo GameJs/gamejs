@@ -163,9 +163,13 @@ exports.init = function() {
       canvas.focus();
    }
    // remove loader if any;
-   var $loader = document.getElementById('gjs-loader');
+   var $loader = document.getElementById(LOADER_ID);
    if ($loader) {
       $loader.style.display = "none";
+   }
+   var $displaySurface = document.getElementById(CANVAS_ID);
+   if ($displaySurface) {
+      $displaySurface.style.display = 'block';
    }
    // hook into resize
    window.addEventListener("resize", onResize, false);
