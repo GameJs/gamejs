@@ -3,19 +3,33 @@ var Surface = require('./graphics').Surface;
 /**
  * @fileoverview Methods to create, access and manipulate the display Surface.
  *
- * For convinience, the `setMode()` function
- * instantly returns the drawing canvas:
+ * You can just grab the canvas element whether it exists in the DOM or not (GameJs
+ * will create it if necessary):
  *
- *     var display = gamejs.display.setMode([800, 600]);
+ *     var display = gamejs.display.getSurface();
  *
- * Or you can first initialize it with `gamejs.display.setMode()` and retrieve it later with `gamejs.display.getSurface()`.
+ * If you need to resize the canvas - although it is recommended to style it with CSS - you can
+ * call the `setMode()` function, which conviniently returns the new display surface:
+ *
+ *     newDisplay = gamejs.display.setMode([800, 600]);
+ *
+ * ### Browser window gets resized
+ *
+ * When the canvas size is configured with CSS, the display surface might change when
+ * the browser window is resized. GameJs will internally deal with this and recreate
+ * the the display surface with the new size.
+ *
+ * You will typically not have to worry about this but if you want to get informed
+ * about a display resize, you can register a callback with `gamejs.event.onDisplayResize`.
+ *
+ *
+ * ### Flags
  *
  * For advanced uses you can set a few modes which additionally change how the display
  * behaves with regards to pixel smoothing and whether you want a fullscreen canvas with
  * or withouth the mouse pointer locked inside the window (for endless mouse movement in
  * all directions).
  *
- * ### Flags
  *
  * `gamejs.display.setMode()` understands three flags:
  *
@@ -131,6 +145,9 @@ function onResize(event) {
    var canvas = getCanvas();
    SURFACE._canvas.width = canvas.clientWidth;
    SURFACE._canvas.height = canvas.clientHeight;
+   require('./event')._triggerCallbacks({
+      type: require('./event').DISPLAY_RESIZE
+   });
 }
 
 /**

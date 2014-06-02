@@ -9,9 +9,6 @@
 
 var gamejs = require('gamejs');
 
-var SCREEN_WIDTH = 400;
-var SCREEN_HEIGHT = 400;
-
 // ball is a colored circle.
 // ball can circle through color list.
 // ball constantly pulsates in size.
@@ -49,8 +46,8 @@ function main() {
    // setup screen and ball.
    // ball in screen center.
    // start game loop.
-   var display = gamejs.display.setMode([SCREEN_WIDTH, SCREEN_HEIGHT]);
-   var ballCenter = [SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2];
+   var display = gamejs.display.getSurface();
+   var ballCenter = [display.getRect().width / 2, display.getRect().height / 2];
    var ball = new Ball(ballCenter);
 
    // ball changes color on mouse up
@@ -65,6 +62,10 @@ function main() {
       ball.update(msDuration);
       display.clear();
       ball.draw(display);
+   });
+
+   gamejs.event.onDisplayResize(function(event) {
+      ball.center = display.getRect().center;
    });
 };
 

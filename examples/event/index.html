@@ -1,16 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>GameJS Application</title>
     <style type=text/css>
         body{
            background:#fff;
            color:#222;
-           margin:1em 0 2em 6em;
-           padding:0;
+           margin:0px;
+           padding:0px;
+        }
+        #gjs-canvas {
+            border: 1px solid #ccc;
+            margin: 20px;
+            box-shadow: 14px 10px 30px 0px rgba(50, 50, 50, 0.75);
+            width: calc(100% - 40px);
+            height: calc(100% - 60px);
+            position: absolute
+        }
+        .footer {
+            position:absolute;
+            top: calc(100% - 50px);
         }
     </style>
-    <script src="../../gamejs-2.0.0-alpha-min.js"></script>
+    <script src="../../gamejs-2.0.0-alpha.js"></script>
     <script>
         require.setModuleRoot('./');
         require.run('main')
@@ -22,8 +33,8 @@
          Loading...
         </div>
         <canvas id="gjs-canvas"></canvas>
-        <p>
-        Powered by <a href="http://gamejs.org">GameJs</a>.
+        <p class="footer">
+            Powered by <a href="http://gamejs.org">GameJs</a>.
         </p>
     </div>
 </body>

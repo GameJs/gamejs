@@ -15,8 +15,8 @@ var $v = require('gamejs/math/vectors');
 
 function main() {
 
-   var display = gamejs.display.setMode([500, 350]);
-
+   var display = gamejs.display.getSurface();
+   console.log(display.getRect().width)
    var spear = gamejs.image.load('./spear.png');
    var unit = gamejs.image.load('./unit.png');
 
@@ -63,7 +63,6 @@ function main() {
       if (hasMaskOverlap) {
          display.blit(font.render('COLLISION', '#ff0000'), [250, 50]);
       }
-      display.blit(font.render('Move with mouse or cursor keys.'), [10, 250])
    });
 };
 

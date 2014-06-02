@@ -61,7 +61,7 @@ var Map = exports.Map = function(url) {
 
 gamejs.ready(function() {
    gamejs.display.setCaption('TMX viewer');
-   var display = gamejs.display.setMode([800, 500]);
+   var display = gamejs.display.getSurface();
 
    var map = new Map('./data/example.tmx');
 

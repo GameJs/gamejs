@@ -33,11 +33,22 @@ var Callback = require('./utils/callback').Callback;
  *  * gamejs.event.DISPLAY\_FULLSCREEN\_DISABLED
  *  * gamejs.event.QUIT
  *  * gamejs.event.MOUSE_WHEEL
+ *  * gamejs.event.TOUCH\_DOWN
+ *  * gamejs.event.TOUCH\_UP
+ *  * gamejs.event.TOUCH\_MOTION
  *
  * ### Keyboard constants
  *
  * There are also a lot of keyboard constants for ASCII. Those are all prefixed with `K\_`, e.g. `gamejs.event.K\_a` would be the "a"
  * key and `gamejs.event.K_SPACE` is the spacebar.
+ *
+ * ## Touch events
+ *
+ * Touch events do not have a single position but for all `TOUCH\_*` events you get an array of
+ * `touches`, which each have their own `pos` attribute and a unique `identifier` for tracking
+ * this touch across multiple `TOUCH\_MOTION` events.
+ *
+ * ## User defined events
  *
  * All user defined events can have the value of `gamejs.event.USEREVENT` or higher.
  * Make sure your custom event ids follow this system.
@@ -66,17 +77,7 @@ var _triggerCallbacks = exports._triggerCallbacks = function() {
 };
 
 /*
- @@ implement
-exports.onFocus = function(callback, scope) {
-  _CALLBACKS.push({
-    callback: callback,
-    scope: scope,
-    type: exports.
-  })
-}
-
 exports.onQuit(callback)
-exports.onResize(callback)
 exports.onVisiblityChange(callback)
 */
 
@@ -120,6 +121,23 @@ exports.onEvent = function(callback, scope) {
     type: 'all'
   });
 };
+
+
+/**
+ * @param {Function} callback to be called
+ * @param {Object} scope within which the callback should be called. It's `this` during invocation. (optional)
+ */
+exports.onDisplayResize = function(callback, scope) {
+   if (typeof(callback) !== 'function') {
+      throw new Error('Callback must be a function');
+   };
+
+  _CALLBACKS.push({
+    callback: callback,
+    scope: scope,
+    type: exports.DISPLAY_RESIZE
+  });
+}
 
 /**
  * @param {Function} callback to be called
@@ -170,6 +188,51 @@ exports.onMouseDown = function(callback, scope) {
  * @param {Function} callback to be called
  * @param {Object} scope within which the callback should be called. It's `this` during invocation. (optional)
  */
+exports.onTouchMotion = function(callback, scope) {
+   if (typeof(callback) !== 'function') {
+      throw new Error('Callback must be a function');
+   }
+  _CALLBACKS.push({
+    callback: callback,
+    scope: scope,
+    type: exports.TOUCH_MOTION
+  });
+};
+
+/**
+ * @param {Function} callback to be called
+ * @param {Object} scope within which the callback should be called. It's `this` during invocation. (optional)
+ */
+exports.onTouchUp = function(callback, scope) {
+   if (typeof(callback) !== 'function') {
+      throw new Error('Callback must be a function');
+   }
+  _CALLBACKS.push({
+    callback: callback,
+    scope: scope,
+    type: exports.TOUCH_UP
+  });
+};
+
+/**
+ * @param {Function} callback to be called
+ * @param {Object} scope within which the callback should be called. It's `this` during invocation. (optional)
+ */
+exports.onTouchDown = function(callback, scope) {
+   if (typeof(callback) !== 'function') {
+      throw new Error('Callback must be a function');
+   }
+  _CALLBACKS.push({
+    callback: callback,
+    scope: scope,
+    type: exports.TOUCH_DOWN
+  });
+};
+
+/**
+ * @param {Function} callback to be called
+ * @param {Object} scope within which the callback should be called. It's `this` during invocation. (optional)
+ */
 exports.onKeyDown = function(callback, scope) {
    if (typeof(callback) !== 'function') {
       throw new Error('Callback must be a function');
@@ -195,6 +258,7 @@ exports.onKeyUp = function(callback, scope) {
     type: exports.KEY_UP
   });
 };
+
 // key constants
 exports.K_UP = 38;
 exports.K_DOWN = 40;
@@ -263,6 +327,7 @@ exports.NUMEVENTS = 32000;
 
 exports.DISPLAY_FULLSCREEN_ENABLED = 300;
 exports.DISPLAY_FULLSCREEN_DISABLED = 301;
+exports.DISPLAY_RESIZE = 302;
 
 exports.QUIT = 0;
 exports.KEY_DOWN = 1;
@@ -271,6 +336,9 @@ exports.MOUSE_MOTION = 3;
 exports.MOUSE_UP = 4;
 exports.MOUSE_DOWN = 5;
 exports.MOUSE_WHEEL = 6;
+exports.TOUCH_UP = 7;
+exports.TOUCH_DOWN = 8;
+exports.TOUCH_MOTION = 9;
 exports.USEREVENT = 2000;
 
 
@@ -415,6 +483,45 @@ exports.init = function() {
          'type': exports.QUIT
       });
       return;
+   };
+
+   // convert a w3c touch event into gamejs event
+   function w3cTouchConvert(touchList) {
+      var canvasOffset = display._getCanvasOffset();
+      var tList = [];
+      for (var i = 0; i < touchList.length; i++) {
+         var touchEvent = touchList.item(i);
+         tList.push({
+            identifier: touchEvent.identifier,
+            pos: [touchEvent.clientX - canvasOffset[0], touchEvent.clientY - canvasOffset[1]]
+         });
+      }
+      return tList;
+   }
+
+   function onTouchDown(ev) {
+      var canvasOffset = display._getCanvasOffset();
+      var changedTouches = w3cTouchConvert(ev.changedTouches);
+      _triggerCallbacks({
+         'type': exports.TOUCH_DOWN,
+         'touches': changedTouches
+      });
+   };
+
+   function onTouchUp(ev) {
+      var changedTouches = w3cTouchConvert(ev.changedTouches);
+      _triggerCallbacks({
+         'type': exports.TOUCH_UP,
+         'touches': changedTouches,
+      });
+   }
+   function onTouchMotion(ev) {
+      var changedTouches = w3cTouchConvert(ev.changedTouches);
+      _triggerCallbacks({
+         'type': exports.TOUCH_MOTION,
+         'touches': changedTouches
+      });
+      ev.preventDefault();
    }
 
    // IE does not support addEventListener on document itself
@@ -430,5 +537,11 @@ exports.init = function() {
    // https://developer.mozilla.org/en/Code_snippets/Miscellaneous#Detecting_mouse_wheel_events
    canvas.addEventListener('DOMMouseScroll', onMouseScroll, false);
    canvas.addEventListener('beforeunload', onBeforeUnload, false);
+   // touchs
+   canvas.addEventListener("touchstart", onTouchDown, false);
+   canvas.addEventListener("touchend", onTouchUp, false);
+   canvas.addEventListener("touchcancel", onTouchUp, false);
+   canvas.addEventListener("touchleave", onTouchUp, false);
+   canvas.addEventListener("touchmove", onTouchMotion, false);
 
 };

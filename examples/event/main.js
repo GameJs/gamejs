@@ -12,7 +12,7 @@ var gamejs = require('gamejs');
 
 function main() {
 
-   var display = gamejs.display.setMode([850, 600], gamejs.display.FULLSCREEN);
+   var display = gamejs.display.getSurface();
    gamejs.display.setCaption('example event');
    var starImage = gamejs.image.load('./sparkle.png');
 
@@ -45,12 +45,6 @@ function main() {
          });
       }
    })
-
-   gamejs.event.onFullscreen(function() {
-      // if the game just went fullscreen: adapt the display size
-      display = gamejs.display.setMode([window.innerWidth-10, window.innerHeight-10]);
-      displayRect = display.rect;
-   });
 
    gamejs.onTick(function(msDuration) {
       // update sparkle position & alpha

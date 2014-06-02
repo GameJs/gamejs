@@ -4,8 +4,8 @@ var blitArray = require('gamejs/graphics').blitArray;
 var logger = require('gamejs/logging');
 
 gamejs.ready(function() {
-   var dims = [600, 400];
-   var display = gamejs.display.setMode(dims);
+   var display = gamejs.display.getSurface();
+   var dims = display.getSize();
    var displayArray = new SurfaceArray(display);
    var infoFont = new gamejs.font.Font();
 
@@ -37,13 +37,16 @@ gamejs.ready(function() {
       updateDisplay(event.noiseData);
       // .. and request new noise data, after a short delay
       setTimeout(function() {
-         noiseWorker.post(requestNoiseData)
+         noiseWorker.post({
+            dimensions: display.getSize()
+         })
       }, 1000)
    })
 
 
-   var requestNoiseData = {dimensions: dims};
    // send dimensions to worker so he starts creating noise data
-   noiseWorker.post(requestNoiseData);
+   noiseWorker.post({
+      dimensions: display.getSize()
+   });
 
 });

@@ -3,10 +3,10 @@ var SurfaceArray = require('gamejs/graphics').SurfaceArray;
 var blitArray = require('gamejs/graphics').blitArray;
 
 gamejs.ready(function() {
-   var dims = [600, 400];
    // we will modify individual pixels directly, that's
    // easiest with a SurfaceArray
-   var display = gamejs.display.setMode(dims);
+   var display = gamejs.display.getSurface();
+   var dims = display.getSize();
    var displayArray = new SurfaceArray(display);
 
 

@@ -9,7 +9,7 @@ var font = require('gamejs/font');
 
 function main() {
    // set resolution & title
-   var display = gamejs.display.setMode([800, 600]);
+   var display = gamejs.display.getSurface();
    gamejs.display.setCaption("Example Draw");
 
    var colorOne = '#ff0000';

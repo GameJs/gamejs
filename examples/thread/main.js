@@ -12,7 +12,7 @@ var gamejs = require('gamejs');
 
 function main() {
    // screen setup
-   var display = gamejs.display.setMode([800, 600]);
+   var display = gamejs.display.getSurface();
    gamejs.display.setCaption("Example Workers");
    var font = new gamejs.font.Font();
 
