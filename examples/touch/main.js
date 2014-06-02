@@ -21,39 +21,40 @@ function colorForTouch(touch) {
   return color;
 }
 
-// keep track of the ongoing touches
-var onGoingTouches = {};
-function touchDown(event) {
-  event.touches.forEach(function(touch) {
-     onGoingTouches[touch.identifier] = touch;
-     onGoingTouches[touch.identifier].color = colorForTouch(touch);
-     // draw circle at start
-     gamejs.graphics.circle(display, '#ff0000', touch.pos, 5);
-  });
-};
-
-function touchUp(event) {
-  event.touches.forEach(function(touch) {
-     onGoingTouches[touch.identifier] = undefined;
-     // draw circle at end
-     gamejs.graphics.circle(display, '#ff0000', touch.pos, 5);
-  })
-};
-
-function touchMotion (event) {
-  event.touches.forEach(function(touch) {
-     // keep track of previous and current position
-     var aTouch = onGoingTouches[touch.identifier];
-     aTouch.lastPos = aTouch.pos;
-     aTouch.pos = touch.pos;
-     // draw movement
-     gamejs.graphics.line(display, aTouch.color, aTouch.lastPos, aTouch.pos, 3);
-  })
-};
-
 function main() {
    // minus margin and footer
-   var display = gamejs.display.setMode([document.body.clientWidth-50, window.innerHeight-120]);
+  var display = gamejs.display.setMode([document.body.clientWidth-50, window.innerHeight-120]);
+
+
+  // keep track of the ongoing touches
+  var onGoingTouches = {};
+  function touchDown(event) {
+    event.touches.forEach(function(touch) {
+       onGoingTouches[touch.identifier] = touch;
+       onGoingTouches[touch.identifier].color = colorForTouch(touch);
+       // draw circle at start
+       gamejs.graphics.circle(display, '#ff0000', touch.pos, 5);
+    });
+  };
+
+  function touchUp(event) {
+    event.touches.forEach(function(touch) {
+       onGoingTouches[touch.identifier] = undefined;
+       // draw circle at end
+       gamejs.graphics.circle(display, '#ff0000', touch.pos, 5);
+    })
+  };
+
+  function touchMotion (event) {
+    event.touches.forEach(function(touch) {
+       // keep track of previous and current position
+       var aTouch = onGoingTouches[touch.identifier];
+       aTouch.lastPos = aTouch.pos;
+       aTouch.pos = touch.pos;
+       // draw movement
+       gamejs.graphics.line(display, aTouch.color, aTouch.lastPos, aTouch.pos, 3);
+    })
+  };
 
   gamejs.event.onTouchDown(touchDown);
   gamejs.event.onTouchUp(touchUp);
