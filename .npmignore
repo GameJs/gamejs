@@ -1,0 +1,6 @@
+utils/
+examples/
+doc/
+tests/
+jsdoc.sh
+Gruntfile.js
