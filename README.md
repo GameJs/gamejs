@@ -45,9 +45,11 @@ Topics
 Usage
 =================
 
+See the examples directory for working examples.
+
 ## Standalone
 
-HTML File:
+HTML File loads GameJs and sets the main module:
 
     <script src="./public/gamejs.min.js"></script>
     <script>
@@ -56,16 +58,17 @@ HTML File:
     </script>
 
 
-"./javascript/main.js":
+The main module `javascript/main.js` starts the application:
 
     var gamejs = require('gamejs');
     gamejs.ready(function() {
+        var display = gamejs.display.getSurface();
         ...
     });
 
-## GameJs a node package with browserify
+## GameJs as a node package with browserify
 
-GameJs is a CommonJs package published on NPM. To use it with [browserify](http://browserify.org/) install GameJs in your game's directory:
+GameJs is a CommonJs package published on NPM. To use it with [browserify](http://browserify.org/) install the GameJs package in your game's directory:
 
     $ npm install gamejs
 
