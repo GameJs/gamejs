@@ -11,17 +11,17 @@ Topics
 
 ### Drawing on the screen
 
- * [gamejs.image](http://docs.gamejs.org/gamejs/image/) loading image files
- * [gamejs.graphics](http://docs.gamejs.org/gamejs/graphics/) image transformation (rotate, transform,...) and drawing with geometric shapes
- * [gamejs.font](http://docs.gamejs.org/gamejs/font/) rendering text
+ * [image](http://docs.gamejs.org/gamejs/image/) loading image files
+ * [graphics](http://docs.gamejs.org/gamejs/graphics/) image transformation (rotate, transform,...) and drawing with geometric shapes
+ * [font](http://docs.gamejs.org/gamejs/font/) rendering text
 
 ### Mouse and keyboard
 
- * [gamejs.event](http://docs.gamejs.org/gamejs/event/) Recieve events for user input
+ * [event](http://docs.gamejs.org/gamejs/event/) Recieve events for user input
 
 ### Audio
 
- * [gamejs.audio](http://docs.gamejs.org/gamejs/audio/) Playback with multiple channels
+ * [audio](http://docs.gamejs.org/gamejs/audio/) Playback with multiple channels
 
 ### Game logic
 
@@ -47,8 +47,7 @@ Usage
 
 ## Standalone
 
-Load the "gamejs.min.js" script and tell the module loader where your
-game's main module lies (usually "./javascript/main.js"):
+HTML File:
 
     <script src="./public/gamejs.min.js"></script>
     <script>
@@ -57,8 +56,7 @@ game's main module lies (usually "./javascript/main.js"):
     </script>
 
 
-And inside "./javascript/main.js", you can `require` gamejs
-and start your game:
+"./javascript/main.js":
 
     var gamejs = require('gamejs');
     gamejs.ready(function() {
