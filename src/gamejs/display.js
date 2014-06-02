@@ -127,6 +127,12 @@ exports.hasPointerLock = function() {
       document.mozFullScreenElement);
 };
 
+function onResize(event) {
+   var canvas = getCanvas();
+   SURFACE._canvas.width = canvas.clientWidth;
+   SURFACE._canvas.height = canvas.clientHeight;
+}
+
 /**
  * Create the master Canvas plane.
  * @ignore
@@ -144,6 +150,8 @@ exports.init = function() {
    if ($loader) {
       $loader.style.display = "none";
    }
+   // hook into resize
+   window.addEventListener("resize", onResize, false);
    return;
 };
 
