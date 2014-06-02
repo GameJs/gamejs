@@ -6,11 +6,9 @@ var Callback = require('./gamejs/utils/callback').Callback;
  * @fileoverview  `gamejs.ready()` is maybe the most important function as it kickstarts your app:
  *
  *     var gamejs = require('gamejs');
-
- *
- ready(function() {
+ *     ready(function() {
  *         gamejs.log('I am ready!')
- *     })
+ *     });
  *
  * If you use images or sounds preload all assets with `gamejs.preload(['./files/foo.png'])` before calling `ready()`.
  *
