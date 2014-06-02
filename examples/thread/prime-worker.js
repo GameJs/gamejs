@@ -30,7 +30,7 @@ var handleEvent = function(data) {
          }
       };
    } else {
-      gamejs.log('unknown todo');
+      gamejs.logging.log('unknown todo');
    }
 }
 gamejs.ready(function() {

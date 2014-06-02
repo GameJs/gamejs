@@ -31,10 +31,6 @@ function main() {
       primes.push(event.prime);
    });
 
-   primeWorker.onError(function(data) {
-      gamejs.log('worker threw an exception', data);
-   });
-
    // draw resutls
    gamejs.onTick(function(msDuration) {
       var yOffset = 56;

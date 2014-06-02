@@ -10,7 +10,13 @@
   * feature: add "debug" loglevel (even lower than "info")
   * feature: special gamejs.event callbacks for different types of events: onMouseMotion, onKeyDown, onFullscreen(),...
   * docs: overhaul all jsdoc with better text and more relevant examples
-  * rename: move some utils.* modules into math.*
-  * rename: gamejs.callback -> gamejs.utils.callback
-  * rename: gamejs.worker.Worker -> gamejs.thread.Worker
-  * rename: gamejs.tmx -> gamejs.tiledmap
+  * rename:
+     * gamejs.log/debug/info/error/fatal -> gamejs.logging.*
+     * gamejs.tmx -> gamejs.tiledmap
+     * gamejs.worker.Worker -> gamejs.thread.Worker
+     * gamejs.Surface -> gamejs.graphics.Surface
+     * gamejs.transform.* -> instance methods on gamejs.graphics.Surface
+     * gamejs.draw.* -> static functions in gamejs.graphics
+     * gamejs.utils.vectors -> gamejs.math.vectors
+     * gamejs.utils.prng -> gamejs.math.random
+     * gamejs.utils.matrix -> gamejs.math.matrix

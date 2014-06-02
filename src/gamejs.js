@@ -7,7 +7,7 @@ var Callback = require('./gamejs/utils/callback').Callback;
  *
  *     var gamejs = require('gamejs');
  *     ready(function() {
- *         gamejs.log('I am ready!')
+ *         gamejs.logging.info('I am ready!')
  *     });
  *
  * If you use images or sounds preload all assets with `gamejs.preload(['./files/foo.png'])` before calling `ready()`.

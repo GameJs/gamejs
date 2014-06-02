@@ -81,7 +81,7 @@ exports.preload = function(imgIdents) {
          _PRELOADING = false;
       }
       if (countLoaded % 10 === 0) {
-         gamejs.log('gamejs.image: preloaded  ' + countLoaded + ' of ' + countTotal);
+         gamejs.logging.debug('gamejs.image: preloaded  ' + countLoaded + ' of ' + countTotal);
       }
    }
 

@@ -9,16 +9,16 @@ var Callback = require('./utils/callback').Callback;
  *
  *     gamejs.onEvent(function(event) {
  *        if (event.type === gamejs.event.MOUSE_UP) {
- *          gamejs.log(event.pos, event.button);
+ *          gamejs.logging.info(event.pos, event.button);
  *        } else if (event.type === gamejs.event.KEY_UP) {
- *          gamejs.log(event.key);
+ *          gamejs.logging.info(event.key);
  *        }
  *     });
  *
  * Or recieve more specific callbacks, e.g. only for `KEY\_UP` with  `gamejs.event.onKeyUp()`:
  *
  *     gamejs.onKeyUp(function(event) {
- *          gamejs.log(event.key);
+ *          gamejs.logging.info(event.key);
  *     });
  *
  * All events passed to your callback are instances of `gamejs.event.Event` and have a `type` property to help
@@ -56,9 +56,9 @@ var Callback = require('./utils/callback').Callback;
  * @example
  *     gamejs.onEvent(function(event) {
  *        if (event.type === gamejs.event.MOUSE_UP) {
- *          gamejs.log(event.pos, event.button);
+ *          gamejs.logging.log(event.pos, event.button);
  *        } else if (event.type === gamejs.event.KEY_UP) {
- *          gamejs.log(event.key);
+ *          gamejs.logging.log(event.key);
  *        }
  *     });
  *
@@ -526,7 +526,7 @@ exports.init = function() {
 
    // IE does not support addEventListener on document itself
    // FX events don't reach body if mouse outside window or on menubar
-   var canvas = display.getSurface()._canvas;
+   var canvas = display._getCanvas();
    document.addEventListener('mousedown', onMouseDown, false);
    document.addEventListener('mouseup', onMouseUp, false);
    document.addEventListener('keydown', onKeyDown, false);

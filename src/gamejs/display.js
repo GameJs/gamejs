@@ -93,8 +93,9 @@ var _flags = 0;
 
 /**
  * @returns {document.Element} the canvas dom element
+ * @ignore
  */
-var getCanvas = function() {
+var getCanvas = exports._getCanvas = function() {
    var displayCanvas = document.getElementById(CANVAS_ID);
    if (!displayCanvas) {
       displayCanvas = document.createElement("canvas");
@@ -223,8 +224,9 @@ exports._hasFocus = function() {
 exports.setMode = function(dimensions, flags) {
    SURFACE = null;
    var canvas = getCanvas();
-   canvas.width = dimensions[0];
-   canvas.height = dimensions[1];
+   canvas.width = canvas.clientWidth = dimensions[0];
+   canvas.height = canvas.clientHeight = dimensions[1];
+
    _flags = _flags || flags;
    // @ xbrowser firefox allows pointerlock only if fullscreen
    if (_flags & POINTERLOCK) {
@@ -243,7 +245,7 @@ exports.setMode = function(dimensions, flags) {
       document.addEventListener('webkitfullscreenchange', fullScreenChange, false);
       document.addEventListener('mozfullscreenchange', fullScreenChange, false);
    }
-   return getSurface();
+   return getSurface(dimensions);
 };
 
 /**
@@ -279,13 +281,16 @@ exports._getCanvasOffset = function() {
  * Drawing on the Surface returned by `getSurface()` will draw on the screen.
  * @returns {gamejs.Surface} the display Surface
  */
-var getSurface = exports.getSurface = function() {
+var getSurface = exports.getSurface = function(dimensions) {
    if (SURFACE === null) {
       var canvas = getCanvas();
-      SURFACE = new Surface([canvas.clientWidth, canvas.clientHeight]);
+      if (dimensions === undefined) {
+         dimensions = [canvas.clientWidth, canvas.clientHeight];
+      }
+      SURFACE = new Surface(dimensions);
       SURFACE._canvas = canvas;
-      SURFACE._canvas.width = canvas.clientWidth;
-      SURFACE._canvas.height = canvas.clientHeight;
+      SURFACE._canvas.width = dimensions[0];
+      SURFACE._canvas.height = dimensions[1];
       SURFACE._context = canvas.getContext('2d');
       if (!(_flags & DISABLE_SMOOTHING)) {
          SURFACE._smooth();
