@@ -2,6 +2,7 @@
 
   * improved: jshinted all files
   * improved: gamejs.pixelcollision API
+  * added: threaded noise example; uses webworkers to produce new map
   * feature: add gamejs.tiledmap.MapView and tiledmap.LayerView to draw the map
   * removed: gamejs.sprite and SpriteGroup module
   * adapted: all examples, most are nicer now

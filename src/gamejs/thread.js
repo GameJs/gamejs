@@ -32,7 +32,7 @@ var _EVENTS = exports._EVENTS = {
  *
  *     // recieve events from the worker
  *     fooWorker.onEvent(function(event) {
- *         if(event.data.timestamp > ...)
+ *         if(event.timestamp > ...)
  *      });
  *
  * And this is how the above referenced "foo-worker" module would looke like. As usual, we need a
@@ -51,7 +51,7 @@ var _EVENTS = exports._EVENTS = {
  * with `gamejs.thread.post()`:
  *
  *     gamejs.thread.post({
- *        type: "important message from worker",
+ *        info: "important message from worker",
  *        timestamp: 12232435234
  *      });
  *
@@ -201,13 +201,13 @@ exports.Worker = function(moduleId) {
             self.post(data);
          });
       } else if (event.data.type === _EVENTS.LOG) {
-         gamejs.log.apply(null, [id].concat(event.data.arguments));
+         gamejs.logging.log.apply(null, [id].concat(event.data.arguments));
       } else {
          triggerCallbacks(_CALLBACKS, event.data.data);
       }
    };
    worker.onerror = function(event) {
-      gamejs.error('Error in worker "' + id + '" line ' + event.lineno + ': ', event.message);
+      gamejs.logging.error('Error in worker "' + id + '" line ' + event.lineno + ': ', event.message);
       triggerCallbacks(_ERROR_CALLBACKS, {
          data: event.data,
          worker: self,

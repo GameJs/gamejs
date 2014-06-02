@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GameJS Application</title>
+    <style type=text/css>
+        body{
+           background:#fff;
+           color:#222;
+           margin:1em 0 2em 6em;
+           padding:0;
+        }
+    </style>
+    <script src="../../gamejs-2.0.0-alpha.js"></script>
+    <script>
+        require.setModuleRoot('./');
+        require.run('main')
+    </script>
+</head>
+<body>
+    <div>
+        <div id="gjs-loader">
+         Loading...
+        </div>
+        <canvas id="gjs-canvas"></canvas>
+        <p>
+        Powered by <a href="http://gamejs.org">GameJs</a>.
+        </p>
+    </div>
+</body>
+</html>
