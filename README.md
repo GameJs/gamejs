@@ -42,9 +42,9 @@ Usage
 
 ### Math
 
- * [math/vectors](http://localhost/gamejs/doc/api/gamejs/math/vectors/)
- * [math/matrix](http://localhost/gamejs/doc/api/gamejs/math/matrix/)
- * [math/random](http://localhost/gamejs/doc/api/gamejs/math/random/) random numbers and vectors
+ * [math/vectors](http://docs.gamejs.org/gamejs/doc/api/gamejs/math/vectors/)
+ * [math/matrix](http://docs.gamejs.org/gamejs/doc/api/gamejs/math/matrix/)
+ * [math/random](http://docs.gamejs.org/gamejs/doc/api/gamejs/math/random/)
 
 
 Usage
