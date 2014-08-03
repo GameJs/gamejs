@@ -1,10 +1,12 @@
-var Mask = require('gamejs/pixelcollision').Mask;
+var gamejs = require('gamejs');
 qModule('gamejs/pixelcollision');
 
 test('Mask collides', function() {
+   var Mask = gamejs.pixelcollision.Mask;
 
-   var m1 = new Mask([10, 10]);
-   var m2 = new Mask([10, 10]);
+   var empty = new gamejs.graphics.Surface([10,10])
+   var m1 = new Mask(empty);
+   var m2 = new Mask(empty);
 
    // no overlap
    ok(!m1.overlap(m2));
