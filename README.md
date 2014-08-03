@@ -11,10 +11,6 @@ Topics
 ========
 
 ### Drawing on the screen
-=======
-
-Usage
-=========
 
  * [image](http://docs.gamejs.org/gamejs/image/) loading image files
  * [graphics](http://docs.gamejs.org/gamejs/graphics/) image transformation (rotate, transform,...) and drawing with geometric shapes
@@ -50,7 +46,7 @@ Usage
 Usage
 =================
 
-See the examples directory for working examples.
+See the [examples](./examples/) directory for working examples.
 
 ## Standalone
 
@@ -71,7 +67,7 @@ The main module `javascript/main.js` starts the application:
         ...
     });
 
-## GameJs as a node package with browserify
+## GameJs as a CommonJs package with browserify
 
 GameJs is a CommonJs package published on NPM. To use it with [browserify](http://browserify.org/) install the GameJs package in your game's directory:
 
