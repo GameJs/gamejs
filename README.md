@@ -38,9 +38,9 @@ Topics
 
 ### Math
 
- * [math/vectors](http://docs.gamejs.org/gamejs/doc/api/gamejs/math/vectors/)
- * [math/matrix](http://docs.gamejs.org/gamejs/doc/api/gamejs/math/matrix/)
- * [math/random](http://docs.gamejs.org/gamejs/doc/api/gamejs/math/random/)
+ * [math/vectors](http://docs.gamejs.org/gamejs/math/vectors/)
+ * [math/matrix](http://docs.gamejs.org/gamejs/math/matrix/)
+ * [math/random](http://docs.gamejs.org/gamejs/math/random/)
 
 
 Usage
