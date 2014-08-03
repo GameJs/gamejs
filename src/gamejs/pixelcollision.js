@@ -164,7 +164,7 @@ Mask.prototype.overlapMask = function(otherMask, offset) {
       brect.moveIp(offset);
    }
 
-   var mask = new Mask([overlapRect.width, overlapRect.height]);
+   var mask = new Mask(new gamejs.graphics.Surface([overlapRect.width, overlapRect.height]));
    var x,y;
    for (y=overlapRect.top; y<=overlapRect.bottom; y++) {
       for (x=overlapRect.left; x<=overlapRect.right; x++) {
