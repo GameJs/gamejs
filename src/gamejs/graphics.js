@@ -158,13 +158,8 @@ Surface.prototype.blit = function(src, dest, area, compositeOperation) {
 
    this.context.save();
    this.context.globalCompositeOperation = compositeOperation;
-   // first translate, then rotate
-   var m = matrix.translate(matrix.identity(), rDest.left, rDest.top);
-   m = matrix.multiply(m, src._matrix);
-   this.context.transform(m[0], m[1], m[2], m[3], m[4], m[5]);
-   // drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)
    this.context.globalAlpha = src._blitAlpha;
-   this.context.drawImage(src.canvas, rArea.left, rArea.top, rArea.width, rArea.height, 0, 0, rDest.width, rDest.height);
+   this.context.drawImage(src.canvas, rArea.left, rArea.top, rArea.width, rArea.height, rDest.left, rDest.top, rDest.width, rDest.height);
    this.context.restore();
    return;
 };
@@ -551,13 +546,14 @@ Surface.prototype.rotate = function (angle) {
       newSize = [right-left, top-bottom];
    }
    var newSurface = new Surface(newSize);
-   var oldMatrix = this._matrix;
-   this._matrix = matrix.translate(this._matrix, origSize[0]/2, origSize[1]/2);
-   this._matrix = matrix.rotate(this._matrix, radians);
-   this._matrix = matrix.translate(this._matrix, -origSize[0]/2, -origSize[1]/2);
+   var m = matrix.translate(this._matrix, origSize[0]/2, origSize[1]/2);
+   m = matrix.rotate(m, radians);
+   m = matrix.translate(m, -origSize[0]/2, -origSize[1]/2);
    var offset = [(newSize[0] - origSize[0]) / 2, (newSize[1] - origSize[1]) / 2];
+   newSurface.context.save();
+   newSurface.context.transform(m[0], m[1], m[2], m[3], m[4], m[5]);
    newSurface.blit(this, offset);
-   this._matrix = oldMatrix;
+   newSurface.context.restore();
    return newSurface;
 };
 
@@ -577,9 +573,11 @@ Surface.prototype.scale = function(dims) {
    var hs = height / oldDims[1];
    var newSurface = new Surface([width, height]);
    var originalMatrix = this._matrix.slice(0);
-   this._matrix = matrix.scale(this._matrix, [ws, hs]);
+   var m = matrix.scale(matrix.identity(), [ws, hs]);
+   newSurface.context.save();
+   newSurface.context.transform(m[0], m[1], m[2], m[3], m[4], m[5]);
    newSurface.blit(this);
-   this._matrix = originalMatrix;
+   newSurface.context.restore();
    return newSurface;
 };
 
