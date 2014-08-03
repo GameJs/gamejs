@@ -659,3 +659,8 @@ exports.tiledmap = require('./gamejs/tiledmap');
  * @ignore
  */
 exports.time = require('./gamejs/time');
+
+/**
+ * @ignore
+ */
+exports.pixelcollision = require('./gamejs/pixelcollision');
