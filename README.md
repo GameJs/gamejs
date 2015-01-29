@@ -94,7 +94,7 @@ Development - How to build
 
 GameJs consists of CommonJs modules in `./src/` which we build and jshint with grunt. If you don't already have node and npm, install those. You will also need `java` on your path for building the distribution file.
 
-Install then grunt commandline interface:
+Install grunt:
 
     $ npm install -g grunt-cli
 
