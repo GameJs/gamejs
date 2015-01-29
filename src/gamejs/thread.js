@@ -3,7 +3,7 @@ var uri = require('./utils/uri');
 var Callback = require('./utils/callback').Callback;
 
 /**
- * ignore
+ * @ignore
  */
 var _EVENTS = exports._EVENTS = {
    RESULT: 1001,
@@ -14,13 +14,12 @@ var _EVENTS = exports._EVENTS = {
 /**
  * @fileoverview
  *
- * gamejs.worker makes it more convinient to work with W3C WebWorkers by providing a way to run
- * CommonJs modules inside of them. GameJs also provides the typically `gamejs.ready()` and
- * event loop to facilitate communication between workers and the main application.
+ * The `gamejs.worker` module makes it more convinient to work with browser's WebWorkers by providing a way to run
+ * CommonJs modules inside a Worker. GameJs also provides event facilities to communicate between the main code and Workers.
  *
  * See the `examples/workers` directory for a running example.
  *
- * Create a worker with the main module "foo-worker" (see below for how the worker's module looks like):
+ * In the main module, we create a worker which should use the "foo-worker" module as its main module:
  *
  *     var fooWorker = new Worker('./foo-worker');
  *     // Send a message to your worker.
@@ -28,16 +27,17 @@ var _EVENTS = exports._EVENTS = {
  *     // must be `JSON.stringify()`-able
  *     fooWorker.post("foobar");
  *
- * You can also recieve messages from the worker:
+ * You can also recieve messages from the Worker:
  *
  *     // recieve events from the worker
  *     fooWorker.onEvent(function(event) {
  *         if(event.timestamp > ...)
  *      });
  *
- * And this is how the above referenced "foo-worker" module would looke like. As usual, we need a
- * `gamejs.ready()` to get started and within that we bind an event handler:
- *
+ * And below is how the "foo-worker" module looke like. As usual, we need a
+ * `gamejs.ready()` to get started and within that we bind an event handler
+ * to recieve events from the main module:
+ * 
  *     var gamejs = require('gamejs');
  *     gamejs.ready(function() {
  *         gamejs.event.onEvent(function(event) {
@@ -46,21 +46,21 @@ var _EVENTS = exports._EVENTS = {
  *          });
  *     });
  *
- * Our event worker could do expensive calculations (seperate and not blocking the main game) when
- * recieving an event. Once the result is caculated, it can be sent back to the main application
- * with `gamejs.thread.post()`:
+ * Our event worker could do long-running calculations without blocking the main module. Once the worker
+ * has calculated the result, it can be sent back to the main modules using `gamejs.thread.post()`:
  *
  *     gamejs.thread.post({
  *        info: "important message from worker",
  *        timestamp: 12232435234
  *      });
  *
- * The main application would in turn recieve an event posted like this from `fooWorker.onEvent`, as seen above.
+ * The main module will in turn recieve an event posted from the worker in the function registered
+ * to `fooWorker.onEvent()`, as seen above.
  *
- * This module is useful for expensive algorithms where the result does not have to available instantiously
+ * The thread module is useful for expensive algorithms where the result does not have to available instantaneously
  * (e.g., path-finding) or for continous logic which can be
- * calculated seperately from the rendering loop, and which only needs to feed back into the model of the rendering every
- * now and then (e.g. physics) The main draw back of the `Worker` model is that
+ * calculated seperately from the main module which necessarily has the rendering loop.
+ * The main draw back of the `Worker` model is that
  * you can only communicate with them via text messages (typically JSON.stringify()ed messages).
  */
 
@@ -165,11 +165,11 @@ var create = function(workerModuleId) {
  * GameJs modules.
  *
  * **Note:** A Worker does not have access to the browser's `document`. So
- * a lot of GameJs modules - everything related to drawing to the canvas -
+ * a lot of GameJs modules - e.g. any module related to drawing to the canvas -
  * do not work in the Worker.
  *
- * You can use `gamejs.time.*`, `gamejs.utils.*`, `gamejs.event.*` and probably others
- * (as well as any module you write yourself for this purpose, of course).
+ * You can use `gamejs.math.*`, `gamejs.vectors.*`, and probably others
+ * as well as any module you write yourself for this purpose.
  *
  * @param {String} moduleId The Worker's main module id. The main module will be executed in the worker
  */
