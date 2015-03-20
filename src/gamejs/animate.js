@@ -5,12 +5,11 @@ var gamejs = require('../gamejs');
  *
  * @example
  * var spriteSheet = new SpriteSheet(sheetSurface, {width: 16, height: 16});
- * var animation = new Animation(spriteSheet, {walk: [0,1,2,3], loop: true});
- * animation.setState('walk');
+ * var animation = new Animation(spriteSheet, "walk", {walk: [0,1,2,3], loop: true});
  * ....
  * animation.update(msDuration)
  * ....
- * display.blit(animation.currentFrame);
+ * display.blit(animation.image);
  *
  */
 
