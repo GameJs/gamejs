@@ -160,7 +160,19 @@ exports.Sound = function Sound(uriOrAudio) {
     */
    this.stop = function() {
       channels.forEach(function(audio) {
-         audio.stop();
+         audio.pause();
+         audio.load();
+         audio.currentTime = 0;
+      });
+   };
+
+   /**
+    * Pause the sound.
+    * This will pause the playback of this Sound on any active Channels.
+    */
+   this.pause = function() {
+      channels.forEach(function(audio) {
+         audio.pause();
       });
    };
 

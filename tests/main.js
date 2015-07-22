@@ -6,6 +6,7 @@ gamejs.ready(function() {
 
    // NOTE can't name it `gamejs` because that would conflict with above
    // maybe yabble bug
+   require('./audio');
    require('./base64');
    require('./binaryheap');
    require('./draw');
