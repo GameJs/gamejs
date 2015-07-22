@@ -1,16 +1,22 @@
 var gamejs = require('../gamejs');
 
 /**
- * @fileoverview `Animations` on top of `SpriteSheets`.
+ * @fileoverview Provides Animations and SpriteSheets.
  *
  * @example
  * var spriteSheet = new SpriteSheet(sheetSurface, {width: 16, height: 16});
- * var animation = new Animation(spriteSheet, {walk: [0,1,2,3], loop: true});
- * animation.setState('walk');
+ * var animationSpec = {
+ *    walk: {
+ *      frames: [0,1,2,3],
+ *      loop: true,
+ *      rate: 20 // framerate per second
+ *    }
+ * }
+ * var animation = new Animation(spriteSheet, 'walk', animationSpec);
  * ....
  * animation.update(msDuration)
  * ....
- * display.blit(animation.currentFrame);
+ * display.blit(animation.image);
  *
  */
 
@@ -103,7 +109,7 @@ var Animation = exports.Animation = function(spriteSheet, initial, spec) {
     /** @ignore **/
     this.spec = spec;
 
-    /** The current tile surface of the animation. Draw this to the screen. **/
+    /** @ignore **/
     this.currentFrame = null;
     /** @ignore **/
     this.currentFrameDuration = 0;
@@ -113,7 +119,7 @@ var Animation = exports.Animation = function(spriteSheet, initial, spec) {
     this._isFinished = false;
     /** @ignore **/
     this.spriteSheet = spriteSheet;
-    /** @ignore **/
+    /** The current tile surface of the animation. Draw this to the screen. **/
     this.image = spriteSheet.get(0);
     this.start(initial);
 
