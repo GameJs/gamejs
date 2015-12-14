@@ -305,6 +305,7 @@
 
 		var xhr = this.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
 		var moduleUri = resolveModuleUri(moduleId);
+		xhr.overrideMimeType("application/json");
 		xhr.open('GET', moduleUri, true);
 		xhr.onreadystatechange = function() {
 			if (xhr.readyState === 4) {
