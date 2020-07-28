@@ -38,9 +38,9 @@ var Font = exports.Font = function(fontSettings, backgroundColor) {
 /**
  * Returns a Surface with the given text on it.
  * @param {String} text the text to render
- * @param {String} color a valid #RGB String, "#ffcc00"
+ * @param {String=} color a valid #RGB String, "#ffcc00"
  * @param {String=} textBaseline a valid textBaseline value, "alphabetic|top|hanging|middle|ideographic|bottom"
- * @param {Number=} padding a percentage unit of padding space to contain the text in.
+ * @param {Number=} padding number of pixels of padding space to contain the text in.
  * @returns {gamejs.Surface} Surface with the rendered text on it.
  */
 Font.prototype.render = function(text, color, textBaseline, padding) {
