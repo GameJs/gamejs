@@ -55,7 +55,7 @@ Font.prototype.render = function(text, color, textBaseline, padding) {
        ctx.fillRect(0, 0, surface.rect.width, surface.rect.height);
    }
    ctx.font = this.sampleSurface.context.font;
-   ctx.textBaseline = textBaseline || 'alphabetic'
+   ctx.textBaseline = textBaseline || 'alphabetic';
    ctx.textAlign = this.sampleSurface.context.textAlign;
    ctx.fillStyle = ctx.strokeStyle = color || "#000000";
    ctx.fillText(text, 0, surface.rect.height - padding, surface.rect.width);
