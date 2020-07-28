@@ -45,8 +45,8 @@ var Font = exports.Font = function(fontSettings, backgroundColor) {
  */
 Font.prototype.render = function(text, color, textBaseline, padding) {
    var dims = this.size(text);
-   var padding = padding || Math.ceil(dims[1] * 0.2)
-   dims[1] += padding
+   var padding = padding || Math.ceil(dims[1] * 0.2);
+   dims[1] += padding;
    var surface = new Surface(dims);
    var ctx = surface.context;
    ctx.save();
