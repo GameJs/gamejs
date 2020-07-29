@@ -38,11 +38,15 @@ var Font = exports.Font = function(fontSettings, backgroundColor) {
 /**
  * Returns a Surface with the given text on it.
  * @param {String} text the text to render
- * @param {String} color a valid #RGB String, "#ffcc00"
+ * @param {String=} color a valid #RGB String, "#ffcc00"
+ * @param {String=} textBaseline a valid textBaseline value, "alphabetic|top|hanging|middle|ideographic|bottom"
+ * @param {Number=} padding number of pixels of padding space to contain the text in.
  * @returns {gamejs.Surface} Surface with the rendered text on it.
  */
-Font.prototype.render = function(text, color) {
+Font.prototype.render = function(text, color, textBaseline, padding) {
    var dims = this.size(text);
+   var padding = padding || Math.ceil(dims[1] * 0.2);
+   dims[1] += padding;
    var surface = new Surface(dims);
    var ctx = surface.context;
    ctx.save();
@@ -51,14 +55,13 @@ Font.prototype.render = function(text, color) {
        ctx.fillRect(0, 0, surface.rect.width, surface.rect.height);
    }
    ctx.font = this.sampleSurface.context.font;
-   ctx.textBaseline = this.sampleSurface.context.textBaseline;
+   ctx.textBaseline = textBaseline || 'alphabetic';
    ctx.textAlign = this.sampleSurface.context.textAlign;
    ctx.fillStyle = ctx.strokeStyle = color || "#000000";
-   ctx.fillText(text, 0, surface.rect.height, surface.rect.width);
+   ctx.fillText(text, 0, surface.rect.height - padding, surface.rect.width);
    ctx.restore();
    return surface;
 };
-
 /**
  * Determine the width and height of the given text if rendered
  * with this Font.
